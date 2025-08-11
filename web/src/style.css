@@ -1,0 +1,59 @@
+:root {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+  color-scheme: light;
+  color: #111827; /* neutral-900 */
+  background-color: #ffffff;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Links neutral */
+a { color: inherit; text-decoration: none; }
+a:hover { opacity: 0.9; }
+
+/* Body-Reset */
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* Überschriften etwas kräftiger */
+h1, h2, h3 { font-weight: 800; letter-spacing: -0.01em; }
+
+/* Entferne Vite Demo-Container-Styles */
+#app { max-width: none; margin: 0; padding: 0; text-align: initial; }
+
+/* Buttons neutralisieren, PrimeVue übernimmt Styling */
+button { font-family: inherit; }
+
+/* PrimeVue Button – Sichtbarkeit sicherstellen */
+.p-button { display: inline-flex; align-items: center; justify-content: center; }
+.p-button .p-button-label { color: inherit; }
+
+/* Outlined-Variante mit ausreichendem Kontrast */
+.p-button.p-button-outlined { color: #111827; border-color: #111827; }
+
+/* Lesbarkeit: dunklere Standard-Typografie auf hellem Hintergrund */
+:root { color: #111827; }
+body { color: #111827; }
+
+/* Utility-Farben (PrimeFlex) etwas dunkler für besseren Kontrast auf Weiß */
+.text-700 { color: #374151 !important; }
+.text-600 { color: #4b5563 !important; }
+.text-500 { color: #6b7280 !important; }
+
+/* Karten/Flächen: Standardtext nicht zu hell */
+.surface-card { color: #0f172a; }
+
+/* Halbtransparenter Weiß-Hintergrund für Overlays (z. B. Hero-Box) */
+.surface-100 { background-color: rgba(255, 255, 255, 0.96) !important; color: #0f172a; }
+
+
+@media (prefers-color-scheme: light) {
+  :root { color: #111827; background-color: #ffffff; }
+}
