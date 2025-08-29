@@ -24,23 +24,23 @@
 
         <!-- Kartenbild und Infos -->
         <div class="flex p-6">
-          <!-- Kartenbild links (viel kleiner, etwa 15% der Breite) -->
-          <div class="flex-shrink-0 w-1/6 pr-4">
+          <!-- Kartenbild links (sehr klein, nur 10% der Breite) -->
+          <div class="flex-shrink-0 card-image pr-3">
             <div class="relative">
               <img 
                 :src="card.image" 
                 :alt="card.title" 
-                class="w-full h-16 object-cover rounded-md shadow-sm"
+                class="w-full h-12 object-cover rounded shadow-sm"
               />
               <!-- Karten-Typ Badge -->
-              <div class="absolute bottom-1 right-1 bg-white bg-opacity-90 px-1 py-0.5 rounded text-xs font-semibold text-gray-700">
+              <div class="absolute bottom-0 right-0 bg-white bg-opacity-90 px-1 py-0.5 rounded text-xs font-semibold text-gray-700">
                 {{ card.cardType }}
               </div>
             </div>
           </div>
 
-          <!-- Infos rechts (etwa 85% der Breite) -->
-          <div class="flex-grow w-5/6">
+          <!-- Infos rechts (90% der Breite) -->
+          <div class="flex-grow card-content">
             <!-- Kartenname -->
             <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight">{{ card.title }}</h3>
             
@@ -152,6 +152,15 @@ function goApply(slug) {
 .card-item:hover {
   transform: translateY(-2px);
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+.card-image {
+  width: 10%;
+  min-width: 60px;
+}
+
+.card-content {
+  width: 90%;
 }
 
 @media (max-width: 1024px) {
