@@ -24,23 +24,23 @@
 
         <!-- Kartenbild und Infos -->
         <div class="flex p-6">
-          <!-- Kartenbild links (etwa 40% der Breite) -->
-          <div class="flex-shrink-0 w-2/5 pr-4">
+          <!-- Kartenbild links (viel kleiner, etwa 15% der Breite) -->
+          <div class="flex-shrink-0 w-1/6 pr-4">
             <div class="relative">
               <img 
                 :src="card.image" 
                 :alt="card.title" 
-                class="w-full h-32 object-cover rounded-lg shadow-md"
+                class="w-full h-16 object-cover rounded-md shadow-sm"
               />
               <!-- Karten-Typ Badge -->
-              <div class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded text-xs font-semibold text-gray-700">
+              <div class="absolute bottom-1 right-1 bg-white bg-opacity-90 px-1 py-0.5 rounded text-xs font-semibold text-gray-700">
                 {{ card.cardType }}
               </div>
             </div>
           </div>
 
-          <!-- Infos rechts (etwa 60% der Breite) -->
-          <div class="flex-grow w-3/5">
+          <!-- Infos rechts (etwa 85% der Breite) -->
+          <div class="flex-grow w-5/6">
             <!-- Kartenname -->
             <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight">{{ card.title }}</h3>
             
