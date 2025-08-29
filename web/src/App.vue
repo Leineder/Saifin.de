@@ -1,44 +1,73 @@
 <template>
   <div class="app-root min-h-screen flex flex-column">
-    <header class="site-header">
-      <div class="container header-inner">
-        <router-link to="/" class="brand" aria-label="Startseite">
-          <span class="brand-logo" aria-hidden="true"></span>
-          <span class="brand-name">DeinFirmenname</span>
-        </router-link>
+    <!-- Passwortschutz-Komponente -->
+    <PasswordProtection ref="passwordProtection" />
+    
+    <!-- Hauptinhalt (nur sichtbar wenn authentifiziert) -->
+    <div v-if="isAuthenticated">
+      <header class="site-header">
+        <div class="container header-inner">
+          <router-link to="/" class="brand" aria-label="Startseite">
+            <span class="brand-logo" aria-hidden="true"></span>
+            <span class="brand-name">DeinFirmenname</span>
+          </router-link>
 
-        <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten">
-          <i class="pi pi-bars"></i>
-        </button>
+          <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten">
+            <i class="pi pi-bars"></i>
+          </button>
 
-        <nav :class="['site-nav', { 'is-open': isMenuOpen }]">
-          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu">Kreditkarten</router-link>
-          <router-link :to="{ path: '/', hash: '#about' }" class="nav-link" @click="closeMenu">Über uns</router-link>
-          <router-link to="/kontakt" class="nav-link" @click="closeMenu">Kontakt</router-link>
-        </nav>
-      </div>
-    </header>
+          <nav :class="['site-nav', { 'is-open': isMenuOpen }]">
+            <router-link to="/kreditkarten" class="nav-link" @click="closeMenu">Kreditkarten</router-link>
+            <router-link :to="{ path: '/', hash: '#about' }" class="nav-link" @click="closeMenu">Über uns</router-link>
+            <router-link to="/kontakt" class="nav-link" @click="closeMenu">Kontakt</router-link>
+          </nav>
+        </div>
+      </header>
 
-    <main class="flex-1">
-      <router-view />
-    </main>
+      <main class="flex-1">
+        <router-view />
+      </main>
 
-    <footer class="site-footer">
-      <div class="container footer-inner">
-        <span>© {{ new Date().getFullYear() }} DeinFirmenname</span>
-        <span class="sep">·</span>
-        <router-link to="/datenschutz" class="footer-link">Datenschutz</router-link>
-        <span class="sep">·</span>
-        <router-link to="/impressum" class="footer-link">Impressum</router-link>
-      </div>
-    </footer>
+      <footer class="site-footer">
+        <div class="container footer-inner">
+          <span>© {{ new Date().getFullYear() }} DeinFirmenname</span>
+          <span class="sep">·</span>
+          <router-link to="/datenschutz" class="footer-link">Datenschutz</router-link>
+          <span class="sep">·</span>
+          <router-link to="/impressum" class="footer-link">Impressum</router-link>
+        </div>
+      </footer>
+    </div>
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+import PasswordProtection from './components/PasswordProtection.vue'
+
 const isMenuOpen = ref(false)
+const passwordProtection = ref(null)
+const isAuthenticated = ref(false)
+
 const closeMenu = () => { isMenuOpen.value = false }
+
+onMounted(() => {
+  // Für Testzwecke: localStorage zurücksetzen (entfernen Sie diese Zeile später)
+  localStorage.removeItem('siteAuthenticated')
+  
+  // Prüfe initial den Authentifizierungsstatus
+  const authenticated = localStorage.getItem('siteAuthenticated')
+  if (authenticated === 'true') {
+    isAuthenticated.value = true
+  }
+})
+
+// Überwache Änderungen am Authentifizierungsstatus
+watch(() => passwordProtection.value?.isAuthenticated, (newValue) => {
+  if (newValue) {
+    isAuthenticated.value = true
+  }
+}, { immediate: true })
 </script>
 
 <style>
