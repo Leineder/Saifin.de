@@ -23,14 +23,14 @@
         </div>
 
         <!-- Kartenbild und Infos -->
-        <div class="flex p-6">
+        <div class="flex p-5">
           <!-- Kartenbild links (sehr klein, nur 10% der Breite) -->
           <div class="flex-shrink-0 card-image pr-3">
             <div class="relative">
               <img 
                 :src="card.image" 
                 :alt="card.title" 
-                class="w-full h-12 object-cover rounded shadow-sm"
+                class="w-full card-image-height object-cover rounded shadow-sm"
               />
               <!-- Karten-Typ Badge -->
               <div class="absolute bottom-0 right-0 bg-white bg-opacity-90 px-1 py-0.5 rounded text-xs font-semibold text-gray-700">
@@ -161,6 +161,10 @@ function goApply(slug) {
 
 .card-content {
   width: 90%;
+}
+
+.card-image-height {
+  height: 120px; /* 2.5x größer als h-12 (48px) = 120px */
 }
 
 @media (max-width: 1024px) {
