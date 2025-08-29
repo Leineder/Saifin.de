@@ -9,7 +9,7 @@
         <div class="container header-inner">
           <router-link to="/" class="brand" aria-label="Startseite">
             <span class="brand-logo" aria-hidden="true"></span>
-            <span class="brand-name">DeinFirmenname</span>
+            <span class="brand-name">Saifin</span>
           </router-link>
 
           <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten">
@@ -30,7 +30,7 @@
 
       <footer class="site-footer">
         <div class="container footer-inner">
-          <span>© {{ new Date().getFullYear() }} DeinFirmenname</span>
+          <span>© {{ new Date().getFullYear() }} Saifin</span>
           <span class="sep">·</span>
           <router-link to="/datenschutz" class="footer-link">Datenschutz</router-link>
           <span class="sep">·</span>

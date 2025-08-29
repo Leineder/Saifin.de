@@ -80,7 +80,7 @@ onMounted(() => { storeTrackingParams() })
       <div class="col-12 md:col-6">
         <div class="content-box about-text">
           <div>
-            <h3 class="text-900 text-xl md:text-2xl mb-2">Was ist DeinFirmenname?</h3>
+            <h3 class="text-900 text-xl md:text-2xl mb-2">Was ist Saifin?</h3>
             <p class="text-700">
               Wir sind ein unabhängiges Vergleichsportal für Finanzprodukte. Unser Ziel: Dir eine
               klare, schnelle und zuverlässige Übersicht über Angebote zu liefern, damit du ohne
