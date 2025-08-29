@@ -1,93 +1,114 @@
 <template>
   <div class="credit-card-comparison">
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div
         v-for="card in offers"
         :key="card.id"
         class="card-item bg-white rounded-lg shadow-md overflow-hidden relative border border-gray-200"
       >
         <!-- Testsieger Badge -->
-        <div v-if="card.isTestsieger" class="absolute top-2 left-2 z-10">
-          <div class="bg-yellow-400 text-gray-800 text-xs font-bold px-2 py-1 rounded-full shadow-sm flex items-center">
+        <div v-if="card.isTestsieger" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+          <div class="bg-yellow-400 text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-md flex items-center">
             <span class="mr-1">🏆</span>
             Testsieger
           </div>
         </div>
 
         <!-- Bewertung Badge -->
-        <div class="absolute top-2 right-2 z-10">
+        <div class="absolute top-3 right-3 z-10">
           <div class="flex items-center bg-yellow-100 px-2 py-1 rounded-full">
-            <span class="text-yellow-600 font-bold mr-1 text-xs">★</span>
-            <span class="text-gray-800 font-semibold text-xs">{{ card.rating }}/5</span>
+            <span class="text-yellow-600 font-bold mr-1">★</span>
+            <span class="text-gray-800 font-semibold text-sm">{{ card.rating }}/5</span>
           </div>
         </div>
 
         <!-- Kartenbild und Infos -->
-        <div class="flex p-3">
-          <!-- Kartenbild links (maximal 50% der Breite) -->
-          <div class="flex-shrink-0 w-1/2 pr-3">
+        <div class="flex p-6">
+          <!-- Kartenbild links (etwa 40% der Breite) -->
+          <div class="flex-shrink-0 w-2/5 pr-4">
             <div class="relative">
               <img 
                 :src="card.image" 
                 :alt="card.title" 
-                class="w-full h-16 object-cover rounded-md shadow-sm"
+                class="w-full h-32 object-cover rounded-lg shadow-md"
               />
               <!-- Karten-Typ Badge -->
-              <div class="absolute bottom-1 left-1 bg-white bg-opacity-90 px-1 py-0.5 rounded text-xs font-semibold text-gray-700">
+              <div class="absolute bottom-2 right-2 bg-white bg-opacity-90 px-2 py-1 rounded text-xs font-semibold text-gray-700">
                 {{ card.cardType }}
               </div>
             </div>
           </div>
 
-          <!-- Infos rechts -->
-          <div class="flex-grow w-1/2">
+          <!-- Infos rechts (etwa 60% der Breite) -->
+          <div class="flex-grow w-3/5">
             <!-- Kartenname -->
-            <h3 class="text-sm font-bold text-gray-900 mb-1 leading-tight">{{ card.title }}</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight">{{ card.title }}</h3>
             
-            <!-- Hauptfeatures (nur 1-2 wichtigste) -->
-            <div class="space-y-1 mb-2">
-              <div v-for="bullet in card.bullets.slice(0, 1)" :key="bullet" class="flex items-start">
-                <div class="flex-shrink-0 w-2 h-2 bg-green-100 rounded-full flex items-center justify-center mr-1 mt-0.5">
-                  <span class="text-green-600 text-xs">✓</span>
+            <!-- Hauptfeatures -->
+            <div class="space-y-2 mb-4">
+              <div v-for="bullet in card.bullets.slice(0, 3)" :key="bullet" class="flex items-start">
+                <div class="flex-shrink-0 w-4 h-4 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                  <span class="text-green-600 text-sm">✓</span>
                 </div>
-                <span class="text-gray-700 text-xs">{{ bullet }}</span>
+                <span class="text-gray-700 text-sm">{{ bullet }}</span>
+              </div>
+              
+              <!-- Negative Bedingung (falls vorhanden) -->
+              <div v-if="card.specialConditions && card.specialConditions.schufaCheck === 'Ablehnung bei SCHUFA-Einträgen'" class="flex items-start">
+                <div class="flex-shrink-0 w-4 h-4 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                  <span class="text-red-600 text-sm">✗</span>
+                </div>
+                <span class="text-red-600 text-sm">Ablehnung bei SCHUFA-Einträgen</span>
               </div>
             </div>
 
             <!-- Wichtige Details -->
-            <div class="grid grid-cols-2 gap-1 text-xs mb-2">
+            <div class="grid grid-cols-2 gap-3 text-sm mb-4">
               <!-- Jahresgebühr -->
-              <div class="bg-gray-50 p-1 rounded">
-                <div class="font-semibold text-gray-900 text-xs">Jahresgebühr</div>
-                <div v-if="card.annualFee === 0" class="text-green-600 font-bold text-xs">0 €</div>
-                <div v-else-if="typeof card.annualFee === 'number'" class="text-gray-900 font-bold text-xs">{{ card.annualFee }} €</div>
-                <div v-else class="text-gray-600 text-xs">{{ card.annualFee }}</div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <div class="font-semibold text-gray-900 mb-1">Jahresgebühr</div>
+                <div v-if="card.annualFee === 0" class="text-green-600 font-bold text-lg">0 €</div>
+                <div v-else-if="typeof card.annualFee === 'number'" class="text-gray-900 font-bold text-lg">{{ card.annualFee }} €</div>
+                <div v-else class="text-gray-600">{{ card.annualFee }}</div>
               </div>
 
               <!-- Auslandsgebühren -->
-              <div class="bg-gray-50 p-1 rounded">
-                <div class="font-semibold text-gray-900 text-xs">Ausland</div>
-                <div v-if="card.foreignFee === '0%'" class="text-green-600 font-bold text-xs">0%</div>
-                <div v-else class="text-gray-700 text-xs">{{ card.foreignFee }}</div>
+              <div class="bg-gray-50 p-3 rounded-lg">
+                <div class="font-semibold text-gray-900 mb-1">Auslandsgebühren</div>
+                <div v-if="card.foreignFee === '0%'" class="text-green-600 font-bold text-lg">0%</div>
+                <div v-else class="text-gray-700">{{ card.foreignFee }}</div>
               </div>
             </div>
 
-            <!-- Spezielle Features (nur wenn wichtig) -->
-            <div v-if="card.features && card.features.cashback" class="mb-2">
-              <div class="flex items-center text-green-600 text-xs">
-                <span class="mr-1">💰</span>
+            <!-- Spezielle Features -->
+            <div v-if="card.features" class="mb-4 space-y-2">
+              <div v-if="card.features.cashback" class="flex items-center text-green-600 text-sm">
+                <span class="mr-2">💰</span>
                 <span>{{ card.features.cashback }}</span>
               </div>
+              <div v-if="card.features.travelCredit" class="flex items-center text-blue-600 text-sm">
+                <span class="mr-2">✈️</span>
+                <span>{{ card.features.travelCredit }}</span>
+              </div>
+              <div v-if="card.features.insurance" class="flex items-center text-purple-600 text-sm">
+                <span class="mr-2">🛡️</span>
+                <span>{{ card.features.insurance }}</span>
+              </div>
+              <div v-if="card.specialConditions && card.specialConditions.sustainable" class="flex items-center text-green-600 text-sm">
+                <span class="mr-2">🌱</span>
+                <span>{{ card.specialConditions.sustainable }}</span>
+              </div>
             </div>
 
-            <!-- Mobile Payment Logos (kompakt) -->
-            <div v-if="card.features && card.features.mobilePay && card.features.mobilePay.length > 0" class="flex items-center mb-2">
-              <div class="flex space-x-1">
-                <div v-if="card.features.mobilePay.includes('Apple Pay')" class="bg-black text-white px-1 py-0.5 rounded text-xs font-semibold">
-                  A
+            <!-- Mobile Payment Logos -->
+            <div v-if="card.features && card.features.mobilePay && card.features.mobilePay.length > 0" class="flex items-center mb-4">
+              <span class="text-sm text-gray-600 mr-3">Mobile Payment:</span>
+              <div class="flex space-x-2">
+                <div v-if="card.features.mobilePay.includes('Apple Pay')" class="bg-black text-white px-2 py-1 rounded text-xs font-semibold">
+                  Apple Pay
                 </div>
-                <div v-if="card.features.mobilePay.includes('Google Pay')" class="bg-blue-600 text-white px-1 py-0.5 rounded text-xs font-semibold">
-                  G
+                <div v-if="card.features.mobilePay.includes('Google Pay')" class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-semibold">
+                  Google Pay
                 </div>
               </div>
             </div>
@@ -95,10 +116,10 @@
             <!-- Call to Action -->
             <button 
               @click="goApply(card.slug)"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1 px-2 rounded text-xs transition-colors duration-200 flex items-center justify-center"
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
             >
-              <span>ANTRAG</span>
-              <span class="ml-1">→</span>
+              <span>ZUM ANTRAG</span>
+              <span class="ml-2">→</span>
             </button>
           </div>
         </div>
@@ -126,17 +147,16 @@ function goApply(slug) {
 
 .card-item {
   transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  max-height: 120px; /* Begrenzte Höhe */
 }
 
 .card-item:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
 }
 
 @media (max-width: 1024px) {
   .card-item {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
   }
 }
 </style>
