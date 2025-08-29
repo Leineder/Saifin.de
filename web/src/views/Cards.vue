@@ -1,6 +1,9 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { offers } from '../data/offers'
+
+const router = useRouter()
 
 // Filter States
 const cashWithdrawalFilter = ref('alle')
@@ -43,6 +46,12 @@ const formatEuro = (n) => {
   if (n === 0) return '0,00 €'
   if (typeof n === 'number') return `${n.toFixed(2).replace('.', ',')} €`
   return n
+}
+
+const goToApply = (offer) => {
+  if (offer.applyUrl) {
+    router.push(offer.applyUrl)
+  }
 }
 </script>
 
@@ -94,8 +103,7 @@ const formatEuro = (n) => {
             {{ offer.bonus }} Bonus
           </div>
           
-          <!-- Advertisement Label -->
-          <div class="ad-label">Anzeige</div>
+
           
           <div class="offer-content">
             <!-- Card Image -->
@@ -128,8 +136,8 @@ const formatEuro = (n) => {
               
               <!-- Action Buttons -->
               <div class="action-buttons">
-                <button class="provider-btn">
-                  zum Anbieter
+                <button class="provider-btn" @click="goToApply(offer)">
+                  zum Antrag
                 </button>
                 
                 <div class="expandable-sections">
@@ -191,8 +199,8 @@ const formatEuro = (n) => {
                 
                 <!-- Action Buttons -->
                 <div class="action-buttons">
-                  <button class="provider-btn">
-                    zum Anbieter
+                  <button class="provider-btn" @click="goToApply(offer)">
+                    zum Antrag
                   </button>
                   
                   <div class="expandable-sections">
@@ -328,14 +336,7 @@ const formatEuro = (n) => {
   z-index: 10;
 }
 
-.ad-label {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  color: #6b7280;
-  font-size: 0.75rem;
-  z-index: 10;
-}
+
 
 .offer-content {
   display: flex;
@@ -352,7 +353,8 @@ const formatEuro = (n) => {
   width: 100%;
   height: 75px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
 }
 
 .offer-details {
