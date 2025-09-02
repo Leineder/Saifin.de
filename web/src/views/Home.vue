@@ -161,3 +161,5 @@ onMounted(() => { storeTrackingParams() })
   .about-text { min-height: 320px; display: flex; align-items: center; }
 }
 </style>
+
+
