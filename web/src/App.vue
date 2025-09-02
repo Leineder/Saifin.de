@@ -37,11 +37,18 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 
 const isMenuOpen = ref(false)
 
 const closeMenu = () => { isMenuOpen.value = false }
+
+onMounted(() => {
+  // Bereinige alle Passwort-bezogenen localStorage-Daten
+  localStorage.removeItem('siteAuthenticated')
+  localStorage.removeItem('password')
+  localStorage.removeItem('isAuthenticated')
+})
 </script>
 
 <style>
