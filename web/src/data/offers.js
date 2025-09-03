@@ -3,17 +3,17 @@ export const offers = [
     id: 'american-express-platinum',
     slug: 'american-express-platinum',
     title: 'American Express Platinum Card',
-    bullets: ['Kostenlose Kreditkarte', 'Bargeld an 58000 Automaten', 'flexible Ratenzahlung möglich', 'Zahlungsart Charge'],
+    bullets: ['720€ Jahresgebühr', '€640 in Credits und Vouchers', 'Membership Rewards Punkte', 'Premium Reiseleistungen'],
     image: '/images/creditcards/amex-platinum.png',
     graceWeeks: 7,
-    annualFee: -720,
+    annualFee: 720,
     foreignFee: '0%',
     cardType: 'American Express Platinum',
-    bonus: '100,00 €',
+    bonus: '€640 in Credits und Vouchers',
     design: 'Silberne American Express Platinum Karte',
     features: {
       cashback: '5% Rückvergütung bei Mietwagen',
-      travelCredit: '5% Reisegutschrift',
+      travelCredit: '€640 in Credits und Vouchers',
       insurance: 'Reiseversicherung inklusive',
       mobilePay: ['Apple Pay', 'Google Pay'],
       virtual: false
@@ -23,7 +23,7 @@ export const offers = [
       schufaCheck: true,
       instantDecision: false
     },
-    disclaimer: '*Bonitätsprüfung durch die Bank. Konditionen abhängig vom Einzelfall.',
+    disclaimer: '*€640 in Credits und Vouchers, plus zusätzlicher Wert durch Membership Rewards Punkte und andere Vorteile.',
     applyUrl: '/antrag/american-express-platinum'
   },
   {
