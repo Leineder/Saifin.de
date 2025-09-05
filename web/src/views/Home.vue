@@ -32,28 +32,60 @@ onMounted(() => { storeTrackingParams() })
     </div>
   </section>
 
-  <!-- Mini-Angebote unter dem Hero -->
-  <section class="p-3 md:p-4">
-    <div class="grid justify-content-center">
-      <div v-for="o in topOffers" :key="o.id" class="col-12 md:col-6 flex justify-content-center">
-        <router-link :to="`/kreditkarten/${o.slug}`" class="offer-link" :aria-label="`Details zu ${o.title}`">
-          <div class="offer-card surface-card border-round-xl shadow-2 w-full" style="max-width:620px;">
-            <div class="p-3 flex align-items-center gap-3">
-              <img :src="o.image" alt="" class="offer-thumb border-round" />
-              <div class="flex-1">
-                <div class="text-900 text-lg font-bold line-height-2">{{ o.title }}</div>
-                <div class="text-600 text-sm">Jahresgebühr</div>
-                <div class="text-900 text-lg font-bold">{{ formatEuro(o.annualFee) }}</div>
+  <!-- Why Choose Us / USP-Kacheln -->
+  <section class="section-muted">
+    <div class="container">
+      <div class="section-eyebrow">Warum Saifin</div>
+      <h2 class="section-title text-2xl md:text-3xl mb-4">Schnell. Transparent. Unabhängig.</h2>
+      <div class="grid">
+        <div class="col-12 md:col-4">
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <h3 class="m-0 mb-2 section-title text-lg">Klarer Vergleich</h3>
+            <p class="m-0 text-700">Nur relevante Kennzahlen und Leistungen – auf einen Blick.</p>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <h3 class="m-0 mb-2 section-title text-lg">Aktuelle Angebote</h3>
+            <p class="m-0 text-700">Wir pflegen laufend neue Karten und Konditionen ein.</p>
+          </div>
+        </div>
+        <div class="col-12 md:col-4">
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <h3 class="m-0 mb-2 section-title text-lg">Unabhängig</h3>
+            <p class="m-0 text-700">Unsere Kriterien bleiben redaktionell – transparent gekennzeichnet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top-Angebote Preview Cards -->
+  <section class="section">
+    <div class="container">
+      <div class="section-eyebrow">Top-Angebote</div>
+      <h2 class="section-title text-2xl md:text-3xl mb-3">Beliebte Karten</h2>
+      <div class="grid">
+        <div v-for="o in topOffers" :key="o.id" class="col-12 md:col-6">
+          <router-link :to="`/kreditkarten/${o.slug}`" class="offer-link">
+            <div class="surface-card border-round-xl card-accent w-full" style="max-width:100%">
+              <div class="p-3 flex align-items-center gap-3">
+                <img :src="o.image" alt="" class="offer-thumb border-round" />
+                <div class="flex-1">
+                  <div class="text-900 text-lg font-bold line-height-2">{{ o.title }}</div>
+                  <div class="text-600 text-sm">Jahresgebühr</div>
+                  <div class="text-900 text-lg font-bold">{{ formatEuro(o.annualFee) }}</div>
+                </div>
               </div>
             </div>
-          </div>
-        </router-link>
+          </router-link>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Testimonials -->
-  <section class="p-4 md:p-6">
+  <section class="section">
     <h2 class="text-2xl md:text-3xl text-center mb-4">Das sagen unsere Nutzer</h2>
     <div class="surface-card border-round-lg">
       <div v-for="(t, idx) in testimonials" :key="t.name" class="testimonial">
@@ -72,7 +104,7 @@ onMounted(() => { storeTrackingParams() })
   </section>
 
   <!-- Über uns -->
-  <section id="about" class="p-4 md:p-6">
+  <section id="about" class="section">
     <h2 class="text-2xl md:text-3xl text-center mb-4">Über uns</h2>
 
     <!-- Block 1 -->
@@ -133,6 +165,39 @@ onMounted(() => { storeTrackingParams() })
         <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200" alt="Partnerschaft"
              class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)">
       </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section-muted">
+    <div class="container">
+      <div class="section-eyebrow">FAQ</div>
+      <h2 class="section-title text-2xl md:text-3xl mb-3">Häufige Fragen</h2>
+      <div class="faq">
+        <details>
+          <summary>Wie finde ich die passende Kreditkarte?</summary>
+          <div class="text-700 p-2">Nutze unsere Filter und vergleiche Jahresgebühren, Leistungen und Konditionen.</div>
+        </details>
+        <details>
+          <summary>Kostet Saifin etwas?</summary>
+          <div class="text-700 p-2">Die Nutzung ist kostenlos. Für einige Links erhalten wir ggf. eine Vergütung.</div>
+        </details>
+        <details>
+          <summary>Wie aktuell sind die Angebote?</summary>
+          <div class="text-700 p-2">Wir pflegen die Daten laufend und überprüfen Konditionen regelmäßig.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Band -->
+  <section class="cta-band">
+    <div class="container" style="text-align:center">
+      <h2 class="cta-title text-2xl md:text-3xl">Bereit zum Vergleichen?</h2>
+      <p class="cta-sub">Finde die Karte, die zu dir passt – schnell und transparent.</p>
+      <router-link to="/kreditkarten" class="p-button p-button-rounded p-button-lg">
+        <span class="p-button-label">Jetzt Kreditkarten vergleichen</span>
+      </router-link>
     </div>
   </section>
 </template>

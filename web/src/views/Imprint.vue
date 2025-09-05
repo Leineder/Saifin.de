@@ -57,8 +57,8 @@
 <style scoped>
 .imprint-container {
   padding: 2rem 1rem;
-  background: #f8fafc;
-  min-height: calc(100vh - 128px); /* Abzüglich Header und Footer */
+  background: var(--saifin-surface);
+  min-height: calc(100vh - 128px);
 }
 
 .container {
@@ -71,8 +71,8 @@
 }
 
 .imprint-title {
-  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
-  color: white;
+  background: linear-gradient(135deg, var(--saifin-navy-700), var(--saifin-navy-900));
+  color: #fff;
   margin: 0;
   padding: 2rem;
   font-size: 2rem;
@@ -97,20 +97,20 @@
 }
 
 .imprint-section h2 {
-  color: #1f2937;
+  color: var(--saifin-navy-900);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #3b82f6;
+  border-bottom: 2px solid var(--saifin-navy-700);
   display: inline-block;
 }
 
 .contact-info {
-  background: #f8fafc;
+  background: var(--saifin-surface);
   padding: 1rem;
   border-radius: 8px;
-  border-left: 4px solid #3b82f6;
+  border-left: 4px solid var(--saifin-navy-700);
 }
 
 .contact-info p {
@@ -127,14 +127,14 @@
 }
 
 .contact-link {
-  color: #3b82f6;
+  color: var(--saifin-navy-700);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .contact-link:hover {
-  color: #1d4ed8;
+  color: var(--saifin-navy-900);
   text-decoration: underline;
 }
 

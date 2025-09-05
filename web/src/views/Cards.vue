@@ -57,195 +57,137 @@ const goToApply = (offer) => {
 
 <template>
   <div class="cards-page">
-    <!-- Filter Section -->
-    <div class="filter-section">
-      <div class="filter-container">
-        <div class="filter-group">
-          <h3 class="filter-title">Kostenlos Bargeld abheben</h3>
-          <select v-model="cashWithdrawalFilter" class="filter-select">
-            <option value="alle">alle</option>
-            <option value="kostenlos">kostenlos</option>
-            <option value="gebührenpflichtig">gebührenpflichtig</option>
-          </select>
-        </div>
-        
-        <div class="filter-group">
-          <h3 class="filter-title">Kostenlos bezahlen</h3>
-          <select v-model="paymentFilter" class="filter-select">
-            <option value="alle">alle</option>
-            <option value="kostenlos">kostenlos</option>
-            <option value="gebührenpflichtig">gebührenpflichtig</option>
-          </select>
-        </div>
-        
-        <div class="filter-actions">
-          <button class="filter-settings-btn" @click="showFilters = !showFilters">
-            <i class="pi pi-cog"></i>
-            Filtereinstellungen
-            <i class="pi pi-info-circle"></i>
-          </button>
-          
-          <button class="update-search-btn">
-            SUCHANFRAGE AKTUALISIEREN
-          </button>
-        </div>
-      </div>
-    </div>
+    <section class="section">
+      <div class="container layout">
+        <!-- Sidebar Filter -->
+        <aside class="sidebar">
+          <div class="surface-card border-round-lg p-3 card-accent sidebar-card">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde deine Karte</h2>
 
-    <!-- Main Content -->
-    <div class="main-content">
-      <!-- Credit Card Offers -->
-      <div class="offers-section">
-        <div v-for="offer in filteredOffers" :key="offer.id" class="offer-card">
-          <!-- Bonus Banner -->
-          <div v-if="offer.bonus" class="bonus-banner">
-            <i class="pi pi-gift"></i>
-            {{ offer.bonus }} Bonus
-          </div>
-          
-
-          
-          <div class="offer-content">
-            <!-- Card Image -->
-            <div class="card-image-container">
-              <img :src="offer.image" :alt="offer.title" class="card-image" />
+            <div class="filter-group">
+              <h3 class="filter-title">Kostenlos Bargeld abheben</h3>
+              <select v-model="cashWithdrawalFilter" class="filter-select">
+                <option value="alle">alle</option>
+                <option value="kostenlos">kostenlos</option>
+                <option value="gebührenpflichtig">gebührenpflichtig</option>
+              </select>
             </div>
-            
-            <!-- Offer Details -->
-            <div class="offer-details">
-              <div class="offer-header">
-                <h3 class="offer-title">{{ offer.title }}</h3>
-                <div class="payment-type">
-                  <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
-                  <i class="pi pi-info-circle"></i>
-                </div>
-              </div>
-              
-              <!-- Features -->
-              <div class="features-list">
-                <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                  <i class="pi pi-check"></i>
-                  <span>{{ feature }}</span>
-                </div>
-              </div>
-              
-              <!-- Annual Fee -->
-              <div class="annual-fee">
-                {{ formatEuro(offer.annualFee) }} pro Jahr
-              </div>
-              
-              <!-- Action Buttons -->
-              <div class="action-buttons">
-                <button class="provider-btn" @click="goToApply(offer)">
-                  zum Antrag
-                </button>
-                
-                <div class="expandable-sections">
-                  <button class="expand-btn">
-                    Konditionen
-                    <i class="pi pi-chevron-down"></i>
-                  </button>
-                  <button class="expand-btn">
-                    Details
-                    <i class="pi pi-chevron-down"></i>
-                  </button>
-                </div>
-              </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Kostenlos bezahlen</h3>
+              <select v-model="paymentFilter" class="filter-select">
+                <option value="alle">alle</option>
+                <option value="kostenlos">kostenlos</option>
+                <option value="gebührenpflichtig">gebührenpflichtig</option>
+              </select>
+            </div>
+
+            <div class="sidebar-actions">
+              <button class="p-button p-button-outlined w-full" @click="showFilters = !showFilters">
+                <span class="p-button-label">Filtereinstellungen</span>
+              </button>
             </div>
           </div>
-        </div>
-      </div>
+        </aside>
 
-      <!-- Recommendations Section -->
-      <div class="recommendations-section">
-        <h2 class="recommendations-title">Unsere Empfehlungen für Sie</h2>
-        
-        <div class="recommendations-grid">
-          <div v-for="offer in topOffers" :key="offer.id" class="recommendation-card">
-            <!-- Bonus Banner -->
-            <div v-if="offer.bonus" class="bonus-banner">
-              <i class="pi pi-gift"></i>
-              {{ offer.bonus }} Bonus
-            </div>
-            
-            <div class="recommendation-content">
-              <!-- Card Image -->
-              <div class="card-image-container">
-                <img :src="offer.image" :alt="offer.title" class="card-image" />
+        <!-- Offers -->
+        <main class="content">
+          <div class="section-eyebrow">Angebote</div>
+          <h1 class="section-title text-2xl md:text-3xl mb-3">Kreditkarten im Vergleich</h1>
+
+          <div class="offers-section">
+            <div v-for="offer in filteredOffers" :key="offer.id" class="offer-card surface-card border-round-xl card-accent">
+              <div v-if="offer.bonus" class="bonus-banner">
+                <i class="pi pi-gift"></i>
+                {{ offer.bonus }} Bonus
               </div>
-              
-              <!-- Offer Details -->
-              <div class="recommendation-details">
-                <div class="offer-header">
-                  <h3 class="offer-title">{{ offer.title }}</h3>
-                  <div class="payment-type">
-                    <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
-                    <i class="pi pi-info-circle"></i>
+
+              <div class="offer-content">
+                <div class="card-image-container">
+                  <img :src="offer.image" :alt="offer.title" class="card-image" />
+                </div>
+                <div class="offer-details">
+                  <div class="offer-header">
+                    <h3 class="offer-title">{{ offer.title }}</h3>
+                    <div class="payment-type">
+                      <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
+                      <i class="pi pi-info-circle"></i>
+                    </div>
                   </div>
-                </div>
-                
-                <!-- Features -->
-                <div class="features-list">
-                  <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                    <i class="pi pi-check"></i>
-                    <span>{{ feature }}</span>
+                  <div class="features-list">
+                    <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
+                      <i class="pi pi-check"></i>
+                      <span>{{ feature }}</span>
+                    </div>
                   </div>
-                </div>
-                
-                <!-- Annual Fee -->
-                <div class="annual-fee">
-                  {{ formatEuro(offer.annualFee) }} pro Jahr
-                </div>
-                
-                <!-- Action Buttons -->
-                <div class="action-buttons">
-                  <button class="provider-btn" @click="goToApply(offer)">
-                    zum Antrag
-                  </button>
-                  
-                  <div class="expandable-sections">
-                    <button class="expand-btn">
-                      Konditionen
-                      <i class="pi pi-chevron-down"></i>
-                    </button>
-                    <button class="expand-btn">
-                      Details
-                      <i class="pi pi-chevron-down"></i>
-                    </button>
+                  <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
+                  <div class="action-buttons">
+                    <button class="p-button" @click="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                    <div class="expandable-sections">
+                      <button class="expand-btn">Konditionen <i class="pi pi-chevron-down"></i></button>
+                      <button class="expand-btn">Details <i class="pi pi-chevron-down"></i></button>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+
+          <!-- Recommendations -->
+          <div class="recommendations-section">
+            <h2 class="recommendations-title section-title">Unsere Empfehlungen</h2>
+            <div class="recommendations-grid">
+              <div v-for="offer in topOffers" :key="offer.id" class="recommendation-card surface-card border-round-xl card-accent">
+                <div v-if="offer.bonus" class="bonus-banner">
+                  <i class="pi pi-gift"></i>
+                  {{ offer.bonus }} Bonus
+                </div>
+                <div class="recommendation-content">
+                  <div class="card-image-container">
+                    <img :src="offer.image" :alt="offer.title" class="card-image" />
+                  </div>
+                  <div class="recommendation-details">
+                    <div class="offer-header">
+                      <h3 class="offer-title">{{ offer.title }}</h3>
+                      <div class="payment-type">
+                        <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
+                        <i class="pi pi-info-circle"></i>
+                      </div>
+                    </div>
+                    <div class="features-list">
+                      <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
+                        <i class="pi pi-check"></i>
+                        <span>{{ feature }}</span>
+                      </div>
+                    </div>
+                    <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
+                    <div class="action-buttons">
+                      <button class="p-button" @click="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                      <div class="expandable-sections">
+                        <button class="expand-btn">Konditionen <i class="pi pi-chevron-down"></i></button>
+                        <button class="expand-btn">Details <i class="pi pi-chevron-down"></i></button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
-    </div>
+    </section>
   </div>
 </template>
 
 <style scoped>
-.cards-page {
-  background: #f8fafc;
-  min-height: 100vh;
-}
+.cards-page { background: var(--saifin-surface); min-height: 100vh; }
+.layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+.sidebar { position: relative; }
+.sidebar-card { position: sticky; top: 86px; }
+.content { min-width: 0; }
 
 /* Filter Section */
-.filter-section {
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
-  padding: 1.5rem 0;
-}
-
-.filter-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-
 .filter-group {
   display: flex;
   flex-direction: column;
@@ -268,64 +210,26 @@ const goToApply = (offer) => {
   min-width: 120px;
 }
 
-.filter-actions {
-  display: flex;
-  gap: 1rem;
-  margin-left: auto;
-}
+.sidebar-actions { margin-top: 1rem; }
 
-.filter-settings-btn {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
-  background: white;
-  color: #374151;
-  font-size: 0.875rem;
-  cursor: pointer;
-}
-
-.update-search-btn {
-  padding: 0.5rem 1rem;
-  border: 2px solid #f97316;
-  border-radius: 0.375rem;
-  background: white;
-  color: #f97316;
-  font-size: 0.875rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
+/* Buttons werden über PrimeVue gebrandet */
 
 /* Main Content */
-.main-content {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
+.main-content { }
 
 /* Offer Cards */
 .offers-section {
   margin-bottom: 3rem;
 }
 
-.offer-card {
-  background: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1.5rem;
-  position: relative;
-  overflow: hidden;
-}
+.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
 
 .bonus-banner {
   position: absolute;
   top: 1rem;
   left: 1rem;
-  background: #0d9488;
-  color: white;
+  background: var(--brand-accent);
+  color: #062a3f;
   padding: 0.25rem 0.75rem;
   border-radius: 0.375rem;
   font-size: 0.75rem;
@@ -404,11 +308,7 @@ const goToApply = (offer) => {
   font-size: 0.75rem;
 }
 
-.annual-fee {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: #f97316;
-}
+.annual-fee { font-size: 1.125rem; font-weight: 700; color: var(--saifin-navy-800); }
 
 .action-buttons {
   display: flex;
@@ -417,16 +317,7 @@ const goToApply = (offer) => {
   gap: 1rem;
 }
 
-.provider-btn {
-  background: #f97316;
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.375rem;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-}
+/* Primäre CTA über .p-button */
 
 .expandable-sections {
   display: flex;
@@ -487,16 +378,8 @@ const goToApply = (offer) => {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .filter-container {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 1rem;
-  }
-  
-  .filter-actions {
-    margin-left: 0;
-    justify-content: space-between;
-  }
+  .layout { grid-template-columns: 1fr; }
+  .sidebar-card { position: static; }
   
   .offer-content,
   .recommendation-content {
