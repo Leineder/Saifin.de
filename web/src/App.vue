@@ -4,7 +4,9 @@
     <header class="site-header">
       <div class="container header-inner">
         <router-link to="/" class="brand" aria-label="Startseite">
-          <img class="brand-logo-img" src="/images/saifin-logo.svg" alt="" @error="(e) => (e.target.src = '/images/saifin-logo.png')" />
+          <span class="brand-mark">
+            <img class="brand-logo-img" src="/images/saifin-mark.svg" alt="" @error="(e) => (e.target.src = '/images/saifin-logo.svg')" />
+          </span>
           <span class="brand-name">Saifin</span>
         </router-link>
 
@@ -73,7 +75,8 @@ onMounted(() => {
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
 .brand-name { font-weight: 800; color: var(--brand-primary-contrast); letter-spacing: -0.01em; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
-.brand-logo-img { width: 32px; height: 32px; object-fit: contain; display: block; }
+.brand-mark { width: 32px; height: 32px; border-radius: 8px; overflow: hidden; display: inline-block; }
+.brand-logo-img { width: 100%; height: 100%; object-fit: cover; object-position: center 34%; display: block; }
 
 /* Navigation */
 .site-nav { display: none; gap: 20px; align-items: center; }
