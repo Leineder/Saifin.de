@@ -80,7 +80,7 @@ onMounted(() => { storeTrackingParams() })
       <div class="col-12 md:col-6">
         <div class="content-box about-text">
           <div>
-            <h3 class="text-900 text-xl md:text-2xl mb-2">Was ist Saifin?</h3>
+            <h3 class="section-title text-xl md:text-2xl mb-2">Was ist Saifin?</h3>
             <p class="text-700">
               Wir sind ein unabhängiges Vergleichsportal für Finanzprodukte. Unser Ziel: Dir eine
               klare, schnelle und zuverlässige Übersicht über Angebote zu liefern, damit du ohne
@@ -104,7 +104,7 @@ onMounted(() => { storeTrackingParams() })
       <div class="col-12 md:col-6 order-1 md:order-2">
         <div class="content-box about-text">
           <div>
-            <h3 class="text-900 text-xl md:text-2xl mb-2">Wie bewerten wir?</h3>
+            <h3 class="section-title text-xl md:text-2xl mb-2">Wie bewerten wir?</h3>
             <p class="text-700">
               Produkte landen erst nach einer sorgfältigen Prüfung in unserem Vergleich. Wir schauen
               auf Konditionen wie Gebühren, Leistungen, Service und Transparenz. Nur Angebote, die
@@ -120,7 +120,7 @@ onMounted(() => { storeTrackingParams() })
       <div class="col-12 md:col-6">
         <div class="content-box about-text">
           <div>
-            <h3 class="text-900 text-xl md:text-2xl mb-2">Wie finanzieren wir uns?</h3>
+            <h3 class="section-title text-xl md:text-2xl mb-2">Wie finanzieren wir uns?</h3>
             <p class="text-700">
               Für einige Produktlinks können wir eine Vergütung von Partnern erhalten. Das hilft uns,
               den Service kostenlos anzubieten. Unsere redaktionellen Kriterien bleiben davon unberührt;
@@ -138,18 +138,19 @@ onMounted(() => { storeTrackingParams() })
 </template>
 
 <style scoped>
-/* Moderner Hero */
+/* Hero in Brandfarben */
 .hero { height: clamp(420px, 62vh, 640px); }
-.hero-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,31,58,0.55) 0%, rgba(11,31,58,0.35) 40%, rgba(11,31,58,0.15) 75%, rgba(11,31,58,0.05) 100%); }
+.hero-img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.85) contrast(1.05); }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,31,58,0.65) 0%, rgba(11,31,58,0.45) 40%, rgba(11,31,58,0.2) 75%, rgba(11,31,58,0.08) 100%); }
 .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 16px; text-align: center; color: #fff; }
-.hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); }
-.hero-sub { color: rgba(255,255,255,0.9); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
+.hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
+.hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .stars { color: #fbbf24; }
 .testimonial + .testimonial { border-top: 1px solid #e5e7eb; }
-.content-box { background: rgba(255,255,255,0.98); color: #0f172a; border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); }
+.content-box { background: rgba(255,255,255,0.98); color: #0f172a; border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); border: 1px solid rgba(11,31,58,0.08) }
+.section-title { color: var(--saifin-navy-900); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 
 .offer-card { transition: transform .15s ease, box-shadow .15s ease; }
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }

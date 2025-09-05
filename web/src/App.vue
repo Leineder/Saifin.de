@@ -4,7 +4,7 @@
     <header class="site-header">
       <div class="container header-inner">
         <router-link to="/" class="brand" aria-label="Startseite">
-          <span class="brand-logo" aria-hidden="true"></span>
+          <img class="brand-logo-img" src="/images/saifin-logo.svg" alt="" @error="(e) => (e.target.src = '/images/saifin-logo.png')" />
           <span class="brand-name">Saifin</span>
         </router-link>
 
@@ -61,9 +61,9 @@ onMounted(() => {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: #ffffff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+  background: var(--brand-primary);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 .header-inner {
   display: flex;
@@ -72,19 +72,16 @@ onMounted(() => {
   height: 64px;
 }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
-.brand-name { font-weight: 800; color: #0f172a; letter-spacing: -0.01em; }
-.brand-logo {
-  width: 32px; height: 32px; border-radius: 8px;
-  background: linear-gradient(135deg, #111827, #374151);
-}
+.brand-name { font-weight: 800; color: var(--brand-primary-contrast); letter-spacing: -0.01em; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
+.brand-logo-img { width: 32px; height: 32px; object-fit: contain; display: block; }
 
 /* Navigation */
 .site-nav { display: none; gap: 20px; align-items: center; }
-.nav-link { color: #0f172a; text-decoration: none; font-weight: 600; padding: 6px 0; border-bottom: 2px solid transparent; }
-.nav-link:hover { border-bottom-color: rgba(15, 23, 42, 0.3); }
+.nav-link { color: var(--brand-primary-contrast); text-decoration: none; font-weight: 600; padding: 6px 0; border-bottom: 2px solid transparent; opacity: 0.95; }
+.nav-link:hover { border-bottom-color: rgba(255, 255, 255, 0.4); opacity: 1; }
 
-.nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: none; background: transparent; color: #0f172a; cursor: pointer; border-radius: 8px; }
-.nav-toggle:hover { background: rgba(15, 23, 42, 0.06); }
+.nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: none; background: transparent; color: var(--brand-primary-contrast); cursor: pointer; border-radius: 8px; }
+.nav-toggle:hover { background: rgba(255, 255, 255, 0.08); }
 
 /* Desktop breakpoint */
 @media (min-width: 768px) {
@@ -99,17 +96,17 @@ onMounted(() => {
   top: 64px;
   left: 0; right: 0;
   flex-direction: column;
-  background: #ffffff;
+  background: var(--saifin-navy-900);
   padding: 12px 16px 16px;
-  border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
 }
 .site-nav.is-open .nav-link { padding: 10px 4px; }
 
 /* Footer */
-.site-footer { border-top: 1px solid #e5e7eb; background: #f7f7f7; }
-.footer-inner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 16px; color: #6b7280; font-size: 0.9rem; }
-.footer-link { color: inherit; text-decoration: none; }
+.site-footer { border-top: 1px solid rgba(11,31,58,0.15); background: #ffffff; }
+.footer-inner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 16px; color: #4b5563; font-size: 0.9rem; }
+.footer-link { color: var(--brand-primary); text-decoration: none; }
 .footer-link:hover { text-decoration: underline; }
 .sep { color: #9ca3af; }
 </style>
