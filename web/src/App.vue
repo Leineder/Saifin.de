@@ -63,7 +63,7 @@ onMounted(() => {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: var(--brand-primary);
+  background: linear-gradient(180deg, var(--saifin-navy-900), var(--saifin-navy-800));
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -76,7 +76,7 @@ onMounted(() => {
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-name { font-weight: 800; color: var(--brand-primary-contrast); letter-spacing: -0.01em; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 .brand-mark { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; display: inline-block; }
-.brand-logo-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; }
+.brand-logo-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; filter: brightness(0.92) saturate(1.05); }
 
 /* Navigation */
 .site-nav { display: none; gap: 20px; align-items: center; }
