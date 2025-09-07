@@ -70,11 +70,11 @@ onMounted(() => {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 64px;
+  height: 96px;
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-name { font-weight: 800; color: var(--brand-primary-contrast); letter-spacing: -0.01em; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
-.brand-mark { width: 44px; height: 44px; border-radius: 8px; overflow: hidden; display: inline-block; }
+.brand-mark { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; display: inline-block; }
 .brand-logo-img { width: 100%; height: 100%; object-fit: contain; object-position: center; display: block; filter: brightness(0.92) saturate(1.05); }
 
 /* Navigation */
@@ -95,7 +95,7 @@ onMounted(() => {
 .site-nav.is-open {
   display: flex;
   position: absolute;
-  top: 64px;
+  top: 96px;
   left: 0; right: 0;
   flex-direction: column;
   background: var(--saifin-navy-900);
