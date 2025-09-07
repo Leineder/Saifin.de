@@ -5,9 +5,8 @@
       <div class="container header-inner">
         <router-link to="/" class="brand" aria-label="Startseite">
           <span class="brand-mark">
-            <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="" @error="(e) => (e.target.src = '/images/saifin_logo_square_originalscale.svg')" />
+            <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="Saifin" @error="(e) => (e.target.src = '/images/saifin_logo_square_originalscale.svg')" />
           </span>
-          <span class="brand-name">Saifin</span>
         </router-link>
 
         <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten">
@@ -63,7 +62,7 @@ onMounted(() => {
   position: sticky;
   top: 0;
   z-index: 1000;
-  background: linear-gradient(180deg, var(--saifin-navy-900), var(--saifin-navy-800));
+  background: #141833;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }

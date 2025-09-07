@@ -6,18 +6,18 @@
   line-height: 1.6;
   font-weight: 400;
 
-  /* Saifin Brand Palette (abgeleitet vom Logo) */
-  --saifin-navy-900: #0b1f3a;
-  --saifin-navy-800: #0e2a52;
-  --saifin-navy-700: #123a6a;
-  --saifin-navy-600: #1b4c87;
-  --saifin-navy-500: #2a5da3;
+  /* Saifin Brand Palette – exakte Logo-Werte */
+  --saifin-navy-900: #141833; /* primary */
+  --saifin-navy-800: #151934; /* slight shade */
+  --saifin-navy-700: #131732; /* slight shade */
+  --saifin-navy-600: #1b2248; /* supportive tint for hovers */
+  --saifin-navy-500: #2a3966; /* supportive tint for states */
   --saifin-accent-600: #2ea7c9;
   --saifin-accent-500: #56b4d3;
   --saifin-surface: #f7f9fc;
 
-  --brand-primary: var(--saifin-navy-800);
-  --brand-primary-contrast: #ffffff;
+  --brand-primary: var(--saifin-navy-900);
+  --brand-primary-contrast: #ffffff; /* or #e4e2e3 for softer white */
   --brand-accent: var(--saifin-accent-500);
   --brand-ring: rgba(18, 58, 106, 0.35);
 
