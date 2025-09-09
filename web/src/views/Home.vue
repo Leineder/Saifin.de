@@ -26,7 +26,7 @@ onMounted(() => { storeTrackingParams() })
     <div class="hero-content">
       <h1 class="hero-title">Eine Kreditkarte für jede Situation.</h1>
       <p class="hero-sub">Vergleiche Top-Angebote und beantrage in wenigen Minuten.</p>
-      <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised">
+      <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
         <span class="p-button-label">Kreditkarten ansehen</span>
       </router-link>
     </div>
@@ -210,6 +210,18 @@ onMounted(() => { storeTrackingParams() })
 .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 16px; text-align: center; color: #fff; }
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 .hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
+
+/* Weißer Hero-Button statt blauer Hinterlegung */
+.hero-cta.p-button {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: var(--brand-primary);
+}
+.hero-cta.p-button:hover {
+  background: #f2f4f7;
+  border-color: #f2f4f7;
+  color: var(--brand-primary);
+}
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .stars { color: #fbbf24; }
