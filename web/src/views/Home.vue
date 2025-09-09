@@ -211,16 +211,26 @@ onMounted(() => { storeTrackingParams() })
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 .hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
 
-/* Weißer Hero-Button statt blauer Hinterlegung */
+/* Einladender Hero-Button: weiß, navy Text, gute Lesbarkeit auch beim Hover */
 .hero-cta.p-button {
-  background: #ffffff;
-  border-color: #ffffff;
-  color: var(--brand-primary);
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: var(--brand-primary) !important;
+  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  transition: background-color .15s ease, box-shadow .15s ease, transform .15s ease, color .15s ease;
 }
-.hero-cta.p-button:hover {
-  background: #f2f4f7;
-  border-color: #f2f4f7;
-  color: var(--brand-primary);
+.hero-cta.p-button:hover,
+.hero-cta.p-button:focus,
+.hero-cta.p-button:focus-visible {
+  background: #ffffff !important;
+  border-color: #ffffff !important;
+  color: var(--brand-primary) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(0,0,0,0.22);
+}
+.hero-cta.p-button:active {
+  transform: translateY(0);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.16);
 }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
