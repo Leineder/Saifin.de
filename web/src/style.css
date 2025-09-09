@@ -17,7 +17,7 @@
   --saifin-surface: #f7f9fc;
 
   --brand-primary: var(--saifin-navy-900);
-  --brand-primary-contrast: #ffffff; /* or #e4e2e3 for softer white */
+  --brand-primary-contrast: #e4e2e3; /* matches logo whites better */
   --brand-accent: var(--saifin-accent-500);
   --brand-ring: rgba(18, 58, 106, 0.35);
 
