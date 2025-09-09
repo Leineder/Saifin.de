@@ -80,7 +80,10 @@ onMounted(() => {
 /* Navigation */
 .site-nav { display: none; gap: 20px; align-items: center; }
 .nav-link { color: var(--brand-primary-contrast); text-decoration: none; font-weight: 600; padding: 6px 0; border-bottom: 2px solid transparent; opacity: 0.95; }
-.nav-link:hover { border-bottom-color: rgba(255, 255, 255, 0.4); opacity: 1; }
+.nav-link:hover { color: var(--brand-primary-contrast); border-bottom-color: rgba(255, 255, 255, 0.5); opacity: 1; }
+/* Überschreibe globale Link-Hover-Farbe im Header */
+.site-header a { color: var(--brand-primary-contrast); }
+.site-header a:hover { color: var(--brand-primary-contrast); }
 
 .nav-toggle { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border: none; background: transparent; color: var(--brand-primary-contrast); cursor: pointer; border-radius: 8px; }
 .nav-toggle:hover { background: rgba(255, 255, 255, 0.08); }

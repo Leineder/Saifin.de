@@ -32,7 +32,7 @@
 
 /* Links – Brandfarben */
 a { color: var(--brand-primary); text-decoration: none; }
-a:hover { color: var(--saifin-navy-700); }
+a:hover { color: var(--brand-primary); opacity: .9; }
 
 /* Body-Reset */
 body {
