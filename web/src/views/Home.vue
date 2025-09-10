@@ -21,7 +21,7 @@ onMounted(() => { storeTrackingParams() })
 <template>
   <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
   <section class="hero relative">
-    <img class="hero-img" src="https://images.unsplash.com/photo-1506012787146-f92b2d7d6d96?q=80&w=1600" alt="Urlaub" />
+    <img class="hero-img" src="/images/landing-hero.jpg" alt="Kartenzahlung mit Karte und Terminal" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">Eine Kreditkarte für jede Situation.</h1>
@@ -164,7 +164,7 @@ onMounted(() => { storeTrackingParams() })
       <div class="col-12 md:col-6">
         <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200" alt="Partnerschaft"
              class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)">
-      </div>
+       </div>
     </div>
   </section>
 
