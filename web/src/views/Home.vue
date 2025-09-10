@@ -211,41 +211,42 @@ onMounted(() => { storeTrackingParams() })
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 .hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
 
-/* Hero-Button: weißer Pill-Button mit schwarzem Rand – wie Vorlage */
+/* Hero-Button: leicht abgerundet, ohne Rand, dezenter Shadow */
 .hero-cta.p-button {
   background: #fff !important;
   color: #111 !important;
-  border: 1.5px solid #111 !important;
-  border-radius: 9999px !important;
-  box-shadow: none !important;
-  padding: 0.75rem 1.1rem !important;
-  transition: background-color .15s ease, color .15s ease, transform .15s ease;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px var(--shadow-color) !important;
+  padding: 0.7rem 1rem !important;
+  transition: box-shadow .15s ease, transform .15s ease, background-color .15s ease, color .15s ease;
 }
 .hero-cta.p-button:hover,
 .hero-cta.p-button:focus,
 .hero-cta.p-button:focus-visible {
-  background: #111 !important;
-  color: #fff !important;
+  background: #fff !important;
+  color: #111 !important;
   transform: translateY(-1px);
+  box-shadow: 0 12px 28px var(--shadow-color) !important;
 }
 .hero-cta.p-button:active { transform: translateY(0); }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .hero-cta.p-button .p-button-label { font-weight: 700; letter-spacing: .01em; }
 
-/* Dark Mode: gleicher Look (weiß mit schwarzem Rand) */
+/* Dark Mode: gleicher Look (weiß, ohne Rand) */
 @media (prefers-color-scheme: dark) {
   .hero-cta.p-button {
     background: #fff !important;
     color: #111 !important;
-    border-color: #111 !important;
+    border: none !important;
   }
   .hero-cta.p-button:hover,
   .hero-cta.p-button:focus,
   .hero-cta.p-button:focus-visible {
-    background: #111 !important;
-    color: #fff !important;
-    border-color: #111 !important;
+    background: #fff !important;
+    color: #111 !important;
+    box-shadow: 0 12px 28px var(--shadow-color) !important;
   }
 }
 .stars { color: #facc15; }
