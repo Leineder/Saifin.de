@@ -53,6 +53,12 @@ const goToApply = (offer) => {
     router.push(offer.applyUrl)
   }
 }
+
+const goToDetail = (offer) => {
+  if (offer && offer.slug) {
+    router.push(`/kreditkarten/${offer.slug}`)
+  }
+}
 </script>
 
 <template>
@@ -97,7 +103,13 @@ const goToApply = (offer) => {
           <h1 class="section-title text-2xl md:text-3xl mb-3">Kreditkarten im Vergleich</h1>
 
           <div class="offers-section">
-            <div v-for="offer in filteredOffers" :key="offer.id" class="offer-card surface-card border-round-xl card-accent">
+            <div 
+              v-for="offer in filteredOffers" 
+              :key="offer.id" 
+              class="offer-card surface-card border-round-xl card-accent"
+              @click="goToDetail(offer)"
+              style="cursor: pointer;"
+            >
               <div v-if="offer.bonus" class="bonus-banner">
                 <i class="pi pi-gift"></i>
                 {{ offer.bonus }} Bonus
@@ -123,11 +135,8 @@ const goToApply = (offer) => {
                   </div>
                   <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
                   <div class="action-buttons">
-                    <button class="p-button" @click="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
-                    <div class="expandable-sections">
-                      <button class="expand-btn">Konditionen <i class="pi pi-chevron-down"></i></button>
-                      <button class="expand-btn">Details <i class="pi pi-chevron-down"></i></button>
-                    </div>
+                    <button class="p-button" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
                   </div>
                 </div>
               </div>
@@ -138,7 +147,13 @@ const goToApply = (offer) => {
           <div class="recommendations-section">
             <h2 class="recommendations-title section-title">Unsere Empfehlungen</h2>
             <div class="recommendations-grid">
-              <div v-for="offer in topOffers" :key="offer.id" class="recommendation-card surface-card border-round-xl card-accent">
+              <div 
+                v-for="offer in topOffers" 
+                :key="offer.id" 
+                class="recommendation-card surface-card border-round-xl card-accent"
+                @click="goToDetail(offer)"
+                style="cursor: pointer;"
+              >
                 <div v-if="offer.bonus" class="bonus-banner">
                   <i class="pi pi-gift"></i>
                   {{ offer.bonus }} Bonus
@@ -163,11 +178,8 @@ const goToApply = (offer) => {
                     </div>
                     <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
                     <div class="action-buttons">
-                      <button class="p-button" @click="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
-                      <div class="expandable-sections">
-                        <button class="expand-btn">Konditionen <i class="pi pi-chevron-down"></i></button>
-                        <button class="expand-btn">Details <i class="pi pi-chevron-down"></i></button>
-                      </div>
+                      <button class="p-button" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                      <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
                     </div>
                   </div>
                 </div>

@@ -8,6 +8,11 @@ if (!offer) router.replace('/kreditkarten')
 
 const goBack = () => router.push('/kreditkarten')
 const goApply = () => router.push(`/antrag/${offer.slug}`)
+const formatEuro = (n) => {
+  if (n === 0) return '0,00 €'
+  if (typeof n === 'number') return `${n.toFixed(2).replace('.', ',')} €`
+  return n
+}
 </script>
 
 <template>
@@ -19,13 +24,52 @@ const goApply = () => router.push(`/antrag/${offer.slug}`)
       <div class="content">
         <div class="section-eyebrow">Kreditkarte</div>
         <h1 class="section-title text-3xl mb-2">{{ offer.title }}</h1>
-        <ul class="pl-3 mb-3">
-          <li v-for="b in offer.bullets" :key="b" class="text-700">{{ b }}</li>
-        </ul>
-        <div class="facts mb-3 surface-card border-round-lg p-3 card-accent">
-          <p class="text-700"><strong>Jahresgebühr:</strong> {{ offer.annualFee }} €</p>
-          <p class="text-700"><strong>Zinsfreie Phase:</strong> bis {{ offer.graceWeeks }} Wochen</p>
-          <p class="text-700"><strong>Fremdwährungsgebühr:</strong> {{ offer.foreignFee }}</p>
+        <div class="bullets surface-card border-round-lg p-3 card-accent mb-3">
+          <ul class="pl-3 m-0">
+            <li v-for="b in offer.bullets" :key="b" class="text-700">{{ b }}</li>
+          </ul>
+        </div>
+        <div class="facts-grid mb-3">
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <div class="fact-label">Jahresgebühr</div>
+            <div class="fact-value">{{ offer.details?.annualFeeText || formatEuro(offer.annualFee) }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <div class="fact-label">Zinsfreie Phase</div>
+            <div class="fact-value">bis {{ offer.graceWeeks }} Wochen</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <div class="fact-label">Kartentyp</div>
+            <div class="fact-value">{{ offer.details?.cardType || offer.cardType }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent">
+            <div class="fact-label">Fremdwährung</div>
+            <div class="fact-value">{{ offer.details?.foreignCurrency || offer.foreignFee }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.details?.cashWithdrawal">
+            <div class="fact-label">Bargeld</div>
+            <div class="fact-value">{{ offer.details.cashWithdrawal }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.details?.limits || offer.details?.atmLimits">
+            <div class="fact-label">Limits</div>
+            <div class="fact-value">{{ offer.details.limits || offer.details.atmLimits }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.details?.creditLimit">
+            <div class="fact-label">Kreditrahmen</div>
+            <div class="fact-value">{{ offer.details.creditLimit }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.details?.interest">
+            <div class="fact-label">Zinsen/Rückzahlung</div>
+            <div class="fact-value">{{ offer.details.interest }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.details?.benefits || offer.features?.insurance">
+            <div class="fact-label">Benefits/Versicherung</div>
+            <div class="fact-value">{{ offer.details?.benefits || offer.features?.insurance }}</div>
+          </div>
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.details?.notes || offer.details?.promo">
+            <div class="fact-label">Hinweis</div>
+            <div class="fact-value">{{ offer.details.notes || offer.details.promo }}</div>
+          </div>
         </div>
         <p class="text-600 text-sm mb-4">{{ offer.disclaimer }}</p>
 
@@ -56,6 +100,13 @@ const goApply = () => router.push(`/antrag/${offer.slug}`)
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
 .cta-col { display: grid; grid-template-columns: 1fr; gap: 10px; }
+.facts-grid { 
+  display: grid; 
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 12px; 
+}
+.fact-label { font-size: 0.75rem; color: var(--subtle-text); margin-bottom: 4px; }
+.fact-value { font-weight: 600; color: var(--text); }
 
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: 1fr 1fr; }

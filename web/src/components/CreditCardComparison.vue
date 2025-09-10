@@ -26,7 +26,7 @@
         <div class="flex p-5">
           <!-- Kartenbild links (sehr klein, nur 10% der Breite) -->
           <div class="flex-shrink-0 card-image pr-3">
-            <div class="relative">
+            <div class="relative cursor-pointer" @click="goDetail(card.slug)">
               <img 
                 :src="card.image" 
                 :alt="card.title" 
@@ -42,7 +42,7 @@
           <!-- Infos rechts (90% der Breite) -->
           <div class="flex-grow card-content">
             <!-- Kartenname -->
-            <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight">{{ card.title }}</h3>
+            <h3 class="text-xl font-bold text-gray-900 mb-3 leading-tight cursor-pointer" @click="goDetail(card.slug)">{{ card.title }}</h3>
             
             <!-- Hauptfeatures -->
             <div class="space-y-2 mb-4">
@@ -121,6 +121,13 @@
               <span>ZUM ANTRAG</span>
               <span class="ml-2">→</span>
             </button>
+            <button 
+              @click="goDetail(card.slug)"
+              class="w-full mt-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
+            >
+              <span>DETAILS</span>
+              <span class="ml-2">→</span>
+            </button>
           </div>
         </div>
       </div>
@@ -136,6 +143,10 @@ const router = useRouter()
 
 function goApply(slug) {
   router.push(`/antrag/${slug}`)
+}
+
+function goDetail(slug) {
+  router.push(`/kreditkarten/${slug}`)
 }
 </script>
 
