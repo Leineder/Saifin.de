@@ -21,7 +21,7 @@ onMounted(() => { storeTrackingParams() })
 <template>
   <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
   <section class="hero relative">
-    <img class="hero-img" src="/images/landing-hero.jpg" alt="Kartenzahlung mit Karte und Terminal" />
+    <img class="hero-img" src="/images/landing-hero.jpg?v=1" alt="Kartenzahlung mit Karte und Terminal" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">Eine Kreditkarte für jede Situation.</h1>
