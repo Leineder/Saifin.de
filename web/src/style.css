@@ -164,4 +164,9 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
     --shadow-color: rgba(0,0,0,0.5);
     --link-color: var(--brand-accent);
   }
+
+  /* Buttons im Dark Mode kontraststark */
+  .p-button.p-button-outlined { color: var(--brand-accent); border-color: var(--brand-accent); background: transparent; }
+  .p-button.p-button-outlined .p-button-label { color: var(--brand-accent); }
+  .p-button.p-button-text { color: var(--brand-accent); }
 }
