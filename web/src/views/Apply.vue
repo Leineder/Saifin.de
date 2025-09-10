@@ -130,8 +130,8 @@ function submit() {
         <span class="text-700">Schritt {{ currentStep }}/{{ totalSteps }}</span>
         <span class="text-700">{{ progressPercent }}%</span>
       </div>
-      <div class="w-full" style="height:8px;background:#e5e7eb;border-radius:9999px;overflow:hidden">
-        <div :style="{ width: progressPercent + '%' }" style="height:100%;background:#111827"></div>
+      <div class="w-full" style="height:8px;background:var(--border);border-radius:9999px;overflow:hidden">
+        <div :style="{ width: progressPercent + '%' }" style="height:100%;background:var(--brand-primary)"></div>
       </div>
     </div>
 
@@ -227,7 +227,7 @@ function submit() {
 </template>
 
 <style scoped>
-.p-error { color: #dc2626; }
+.p-error { color: #f87171; }
 .d-block { display: block; }
 @media (max-width: 767px) {
   label { font-size: 0.95rem; }

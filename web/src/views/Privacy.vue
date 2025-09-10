@@ -92,22 +92,23 @@
 <style scoped>
 .privacy-container {
   padding: 2rem 1rem;
-  background: #f8fafc;
+  background: var(--surface-muted);
   min-height: calc(100vh - 128px); /* Abzüglich Header und Footer */
 }
 
 .container {
   max-width: 900px;
   margin: 0 auto;
-  background: white;
+  background: var(--surface);
+  color: var(--text);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px var(--shadow-color);
   overflow: hidden;
 }
 
 .privacy-title {
   background: linear-gradient(135deg, #059669, #047857);
-  color: white;
+  color: #fff;
   margin: 0;
   padding: 2rem;
   font-size: 2rem;
@@ -122,7 +123,7 @@
 .privacy-section {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border);
 }
 
 .privacy-section:last-child {
@@ -132,17 +133,17 @@
 }
 
 .privacy-section h2 {
-  color: #1f2937;
+  color: var(--text);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid #059669;
+  border-bottom: 2px solid var(--border);
   display: inline-block;
 }
 
 .contact-info {
-  background: #f0fdf4;
+  background: var(--surface-muted);
   padding: 1rem;
   border-radius: 8px;
   border-left: 4px solid #059669;
@@ -170,20 +171,20 @@
 }
 
 .contact-link:hover {
-  color: #047857;
+  color: #34d399;
   text-decoration: underline;
 }
 
 .privacy-section p {
   margin: 0.75rem 0;
   line-height: 1.6;
-  color: #374151;
+  color: var(--muted-text);
 }
 
 .privacy-list {
   margin: 0.75rem 0;
   padding-left: 1.5rem;
-  color: #374151;
+  color: var(--muted-text);
 }
 
 .privacy-list li {
@@ -192,7 +193,7 @@
 }
 
 .privacy-section strong {
-  color: #1f2937;
+  color: var(--text);
   font-weight: 600;
 }
 

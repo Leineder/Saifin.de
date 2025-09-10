@@ -57,16 +57,17 @@
 <style scoped>
 .imprint-container {
   padding: 2rem 1rem;
-  background: var(--saifin-surface);
+  background: var(--surface-muted);
   min-height: calc(100vh - 128px);
 }
 
 .container {
   max-width: 800px;
   margin: 0 auto;
-  background: white;
+  background: var(--surface);
+  color: var(--text);
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 12px var(--shadow-color);
   overflow: hidden;
 }
 
@@ -87,7 +88,7 @@
 .imprint-section {
   margin-bottom: 2rem;
   padding-bottom: 1.5rem;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--border);
 }
 
 .imprint-section:last-child {
@@ -97,17 +98,17 @@
 }
 
 .imprint-section h2 {
-  color: var(--saifin-navy-900);
+  color: var(--text);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--saifin-navy-700);
+  border-bottom: 2px solid var(--border);
   display: inline-block;
 }
 
 .contact-info {
-  background: var(--saifin-surface);
+  background: var(--surface-muted);
   padding: 1rem;
   border-radius: 8px;
   border-left: 4px solid var(--saifin-navy-700);
@@ -127,30 +128,30 @@
 }
 
 .contact-link {
-  color: var(--saifin-navy-700);
+  color: var(--link-color);
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .contact-link:hover {
-  color: var(--saifin-navy-900);
+  color: var(--link-color);
   text-decoration: underline;
 }
 
 .imprint-section p {
   margin: 0.75rem 0;
   line-height: 1.6;
-  color: #374151;
+  color: var(--muted-text);
 }
 
 .imprint-section strong {
-  color: #1f2937;
+  color: var(--text);
   font-weight: 600;
 }
 
 .imprint-section em {
-  color: #6b7280;
+  color: var(--subtle-text);
   font-style: italic;
 }
 

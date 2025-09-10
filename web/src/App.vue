@@ -54,7 +54,7 @@ onMounted(() => {
 
 <style>
 /* Layout helpers */
-.app-root { background: #fff; color: #0f172a; }
+.app-root { background: var(--background); color: var(--text); }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
 /* Header */
@@ -109,9 +109,9 @@ onMounted(() => {
 .site-nav.is-open .nav-link { padding: 10px 4px; }
 
 /* Footer */
-.site-footer { border-top: 1px solid rgba(11,31,58,0.15); background: #ffffff; }
-.footer-inner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 16px; color: #4b5563; font-size: 0.9rem; }
-.footer-link { color: var(--brand-primary); text-decoration: none; }
+.site-footer { border-top: 1px solid var(--border); background: var(--surface); }
+.footer-inner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 16px; color: var(--muted-text); font-size: 0.9rem; }
+.footer-link { color: var(--link-color); text-decoration: none; }
 .footer-link:hover { text-decoration: underline; }
-.sep { color: #9ca3af; }
+.sep { color: var(--subtle-text); }
 </style>

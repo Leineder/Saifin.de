@@ -181,7 +181,7 @@ const goToApply = (offer) => {
 </template>
 
 <style scoped>
-.cards-page { background: var(--saifin-surface); min-height: 100vh; }
+.cards-page { background: var(--surface-muted); min-height: 100vh; }
 .layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
 .sidebar { position: relative; }
 .sidebar-card { position: sticky; top: 86px; }
@@ -197,15 +197,16 @@ const goToApply = (offer) => {
 .filter-title {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #374151;
+  color: var(--text);
   margin: 0;
 }
 
 .filter-select {
   padding: 0.5rem;
-  border: 1px solid #d1d5db;
+  border: 1px solid var(--border);
   border-radius: 0.375rem;
-  background: white;
+  background: var(--surface);
+  color: var(--text);
   font-size: 0.875rem;
   min-width: 120px;
 }
@@ -215,7 +216,7 @@ const goToApply = (offer) => {
 /* Buttons werden über PrimeVue gebrandet */
 
 /* Main Content */
-.main-content { }
+
 
 /* Offer Cards */
 .offers-section {
@@ -258,7 +259,7 @@ const goToApply = (offer) => {
   height: 75px;
   object-fit: cover;
   border-radius: 0.75rem;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--border);
 }
 
 .offer-details {
@@ -277,7 +278,7 @@ const goToApply = (offer) => {
 .offer-title {
   font-size: 1.125rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text);
   margin: 0;
 }
 
@@ -285,7 +286,7 @@ const goToApply = (offer) => {
   display: flex;
   align-items: center;
   gap: 0.25rem;
-  color: #6b7280;
+  color: var(--subtle-text);
   font-size: 0.875rem;
 }
 
@@ -299,16 +300,16 @@ const goToApply = (offer) => {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #374151;
+  color: var(--muted-text);
   font-size: 0.875rem;
 }
 
 .feature-item i {
-  color: #10b981;
+  color: #34d399;
   font-size: 0.75rem;
 }
 
-.annual-fee { font-size: 1.125rem; font-weight: 700; color: var(--saifin-navy-800); }
+.annual-fee { font-size: 1.125rem; font-weight: 700; color: var(--brand-accent); }
 
 .action-buttons {
   display: flex;
@@ -330,7 +331,7 @@ const goToApply = (offer) => {
   gap: 0.25rem;
   background: none;
   border: none;
-  color: #6b7280;
+  color: var(--subtle-text);
   font-size: 0.875rem;
   cursor: pointer;
   padding: 0.5rem;
@@ -344,7 +345,7 @@ const goToApply = (offer) => {
 .recommendations-title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: #111827;
+  color: var(--text);
   margin-bottom: 1.5rem;
   text-align: center;
 }
@@ -356,9 +357,9 @@ const goToApply = (offer) => {
 }
 
 .recommendation-card {
-  background: white;
+  background: var(--surface);
   border-radius: 0.75rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--shadow-color);
   position: relative;
   overflow: hidden;
 }

@@ -213,20 +213,20 @@ onMounted(() => { storeTrackingParams() })
 
 /* Einladender Hero-Button: weiß, navy Text, gute Lesbarkeit auch beim Hover */
 .hero-cta.p-button {
-  background: #ffffff !important;
-  border-color: #ffffff !important;
+  background: var(--surface) !important;
+  border-color: var(--surface) !important;
   color: var(--brand-primary) !important;
-  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+  box-shadow: 0 8px 22px var(--shadow-color);
   transition: background-color .15s ease, box-shadow .15s ease, transform .15s ease, color .15s ease;
 }
 .hero-cta.p-button:hover,
 .hero-cta.p-button:focus,
 .hero-cta.p-button:focus-visible {
-  background: #ffffff !important;
-  border-color: #ffffff !important;
+  background: var(--surface) !important;
+  border-color: var(--surface) !important;
   color: var(--brand-primary) !important;
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px var(--shadow-color);
 }
 .hero-cta.p-button:active {
   transform: translateY(0);
@@ -234,14 +234,14 @@ onMounted(() => { storeTrackingParams() })
 }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
-.stars { color: #fbbf24; }
-.testimonial + .testimonial { border-top: 1px solid #e5e7eb; }
-.content-box { background: rgba(255,255,255,0.98); color: #0f172a; border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px rgba(0,0,0,0.06); border: 1px solid rgba(11,31,58,0.08) }
-.section-title { color: var(--saifin-navy-900); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
+.stars { color: #facc15; }
+.testimonial + .testimonial { border-top: 1px solid var(--border); }
+.content-box { background: var(--surface); color: var(--text); border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px var(--shadow-color); border: 1px solid var(--border) }
+.section-title { color: var(--text); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 
 .offer-card { transition: transform .15s ease, box-shadow .15s ease; }
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }
-.offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,0,0,0.12); }
+.offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
 .offer-thumb { width: 96px; height: 60px; object-fit: cover; }
 
 /* Vertikale Zentrierung der Textbox neben den Bildern auf Desktop */

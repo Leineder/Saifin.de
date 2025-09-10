@@ -14,25 +14,36 @@
   --saifin-navy-500: #2a3966; /* supportive tint for states */
   --saifin-accent-600: #2ea7c9;
   --saifin-accent-500: #56b4d3;
-  --saifin-surface: #f7f9fc;
 
+  /* Farb-Tokens (Light Default) */
+  --background: #ffffff;
+  --text: #111827; /* neutral-900 */
+  --muted-text: #4b5563; /* neutral-600 */
+  --subtle-text: #6b7280; /* neutral-500 */
+  --surface: #ffffff;
+  --surface-muted: #f7f9fc; /* war zuvor --saifin-surface */
+  --border: rgba(11,31,58,0.08);
+  --shadow-color: rgba(11,31,58,0.08);
+  --link-color: var(--brand-primary);
+
+  /* Brand-Referenzen */
   --brand-primary: var(--saifin-navy-900);
   --brand-primary-contrast: #e4e2e3; /* matches logo whites better */
   --brand-accent: var(--saifin-accent-500);
   --brand-ring: rgba(18, 58, 106, 0.35);
 
   color-scheme: light;
-  color: #111827; /* neutral-900 */
-  background-color: #ffffff;
+  color: var(--text);
+  background-color: var(--background);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Links – Brandfarben */
-a { color: var(--brand-primary); text-decoration: none; }
-a:hover { color: var(--brand-primary); opacity: .9; }
+/* Links – nutzen eigene Variable für bessere Dark-Mode-Kontrolle */
+a { color: var(--link-color); text-decoration: none; }
+a:hover { color: var(--link-color); opacity: .9; }
 
 /* Body-Reset */
 body {
@@ -75,21 +86,25 @@ button:focus-visible {
 .p-button.p-button-outlined { color: var(--brand-primary); border-color: var(--brand-primary); background: transparent; }
 .p-button.p-button-text { color: var(--brand-primary); background: transparent; border-color: transparent; }
 
-/* Lesbarkeit: dunklere Standard-Typografie auf hellem Hintergrund */
-:root { color: #111827; }
-body { color: #111827; background: #ffffff; }
+/* Lesbarkeit: globale Text-/Hintergrundfarben über Tokens */
+body { color: var(--text); background: var(--background); }
+/* Form-Elemente – konsistent in Light/Dark */
+input, select, textarea { color: var(--text); background: var(--surface); border: 1px solid var(--border); }
+input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 
-/* Utility-Farben (PrimeFlex) etwas dunkler für besseren Kontrast auf Weiß */
-.text-700 { color: #374151 !important; }
-.text-600 { color: #4b5563 !important; }
-.text-500 { color: #6b7280 !important; }
+/* Utility-Farben (PrimeFlex) über Tokens – passen sich Light/Dark an */
+.text-900 { color: var(--text) !important; }
+.text-800 { color: var(--text) !important; }
+.text-700 { color: var(--muted-text) !important; }
+.text-600 { color: var(--muted-text) !important; }
+.text-500 { color: var(--subtle-text) !important; }
 
-/* Karten/Flächen: Standardtext nicht zu hell sowie sanfte Flächen */
-.surface-card { color: #0f172a; background: #ffffff; }
-.surface-50 { background: var(--saifin-surface) !important; }
+/* Karten/Flächen: über Tokens */
+.surface-card { color: var(--text); background: var(--surface); }
+.surface-50 { background: var(--surface-muted) !important; }
 .card-accent {
-  border: 1px solid rgba(11,31,58,0.08);
-  box-shadow: 0 10px 24px rgba(11,31,58,0.08);
+  border: 1px solid var(--border);
+  box-shadow: 0 10px 24px var(--shadow-color);
 }
 
 /* Badges/Chips in Brand */
@@ -101,9 +116,9 @@ body { color: #111827; background: #ffffff; }
 /* Globale Sektionen & Heading-Stile */
 .section { padding: 48px 0; }
 .section-sm { padding: 28px 0; }
-.section-muted { padding: 48px 0; background: var(--saifin-surface); }
-.section-title { margin: 0 0 10px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
-.section-eyebrow { color: var(--saifin-navy-700); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: .75rem; }
+.section-muted { padding: 48px 0; background: var(--surface-muted); }
+.section-title { margin: 0 0 10px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; color: var(--text); }
+.section-eyebrow { color: var(--muted-text); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: .75rem; }
 
 /* CTA-Band */
 .cta-band { background: var(--brand-primary); color: #fff; padding: 44px 0; text-align: center; }
@@ -112,15 +127,41 @@ body { color: #111827; background: #ffffff; }
 
 /* FAQ */
 .faq { max-width: 900px; margin: 0 auto; }
-.faq details { background: #fff; border: 1px solid rgba(11,31,58,0.08); border-radius: 12px; margin-bottom: 10px; padding: 12px 16px; }
-.faq summary { cursor: pointer; font-weight: 700; color: var(--saifin-navy-900); list-style: none; }
+.faq details { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; margin-bottom: 10px; padding: 12px 16px; }
+.faq summary { cursor: pointer; font-weight: 700; color: var(--text); list-style: none; }
 .faq summary::-webkit-details-marker { display: none; }
-.faq details[open] { box-shadow: 0 8px 24px rgba(11,31,58,0.08); }
+.faq details[open] { box-shadow: 0 8px 24px var(--shadow-color); }
 
 /* Halbtransparenter Weiß-Hintergrund für Overlays (z. B. Hero-Box) */
 .surface-100 { background-color: rgba(255, 255, 255, 0.96) !important; color: #0f172a; }
 
 
 @media (prefers-color-scheme: light) {
-  :root { color: #111827; background-color: #ffffff; }
+  :root {
+    color-scheme: light;
+    --background: #ffffff;
+    --text: #111827;
+    --muted-text: #4b5563;
+    --subtle-text: #6b7280;
+    --surface: #ffffff;
+    --surface-muted: #f7f9fc;
+    --border: rgba(11,31,58,0.08);
+    --shadow-color: rgba(11,31,58,0.08);
+    --link-color: var(--brand-primary);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+    --background: #0b0f1a;
+    --text: #e5e7eb;
+    --muted-text: #cbd5e1;
+    --subtle-text: #94a3b8;
+    --surface: #131732; /* brand navy 700 */
+    --surface-muted: #0f1426;
+    --border: rgba(255,255,255,0.12);
+    --shadow-color: rgba(0,0,0,0.5);
+    --link-color: var(--brand-accent);
+  }
 }
