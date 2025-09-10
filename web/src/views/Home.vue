@@ -230,10 +230,27 @@ onMounted(() => { storeTrackingParams() })
 }
 .hero-cta.p-button:active {
   transform: translateY(0);
-  box-shadow: 0 6px 16px rgba(0,0,0,0.16);
+  box-shadow: 0 6px 16px var(--shadow-color);
 }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
+.hero-cta.p-button .p-button-label { font-weight: 700; letter-spacing: .01em; }
+
+/* Dark Mode: Button in Akzentfarbe mit heller Schrift für bessere Lesbarkeit */
+@media (prefers-color-scheme: dark) {
+  .hero-cta.p-button {
+    background: var(--brand-accent) !important;
+    border-color: var(--brand-accent) !important;
+    color: var(--brand-primary-contrast) !important;
+  }
+  .hero-cta.p-button:hover,
+  .hero-cta.p-button:focus,
+  .hero-cta.p-button:focus-visible {
+    background: var(--saifin-accent-600) !important;
+    border-color: var(--saifin-accent-600) !important;
+    color: var(--brand-primary-contrast) !important;
+  }
+}
 .stars { color: #facc15; }
 .testimonial + .testimonial { border-top: 1px solid var(--border); }
 .content-box { background: var(--surface); color: var(--text); border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px var(--shadow-color); border: 1px solid var(--border) }
