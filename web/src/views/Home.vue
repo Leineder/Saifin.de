@@ -211,44 +211,41 @@ onMounted(() => { storeTrackingParams() })
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 .hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
 
-/* Einladender Hero-Button: weiß, navy Text, gute Lesbarkeit auch beim Hover */
+/* Hero-Button: weißer Pill-Button mit schwarzem Rand – wie Vorlage */
 .hero-cta.p-button {
-  background: var(--surface) !important;
-  border-color: var(--surface) !important;
-  color: var(--brand-primary) !important;
-  box-shadow: 0 8px 22px var(--shadow-color);
-  transition: background-color .15s ease, box-shadow .15s ease, transform .15s ease, color .15s ease;
+  background: #fff !important;
+  color: #111 !important;
+  border: 1.5px solid #111 !important;
+  border-radius: 9999px !important;
+  box-shadow: none !important;
+  padding: 0.75rem 1.1rem !important;
+  transition: background-color .15s ease, color .15s ease, transform .15s ease;
 }
 .hero-cta.p-button:hover,
 .hero-cta.p-button:focus,
 .hero-cta.p-button:focus-visible {
-  background: var(--surface) !important;
-  border-color: var(--surface) !important;
-  color: var(--brand-primary) !important;
+  background: #111 !important;
+  color: #fff !important;
   transform: translateY(-1px);
-  box-shadow: 0 14px 28px var(--shadow-color);
 }
-.hero-cta.p-button:active {
-  transform: translateY(0);
-  box-shadow: 0 6px 16px var(--shadow-color);
-}
+.hero-cta.p-button:active { transform: translateY(0); }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .hero-cta.p-button .p-button-label { font-weight: 700; letter-spacing: .01em; }
 
-/* Dark Mode: Button in Akzentfarbe mit heller Schrift für bessere Lesbarkeit */
+/* Dark Mode: gleicher Look (weiß mit schwarzem Rand) */
 @media (prefers-color-scheme: dark) {
   .hero-cta.p-button {
-    background: var(--brand-accent) !important;
-    border-color: var(--brand-accent) !important;
-    color: var(--brand-primary-contrast) !important;
+    background: #fff !important;
+    color: #111 !important;
+    border-color: #111 !important;
   }
   .hero-cta.p-button:hover,
   .hero-cta.p-button:focus,
   .hero-cta.p-button:focus-visible {
-    background: var(--saifin-accent-600) !important;
-    border-color: var(--saifin-accent-600) !important;
-    color: var(--brand-primary-contrast) !important;
+    background: #111 !important;
+    color: #fff !important;
+    border-color: #111 !important;
   }
 }
 .stars { color: #facc15; }
