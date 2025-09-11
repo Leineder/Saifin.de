@@ -154,7 +154,7 @@ function goToDetail(broker) {
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .card-image-container { flex-shrink: 0; width: 120px; }
-.card-image { width: 100%; height: 75px; object-fit: cover; border-radius: 0.75rem; border: 1px solid var(--border); }
+.card-image { width: 100%; height: 75px; object-fit: contain; background: #fff; padding: 8px; border-radius: 0.75rem; border: 1px solid var(--border); }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }

@@ -241,6 +241,10 @@ onMounted(() => { storeTrackingParams() })
 }
 .hero-cta.p-button:active { transform: translateY(0); }
 
+/* Abstand/Anordnung der Hero-Buttons */
+.hero-cta-group { display: flex; gap: clamp(12px, 3.5vw, 28px); flex-wrap: wrap; justify-content: center; }
+.hero-cta.alt { background: transparent !important; color: #fff !important; border: 1px solid rgba(255,255,255,0.7) !important; }
+
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .hero-cta.p-button .p-button-label { font-weight: 700; letter-spacing: .01em; }
 

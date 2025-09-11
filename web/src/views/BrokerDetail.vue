@@ -14,7 +14,9 @@ const goBack = () => router.push('/broker')
   <div v-if="broker" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" class="w-full border-round-lg shadow-2" style="max-height:360px;object-fit:cover">
+        <div class="logo-frame">
+          <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" alt="" />
+        </div>
       </div>
       <div class="content">
         <div class="section-eyebrow">Broker</div>
@@ -75,5 +77,9 @@ const goBack = () => router.push('/broker')
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: 1fr; }
 }
+</style>
+<style scoped>
+.logo-frame { width: 100%; max-height: 360px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; border: 1px solid var(--border); padding: 16px; }
+.logo-frame img { max-width: 100%; max-height: 240px; object-fit: contain; display: block; }
 </style>
 
