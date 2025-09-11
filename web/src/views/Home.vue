@@ -223,7 +223,7 @@ onMounted(() => { storeTrackingParams() })
 .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 16px; text-align: center; color: #fff; }
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; margin: 0 0 28px; }
 .hero-title-line { display: block; }
-.hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 64px; }
+.hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 48px; }
 
 /* Hero-Button: leicht abgerundet, ohne Rand, dezenter Shadow */
 .hero-cta.p-button {
