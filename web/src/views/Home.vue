@@ -24,10 +24,7 @@ onMounted(() => { storeTrackingParams() })
     <img class="hero-img" src="/images/landing-hero.jpg?v=1" alt="Kartenzahlung mit Karte und Terminal" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <h1 class="hero-title">
-        <span class="hero-title-line">Einfach vergleichen</span>
-        <span class="hero-title-line">Clever entscheiden</span>
-      </h1>
+      <h1 class="hero-title">Eine Kreditkarte für jede Situation.</h1>
       <p class="hero-sub">Vergleiche Top-Angebote und beantrage in wenigen Minuten.</p>
       <div class="hero-cta-group">
         <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
@@ -222,12 +219,11 @@ onMounted(() => { storeTrackingParams() })
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,31,58,0.65) 0%, rgba(11,31,58,0.45) 40%, rgba(11,31,58,0.2) 75%, rgba(11,31,58,0.08) 100%); }
 .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 16px; text-align: center; color: #fff; }
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.15; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
-.hero-title-line { display: block; }
 .hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 6px; }
 
 /* Hero-Button: leicht abgerundet, ohne Rand, dezenter Shadow */
 .hero-cta.p-button {
-  background: rgba(255,255,255,0.88) !important;
+  background: #fff !important;
   color: #111 !important;
   border: none !important;
   border-radius: 12px !important;
@@ -255,7 +251,7 @@ onMounted(() => { storeTrackingParams() })
 /* Dark Mode: gleicher Look (weiß, ohne Rand) */
 @media (prefers-color-scheme: dark) {
   .hero-cta.p-button {
-    background: rgba(255,255,255,0.88) !important;
+    background: #fff !important;
     color: #111 !important;
     border: none !important;
   }
