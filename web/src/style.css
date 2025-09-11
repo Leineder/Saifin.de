@@ -170,3 +170,24 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
   .p-button.p-button-outlined .p-button-label { color: var(--brand-accent); }
   .p-button.p-button-text { color: var(--brand-accent); }
 }
+
+/* Einheitlicher Apply-CTA im Markenblau (analog Hero-Buttons) */
+.apply-cta,
+.apply-cta.p-button {
+  background: var(--brand-primary) !important;
+  color: var(--brand-primary-contrast) !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px var(--shadow-color) !important;
+  padding: 0.7rem 1rem !important;
+  transition: box-shadow .15s ease, transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.apply-cta:hover,
+.apply-cta:focus,
+.apply-cta:focus-visible {
+  transform: translateY(-1px);
+  background: var(--saifin-navy-700) !important;
+  box-shadow: 0 12px 28px var(--shadow-color) !important;
+}
+.apply-cta:active { transform: translateY(0); }
+.apply-cta .p-button-label { font-weight: 700; letter-spacing: .01em; }

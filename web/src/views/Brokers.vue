@@ -168,7 +168,7 @@ function goToApply(broker) {
                     </div>
                   </div>
                   <div class="action-buttons">
-                    <button class="p-button" @click.stop="goToApply(b)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button class="p-button apply-cta" @click.stop="goToApply(b)"><span class="p-button-label">Zum Antrag</span></button>
                     <button class="expand-btn" @click.stop="goToDetail(b)">Details <i class="pi pi-chevron-right"></i></button>
                   </div>
                 </div>

@@ -212,7 +212,7 @@ const goToDetail = (offer) => {
                   </div>
                   <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
                   <div class="action-buttons">
-                    <button class="p-button" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button class="p-button apply-cta" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
                     <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
                   </div>
                 </div>
@@ -255,7 +255,7 @@ const goToDetail = (offer) => {
                     </div>
                     <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
                     <div class="action-buttons">
-                      <button class="p-button" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                      <button class="p-button apply-cta" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
                       <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
                     </div>
                   </div>

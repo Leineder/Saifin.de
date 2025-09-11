@@ -116,7 +116,7 @@
             <!-- Call to Action -->
             <button 
               @click="goApply(card.slug)"
-              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
+              class="w-full p-button apply-cta font-semibold py-3 px-6 rounded-lg transition-colors duration-200 flex items-center justify-center"
             >
               <span>ZUM ANTRAG</span>
               <span class="ml-2">→</span>
