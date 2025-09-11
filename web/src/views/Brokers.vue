@@ -7,6 +7,13 @@ const router = useRouter()
 
 const search = ref('')
 const onlyRecommended = ref(false)
+const filterEtfPlans = ref(false)
+const filterZeroOrder = ref(false)
+const filterCrypto = ref(false)
+const filterCashInterest = ref(false)
+const filterVollbank = ref(false)
+const filterFreeDepot = ref(false)
+const filterSubscription = ref(false)
 
 const filteredBrokers = computed(() => {
   let list = brokers
@@ -19,6 +26,41 @@ const filteredBrokers = computed(() => {
       b.name.toLowerCase().includes(q) ||
       (b.highlights || []).some(h => h.toLowerCase().includes(q))
     )
+  }
+  if (filterEtfPlans.value) {
+    list = list.filter(b => {
+      const inFeatures = b.features && (b.features.etfPlans === true)
+      const inHighlights = (b.highlights || []).some(h => /sparpl[aä]n/i.test(h))
+      return inFeatures || inHighlights
+    })
+  }
+  if (filterZeroOrder.value) {
+    list = list.filter(b => {
+      const pricingText = (b.pricing && b.pricing.orderCostsDE) ? String(b.pricing.orderCostsDE).toLowerCase() : ''
+      const hasZeroOrder = (b.highlights || []).some(h => /0\s*€/i.test(h) && /(order|geb[uü]hr|provision)/i.test(h))
+        || (/0\s*€/i.test(pricingText) && /(order|geb[uü]hr|provision)/i.test(pricingText))
+      return hasZeroOrder
+    })
+  }
+  if (filterCrypto.value) {
+    list = list.filter(b => (b.highlights || []).some(h => /krypto/i.test(h)))
+  }
+  if (filterCashInterest.value) {
+    list = list.filter(b => b.features && typeof b.features.cashInterest === 'string' && b.features.cashInterest.length > 0)
+  }
+  if (filterVollbank.value) {
+    list = list.filter(b => typeof b.regulation === 'string' && /vollbank/i.test(b.regulation))
+  }
+  if (filterFreeDepot.value) {
+    list = list.filter(b => (b.highlights || []).some(h => /(depot\s*0\s*€|depot\s*kostenlos)/i.test(h)))
+  }
+  if (filterSubscription.value) {
+    list = list.filter(b => {
+      const pricingText = (b.pricing && b.pricing.orderCostsDE) ? String(b.pricing.orderCostsDE).toLowerCase() : ''
+      const inHighlights = (b.highlights || []).some(h => /(monat|prime\+)/i.test(h))
+      const inPricing = /(\/)\s*monat|monat/i.test(pricingText)
+      return inHighlights || inPricing
+    })
   }
   return list
 })
@@ -53,6 +95,42 @@ function goToApply(broker) {
               <label class="checkbox">
                 <input type="checkbox" v-model="onlyRecommended" />
                 <span>Nur Empfehlungen</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Produkt-Features</h3>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterEtfPlans" />
+                <span>ETF-Sparpläne</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterZeroOrder" />
+                <span>0 € Order (oder sehr günstig)</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterCrypto" />
+                <span>Krypto-Handel</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterCashInterest" />
+                <span>Zinsen auf Cash</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Anbieter</h3>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterVollbank" />
+                <span>Vollbank</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterFreeDepot" />
+                <span>Depot kostenlos</span>
+              </label>
+              <label class="checkbox">
+                <input type="checkbox" v-model="filterSubscription" />
+                <span>Pauschal-/Abo-Modell</span>
               </label>
             </div>
           </div>

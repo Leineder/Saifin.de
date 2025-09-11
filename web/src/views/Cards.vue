@@ -5,35 +5,93 @@ import { offers } from '../data/offers'
 
 const router = useRouter()
 
-// Filter States
-const cashWithdrawalFilter = ref('alle')
-const paymentFilter = ref('alle')
-const showFilters = ref(false)
+// Filter States (kartenspezifisch)
+const maxAnnualFee = ref('alle') // 'alle' | 0 | 60 | 100 | 200 | 'custom'
+const foreignFee = ref('alle') // 'alle' | '0' | '<=1' | '<=2' | '>2'
+const cardTypes = ref([]) // ['Charge','Credit','Debit']
+const supportsApplePay = ref(false)
+const supportsGooglePay = ref(false)
+const hasInsurance = ref(false)
+const hasCashback = ref(false)
+const schufaFree = ref(false)
+const instantDecision = ref(false)
 
-// Computed filtered offers
+// Helpers
+function parsePercentToNumber(text) {
+  if (!text || typeof text !== 'string') return NaN
+  const m = text.replace(',', '.').match(/([0-9]+(?:\.[0-9]+)?)\s*%/)
+  return m ? parseFloat(m[1]) : NaN
+}
+
 const filteredOffers = computed(() => {
   let filtered = offers
-  
-  if (cashWithdrawalFilter.value !== 'alle') {
-    // Filter logic for cash withdrawal
-    filtered = filtered.filter(offer => {
-      if (cashWithdrawalFilter.value === 'kostenlos') {
-        return offer.foreignFee === '0%' || offer.foreignFee.includes('0%')
-      }
+
+  // Jahresgebühr
+  if (maxAnnualFee.value !== 'alle') {
+    filtered = filtered.filter(o => {
+      const fee = typeof o.annualFee === 'number' ? o.annualFee : Number.POSITIVE_INFINITY
+      if (maxAnnualFee.value === 0) return fee === 0
+      if (typeof maxAnnualFee.value === 'number') return fee <= maxAnnualFee.value
       return true
     })
   }
-  
-  if (paymentFilter.value !== 'alle') {
-    // Filter logic for payment
-    filtered = filtered.filter(offer => {
-      if (paymentFilter.value === 'kostenlos') {
-        return offer.annualFee === 0
-      }
+
+  // Auslandseinsatz/Währungsgebühr
+  if (foreignFee.value !== 'alle') {
+    filtered = filtered.filter(o => {
+      const pct = parsePercentToNumber(o.foreignFee)
+      if (isNaN(pct)) return true
+      if (foreignFee.value === '0') return pct === 0
+      if (foreignFee.value === '<=1') return pct <= 1
+      if (foreignFee.value === '<=2') return pct <= 2
+      if (foreignFee.value === '>2') return pct > 2
       return true
     })
   }
-  
+
+  // Kartenart
+  if (cardTypes.value.length > 0) {
+    filtered = filtered.filter(o => {
+      const isCharge = /charge/i.test(o.cardType) || /charge/i.test(o.details?.cardType || '')
+      const isDebit = /debit/i.test(o.cardType) || /debit/i.test(o.details?.cardType || '')
+      const isCredit = /credit|revolving/i.test(o.cardType) || /credit|revolving/i.test(o.details?.cardType || '')
+      const desired = new Set(cardTypes.value)
+      return (
+        (desired.has('Charge') && isCharge) ||
+        (desired.has('Debit') && isDebit) ||
+        (desired.has('Credit') && isCredit)
+      )
+    })
+  }
+
+  // Mobile Payment
+  if (supportsApplePay.value) {
+    filtered = filtered.filter(o => o.features?.mobilePay?.includes('Apple Pay'))
+  }
+  if (supportsGooglePay.value) {
+    filtered = filtered.filter(o => o.features?.mobilePay?.includes('Google Pay'))
+  }
+
+  // Versicherungen
+  if (hasInsurance.value) {
+    filtered = filtered.filter(o => Boolean(o.features?.insurance))
+  }
+
+  // Cashback/Travel Credit
+  if (hasCashback.value) {
+    filtered = filtered.filter(o => Boolean(o.features?.cashback || o.features?.travelCredit))
+  }
+
+  // SCHUFA-frei (kein Schufa-Check)
+  if (schufaFree.value) {
+    filtered = filtered.filter(o => o.specialConditions?.schufaCheck === false)
+  }
+
+  // Sofortentscheidung
+  if (instantDecision.value) {
+    filtered = filtered.filter(o => o.specialConditions?.instantDecision === true)
+  }
+
   return filtered
 })
 
@@ -72,27 +130,46 @@ const goToDetail = (offer) => {
             <h2 class="section-title text-xl mb-3">Finde deine Karte</h2>
 
             <div class="filter-group">
-              <h3 class="filter-title">Kostenlos Bargeld abheben</h3>
-              <select v-model="cashWithdrawalFilter" class="filter-select">
+              <h3 class="filter-title">Jahresgebühr</h3>
+              <select v-model="maxAnnualFee" class="filter-select">
                 <option value="alle">alle</option>
-                <option value="kostenlos">kostenlos</option>
-                <option value="gebührenpflichtig">gebührenpflichtig</option>
+                <option :value="0">genau 0 €</option>
+                <option :value="60">bis 60 €</option>
+                <option :value="100">bis 100 €</option>
+                <option :value="200">bis 200 €</option>
               </select>
             </div>
 
             <div class="filter-group">
-              <h3 class="filter-title">Kostenlos bezahlen</h3>
-              <select v-model="paymentFilter" class="filter-select">
+              <h3 class="filter-title">Auslandseinsatz</h3>
+              <select v-model="foreignFee" class="filter-select">
                 <option value="alle">alle</option>
-                <option value="kostenlos">kostenlos</option>
-                <option value="gebührenpflichtig">gebührenpflichtig</option>
+                <option value="0">0 %</option>
+                <option value="<=1">≤ 1 %</option>
+                <option value="<=2">≤ 2 %</option>
+                <option value=">2">> 2 %</option>
               </select>
             </div>
 
-            <div class="sidebar-actions">
-              <button class="p-button p-button-outlined w-full" @click="showFilters = !showFilters">
-                <span class="p-button-label">Filtereinstellungen</span>
-              </button>
+            <div class="filter-group">
+              <h3 class="filter-title">Kartenart</h3>
+              <label class="checkbox"><input type="checkbox" value="Charge" v-model="cardTypes" /> <span>Charge</span></label>
+              <label class="checkbox"><input type="checkbox" value="Credit" v-model="cardTypes" /> <span>Credit (Revolving)</span></label>
+              <label class="checkbox"><input type="checkbox" value="Debit" v-model="cardTypes" /> <span>Debit</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Zahlung & Extras</h3>
+              <label class="checkbox"><input type="checkbox" v-model="supportsApplePay" /> <span>Apple Pay</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="supportsGooglePay" /> <span>Google Pay</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="hasInsurance" /> <span>Versicherungen</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="hasCashback" /> <span>Cashback / Reisegutschrift</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Bedingungen</h3>
+              <label class="checkbox"><input type="checkbox" v-model="schufaFree" /> <span>Ohne SCHUFA</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="instantDecision" /> <span>Sofortentscheidung</span></label>
             </div>
           </div>
         </aside>
