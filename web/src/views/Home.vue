@@ -30,7 +30,7 @@ onMounted(() => { storeTrackingParams() })
         <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
           <span class="p-button-label">Kreditkarten ansehen</span>
         </router-link>
-        <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta alt">
+        <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
           <span class="p-button-label">Broker vergleichen</span>
         </router-link>
       </div>
