@@ -221,19 +221,22 @@ function goToApply(broker) {
       <div class="container">
         <!-- Guide: Wie finde ich den richtigen Broker? -->
         <div class="guide-section">
-          <h2 class="section-title">Wie finde ich den richtigen Broker?</h2>
-          <p class="guide-paragraph">Ein Broker ist dein Zugang zur Börse. Er führt deine Wertpapieraufträge aus und stellt dir Tools zur Verfügung, um zu handeln und zu sparen. Es gibt verschiedene Broker-Typen mit unterschiedlichen Stärken.</p>
+          <div class="guide-header">
+            <div class="section-eyebrow">Ratgeber</div>
+            <h2 class="section-title">Wie finde ich den richtigen Broker?</h2>
+            <p class="guide-subtitle">Ein Broker ist dein Zugang zur Börse. Er führt deine Wertpapieraufträge aus und stellt dir Tools zur Verfügung, um zu handeln und zu sparen. Es gibt verschiedene Broker-Typen mit unterschiedlichen Stärken.</p>
+          </div>
           <div class="guide-grid">
-            <div class="surface-card border-round-lg p-3 card-accent">
-              <h3 class="filter-title">Broker-Arten</h3>
+            <div class="surface-card border-round-lg p-3 card-accent info-card">
+              <h3 class="info-title">Broker-Arten</h3>
               <ul class="guide-list">
                 <li><strong>Neobroker:</strong> Sehr günstige Orders, einfache App, Fokus auf ETFs/Aktien.</li>
                 <li><strong>Vollbank-/Direktbank-Broker:</strong> Umfassendes Angebot, klassische Bankfunktionen.</li>
                 <li><strong>Spezialbroker:</strong> Breite internationale Börsenplätze, Derivate/Optionen.</li>
               </ul>
             </div>
-            <div class="surface-card border-round-lg p-3 card-accent">
-              <h3 class="filter-title">Worauf achten</h3>
+            <div class="surface-card border-round-lg p-3 card-accent info-card">
+              <h3 class="info-title">Worauf achten</h3>
               <ul class="guide-list">
                 <li><strong>Kosten:</strong> Ordergebühren, Spreads/Marktkosten, Depotkosten.</li>
                 <li><strong>Angebot:</strong> Aktien, ETFs, Sparpläne, Auslandsbörsen, Krypto.</li>
@@ -324,8 +327,11 @@ function goToApply(broker) {
 .recommendation-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 
 .guide-section { margin-top: 3rem; }
-.guide-paragraph { color: var(--muted-text); }
+.guide-header { margin-bottom: 1rem; }
+.guide-subtitle { color: var(--muted-text); }
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.info-card { box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06); }
+.info-title { font-size: 0.875rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--subtle-text); margin: 0 0 .25rem; }
 .guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps { margin-top: 1rem; }
 .steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }

@@ -269,19 +269,22 @@ const goToDetail = (offer) => {
       <div class="container">
         <!-- Guide: Wie finde ich die richtige Kreditkarte? -->
         <div class="guide-section">
-          <h2 class="section-title">Wie finde ich die richtige Kreditkarte?</h2>
-          <p class="guide-paragraph">Kreditkarten unterscheiden sich in Art (Charge, Credit/Revolving, Debit), Gebühren und Zusatzleistungen. Wichtig ist, dass die Karte zu deinem Nutzungsprofil passt.</p>
+          <div class="guide-header">
+            <div class="section-eyebrow">Ratgeber</div>
+            <h2 class="section-title">Wie finde ich die richtige Kreditkarte?</h2>
+            <p class="guide-subtitle">Kreditkarten unterscheiden sich in Art (Charge, Credit/Revolving, Debit), Gebühren und Zusatzleistungen. Wichtig ist, dass die Karte zu deinem Nutzungsprofil passt.</p>
+          </div>
           <div class="guide-grid">
-            <div class="surface-card border-round-lg p-3 card-accent">
-              <h3 class="filter-title">Kartenarten</h3>
+            <div class="surface-card border-round-lg p-3 card-accent info-card">
+              <h3 class="info-title">Kartenarten</h3>
               <ul class="guide-list">
                 <li><strong>Charge:</strong> Sammelabrechnung, Vollausgleich monatlich.</li>
                 <li><strong>Credit/Revolving:</strong> Teilzahlung möglich, bei Restzahlung fallen Zinsen an.</li>
                 <li><strong>Debit:</strong> Sofortabbuchung vom Verrechnungskonto.</li>
               </ul>
             </div>
-            <div class="surface-card border-round-lg p-3 card-accent">
-              <h3 class="filter-title">Worauf achten</h3>
+            <div class="surface-card border-round-lg p-3 card-accent info-card">
+              <h3 class="info-title">Worauf achten</h3>
               <ul class="guide-list">
                 <li><strong>Jahresgebühr:</strong> 0 € bis Premium – passt der Gegenwert?</li>
                 <li><strong>Auslandseinsatz:</strong> 0 % ideal für Reisen; ATM-Gebühren beachten.</li>
@@ -527,11 +530,15 @@ const goToDetail = (offer) => {
 
 /* Guide & FAQ */
 .guide-section { margin-top: 3rem; }
-.guide-paragraph { color: var(--muted-text); }
+.guide-header { margin-bottom: 1rem; }
+.guide-subtitle { color: var(--muted-text); }
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
 .guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps { margin-top: 1rem; }
 .steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+
+.info-card { box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06); }
+.info-title { font-size: 0.875rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--subtle-text); margin: 0 0 .25rem; }
 
 .faq-section { margin-top: 2rem; }
 .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
