@@ -26,9 +26,14 @@ onMounted(() => { storeTrackingParams() })
     <div class="hero-content">
       <h1 class="hero-title">Eine Kreditkarte für jede Situation.</h1>
       <p class="hero-sub">Vergleiche Top-Angebote und beantrage in wenigen Minuten.</p>
-      <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
-        <span class="p-button-label">Kreditkarten ansehen</span>
-      </router-link>
+      <div class="hero-cta-group">
+        <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
+          <span class="p-button-label">Kreditkarten ansehen</span>
+        </router-link>
+        <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta alt">
+          <span class="p-button-label">Broker vergleichen</span>
+        </router-link>
+      </div>
     </div>
   </section>
 
@@ -194,10 +199,15 @@ onMounted(() => { storeTrackingParams() })
   <section class="cta-band">
     <div class="container" style="text-align:center">
       <h2 class="cta-title text-2xl md:text-3xl">Bereit zum Vergleichen?</h2>
-      <p class="cta-sub">Finde die Karte, die zu dir passt – schnell und transparent.</p>
-      <router-link to="/kreditkarten" class="p-button p-button-rounded p-button-lg">
-        <span class="p-button-label">Jetzt Kreditkarten vergleichen</span>
-      </router-link>
+      <p class="cta-sub">Kreditkarten oder Broker – starte jetzt deinen Vergleich.</p>
+      <div class="cta-buttons">
+        <router-link to="/kreditkarten" class="p-button p-button-rounded p-button-lg">
+          <span class="p-button-label">Kreditkarten vergleichen</span>
+        </router-link>
+        <router-link to="/broker" class="p-button p-button-rounded p-button-lg p-button-outlined">
+          <span class="p-button-label">Broker vergleichen</span>
+        </router-link>
+      </div>
     </div>
   </section>
 </template>

@@ -8,11 +8,15 @@ import Thanks from '../views/Thanks.vue'
 import Privacy from '../views/Privacy.vue'
 import Imprint from '../views/Imprint.vue'
 import Contact from '../views/Contact.vue'
+import Brokers from '../views/Brokers.vue'
+import BrokerDetail from '../views/BrokerDetail.vue'
 
 const routes = [
   { path: '/', component: Home },
   { path: '/kreditkarten', component: Cards },
   { path: '/kreditkarten/:slug', component: CardDetail },
+  { path: '/broker', component: Brokers },
+  { path: '/broker/:slug', component: BrokerDetail },
   { path: '/antrag/:slug', component: Apply },
   { path: '/danke', component: Thanks },
   { path: '/datenschutz', component: Privacy },
