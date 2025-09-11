@@ -246,7 +246,8 @@ function goToApply(broker) {
               </ul>
             </div>
           </div>
-          <div class="guide-steps">
+          <div class="surface-card border-round-lg p-3 card-accent info-card guide-steps-card">
+            <h3 class="info-title">In 5 Schritten starten</h3>
             <ol class="steps-list">
               <li>Nutzungsprofil klären (Handel vs. Sparpläne, international ja/nein).</li>
               <li>Filter in der Sidebar nutzen (z. B. ETF-Sparpläne, 0 € Order, Zinsen).</li>
@@ -335,6 +336,7 @@ function goToApply(broker) {
 .guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps { margin-top: 1rem; }
 .steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+.guide-steps-card { margin-top: 1rem; }
 
 .faq-section { margin-top: 2rem; }
 .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }

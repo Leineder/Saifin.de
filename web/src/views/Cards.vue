@@ -294,7 +294,8 @@ const goToDetail = (offer) => {
               </ul>
             </div>
           </div>
-          <div class="guide-steps">
+          <div class="surface-card border-round-lg p-3 card-accent info-card guide-steps-card">
+            <h3 class="info-title">In 4 Schritten starten</h3>
             <ol class="steps-list">
               <li>Nutzungsprofil definieren (Reisen, Alltag, Cashback, Versicherungen).</li>
               <li>Filter in der Sidebar nutzen (Gebühren, Ausland, Art, Mobile Pay).</li>
@@ -536,6 +537,7 @@ const goToDetail = (offer) => {
 .guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps { margin-top: 1rem; }
 .steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+.guide-steps-card { margin-top: 1rem; }
 
 .info-card { box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06); }
 .info-title { font-size: 0.875rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--subtle-text); margin: 0 0 .25rem; }
