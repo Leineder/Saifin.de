@@ -28,6 +28,10 @@ const top3 = computed(() => brokers.filter(b => recommendedBrokers.includes(b.sl
 function goToDetail(broker) {
   router.push(`/broker/${broker.slug}`)
 }
+
+function goToApply(broker) {
+  router.push(`/antrag/${broker.slug}`)
+}
 </script>
 
 <template>
@@ -86,8 +90,8 @@ function goToDetail(broker) {
                     </div>
                   </div>
                   <div class="action-buttons">
-                    <button class="p-button" @click.stop="goToDetail(b)"><span class="p-button-label">Details</span></button>
-                    <button class="expand-btn" @click.stop="goToDetail(b)">Mehr <i class="pi pi-chevron-right"></i></button>
+                    <button class="p-button" @click.stop="goToApply(b)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button class="expand-btn" @click.stop="goToDetail(b)">Details <i class="pi pi-chevron-right"></i></button>
                   </div>
                 </div>
               </div>
@@ -124,8 +128,8 @@ function goToDetail(broker) {
                       </div>
                     </div>
                     <div class="action-buttons">
-                      <button class="p-button" @click.stop="goToDetail(b)"><span class="p-button-label">Details</span></button>
-                      <button class="expand-btn" @click.stop="goToDetail(b)">Mehr <i class="pi pi-chevron-right"></i></button>
+                      <button class="p-button" @click.stop="goToApply(b)"><span class="p-button-label">Zum Antrag</span></button>
+                      <button class="expand-btn" @click.stop="goToDetail(b)">Details <i class="pi pi-chevron-right"></i></button>
                     </div>
                   </div>
                 </div>

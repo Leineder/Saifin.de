@@ -2,11 +2,20 @@
 import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { offers } from '../data/offers'
+import { brokers } from '../data/brokers'
 import { getTrackingParams } from '../tracking'
 
 const route = useRoute()
 const router = useRouter()
 const offer = offers.find(o => o.slug === route.params.slug)
+const broker = brokers.find(b => b.slug === route.params.slug)
+const entity = offer || broker
+
+const applySubjectTitle = computed(() => {
+  if (offer) return offer.title
+  if (broker) return broker.name
+  return ''
+})
 
 const currentStep = ref(1)
 const totalSteps = 3
@@ -108,14 +117,14 @@ function onInput(field) {
 function submit() {
   if (!validateStep(3)) return
   try { localStorage.removeItem(storageKey.value) } catch (_) {}
-  console.log('Lead (demo):', { offerId: offer?.id, ...form.value })
+  console.log('Lead (demo):', { type: offer ? 'card' : 'broker', offerId: offer?.id, brokerId: broker?.id, ...form.value })
   router.push('/danke')
 }
 </script>
 
 <template>
-  <div class="p-3 md:p-6" v-if="offer">
-    <h1 class="text-2xl md:text-3xl mb-3">Antrag starten – {{ offer.title }}</h1>
+  <div class="p-3 md:p-6" v-if="entity">
+    <h1 class="text-2xl md:text-3xl mb-3">Antrag starten – {{ applySubjectTitle }}</h1>
 
     <!-- versteckte Tracking-Felder (würden beim Backend-Submit mitgesendet) -->
     <input type="hidden" name="utm_source" :value="form.utm_source" />

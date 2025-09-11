@@ -8,6 +8,7 @@ const broker = brokers.find(b => b.slug === route.params.slug)
 if (!broker) router.replace('/broker')
 
 const goBack = () => router.push('/broker')
+const goApply = () => router.push(`/antrag/${broker.slug}`)
 </script>
 
 <template>
@@ -58,6 +59,9 @@ const goBack = () => router.push('/broker')
         <div class="cta-col">
           <button class="p-button p-component p-button-outlined w-full" @click="goBack">
             <span class="p-button-label">Zur Übersicht</span>
+          </button>
+          <button class="p-button p-component w-full" @click="goApply">
+            <span class="p-button-label">Jetzt beantragen</span>
           </button>
         </div>
       </div>
