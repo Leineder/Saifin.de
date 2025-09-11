@@ -69,7 +69,7 @@ function goToDetail(broker) {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="b.name" class="card-image" />
+                  <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="b.name" :class="['card-image', 'logo-' + b.slug]" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -153,8 +153,17 @@ function goToDetail(broker) {
 .offers-section { margin-bottom: 3rem; }
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
-.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; }
+.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
 .card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
+
+/* Logos, die vollständig lesbar bleiben sollen */
+.card-image.logo-justtrade,
+.card-image.logo-flatex { object-fit: contain; transform: none; }
+
+/* Logos, die etwas größer dargestellt werden sollen */
+.card-image.logo-smartbroker-plus,
+.card-image.logo-trade-republic,
+.card-image.logo-ing { transform: scale(1.12); }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }

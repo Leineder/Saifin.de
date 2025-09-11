@@ -15,7 +15,7 @@ const goBack = () => router.push('/broker')
     <div class="container detail-grid">
       <div class="media">
         <div class="logo-frame">
-          <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" alt="" />
+          <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" alt="" :class="'detail-logo ' + broker.slug" />
         </div>
       </div>
       <div class="content">
@@ -81,5 +81,8 @@ const goBack = () => router.push('/broker')
 <style scoped>
 .logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
 .logo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+/* Voll lesbar lassen */
+.logo-frame img.detail-logo.justtrade,
+.logo-frame img.detail-logo.flatex { object-fit: contain; }
 </style>
 
