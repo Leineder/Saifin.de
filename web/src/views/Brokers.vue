@@ -163,7 +163,7 @@ function goToDetail(broker) {
 /* Logos, die etwas größer dargestellt werden sollen */
 .card-image.logo-smartbroker-plus,
 .card-image.logo-trade-republic,
-.card-image.logo-ing { transform: scale(1.12); }
+.card-image.logo-ing { transform: scale(1.24); }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }
