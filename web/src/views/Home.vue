@@ -223,7 +223,7 @@ onMounted(() => { storeTrackingParams() })
 
 /* Hero-Button: leicht abgerundet, ohne Rand, dezenter Shadow */
 .hero-cta.p-button {
-  background: #fff !important;
+  background: rgba(255,255,255,0.88) !important;
   color: #111 !important;
   border: none !important;
   border-radius: 12px !important;
@@ -251,7 +251,7 @@ onMounted(() => { storeTrackingParams() })
 /* Dark Mode: gleicher Look (weiß, ohne Rand) */
 @media (prefers-color-scheme: dark) {
   .hero-cta.p-button {
-    background: #fff !important;
+    background: rgba(255,255,255,0.88) !important;
     color: #111 !important;
     border: none !important;
   }
