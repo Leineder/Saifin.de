@@ -79,7 +79,7 @@ const goBack = () => router.push('/broker')
 }
 </style>
 <style scoped>
-.logo-frame { width: 100%; max-height: 360px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; border: 1px solid var(--border); padding: 16px; }
-.logo-frame img { max-width: 100%; max-height: 240px; object-fit: contain; display: block; }
+.logo-frame { width: 100%; max-height: 360px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; border: 1px solid var(--border); padding: 8px; }
+.logo-frame img { width: 100%; height: 240px; object-fit: contain; display: block; }
 </style>
 
