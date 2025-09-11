@@ -153,8 +153,8 @@ function goToDetail(broker) {
 .offers-section { margin-bottom: 3rem; }
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
-.card-image-container { flex-shrink: 0; width: 120px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; }
-.card-image { width: 100%; height: 75px; object-fit: contain; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
+.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; }
+.card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }
