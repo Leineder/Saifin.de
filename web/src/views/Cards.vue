@@ -466,6 +466,20 @@ const goToDetail = (offer) => {
   gap: 1rem;
 }
 
+/* Guide & FAQ */
+.guide-section { margin-top: 3rem; }
+.guide-paragraph { color: var(--muted-text); }
+.guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+.guide-steps { margin-top: 1rem; }
+.steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+
+.faq-section { margin-top: 2rem; }
+.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; }
+.faq-item summary { cursor: pointer; font-weight: 600; color: var(--text); list-style: none; }
+.faq-item p { margin: 0.5rem 0 0; color: var(--muted-text); }
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }

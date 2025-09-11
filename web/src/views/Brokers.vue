@@ -214,6 +214,64 @@ function goToApply(broker) {
               </div>
             </div>
           </div>
+
+          <!-- Guide: Wie finde ich den richtigen Broker? -->
+          <div class="guide-section">
+            <h2 class="section-title">Wie finde ich den richtigen Broker?</h2>
+            <p class="guide-paragraph">Ein Broker ist dein Zugang zur Börse. Er führt deine Wertpapieraufträge aus und stellt dir Tools zur Verfügung, um zu handeln und zu sparen. Es gibt verschiedene Broker-Typen mit unterschiedlichen Stärken.</p>
+            <div class="guide-grid">
+              <div class="surface-card border-round-lg p-3 card-accent">
+                <h3 class="filter-title">Broker-Arten</h3>
+                <ul class="guide-list">
+                  <li><strong>Neobroker:</strong> Sehr günstige Orders, einfache App, Fokus auf ETFs/Aktien.</li>
+                  <li><strong>Vollbank-/Direktbank-Broker:</strong> Umfassendes Angebot, klassische Bankfunktionen.</li>
+                  <li><strong>Spezialbroker:</strong> Breite internationale Börsenplätze, Derivate/Optionen.</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent">
+                <h3 class="filter-title">Worauf achten</h3>
+                <ul class="guide-list">
+                  <li><strong>Kosten:</strong> Ordergebühren, Spreads/Marktkosten, Depotkosten.</li>
+                  <li><strong>Angebot:</strong> Aktien, ETFs, Sparpläne, Auslandsbörsen, Krypto.</li>
+                  <li><strong>Regulierung & Sicherheit:</strong> BaFin, Einlagensicherung, Verwahrung.</li>
+                  <li><strong>Bedienung:</strong> App/Web, Reports/Steuer, Support.</li>
+                  <li><strong>Extras:</strong> Zinsen auf Cash, Pauschal-/Abo-Modelle.</li>
+                </ul>
+              </div>
+            </div>
+            <div class="guide-steps">
+              <ol class="steps-list">
+                <li>Nutzungsprofil klären (Handel vs. Sparpläne, international ja/nein).</li>
+                <li>Filter in der Sidebar nutzen (z. B. ETF-Sparpläne, 0 € Order, Zinsen).</li>
+                <li>2–3 Anbieter vergleichen und Highlights prüfen.</li>
+                <li>Preis-/Leistungsverzeichnis ansehen (Fremdkosten, Börsenplätze).</li>
+                <li>Kleiner Test: z. B. Sparplan anlegen oder Demo ausprobieren.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- FAQ Broker -->
+          <div class="faq-section">
+            <h2 class="section-title">Häufige Fragen zum Broker</h2>
+            <div class="faq-list">
+              <details class="faq-item">
+                <summary>Was ist ein Neobroker?</summary>
+                <p>Neobroker sind digital-fokussierte Anbieter mit sehr günstigen Orders und einfacher App. Häufig mit Fokus auf ETFs/Aktien und Sparpläne.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Sind 0 € Orders wirklich kostenlos?</summary>
+                <p>Es fallen oft keine Orderprovisionen an, aber Spreads/Markt- und Börsenentgelte können anfallen. Details findest du im Preisverzeichnis.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Wie sicher sind meine Einlagen und Wertpapiere?</summary>
+                <p>Einlagen sind über gesetzliche Einlagensicherung geschützt. Wertpapiere gelten als Sondervermögen und sind getrennt vom Brokervermögen verwahrt.</p>
+              </details>
+              <details class="faq-item">
+                <summary>Kann ich mehrere Broker parallel nutzen?</summary>
+                <p>Ja. Viele Anleger nutzen z. B. einen Neobroker für Sparpläne und einen Spezialbroker für internationale Märkte.</p>
+              </details>
+            </div>
+          </div>
         </main>
       </div>
     </section>
@@ -261,6 +319,19 @@ function goToApply(broker) {
 .recommendation-card { background: var(--surface); border-radius: 0.75rem; box-shadow: 0 1px 3px var(--shadow-color); position: relative; overflow: hidden; }
 .recommendation-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .recommendation-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+
+.guide-section { margin-top: 3rem; }
+.guide-paragraph { color: var(--muted-text); }
+.guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
+.guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+.guide-steps { margin-top: 1rem; }
+.steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
+
+.faq-section { margin-top: 2rem; }
+.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; }
+.faq-item summary { cursor: pointer; font-weight: 600; color: var(--text); list-style: none; }
+.faq-item p { margin: 0.5rem 0 0; color: var(--muted-text); }
 
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
