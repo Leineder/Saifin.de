@@ -265,6 +265,65 @@ const goToDetail = (offer) => {
           </div>
         </main>
       </div>
+      <!-- Volle Breite: Guide & FAQ außerhalb des 2-Spalten-Layouts -->
+      <div class="container">
+        <!-- Guide: Wie finde ich die richtige Kreditkarte? -->
+        <div class="guide-section">
+          <h2 class="section-title">Wie finde ich die richtige Kreditkarte?</h2>
+          <p class="guide-paragraph">Kreditkarten unterscheiden sich in Art (Charge, Credit/Revolving, Debit), Gebühren und Zusatzleistungen. Wichtig ist, dass die Karte zu deinem Nutzungsprofil passt.</p>
+          <div class="guide-grid">
+            <div class="surface-card border-round-lg p-3 card-accent">
+              <h3 class="filter-title">Kartenarten</h3>
+              <ul class="guide-list">
+                <li><strong>Charge:</strong> Sammelabrechnung, Vollausgleich monatlich.</li>
+                <li><strong>Credit/Revolving:</strong> Teilzahlung möglich, bei Restzahlung fallen Zinsen an.</li>
+                <li><strong>Debit:</strong> Sofortabbuchung vom Verrechnungskonto.</li>
+              </ul>
+            </div>
+            <div class="surface-card border-round-lg p-3 card-accent">
+              <h3 class="filter-title">Worauf achten</h3>
+              <ul class="guide-list">
+                <li><strong>Jahresgebühr:</strong> 0 € bis Premium – passt der Gegenwert?</li>
+                <li><strong>Auslandseinsatz:</strong> 0 % ideal für Reisen; ATM-Gebühren beachten.</li>
+                <li><strong>Mobile Pay:</strong> Apple Pay/Google Pay Support.</li>
+                <li><strong>Leistungen:</strong> Versicherungen, Cashback, Reiseguthaben.</li>
+                <li><strong>Bedingungen:</strong> SCHUFA, Sofortentscheidung, Limits.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="guide-steps">
+            <ol class="steps-list">
+              <li>Nutzungsprofil definieren (Reisen, Alltag, Cashback, Versicherungen).</li>
+              <li>Filter in der Sidebar nutzen (Gebühren, Ausland, Art, Mobile Pay).</li>
+              <li>2–3 Karten vergleichen und Bedingungen prüfen.</li>
+              <li>Bei Revolving: Vollabbuchung aktivieren, um Zinsen zu vermeiden.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- FAQ Kreditkarten -->
+        <div class="faq-section">
+          <h2 class="section-title">Häufige Fragen zur Kreditkarte</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>Charge vs. Credit vs. Debit – was ist der Unterschied?</summary>
+              <p>Charge: Sammelabrechnung mit Vollausgleich. Credit/Revolving: Teilzahlung möglich, Zinsen bei Restschulden. Debit: Direkte Abbuchung vom Konto.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Ist 0 % Auslandseinsatz wirklich gebührenfrei?</summary>
+              <p>Die Bank erhebt keine Auslandseinsatzgebühr, Automatenbetreiber können jedoch eigene Entgelte verlangen. Hinweise im Preisverzeichnis beachten.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Beeinflusst eine Kreditkarte meine SCHUFA?</summary>
+              <p>Ja, Beantragung und Nutzung können vermerkt werden. Verantwortungsvolle Nutzung (pünktliche Zahlung) ist positiv.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Wie vermeide ich Zinsen bei Revolving-Karten?</summary>
+              <p>Automatische Vollabbuchung aktivieren und Rechnungen fristgerecht begleichen.</p>
+            </details>
+          </div>
+        </div>
+      </div>
     </section>
   </div>
 </template>
