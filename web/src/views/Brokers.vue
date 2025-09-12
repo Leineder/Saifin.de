@@ -320,6 +320,19 @@ function goToApply(broker) {
 .feature-item i { color: #34d399; font-size: 0.75rem; }
 .action-buttons { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 
+/* Details-Button wie in Kreditkarten */
+.expand-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--subtle-text);
+  font-size: 0.875rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
 .recommendations-section { margin-top: 3rem; }
 .recommendations-title { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
