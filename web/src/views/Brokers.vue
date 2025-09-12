@@ -156,10 +156,6 @@ function goToApply(broker) {
                 <div class="offer-details">
                   <div class="offer-header">
                     <h3 class="offer-title">{{ b.name }}</h3>
-                    <div class="payment-type">
-                      <span>Regulierung</span>
-                      <i class="pi pi-info-circle"></i>
-                    </div>
                   </div>
                   <div class="features-list">
                     <div v-for="(h, idx) in (b.highlights || []).slice(0, 4)" :key="idx" class="feature-item">
@@ -194,10 +190,6 @@ function goToApply(broker) {
                   <div class="recommendation-details">
                     <div class="offer-header">
                       <h3 class="offer-title">{{ b.name }}</h3>
-                      <div class="payment-type">
-                        <span>{{ b.recommendation?.title || 'Empfehlung' }}</span>
-                        <i class="pi pi-info-circle"></i>
-                      </div>
                     </div>
                     <div class="features-list">
                       <div v-for="(p, idx) in (b.recommendation?.pros || b.highlights || []).slice(0, 4)" :key="idx" class="feature-item">
