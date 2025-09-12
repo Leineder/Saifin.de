@@ -123,7 +123,7 @@ function submit() {
 </script>
 
 <template>
-  <div class="p-3 md:p-6" v-if="entity">
+  <div class="p-3 md:p-6 apply-form" v-if="entity">
     <h1 class="text-2xl md:text-3xl mb-3">Antrag starten – {{ applySubjectTitle }}</h1>
 
     <!-- versteckte Tracking-Felder (würden beim Backend-Submit mitgesendet) -->
@@ -221,14 +221,14 @@ function submit() {
 
     <!-- Navigation zwischen den Schritten -->
     <div class="flex gap-2 mt-3">
-      <button v-if="currentStep > 1" class="p-button p-component w-full md:w-auto" @click="prevStep">
+      <button v-if="currentStep > 1" class="p-button p-component p-button-outlined w-full md:w-auto" @click="prevStep">
         <span class="p-button-label">Zurück</span>
       </button>
       <div class="flex-1"></div>
-      <button v-if="currentStep < totalSteps" class="p-button p-component w-full md:w-auto" @click="nextStep">
+      <button v-if="currentStep < totalSteps" class="p-button p-component apply-cta w-full md:w-auto" @click="nextStep">
         <span class="p-button-label">Weiter</span>
       </button>
-      <button v-else class="p-button p-component w-full md:w-auto" @click="submit">
+      <button v-else class="p-button p-component apply-cta w-full md:w-auto" @click="submit">
         <span class="p-button-label">Absenden</span>
       </button>
     </div>
@@ -241,4 +241,25 @@ function submit() {
 @media (max-width: 767px) {
   label { font-size: 0.95rem; }
 }
+
+/* Freundlicheres, einladendes Styling für die Antragsform */
+.apply-form label { font-weight: 600; color: var(--text); }
+.apply-form .p-inputtext {
+  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  transition: box-shadow .15s ease, border-color .15s ease, background-color .15s ease;
+}
+.apply-form .p-inputtext:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 3px var(--brand-ring);
+}
+.apply-form select.p-inputtext { appearance: none; }
+.apply-form small.p-error { display: block; margin-top: 6px; }
+
+/* Abstände zwischen Grid-Feldern harmonisieren */
+.apply-form .grid { row-gap: 14px; }
 </style>
