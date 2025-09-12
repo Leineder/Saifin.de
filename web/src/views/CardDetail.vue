@@ -77,7 +77,7 @@ const formatEuro = (n) => {
           <button class="p-button p-component p-button-outlined w-full" @click="goBack">
             <span class="p-button-label">Zur Übersicht</span>
           </button>
-          <button class="p-button p-component w-full" @click="goApply">
+          <button class="p-button p-component w-full apply-cta" @click="goApply">
             <span class="p-button-label">Jetzt beantragen</span>
           </button>
         </div>
@@ -86,7 +86,7 @@ const formatEuro = (n) => {
         <div class="surface-card border-round-lg p-3 card-accent">
           <h3 class="m-0 mb-2 section-title text-lg">Direkt beantragen</h3>
           <p class="m-0 text-700 mb-2">Schnell und sicher zum Antrag.</p>
-          <button class="p-button w-full" @click="goApply"><span class="p-button-label">Jetzt beantragen</span></button>
+          <button class="p-button w-full apply-cta" @click="goApply"><span class="p-button-label">Jetzt beantragen</span></button>
         </div>
       </aside>
     </div>

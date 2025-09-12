@@ -60,7 +60,7 @@ const goApply = () => router.push(`/antrag/${broker.slug}`)
           <button class="p-button p-component p-button-outlined w-full" @click="goBack">
             <span class="p-button-label">Zur Übersicht</span>
           </button>
-          <button class="p-button p-component w-full" @click="goApply">
+          <button class="p-button p-component w-full apply-cta" @click="goApply">
             <span class="p-button-label">Jetzt beantragen</span>
           </button>
         </div>
