@@ -154,12 +154,12 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --background: #0b0f1a;
+    --background: #131732; /* Gleiches Blau wie die Karten-Container */
     --text: #e5e7eb;
     --muted-text: #cbd5e1;
     --subtle-text: #94a3b8;
     --surface: #131732; /* brand navy 700 */
-    --surface-muted: #0f1426;
+    --surface-muted: #131732; /* Gleiches Blau für alle Sektionen */
     --border: rgba(255,255,255,0.12);
     --shadow-color: rgba(0,0,0,0.5);
     --link-color: var(--brand-accent);
