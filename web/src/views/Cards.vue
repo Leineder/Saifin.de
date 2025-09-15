@@ -656,7 +656,7 @@ onBeforeUnmount(() => {
     grid-template-columns: 1fr;
   }
 
-  .mobile-filter-toggle { display: flex; justify-content: center; margin-bottom: 12px; }
+  .mobile-filter-toggle { display: flex; justify-content: center; margin: 12px 0; }
   .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }
   .mobile-filter-panel { margin-bottom: 16px; }
 }
