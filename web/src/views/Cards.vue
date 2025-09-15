@@ -657,6 +657,7 @@ onBeforeUnmount(() => {
   }
 
   .mobile-filter-toggle { display: flex; justify-content: center; margin-bottom: 12px; }
+  .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }
   .mobile-filter-panel { margin-bottom: 16px; }
 }
 
