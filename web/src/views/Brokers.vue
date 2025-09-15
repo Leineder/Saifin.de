@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { brokers, recommendedBrokers } from '../data/brokers'
 
@@ -74,14 +74,36 @@ function goToDetail(broker) {
 function goToApply(broker) {
   router.push(`/antrag/${broker.slug}`)
 }
+
+// Mobile: Filter einklappbar
+const showFilters = ref(false)
+const isDesktop = ref(false)
+let mediaQuery
+let onChange
+onMounted(() => {
+  mediaQuery = window.matchMedia('(min-width: 769px)')
+  onChange = () => {
+    isDesktop.value = mediaQuery.matches
+    if (isDesktop.value) {
+      showFilters.value = false
+    }
+  }
+  mediaQuery.addEventListener ? mediaQuery.addEventListener('change', onChange) : mediaQuery.addListener(onChange)
+  onChange()
+})
+onBeforeUnmount(() => {
+  if (mediaQuery && onChange) {
+    mediaQuery.removeEventListener ? mediaQuery.removeEventListener('change', onChange) : mediaQuery.removeListener(onChange)
+  }
+})
 </script>
 
 <template>
   <div class="brokers-page">
     <section class="section">
       <div class="container layout">
-        <!-- Sidebar Filter -->
-        <aside class="sidebar">
+        <!-- Sidebar Filter (Desktop) -->
+        <aside v-if="isDesktop" class="sidebar">
           <div class="surface-card border-round-lg p-3 card-accent sidebar-card">
             <div class="section-eyebrow">Filter</div>
             <h2 class="section-title text-xl mb-3">Finde deinen Broker</h2>
@@ -138,6 +160,45 @@ function goToApply(broker) {
 
         <!-- Content -->
         <main class="content">
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button class="p-button p-button-rounded p-button-outlined" @click="showFilters = !showFilters">
+              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
+            </button>
+          </div>
+
+          <!-- Mobile Filter Panel -->
+          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde deinen Broker</h2>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Suche</h3>
+              <input v-model="search" placeholder="Name oder Feature" class="filter-input" />
+            </div>
+
+            <div class="filter-group">
+              <label class="checkbox">
+                <input type="checkbox" v-model="onlyRecommended" />
+                <span>Nur Empfehlungen</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Produkt-Features</h3>
+              <label class="checkbox"><input type="checkbox" v-model="filterEtfPlans" /> <span>ETF-Sparpläne</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterZeroOrder" /> <span>0 € Order (oder sehr günstig)</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterCrypto" /> <span>Krypto-Handel</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterCashInterest" /> <span>Zinsen auf Cash</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Anbieter</h3>
+              <label class="checkbox"><input type="checkbox" v-model="filterVollbank" /> <span>Vollbank</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterFreeDepot" /> <span>Depot kostenlos</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterSubscription" /> <span>Pauschal-/Abo-Modell</span></label>
+            </div>
+          </div>
           <div class="section-eyebrow">Angebote</div>
           <h1 class="section-title text-2xl md:text-3xl mb-3">Broker im Vergleich</h1>
 
@@ -356,6 +417,12 @@ function goToApply(broker) {
   .card-image-container { width: 100%; max-width: 200px; margin: 0 auto; }
   .action-buttons { flex-direction: column; align-items: stretch; }
   .recommendations-grid { grid-template-columns: 1fr; }
+  .mobile-filter-toggle { display: flex; justify-content: center; margin-bottom: 12px; }
+  .mobile-filter-panel { margin-bottom: 16px; }
+}
+
+@media (min-width: 769px) {
+  .mobile-filter-toggle, .mobile-filter-panel { display: none; }
 }
 </style>
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { offers } from '../data/offers'
 
@@ -117,14 +117,36 @@ const goToDetail = (offer) => {
     router.push(`/kreditkarten/${offer.slug}`)
   }
 }
+
+// Mobile: Filter einklappbar
+const showFilters = ref(false)
+const isDesktop = ref(false)
+let mediaQuery
+let onChange
+onMounted(() => {
+  mediaQuery = window.matchMedia('(min-width: 769px)')
+  onChange = () => {
+    isDesktop.value = mediaQuery.matches
+    if (isDesktop.value) {
+      showFilters.value = false
+    }
+  }
+  mediaQuery.addEventListener ? mediaQuery.addEventListener('change', onChange) : mediaQuery.addListener(onChange)
+  onChange()
+})
+onBeforeUnmount(() => {
+  if (mediaQuery && onChange) {
+    mediaQuery.removeEventListener ? mediaQuery.removeEventListener('change', onChange) : mediaQuery.removeListener(onChange)
+  }
+})
 </script>
 
 <template>
   <div class="cards-page">
     <section class="section">
       <div class="container layout">
-        <!-- Sidebar Filter -->
-        <aside class="sidebar">
+        <!-- Sidebar Filter (Desktop) -->
+        <aside v-if="isDesktop" class="sidebar">
           <div class="surface-card border-round-lg p-3 card-accent sidebar-card">
             <div class="section-eyebrow">Filter</div>
             <h2 class="section-title text-xl mb-3">Finde deine Karte</h2>
@@ -176,6 +198,61 @@ const goToDetail = (offer) => {
 
         <!-- Offers -->
         <main class="content">
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button class="p-button p-button-rounded p-button-outlined" @click="showFilters = !showFilters">
+              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
+            </button>
+          </div>
+
+          <!-- Mobile Filter Panel -->
+          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde deine Karte</h2>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Jahresgebühr</h3>
+              <select v-model="maxAnnualFee" class="filter-select">
+                <option value="alle">alle</option>
+                <option :value="0">genau 0 €</option>
+                <option :value="60">bis 60 €</option>
+                <option :value="100">bis 100 €</option>
+                <option :value="200">bis 200 €</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Auslandseinsatz</h3>
+              <select v-model="foreignFee" class="filter-select">
+                <option value="alle">alle</option>
+                <option value="0">0 %</option>
+                <option value="<=1">≤ 1 %</option>
+                <option value="<=2">≤ 2 %</option>
+                <option value=">2">&gt; 2 %</option>
+              </select>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Kartenart</h3>
+              <label class="checkbox"><input type="checkbox" value="Charge" v-model="cardTypes" /> <span>Charge</span></label>
+              <label class="checkbox"><input type="checkbox" value="Credit" v-model="cardTypes" /> <span>Credit (Revolving)</span></label>
+              <label class="checkbox"><input type="checkbox" value="Debit" v-model="cardTypes" /> <span>Debit</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Zahlung & Extras</h3>
+              <label class="checkbox"><input type="checkbox" v-model="supportsApplePay" /> <span>Apple Pay</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="supportsGooglePay" /> <span>Google Pay</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="hasInsurance" /> <span>Versicherungen</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="hasCashback" /> <span>Cashback / Reisegutschrift</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Bedingungen</h3>
+              <label class="checkbox"><input type="checkbox" v-model="schufaFree" /> <span>Ohne SCHUFA</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="instantDecision" /> <span>Sofortentscheidung</span></label>
+            </div>
+          </div>
           <div class="section-eyebrow">Angebote</div>
           <h1 class="section-title text-2xl md:text-3xl mb-3">Kreditkarten im Vergleich</h1>
 
@@ -577,5 +654,13 @@ const goToDetail = (offer) => {
   .recommendations-grid {
     grid-template-columns: 1fr;
   }
+
+  .mobile-filter-toggle { display: flex; justify-content: center; margin-bottom: 12px; }
+  .mobile-filter-panel { margin-bottom: 16px; }
+}
+
+/* Desktop: Mobile-Filter ausblenden */
+@media (min-width: 769px) {
+  .mobile-filter-toggle, .mobile-filter-panel { display: none; }
 }
 </style>
