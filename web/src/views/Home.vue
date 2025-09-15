@@ -281,6 +281,32 @@ onMounted(() => { storeTrackingParams() })
 @media (min-width: 768px) {
   .about-text { min-height: 320px; display: flex; align-items: center; }
 }
+
+/* CTA-Band unten: Ausrichtung und Buttons wie im Hero */
+.cta-band { background: #0b1f3a; color: #fff; padding: clamp(28px, 6vw, 56px) 0; }
+.cta-title { color: #fff; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; margin: 0 0 12px; }
+.cta-sub { color: rgba(255,255,255,0.9); margin: 0 0 20px; }
+.cta-buttons { display: flex; gap: clamp(12px, 3.5vw, 28px); flex-wrap: wrap; justify-content: center; align-items: center; }
+.cta-buttons .p-button {
+  background: #fff !important;
+  color: #111 !important;
+  border: none !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 24px var(--shadow-color) !important;
+  padding: 0.7rem 1rem !important;
+  display: inline-flex;
+  align-items: center;
+  transition: box-shadow .15s ease, transform .15s ease, background-color .15s ease, color .15s ease;
+}
+.cta-buttons .p-button:hover,
+.cta-buttons .p-button:focus,
+.cta-buttons .p-button:focus-visible { transform: translateY(-1px); box-shadow: 0 12px 28px var(--shadow-color) !important; }
+.cta-buttons .p-button:active { transform: translateY(0); }
+.cta-buttons .p-button .p-button-label { font-weight: 700; letter-spacing: .01em; line-height: 1; }
+
+@media (prefers-color-scheme: dark) {
+  .cta-buttons .p-button { background: #fff !important; color: #111 !important; border: none !important; }
+}
 </style>
 
 
