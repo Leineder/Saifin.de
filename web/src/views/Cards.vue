@@ -200,7 +200,8 @@ onBeforeUnmount(() => {
         <main class="content">
           <!-- Mobile Filter Toggle -->
           <div class="mobile-filter-toggle">
-            <button class="p-button p-button-rounded p-button-outlined" @click="showFilters = !showFilters">
+            <button class="p-button apply-cta" @click="showFilters = !showFilters">
+              <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
               <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
             </button>
           </div>
