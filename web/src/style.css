@@ -154,14 +154,16 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --background: #0b0f1a;
-    --text: #e5e7eb;
-    --muted-text: #cbd5e1;
-    --subtle-text: #94a3b8;
-    --surface: #131732; /* brand navy 700 */
-    --surface-muted: #0f1426;
-    --border: rgba(255,255,255,0.12);
-    --shadow-color: rgba(0,0,0,0.5);
+    /* Einheitlicher Dark Mode
+       Hintergrund: Header-Blau, Inhalte: Schwarz mit weißer Schrift */
+    --background: var(--brand-primary); /* Header-Blau */
+    --text: #ffffff; /* Weiß für Texte auf schwarzen Karten */
+    --muted-text: #e5e7eb;
+    --subtle-text: #cbd5e1;
+    --surface: #000000; /* Elemente/Karten in Schwarz */
+    --surface-muted: var(--brand-primary); /* Sektionen ohne Karten = Header-Blau */
+    --border: rgba(255,255,255,0.18);
+    --shadow-color: rgba(0,0,0,0.6);
     --link-color: var(--brand-accent);
   }
 
