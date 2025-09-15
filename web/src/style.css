@@ -154,12 +154,12 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 @media (prefers-color-scheme: dark) {
   :root {
     color-scheme: dark;
-    --background: var(--brand-primary); /* Header-Blau (#141833) für gesamten Hintergrund */
+    --background: #0b0f1a;
     --text: #e5e7eb;
     --muted-text: #cbd5e1;
     --subtle-text: #94a3b8;
     --surface: #131732; /* brand navy 700 */
-    --surface-muted: var(--brand-primary); /* Header-Blau für alle Sektionen */
+    --surface-muted: #0f1426;
     --border: rgba(255,255,255,0.12);
     --shadow-color: rgba(0,0,0,0.5);
     --link-color: var(--brand-accent);
