@@ -7,9 +7,9 @@
         <section class="imprint-section">
           <h2>Angaben gemäß § 5 TMG:</h2>
           <div class="contact-info">
-            <p><strong>Christian Eineder</strong></p>
+            <p><strong>Einzelunternehmer Christian R. Eineder</strong></p>
             <p>Fridolin-Holzer-Straße 6</p>
-            <p>88161 Lindenberg (Allgäu)</p>
+            <p>88161 Lindenberg im Allgäu</p>
           </div>
         </section>
 
@@ -22,20 +22,20 @@
 
         <section class="imprint-section">
           <h2>Vertreten durch:</h2>
-          <p>Christian Eineder (Einzelunternehmer)</p>
+          <p>Christian R. Eineder (Einzelunternehmer)</p>
         </section>
 
         <section class="imprint-section">
           <h2>Umsatzsteuer-ID:</h2>
-          <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: <em>wird beantragt</em></p>
+          <p>Umsatzsteuer-Identifikationsnummer gemäß § 27a Umsatzsteuergesetz: DE456535288</p>
         </section>
 
         <section class="imprint-section">
           <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV:</h2>
           <div class="contact-info">
-            <p><strong>Christian Eineder</strong></p>
+            <p><strong>Christian R. Eineder</strong></p>
             <p>Fridolin-Holzer-Straße 6</p>
-            <p>88161 Lindenberg (Allgäu)</p>
+            <p>88161 Lindenberg im Allgäu</p>
           </div>
         </section>
 
