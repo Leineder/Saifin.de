@@ -93,7 +93,7 @@ export const articles = [
 
 // Optional: weitere Platzhalter für zukünftige Artikel
 export const placeholders = [
-  { slug: 'placeholder-1', title: 'In Kürze: Kreditkarten mit Bonus 2025', hero: '/images/ratgeber/DepotVergleich2025.jpg' },
+  { slug: 'placeholder-1', title: 'In Kürze: Kreditkarten mit Bonus 2025', hero: '/images/ratgeber/KreditkartenmitBonus2025.jpg' },
   { slug: 'placeholder-2', title: 'ETF-Sparpläne: Was 2025 wichtig ist', hero: '/images/ratgeber/BestenKreditkarteninDeutschland.jpg' },
 ]
 
