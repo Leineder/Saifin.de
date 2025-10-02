@@ -10,6 +10,9 @@ import Imprint from '../views/Imprint.vue'
 import Contact from '../views/Contact.vue'
 import Brokers from '../views/Brokers.vue'
 import BrokerDetail from '../views/BrokerDetail.vue'
+import Savings from '../views/Savings.vue'
+import Guide from '../views/Guide.vue'
+import GuideDetail from '../views/GuideDetail.vue'
 
 const routes = [
   { path: '/', component: Home },
@@ -17,6 +20,9 @@ const routes = [
   { path: '/kreditkarten/:slug', component: CardDetail },
   { path: '/broker', component: Brokers },
   { path: '/broker/:slug', component: BrokerDetail },
+  { path: '/tagesgeld', component: Savings },
+  { path: '/ratgeber', component: Guide },
+  { path: '/ratgeber/:slug', component: GuideDetail },
   { path: '/antrag/:slug', component: Apply },
   { path: '/danke', component: Thanks },
   { path: '/datenschutz', component: Privacy },

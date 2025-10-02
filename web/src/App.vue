@@ -16,8 +16,8 @@
         <nav :class="['site-nav', { 'is-open': isMenuOpen }]">
           <router-link to="/kreditkarten" class="nav-link" @click="closeMenu">Kreditkarten</router-link>
           <router-link to="/broker" class="nav-link" @click="closeMenu">Broker</router-link>
-          <router-link :to="{ path: '/', hash: '#about' }" class="nav-link" @click="closeMenu">Über uns</router-link>
-          <router-link to="/kontakt" class="nav-link" @click="closeMenu">Kontakt</router-link>
+          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu">Tagesgeldkonto</router-link>
+          <router-link to="/ratgeber" class="nav-link" @click="closeMenu">Ratgeber</router-link>
         </nav>
       </div>
     </header>
