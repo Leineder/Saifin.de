@@ -31,10 +31,13 @@ onMounted(() => { storeTrackingParams() })
       <p class="hero-sub">Vergleiche Top-Angebote und beantrage in wenigen Minuten.</p>
       <div class="hero-cta-group">
         <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
-          <span class="p-button-label">Kreditkarten ansehen</span>
+          <span class="p-button-label">Kreditkarten</span>
+        </router-link>
+        <router-link to="/tagesgeld" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
+          <span class="p-button-label">Tagesgeldkonten</span>
         </router-link>
         <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
-          <span class="p-button-label">Broker vergleichen</span>
+          <span class="p-button-label">Broker</span>
         </router-link>
       </div>
     </div>
