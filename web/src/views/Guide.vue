@@ -69,23 +69,25 @@ function transformContent(article) {
 
       <!-- Obere Magazin-Leiste: horizontal scrollbare Kartenübersicht -->
       <div class="mag-strip scroll-x">
-        <div v-for="card in stripCards" :key="card.slug" class="mag-card">
-          <router-link v-if="!card.isPlaceholder" :to="{ path: '/ratgeber', hash: '#' + card.slug }" class="mag-link" :aria-label="card.title">
-            <img class="mag-img" :src="card.hero" :alt="card.title" />
-            <div class="mag-overlay"></div>
-            <div class="mag-meta">
-              <div class="mag-cat">{{ card.category }}</div>
-              <div class="mag-title">{{ card.title }}</div>
-              <button class="read-more p-button p-component p-button-text"><span class="p-button-label">Mehr lesen</span></button>
-            </div>
-          </router-link>
-          <div v-else class="mag-ph">
-            <img class="mag-img" :src="card.hero" alt="Platzhalter" loading="lazy" />
-            <div class="mag-overlay"></div>
-            <div class="mag-meta">
-              <div class="mag-cat">Bald</div>
-              <div class="mag-title">{{ card.title }}</div>
-              <button class="read-more p-button p-component p-button-text"><span class="p-button-label">Mehr lesen</span></button>
+        <div v-for="card in stripCards" :key="card.slug" class="mag-item">
+          <div class="mag-card">
+            <router-link v-if="!card.isPlaceholder" :to="{ path: '/ratgeber', hash: '#' + card.slug }" class="mag-link" :aria-label="card.title">
+              <img class="mag-img" :src="card.hero" :alt="card.title" />
+              <div class="mag-overlay"></div>
+              <div class="mag-meta">
+                <div class="mag-cat">{{ card.category }}</div>
+                <div class="mag-title">{{ card.title }}</div>
+                <button class="read-more p-button p-component p-button-text"><span class="p-button-label">Mehr lesen</span></button>
+              </div>
+            </router-link>
+            <div v-else class="mag-ph">
+              <img class="mag-img" :src="card.hero" alt="Platzhalter" loading="lazy" />
+              <div class="mag-overlay"></div>
+              <div class="mag-meta">
+                <div class="mag-cat">Bald</div>
+                <div class="mag-title">{{ card.title }}</div>
+                <button class="read-more p-button p-component p-button-text"><span class="p-button-label">Mehr lesen</span></button>
+              </div>
             </div>
           </div>
         </div>
@@ -116,9 +118,11 @@ function transformContent(article) {
   scroll-snap-type: x mandatory;
 }
 .scroll-x { overflow-x: auto; padding-bottom: 6px; }
-.scroll-x::-webkit-scrollbar { height: 8px; }
-.scroll-x::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 999px; }
-.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; scroll-snap-align: start; }
+.scroll-x::-webkit-scrollbar { height: 0; background: transparent; }
+.scroll-x { scrollbar-width: none; }
+.scroll-x::-webkit-scrollbar-thumb { background: transparent; }
+.mag-item { scroll-snap-align: start; }
+.mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 320px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
 @media (max-width: 1024px) {
   .mag-strip { grid-auto-columns: calc((100% - 12px) / 2); }
   .mag-card { height: 280px; }
