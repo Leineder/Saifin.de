@@ -2,12 +2,12 @@
 import { computed } from 'vue'
 import { articles, placeholders } from '../data/articles'
 
-// Obere Leiste: 4 Karten, restliche Karten unten optional
-const topCards = computed(() => {
+// Kartenübersicht: alle vorhandenen Artikel, ggf. mit Platzhaltern auf 6 auffüllen
+const stripCards = computed(() => {
   const base = articles.map(a => ({ ...a, isPlaceholder: false }))
-  const need = Math.max(0, 4 - base.length)
+  const need = Math.max(0, 6 - base.length)
   const extra = placeholders.slice(0, need).map(p => ({ ...p, isPlaceholder: true, excerpt: 'Bald verfügbar.' }))
-  return [...base, ...extra].slice(0, 4)
+  return [...base, ...extra]
 })
 
 const fullArticles = computed(() => articles)
@@ -21,7 +21,7 @@ const fullArticles = computed(() => articles)
 
       <!-- Obere Magazin-Leiste: horizontal scrollbare Kartenübersicht -->
       <div class="mag-strip scroll-x">
-        <div v-for="card in topCards" :key="card.slug" class="mag-card">
+        <div v-for="card in stripCards" :key="card.slug" class="mag-card">
           <router-link v-if="!card.isPlaceholder" :to="{ path: '/ratgeber', hash: '#' + card.slug }" class="mag-link" :aria-label="card.title">
             <img class="mag-img" :src="card.hero" :alt="card.title" />
             <div class="mag-overlay"></div>
@@ -62,13 +62,14 @@ const fullArticles = computed(() => articles)
 .mag-strip {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(260px, 1fr);
+  grid-auto-columns: minmax(320px, 1fr);
   gap: 12px;
+  scroll-snap-type: x mandatory;
 }
 .scroll-x { overflow-x: auto; padding-bottom: 6px; }
 .scroll-x::-webkit-scrollbar { height: 8px; }
 .scroll-x::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 999px; }
-.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; min-width: 280px; }
+.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; min-width: 360px; scroll-snap-align: start; }
 @media (max-width: 1024px) { .mag-card { height: 280px; } }
 @media (max-width: 640px) { .mag-card { height: 240px; } }
 
