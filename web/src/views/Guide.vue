@@ -10,10 +10,7 @@ const topCards = computed(() => {
   return [...base, ...extra].slice(0, 4)
 })
 
-const moreCards = computed(() => {
-  const rest = articles.slice(4)
-  return rest
-})
+const fullArticles = computed(() => articles)
 </script>
 
 <template>
@@ -25,7 +22,7 @@ const moreCards = computed(() => {
       <!-- Obere Magazin-Leiste: 4 gleich große Karten wie im Referenzbild -->
       <div class="mag-strip">
         <div v-for="card in topCards" :key="card.slug" class="mag-card">
-          <router-link v-if="!card.isPlaceholder" :to="`/ratgeber/${card.slug}`" class="mag-link" :aria-label="card.title">
+          <router-link v-if="!card.isPlaceholder" :to="{ path: '/ratgeber', hash: '#' + card.slug }" class="mag-link" :aria-label="card.title">
             <img class="mag-img" :src="card.hero" :alt="card.title" />
             <div class="mag-overlay"></div>
             <div class="mag-meta">
@@ -46,17 +43,16 @@ const moreCards = computed(() => {
         </div>
       </div>
 
-      <!-- Optional: Weitere Beiträge unten als kleinere Karten -->
-      <div v-if="moreCards.length" class="more-grid">
-        <div v-for="card in moreCards" :key="card.slug" class="more-card">
-          <router-link :to="`/ratgeber/${card.slug}`" class="more-link">
-            <img :src="card.hero" :alt="card.title" />
-            <div class="more-body">
-              <div class="more-cat">{{ card.category }}</div>
-              <div class="more-title">{{ card.title }}</div>
-            </div>
-          </router-link>
-        </div>
+      <!-- Volle Artikel unterhalb anzeigen -->
+      <div class="articles">
+        <article v-for="a in fullArticles" :key="a.slug" :id="a.slug" class="article surface-card border-round-lg card-accent">
+          <img :src="a.hero" :alt="a.title" class="article-hero" />
+          <div class="article-body">
+            <div class="section-eyebrow">{{ a.category }}</div>
+            <h2 class="section-title text-2xl mb-2">{{ a.title }}</h2>
+            <div class="article-content" v-html="a.content"></div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
@@ -88,6 +84,15 @@ const moreCards = computed(() => {
 .more-body { padding: 10px 12px; }
 .more-cat { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--subtle-text); }
 .more-title { font-weight: 700; color: var(--text); }
+
+.articles { margin-top: 18px; display: flex; flex-direction: column; gap: 16px; }
+.article { overflow: hidden; }
+.article-hero { width: 100%; height: 260px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
+.article-body { padding: 12px; }
+.article-content :deep(h2) { margin-top: .5rem; }
+.article-content :deep(h3) { margin-top: .5rem; font-size: 1.1rem; }
+.article-content :deep(p) { margin: .5rem 0; color: var(--text); }
+.article-content :deep(ul), .article-content :deep(ol) { margin: .25rem 0 .5rem 1.25rem; color: var(--muted-text); }
 </style>
 
 
