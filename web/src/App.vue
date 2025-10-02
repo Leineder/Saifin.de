@@ -33,6 +33,10 @@
         <router-link to="/datenschutz" class="footer-link">Datenschutz</router-link>
         <span class="sep">·</span>
         <router-link to="/impressum" class="footer-link">Impressum</router-link>
+        <span class="sep">·</span>
+        <router-link :to="{ path: '/', hash: '#about' }" class="footer-link">Über uns</router-link>
+        <span class="sep">·</span>
+        <router-link to="/kontakt" class="footer-link">Kontakt</router-link>
       </div>
     </footer>
   </div>
