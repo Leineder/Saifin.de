@@ -19,8 +19,8 @@ const fullArticles = computed(() => articles)
       <div class="section-eyebrow">Ratgeber</div>
       <h1 class="section-title text-2xl md:text-3xl mb-3">Aktuelle Beiträge</h1>
 
-      <!-- Obere Magazin-Leiste: 4 gleich große Karten wie im Referenzbild -->
-      <div class="mag-strip">
+      <!-- Obere Magazin-Leiste: horizontal scrollbare Kartenübersicht -->
+      <div class="mag-strip scroll-x">
         <div v-for="card in topCards" :key="card.slug" class="mag-card">
           <router-link v-if="!card.isPlaceholder" :to="{ path: '/ratgeber', hash: '#' + card.slug }" class="mag-link" :aria-label="card.title">
             <img class="mag-img" :src="card.hero" :alt="card.title" />
@@ -32,7 +32,7 @@ const fullArticles = computed(() => articles)
             </div>
           </router-link>
           <div v-else class="mag-ph">
-            <img class="mag-img" :src="card.hero" alt="Platzhalter" />
+            <img class="mag-img" :src="card.hero" alt="Platzhalter" loading="lazy" />
             <div class="mag-overlay"></div>
             <div class="mag-meta">
               <div class="mag-cat">Bald</div>
@@ -46,7 +46,7 @@ const fullArticles = computed(() => articles)
       <!-- Volle Artikel unterhalb anzeigen -->
       <div class="articles">
         <article v-for="a in fullArticles" :key="a.slug" :id="a.slug" class="article surface-card border-round-lg card-accent">
-          <img :src="a.hero" :alt="a.title" class="article-hero" />
+          <img :src="a.hero" :alt="a.title" class="article-hero" loading="lazy" />
           <div class="article-body">
             <div class="section-eyebrow">{{ a.category }}</div>
             <h2 class="section-title text-2xl mb-2">{{ a.title }}</h2>
@@ -61,12 +61,16 @@ const fullArticles = computed(() => articles)
 <style scoped>
 .mag-strip {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 1fr);
   gap: 12px;
 }
-.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; }
-@media (max-width: 1024px) { .mag-strip { grid-template-columns: repeat(2, 1fr); } .mag-card { height: 280px; } }
-@media (max-width: 640px) { .mag-strip { grid-template-columns: 1fr; } .mag-card { height: 240px; } }
+.scroll-x { overflow-x: auto; padding-bottom: 6px; }
+.scroll-x::-webkit-scrollbar { height: 8px; }
+.scroll-x::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 999px; }
+.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; min-width: 280px; }
+@media (max-width: 1024px) { .mag-card { height: 280px; } }
+@media (max-width: 640px) { .mag-card { height: 240px; } }
 
 .mag-link, .mag-ph { display: block; width: 100%; height: 100%; position: relative; color: inherit; text-decoration: none; }
 .mag-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.05); }

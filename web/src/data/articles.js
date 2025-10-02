@@ -30,6 +30,71 @@ export const articles = [
 `,
   },
   {
+    slug: 'cashback-kreditkarten-2025',
+    category: 'Guide',
+    title: 'Cashback-Kreditkarten 2025 – Lohnt sich das?',
+    hero: '/images/ratgeber/Cashback.jpg',
+    excerpt:
+      'Wie Cashback- und Rewards-Programme funktionieren, worauf du achten solltest und welche Karten sich 2025 lohnen.',
+    content: `
+<h2>So funktioniert Cashback</h2>
+<p>Bei <strong>Cashback-Kreditkarten</strong> erhältst du einen Teil deiner Ausgaben als Guthaben zurück – meist zwischen 0,1 % und 1 %. Häufig gibt es Bonusaktionen mit höheren Quoten bei Partnern.</p>
+
+<h3>Worauf achten?</h3>
+<ul>
+  <li>Deckelung pro Monat/Jahr</li>
+  <li>Ausgeschlossene Kategorien (z. B. Barabhebungen)</li>
+  <li>Jahresgebühr vs. erwartetes Cashback</li>
+  <li>Fremdwährungsgebühren bei Auslandsumsätzen</li>
+  <li>Teilzahlungszinsen vermeiden – möglichst immer voll ausgleichen</li>
+</ul>
+
+<p>In unserem <a href="/kreditkarten">Kreditkarten-Vergleich</a> kannst du Karten mit <em>Cashback</em> und <em>Rewards</em> gezielt filtern.</p>
+
+<h3>Fazit</h3>
+<p>Für Haushalte mit hohem Kartenumsatz können Cashback-Karten attraktiv sein – solange Gebühren und Zinsen den Vorteil nicht übersteigen.</p>
+`,
+  },
+  {
+    slug: 'etf-oder-tagesgeld-2025',
+    category: 'Guide',
+    title: 'ETF oder Tagesgeld 2025? So triffst du die richtige Wahl',
+    hero: '/images/ratgeber/ETFvsTagesgeld.jpg',
+    excerpt:
+      'Liquidität vs. Rendite: Wann Tagesgeld sinnvoll ist und wann ETFs – mit Beispielen und Tipps zur Kombination.',
+    content: `
+<h2>Liquidität und Sicherheit</h2>
+<p><strong>Tagesgeld</strong> bietet flexible Verfügbarkeit und <em>gesetzliche Einlagensicherung bis 100.000 €</em> je Bank. Die aktuellen Konditionen findest du im <a href="/tagesgeld">Tagesgeld-Vergleich</a>.</p>
+
+<h2>Langfristige Rendite</h2>
+<p><strong>ETF-Portfolios</strong> sind für den Vermögensaufbau über Jahre gedacht. Ordergebühren, Sparplan-Angebote und Handelsplätze vergleichst du im <a href="/broker">Broker-Vergleich</a>.</p>
+
+<h3>Praxis-Tipp</h3>
+<p>Kombiniere ein gut verzinstes Tagesgeldkonto für Rücklagen mit einem ETF-Sparplan für langfristige Ziele.</p>
+`,
+  },
+  {
+    slug: 'trading-fuer-anfaenger-2025',
+    category: 'Guide',
+    title: 'Trading für Anfänger – Sicher starten in 2025',
+    hero: '/images/ratgeber/TradingfuerAnfaenger.jpg',
+    excerpt:
+      'Ordertypen, Kosten, Risiko-Management: Die wichtigsten Basics für deinen Einstieg ins Trading.',
+    content: `
+<h2>Grundlagen</h2>
+<p>Lerne die <strong>Ordertypen</strong> (Market, Limit, Stop) und prüfe Gebühren sowie verfügbare Börsenplätze. Eine günstige und stabile Plattform ist entscheidend – vergleiche Anbieter im <a href="/broker">Broker-Vergleich</a>.</p>
+
+<h3>Risikomanagement</h3>
+<ul>
+  <li>Nur Kapital einsetzen, dessen Verlust du verkraften kannst</li>
+  <li>Stops nutzen, Positionsgrößen planen</li>
+  <li>Keine Hebelprodukte ohne Übung und Verständnis</li>
+</ul>
+
+<p>Für passives Investieren sind <em>ETF-Sparpläne</em> oft sinnvoller – passende Anbieter findest du ebenfalls im <a href="/broker">Broker-Vergleich</a>.</p>
+`,
+  },
+  {
     slug: 'depot-vergleich-2025',
     category: 'Guide',
     title: 'Depot Vergleich 2025 – So finden Sie den richtigen Broker',
