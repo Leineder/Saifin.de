@@ -3,7 +3,7 @@ export const articles = [
     slug: 'kreditkarten-2025-deutschland',
     category: 'Guide',
     title: 'Die besten Kreditkarten in Deutschland 2025 – Ein Überblick',
-    hero: 'https://images.unsplash.com/photo-1518459031867-a89b944bffe1?q=80&w=1400',
+    hero: '/images/ratgeber/BestenKreditkarteninDeutschland.jpg',
     excerpt:
       'Kreditkarten sind 2025 mehr als nur Zahlungsmittel: Sicherheit, Cashback, Versicherungen – worauf achten und welche Kartenarten gibt es?',
     content: `
@@ -33,7 +33,7 @@ export const articles = [
     slug: 'depot-vergleich-2025',
     category: 'Guide',
     title: 'Depot Vergleich 2025 – So finden Sie den richtigen Broker',
-    hero: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1400',
+    hero: '/images/ratgeber/DepotVergleich2025.jpg',
     excerpt:
       'Bank oder Neobroker? Kosten, Angebot, Sicherheit und Trends 2025 – der Überblick für das passende Depot.',
     content: `
@@ -63,7 +63,7 @@ export const articles = [
     slug: 'tagesgeldkonten-2025',
     category: 'Guide',
     title: 'Tagesgeldkonten 2025 – Sicherheit mit attraktiven Zinsen',
-    hero: 'https://images.unsplash.com/photo-1553729459-efe14ef6055d?q=80&w=1400',
+    hero: '/images/ratgeber/Tagesgeldkonten2025.jpeg',
     excerpt:
       'Warum Tagesgeld 2025 wieder interessant ist: Zinsen, Sicherheit, worauf achten – kompakt erklärt.',
     content: `
@@ -93,8 +93,8 @@ export const articles = [
 
 // Optional: weitere Platzhalter für zukünftige Artikel
 export const placeholders = [
-  { slug: 'placeholder-1', title: 'In Kürze: Kreditkarten mit Bonus 2025', hero: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?q=80&w=1400' },
-  { slug: 'placeholder-2', title: 'ETF-Sparpläne: Was 2025 wichtig ist', hero: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?q=80&w=1400' },
+  { slug: 'placeholder-1', title: 'In Kürze: Kreditkarten mit Bonus 2025', hero: '/images/ratgeber/DepotVergleich2025.jpg' },
+  { slug: 'placeholder-2', title: 'ETF-Sparpläne: Was 2025 wichtig ist', hero: '/images/ratgeber/BestenKreditkarteninDeutschland.jpg' },
 ]
 
 
