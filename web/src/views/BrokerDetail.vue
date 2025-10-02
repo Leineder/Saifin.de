@@ -16,7 +16,7 @@ const goApply = () => router.push(`/antrag/${broker.slug}`)
     <div class="container detail-grid">
       <div class="media">
         <div class="logo-frame">
-          <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" alt="" :class="'detail-logo ' + broker.slug" />
+          <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${broker.name} – Logo`" :class="'detail-logo ' + broker.slug" loading="lazy" />
         </div>
       </div>
       <div class="content">

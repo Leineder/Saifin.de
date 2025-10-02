@@ -28,7 +28,7 @@ const filtered = computed(() => {
           <div v-for="o in filtered" :key="o.slug" class="col-12 md:col-6">
             <div class="surface-card border-round-xl card-accent offer">
               <div class="offer-media">
-                <img :src="o.image" alt="" />
+                <img :src="o.image" :alt="`${o.title} – Angebotsbild`" loading="lazy" />
               </div>
               <div class="offer-body">
                 <div class="section-eyebrow">Tagesgeld</div>

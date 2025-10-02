@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { applyRouteMeta } from '../seo'
 
 import Home from '../views/Home.vue'
 import Cards from '../views/Cards.vue'
@@ -15,22 +16,22 @@ import Guide from '../views/Guide.vue'
 import GuideDetail from '../views/GuideDetail.vue'
 
 const routes = [
-  { path: '/', component: Home },
-  { path: '/kreditkarten', component: Cards },
-  { path: '/kreditkarten/:slug', component: CardDetail },
-  { path: '/broker', component: Brokers },
-  { path: '/broker/:slug', component: BrokerDetail },
-  { path: '/tagesgeld', component: Savings },
-  { path: '/ratgeber', component: Guide },
-  { path: '/ratgeber/:slug', component: GuideDetail },
-  { path: '/antrag/:slug', component: Apply },
-  { path: '/danke', component: Thanks },
-  { path: '/datenschutz', component: Privacy },
-  { path: '/impressum', component: Imprint },
-  { path: '/kontakt', component: Contact },
+  { path: '/', name: 'home', component: Home },
+  { path: '/kreditkarten', name: 'cards', component: Cards },
+  { path: '/kreditkarten/:slug', name: 'card-detail', component: CardDetail },
+  { path: '/broker', name: 'brokers', component: Brokers },
+  { path: '/broker/:slug', name: 'broker-detail', component: BrokerDetail },
+  { path: '/tagesgeld', name: 'savings', component: Savings },
+  { path: '/ratgeber', name: 'guide', component: Guide },
+  { path: '/ratgeber/:slug', name: 'guide-detail', component: GuideDetail },
+  { path: '/antrag/:slug', name: 'apply', component: Apply },
+  { path: '/danke', name: 'thanks', component: Thanks },
+  { path: '/datenschutz', name: 'privacy', component: Privacy },
+  { path: '/impressum', name: 'imprint', component: Imprint },
+  { path: '/kontakt', name: 'contact', component: Contact },
 ]
 
-export default createRouter({
+const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
@@ -39,3 +40,9 @@ export default createRouter({
     return { top: 0 }
   }
 })
+
+router.afterEach((to) => {
+  try { applyRouteMeta(to) } catch (_) {}
+})
+
+export default router

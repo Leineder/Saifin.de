@@ -8,6 +8,7 @@ import 'primeflex/primeflex.css'
 import App from './App.vue'
 import router from './router'
 import './style.css'
+import { initWebVitals } from './vitals'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -24,3 +25,6 @@ router.afterEach(() => {
 })
 app.use(PrimeVue, { theme: { preset: Aura } })
 app.mount('#app')
+
+// Web Vitals initialisieren (nicht-blockierend)
+try { initWebVitals() } catch (_) {}

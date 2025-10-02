@@ -5,7 +5,7 @@
       <div class="container header-inner">
         <router-link to="/" class="brand" aria-label="Startseite">
           <span class="brand-mark">
-            <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="Saifin" draggable="false" @error="(e) => (e.target.src = '/images/saifin_logo_square_originalscale.svg')" />
+            <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="Saifin Logo" draggable="false" @error="(e) => (e.target.src = '/images/saifin_logo_square_originalscale.svg')" />
           </span>
         </router-link>
 

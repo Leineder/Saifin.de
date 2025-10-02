@@ -30,7 +30,34 @@ function transformContent(article) {
   const html = article?.content || ''
   const target = getTargetPathForArticle(article)
   const pattern = /Sai+fin\.de/gi
-  return html.replace(pattern, `<a href="${target}">Saifin.de</a>`)
+  let transformed = html.replace(pattern, `<a href="${target}">Saifin.de</a>`)
+
+  // Zusätzliche, thematisch passende Begriffe verlinken
+  const isCardTopic = target === '/kreditkarten'
+  const isBrokerTopic = target === '/broker'
+  const isSavingsTopic = target === '/tagesgeld'
+
+  if (isCardTopic) {
+    transformed = transformed
+      .replace(/(Kreditkarten[- ]?Vergleich)/gi, `<a href="/kreditkarten">$1</a>`)
+      .replace(/(Cashback[- ]?Kreditkarten[- ]?Vergleich)/gi, `<a href="/kreditkarten">$1</a>`)
+      .replace(/(beste\s+Kreditkarte(?:\s+2025)?)/gi, `<a href="/kreditkarten">$1</a>`)
+  }
+
+  if (isBrokerTopic) {
+    transformed = transformed
+      .replace(/(Broker[- ]?Vergleich)/gi, `<a href="/broker">$1</a>`)
+      .replace(/(Depot[- ]?Vergleich)/gi, `<a href="/broker">$1</a>`)
+  }
+
+  if (isSavingsTopic) {
+    transformed = transformed
+      .replace(/(Tagesgeldangebote(?:\s+im)?\s+Vergleich)/gi, `<a href="/tagesgeld">$1</a>`)
+      .replace(/(Tagesgeld[^<\.!?]{0,24}Vergleich)/gi, `<a href="/tagesgeld">$1</a>`)
+      .replace(/(Überblick\s+auf\s+Tagesgeld)/gi, `<a href="/tagesgeld">$1</a>`)
+  }
+
+  return transformed
 }
 </script>
 

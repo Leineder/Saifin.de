@@ -21,7 +21,7 @@ onMounted(() => { storeTrackingParams() })
 <template>
   <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
   <section class="hero relative">
-    <img class="hero-img" src="/images/landing-hero.jpg?v=1" alt="Kartenzahlung mit Karte und Terminal" />
+    <img class="hero-img" src="/images/landing-hero.jpg?v=1" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" />
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">
@@ -81,7 +81,7 @@ onMounted(() => { storeTrackingParams() })
           <router-link :to="`/kreditkarten/${o.slug}`" class="offer-link">
             <div class="surface-card border-round-xl card-accent w-full" style="max-width:100%">
               <div class="p-3 flex align-items-center gap-3">
-                <img :src="o.image" alt="" class="offer-thumb border-round" />
+                <img :src="o.image" :alt="`${o.title} – Kartenmotiv`" class="offer-thumb border-round" loading="lazy" />
                 <div class="flex-1">
                   <div class="text-900 text-lg font-bold line-height-2">{{ o.title }}</div>
                   <div class="text-600 text-sm">Jahresgebühr</div>
@@ -101,7 +101,7 @@ onMounted(() => { storeTrackingParams() })
     <div class="surface-card border-round-lg">
       <div v-for="(t, idx) in testimonials" :key="t.name" class="testimonial">
         <div class="p-3 md:p-4 flex align-items-start gap-3">
-          <img :src="t.avatar" alt="" class="border-circle" style="width:64px;height:64px;object-fit:cover" />
+          <img :src="t.avatar" :alt="`Avatar von ${t.name}`" class="border-circle" style="width:64px;height:64px;object-fit:cover" loading="lazy" />
           <div class="flex-1">
             <div class="text-900 font-bold mb-1">{{ t.name }}</div>
             <div class="stars mb-2">
