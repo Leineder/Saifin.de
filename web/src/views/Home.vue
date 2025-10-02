@@ -236,6 +236,8 @@ onMounted(() => { storeTrackingParams() })
   border-radius: 12px !important;
   box-shadow: 0 8px 24px var(--shadow-color) !important;
   padding: 0.7rem 1rem !important;
+  min-width: clamp(160px, 24vw, 220px);
+  white-space: nowrap;
   transition: box-shadow .15s ease, transform .15s ease, background-color .15s ease, color .15s ease;
 }
 .hero-cta.p-button:hover,
