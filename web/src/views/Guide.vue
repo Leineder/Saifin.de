@@ -11,6 +11,27 @@ const stripCards = computed(() => {
 })
 
 const fullArticles = computed(() => articles)
+
+function getTargetPathForArticle(article) {
+  const slug = (article?.slug || '').toLowerCase()
+  const title = (article?.title || '').toLowerCase()
+
+  const isCardTopic = slug.includes('kreditkarte') || slug.includes('kreditkarten') || title.includes('kreditkarte') || title.includes('kreditkarten') || slug.includes('cashback')
+  const isBrokerTopic = slug.includes('broker') || slug.includes('depot') || slug.includes('trading') || title.includes('broker') || title.includes('depot') || title.includes('trading')
+  const isSavingsTopic = slug.includes('tagesgeld') || title.includes('tagesgeld')
+
+  if (isCardTopic) return '/kreditkarten'
+  if (isBrokerTopic) return '/broker'
+  if (isSavingsTopic) return '/tagesgeld'
+  return '/kreditkarten'
+}
+
+function transformContent(article) {
+  const html = article?.content || ''
+  const target = getTargetPathForArticle(article)
+  const pattern = /Sai+fin\.de/gi
+  return html.replace(pattern, `<a href="${target}">Saifin.de</a>`)
+}
 </script>
 
 <template>
@@ -50,7 +71,7 @@ const fullArticles = computed(() => articles)
           <div class="article-body">
             <div class="section-eyebrow">{{ a.category }}</div>
             <h2 class="section-title text-2xl mb-2">{{ a.title }}</h2>
-            <div class="article-content" v-html="a.content"></div>
+            <div class="article-content" v-html="transformContent(a)"></div>
           </div>
         </article>
       </div>
@@ -62,16 +83,23 @@ const fullArticles = computed(() => articles)
 .mag-strip {
   display: grid;
   grid-auto-flow: column;
-  grid-auto-columns: minmax(320px, 1fr);
+  /* Exakt 3 Karten sichtbar (mit 12px Lücken dazwischen) */
+  grid-auto-columns: calc((100% - 24px) / 3);
   gap: 12px;
   scroll-snap-type: x mandatory;
 }
 .scroll-x { overflow-x: auto; padding-bottom: 6px; }
 .scroll-x::-webkit-scrollbar { height: 8px; }
 .scroll-x::-webkit-scrollbar-thumb { background: rgba(0,0,0,.2); border-radius: 999px; }
-.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; min-width: 360px; scroll-snap-align: start; }
-@media (max-width: 1024px) { .mag-card { height: 280px; } }
-@media (max-width: 640px) { .mag-card { height: 240px; } }
+.mag-card { position: relative; overflow: hidden; border-radius: 12px; height: 320px; scroll-snap-align: start; }
+@media (max-width: 1024px) {
+  .mag-strip { grid-auto-columns: calc((100% - 12px) / 2); }
+  .mag-card { height: 280px; }
+}
+@media (max-width: 640px) {
+  .mag-strip { grid-auto-columns: 100%; }
+  .mag-card { height: 240px; }
+}
 
 .mag-link, .mag-ph { display: block; width: 100%; height: 100%; position: relative; color: inherit; text-decoration: none; }
 .mag-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.05); }
