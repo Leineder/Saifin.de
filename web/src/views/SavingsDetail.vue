@@ -8,7 +8,15 @@ const offer = savingsOffers.find(o => o.slug === route.params.slug)
 if (!offer) router.replace('/tagesgeld')
 
 const goBack = () => router.push('/tagesgeld')
-const goApply = () => offer?.applyUrl && router.push(offer.applyUrl)
+const goApply = () => {
+  if (!offer?.applyUrl) return
+  const url = offer.applyUrl
+  if (/^https?:\/\//i.test(url)) {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  } else {
+    router.push(url)
+  }
+}
 </script>
 
 <template>

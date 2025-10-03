@@ -56,7 +56,13 @@ const filtered = computed(() => {
 })
 
 function goToApply(o) {
-  if (o && o.applyUrl) router.push(o.applyUrl)
+  if (!o || !o.applyUrl) return
+  const url = o.applyUrl
+  if (/^https?:\/\//i.test(url)) {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  } else {
+    router.push(url)
+  }
 }
 </script>
 

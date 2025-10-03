@@ -55,7 +55,7 @@ export const savingsOffers = [
       'Monatliche Zinsgutschrift',
       'Kostenfrei, täglich verfügbar'
     ],
-    applyUrl: '/antrag/tf-bank'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C213342396T'
   },
   {
     id: 'distingo-bank',
