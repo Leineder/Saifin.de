@@ -122,7 +122,7 @@ function transformContent(article) {
 .scroll-x { scrollbar-width: none; }
 .scroll-x::-webkit-scrollbar-thumb { background: transparent; }
 .mag-item { scroll-snap-align: start; }
-.mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 320px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
+.mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 260px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
 @media (max-width: 1024px) {
   .mag-strip { grid-auto-columns: calc((100% - 12px) / 2); }
   .mag-card { height: 280px; }
@@ -135,10 +135,10 @@ function transformContent(article) {
 .mag-link, .mag-ph { display: block; width: 100%; height: 100%; position: relative; color: inherit; text-decoration: none; }
 .mag-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.92) contrast(1.05); }
 .mag-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.4) 60%, rgba(0,0,0,.65) 100%); }
-.mag-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 16px; color: #fff; display: flex; flex-direction: column; gap: 6px; }
+.mag-meta { position: absolute; left: 0; right: 0; bottom: 0; padding: 12px; color: #fff; display: flex; flex-direction: column; gap: 6px; }
 .mag-cat { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; opacity: .9; }
-.mag-title { font-weight: 800; font-size: 1.1rem; line-height: 1.2; }
-.read-more { align-self: flex-start; padding: .35rem .6rem; background: rgba(255,255,255,.92); color: #111; border-radius: .5rem; }
+.mag-title { font-weight: 800; font-size: 1rem; line-height: 1.2; }
+.read-more { align-self: flex-start; padding: .3rem .55rem; background: rgba(255,255,255,.92); color: #111; border-radius: .5rem; }
 .mag-card:hover .mag-img { transform: scale(1.02); transition: transform .2s ease; }
 
 .more-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin-top: 16px; }
