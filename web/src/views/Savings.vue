@@ -151,7 +151,7 @@ function goToApply(o) {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="o.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${o.title} – Logo/Bild`" class="card-image" loading="lazy" />
+                  <img :src="o.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${o.title} – Logo/Bild`" :class="['card-image', o.slug]" loading="lazy" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -240,6 +240,10 @@ function goToApply(o) {
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
 .card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
+.card-image.pbb-direkt,
+.card-image.suresse-direkt-bank,
+.card-image.ferratum,
+.card-image.consorsbank { object-fit: contain; background: #fff; }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }
