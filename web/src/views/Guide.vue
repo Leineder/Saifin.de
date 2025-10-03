@@ -110,10 +110,7 @@ function transformContent(article) {
 
 <style scoped>
 .mag-strip {
-  display: grid;
-  grid-auto-flow: column;
-  /* Exakt 4 Karten sichtbar (mit 12px Lücken + Rand/Borders kompensiert) */
-  grid-auto-columns: calc((100% - 48px) / 4 - 2px);
+  display: flex;
   gap: 12px;
   scroll-snap-type: x mandatory;
 }
@@ -121,14 +118,14 @@ function transformContent(article) {
 .scroll-x::-webkit-scrollbar { height: 0; background: transparent; }
 .scroll-x { scrollbar-width: none; }
 .scroll-x::-webkit-scrollbar-thumb { background: transparent; }
-.mag-item { scroll-snap-align: start; }
+.mag-item { scroll-snap-align: start; flex: 0 0 calc((100% - 36px) / 4); }
 .mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 260px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
 @media (max-width: 1024px) {
-  .mag-strip { grid-auto-columns: calc((100% - 12px) / 2); }
+  .mag-item { flex-basis: calc((100% - 12px) / 2); }
   .mag-card { height: 280px; }
 }
 @media (max-width: 640px) {
-  .mag-strip { grid-auto-columns: 100%; }
+  .mag-item { flex-basis: 100%; }
   .mag-card { height: 240px; }
 }
 
