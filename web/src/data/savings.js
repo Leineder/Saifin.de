@@ -74,7 +74,7 @@ export const savingsOffers = [
       'Keine Gebühren, 100% online',
       'EU-konforme Sicherung bis 100.000 €'
     ],
-    applyUrl: '/antrag/distingo-bank'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5423128408T'
   },
   {
     id: 'raisin',
@@ -93,7 +93,7 @@ export const savingsOffers = [
       'Top-Zinsen aus der EU, keine Kontoführungsgebühren',
       'Deutscher Support, digitale Verwaltung'
     ],
-    applyUrl: '/antrag/raisin'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C67225978B'
   },
   {
     id: 'jt-direktbank',
@@ -112,7 +112,7 @@ export const savingsOffers = [
       'EU-Einlagensicherung bis 100.000 €',
       'Schnelle Online-Kontoeröffnung'
     ],
-    applyUrl: '/antrag/jt-direktbank'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C4422100650T'
   },
   {
     id: 'openbank',
@@ -150,7 +150,7 @@ export const savingsOffers = [
       'Monatliche Zinsgutschrift, keine Mindestanlage',
       'Deutsche Einlagensicherung + zusätzlicher Fonds'
     ],
-    applyUrl: '/antrag/santander-consumer-bank'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C19399348B'
   },
   {
     id: 'ferratum',
