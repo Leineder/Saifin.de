@@ -213,6 +213,9 @@ onMounted(() => { storeTrackingParams() })
         <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
           <span class="p-button-label">Broker vergleichen</span>
         </router-link>
+        <router-link to="/tagesgeld" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
+          <span class="p-button-label">Tagesgeldkonten vergleichen</span>
+        </router-link>
       </div>
     </div>
   </section>
