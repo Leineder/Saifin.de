@@ -118,15 +118,15 @@ function transformContent(article) {
 .scroll-x::-webkit-scrollbar { height: 0; background: transparent; }
 .scroll-x { scrollbar-width: none; }
 .scroll-x::-webkit-scrollbar-thumb { background: transparent; }
-.mag-item { scroll-snap-align: start; flex: 0 0 calc(25% - 18px); max-width: calc(25% - 18px); }
-.mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 260px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
+.mag-item { scroll-snap-align: start; flex: 0 0 calc((100% - 36px) / 4); max-width: calc((100% - 36px) / 4); }
+.mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 220px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
 @media (max-width: 1024px) {
   .mag-item { flex-basis: calc(50% - 6px); max-width: calc(50% - 6px); }
-  .mag-card { height: 280px; }
+  .mag-card { height: 240px; }
 }
 @media (max-width: 640px) {
   .mag-item { flex-basis: 100%; max-width: 100%; }
-  .mag-card { height: 240px; }
+  .mag-card { height: 200px; }
 }
 
 .mag-link, .mag-ph { display: block; width: 100%; height: 100%; position: relative; color: inherit; text-decoration: none; }
