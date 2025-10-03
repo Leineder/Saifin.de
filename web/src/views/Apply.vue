@@ -3,17 +3,20 @@ import { ref, computed, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { offers } from '../data/offers'
 import { brokers } from '../data/brokers'
+import { savingsOffers } from '../data/savings'
 import { getTrackingParams } from '../tracking'
 
 const route = useRoute()
 const router = useRouter()
 const offer = offers.find(o => o.slug === route.params.slug)
 const broker = brokers.find(b => b.slug === route.params.slug)
-const entity = offer || broker
+const savings = savingsOffers.find(s => s.slug === route.params.slug)
+const entity = offer || broker || savings
 
 const applySubjectTitle = computed(() => {
   if (offer) return offer.title
   if (broker) return broker.name
+  if (savings) return savings.title
   return ''
 })
 
@@ -117,7 +120,8 @@ function onInput(field) {
 function submit() {
   if (!validateStep(3)) return
   try { localStorage.removeItem(storageKey.value) } catch (_) {}
-  console.log('Lead (demo):', { type: offer ? 'card' : 'broker', offerId: offer?.id, brokerId: broker?.id, ...form.value })
+  const type = offer ? 'card' : (broker ? 'broker' : (savings ? 'savings' : 'unknown'))
+  console.log('Lead (demo):', { type, offerId: offer?.id, brokerId: broker?.id, savingsId: savings?.id, ...form.value })
   router.push('/danke')
 }
 </script>

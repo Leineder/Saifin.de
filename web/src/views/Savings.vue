@@ -1,104 +1,270 @@
 <script setup>
-import { computed, ref } from 'vue'
-import { savingsOffers } from '../data/savings'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { useRouter } from 'vue-router'
+import { savingsOffers, recommendedSavings } from '../data/savings'
 
-const query = ref('')
-const filtered = computed(() => {
-  const q = query.value.trim().toLowerCase()
-  if (!q) return savingsOffers
-  return savingsOffers.filter(o =>
-    o.title.toLowerCase().includes(q) ||
-    (o.highlights || []).some(h => h.toLowerCase().includes(q))
-  )
+const router = useRouter()
+
+// Filter States
+const search = ref('')
+const onlyRecommended = ref(false)
+const onlyPromo = ref(false) // Neukundenaktion
+const onlyMonthlyPayout = ref(false)
+const dgsOnly = ref(true) // EU-Einlagensicherung
+const countryFilter = ref('alle') // 'alle' | 'DE' | 'ES' | 'FR' | 'SE' | 'CZ' | 'EU' | 'MT'
+
+const isDesktop = ref(false)
+const showFilters = ref(false)
+let mediaQuery
+let onChange
+
+onMounted(() => {
+  mediaQuery = window.matchMedia('(min-width: 769px)')
+  onChange = () => {
+    isDesktop.value = mediaQuery.matches
+    if (isDesktop.value) showFilters.value = false
+  }
+  mediaQuery.addEventListener ? mediaQuery.addEventListener('change', onChange) : mediaQuery.addListener(onChange)
+  onChange()
 })
+onBeforeUnmount(() => {
+  if (mediaQuery && onChange) {
+    mediaQuery.removeEventListener ? mediaQuery.removeEventListener('change', onChange) : mediaQuery.removeListener(onChange)
+  }
+})
+
+const filtered = computed(() => {
+  let list = savingsOffers
+  if (onlyRecommended.value) list = list.filter(o => recommendedSavings.includes(o.slug))
+
+  const q = search.value.trim().toLowerCase()
+  if (q) {
+    list = list.filter(o =>
+      (o.title || '').toLowerCase().includes(q) ||
+      (o.interest || '').toLowerCase().includes(q) ||
+      (o.security || '').toLowerCase().includes(q) ||
+      (o.payout || '').toLowerCase().includes(q) ||
+      (o.highlights || []).some(h => (h || '').toLowerCase().includes(q))
+    )
+  }
+
+  if (onlyPromo.value) list = list.filter(o => o.isNeukundenaktion)
+  if (onlyMonthlyPayout.value) list = list.filter(o => /monat/i.test(o.payout || ''))
+  if (dgsOnly.value) list = list.filter(o => o.euDgs === true)
+  if (countryFilter.value !== 'alle') list = list.filter(o => (o.countryCode || '').toLowerCase() === countryFilter.value.toLowerCase())
+  return list
+})
+
+function goToApply(o) {
+  if (o && o.applyUrl) router.push(o.applyUrl)
+}
 </script>
 
 <template>
   <div class="savings-page">
     <section class="section">
-      <div class="container">
-        <div class="section-eyebrow">Angebote</div>
-        <h1 class="section-title text-2xl md:text-3xl mb-3">Tagesgeld im Vergleich</h1>
+      <div class="container layout">
+        <!-- Sidebar Filter (Desktop) -->
+        <aside v-if="isDesktop" class="sidebar">
+          <div class="surface-card border-round-lg p-3 card-accent sidebar-card">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde dein Tagesgeld</h2>
 
-        <div class="surface-card border-round-lg p-3 card-accent searchbar">
-          <input v-model="query" placeholder="Suche (z. B. Zinsgarantie, Einlagensicherung)" />
-        </div>
+            <div class="filter-group">
+              <h3 class="filter-title">Suche</h3>
+              <input v-model="search" placeholder="Name, Zins, Einlagensicherung" class="filter-input" />
+            </div>
 
-        <div class="grid">
-          <div v-for="o in filtered" :key="o.slug" class="col-12 md:col-6">
-            <div class="surface-card border-round-xl card-accent offer">
-              <div class="offer-media">
-                <img :src="o.image" :alt="`${o.title} – Angebotsbild`" loading="lazy" />
-              </div>
-              <div class="offer-body">
-                <div class="section-eyebrow">Tagesgeld</div>
-                <h3 class="text-900 m-0">{{ o.title }}</h3>
-                <div class="interest">{{ o.interest }}</div>
-                <ul class="bullets">
-                  <li v-for="h in (o.highlights || [])" :key="h">{{ h }}</li>
-                </ul>
+            <div class="filter-group">
+              <label class="checkbox"><input type="checkbox" v-model="onlyRecommended" /> <span>Nur Empfehlungen</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="onlyPromo" /> <span>Neukundenaktion</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="onlyMonthlyPayout" /> <span>Monatliche Zinszahlung</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="dgsOnly" /> <span>EU-Einlagensicherung</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Land</h3>
+              <select v-model="countryFilter" class="filter-select">
+                <option value="alle">alle</option>
+                <option value="DE">Deutschland</option>
+                <option value="ES">Spanien</option>
+                <option value="FR">Frankreich</option>
+                <option value="SE">Schweden</option>
+                <option value="CZ">Tschechien</option>
+                <option value="MT">Malta</option>
+                <option value="EU">EU/Plattform</option>
+              </select>
+            </div>
+          </div>
+        </aside>
+
+        <!-- Content -->
+        <main class="content">
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button class="p-button apply-cta" @click="showFilters = !showFilters">
+              <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
+              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
+            </button>
+          </div>
+
+          <!-- Mobile Filter Panel -->
+          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde dein Tagesgeld</h2>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Suche</h3>
+              <input v-model="search" placeholder="Name, Zins, Einlagensicherung" class="filter-input" />
+            </div>
+
+            <div class="filter-group">
+              <label class="checkbox"><input type="checkbox" v-model="onlyRecommended" /> <span>Nur Empfehlungen</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="onlyPromo" /> <span>Neukundenaktion</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="onlyMonthlyPayout" /> <span>Monatliche Zinszahlung</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="dgsOnly" /> <span>EU-Einlagensicherung</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Land</h3>
+              <select v-model="countryFilter" class="filter-select">
+                <option value="alle">alle</option>
+                <option value="DE">Deutschland</option>
+                <option value="ES">Spanien</option>
+                <option value="FR">Frankreich</option>
+                <option value="SE">Schweden</option>
+                <option value="CZ">Tschechien</option>
+                <option value="MT">Malta</option>
+                <option value="EU">EU/Plattform</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="section-eyebrow">Angebote</div>
+          <h1 class="section-title text-2xl md:text-3xl mb-3">Tagesgeld im Vergleich</h1>
+
+          <div class="offers-section">
+            <div 
+              v-for="o in filtered" 
+              :key="o.slug" 
+              class="offer-card surface-card border-round-xl card-accent"
+            >
+              <div class="offer-content">
+                <div class="card-image-container">
+                  <img :src="o.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${o.title} – Logo/Bild`" class="card-image" loading="lazy" />
+                </div>
+                <div class="offer-details">
+                  <div class="offer-header">
+                    <h3 class="offer-title">{{ o.title }}</h3>
+                  </div>
+                  <div class="features-list">
+                    <div class="feature-item"><i class="pi pi-check"></i><span>{{ o.interest }}</span></div>
+                    <div v-if="o.payout" class="feature-item"><i class="pi pi-check"></i><span>Zinszahlung: {{ o.payout }}</span></div>
+                    <div v-if="o.depositMin" class="feature-item"><i class="pi pi-check"></i><span>Mindestanlage: {{ o.depositMin }}</span></div>
+                    <div v-if="o.security" class="feature-item"><i class="pi pi-shield"></i><span>{{ o.security }}</span></div>
+                    <div v-for="(h, idx) in (o.highlights || []).slice(0, 2)" :key="idx" class="feature-item">
+                      <i class="pi pi-check"></i><span>{{ h }}</span>
+                    </div>
+                  </div>
+                  <div class="action-buttons">
+                    <button class="p-button apply-cta" @click.stop="goToApply(o)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button class="expand-btn" @click.stop="goToApply(o)">Details <i class="pi pi-chevron-right"></i></button>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        </main>
       </div>
-    </section>
 
-    <!-- Info-/FAQ-Sektion analog zu anderen Seiten -->
-    <section class="section surface-50">
-      <div class="container guide">
-        <div class="section-eyebrow">Ratgeber</div>
-        <h2 class="section-title">Wissenswertes zum Tagesgeld</h2>
-        <div class="guide-grid">
-          <div class="surface-card border-round-lg p-3 card-accent">
-            <h3 class="guide-title">Vorteile</h3>
-            <ul>
-              <li>Jederzeit verfügbar</li>
-              <li>Gesetzliche Einlagensicherung bis 100.000 €</li>
-              <li>Oft Sonderzinsen für Neukunden</li>
-            </ul>
+      <!-- Volle Breite: Guide & FAQ -->
+      <div class="container">
+        <div class="guide-section">
+          <div class="guide-header">
+            <div class="section-eyebrow">Ratgeber</div>
+            <h2 class="section-title">Wissenswertes zum Tagesgeld</h2>
           </div>
-          <div class="surface-card border-round-lg p-3 card-accent">
-            <h3 class="guide-title">Worauf achten</h3>
-            <ul>
-              <li>Zinsgarantie-Dauer</li>
-              <li>Neukunden- vs. Bestandskundenzins</li>
-              <li>Kombinationsangebote (z. B. mit Depot)</li>
-            </ul>
+          <div class="guide-grid">
+            <div class="surface-card border-round-lg p-3 card-accent info-card">
+              <h3 class="guide-title">Vorteile</h3>
+              <ul>
+                <li>Jederzeit verfügbar</li>
+                <li>Gesetzliche Einlagensicherung bis 100.000 €</li>
+                <li>Oft Sonderzinsen für Neukunden</li>
+              </ul>
+            </div>
+            <div class="surface-card border-round-lg p-3 card-accent info-card">
+              <h3 class="guide-title">Worauf achten</h3>
+              <ul>
+                <li>Zinsgarantie-Dauer</li>
+                <li>Neukunden- vs. Bestandskundenzins</li>
+                <li>Kombinationsangebote (z. B. mit Depot)</li>
+              </ul>
+            </div>
           </div>
-        </div>
-        <div class="faq">
-          <details>
-            <summary>Was bedeutet Zinsgarantie?</summary>
-            <div class="text-700 p-2">Ein fester Zinssatz für eine definierte Zeitspanne – unabhängig von Marktschwankungen.</div>
-          </details>
-          <details>
-            <summary>Ist mein Geld sicher?</summary>
-            <div class="text-700 p-2">Guthaben sind bis 100.000 € pro Kunde und Bank gesetzlich abgesichert.</div>
-          </details>
-          <details>
-            <summary>Wie schnell komme ich an mein Geld?</summary>
-            <div class="text-700 p-2">Täglich – Überweisungen dauern i. d. R. 1 Bankarbeitstag.</div>
-          </details>
+          <div class="faq">
+            <details>
+              <summary>Was bedeutet Zinsgarantie?</summary>
+              <div class="text-700 p-2">Ein fester Zinssatz für eine definierte Zeitspanne – unabhängig von Marktschwankungen.</div>
+            </details>
+            <details>
+              <summary>Ist mein Geld sicher?</summary>
+              <div class="text-700 p-2">Guthaben sind bis 100.000 € pro Kunde und Bank gesetzlich abgesichert.</div>
+            </details>
+            <details>
+              <summary>Wie schnell komme ich an mein Geld?</summary>
+              <div class="text-700 p-2">Täglich – Überweisungen dauern i. d. R. 1 Bankarbeitstag.</div>
+            </details>
+          </div>
         </div>
       </div>
     </section>
   </div>
-  
 </template>
 
 <style scoped>
 .savings-page { background: var(--surface-muted); min-height: 100vh; }
-.searchbar input { width: 100%; padding: .6rem .8rem; border: 1px solid var(--border); border-radius: .5rem; background: var(--surface); color: var(--text); }
-.offer { display: grid; grid-template-columns: 160px 1fr; gap: 16px; overflow: hidden; }
-.offer-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.interest { margin-top: 4px; font-weight: 700; color: var(--text); }
-.bullets { margin: 8px 0 0 16px; color: var(--muted-text); }
+.layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+.sidebar { position: relative; }
+.sidebar-card { position: sticky; top: 86px; }
+.content { min-width: 0; }
+
+.filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
+.filter-title { font-size: 0.875rem; font-weight: 600; color: var(--text); margin: 0; }
+.filter-input { padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.375rem; background: var(--surface); color: var(--text); font-size: 0.875rem; }
+.filter-select { padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.375rem; background: var(--surface); color: var(--text); font-size: 0.875rem; }
+.checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text); }
+
+.offers-section { margin-bottom: 3rem; }
+.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+.offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
+.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
+.card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
+.offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
+.offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
+.offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }
+.features-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.feature-item { display: flex; align-items: center; gap: 0.5rem; color: var(--muted-text); font-size: 0.875rem; }
+.feature-item i { color: #34d399; font-size: 0.75rem; }
+.action-buttons { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+.expand-btn { display: flex; align-items: center; gap: 0.25rem; background: none; border: none; color: var(--subtle-text); font-size: 0.875rem; cursor: pointer; padding: 0.5rem; }
+
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0; }
 .guide-title { font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; color: var(--subtle-text); margin: 0 0 6px; }
 
 @media (max-width: 768px) {
-  .offer { grid-template-columns: 1fr; }
+  .layout { grid-template-columns: 1fr; }
+  .sidebar-card { position: static; }
+  .offer-content { flex-direction: column; gap: 1rem; }
+  .card-image-container { width: 100%; max-width: 200px; margin: 0 auto; }
+  .action-buttons { flex-direction: column; align-items: stretch; }
+  .mobile-filter-toggle { display: flex; justify-content: center; margin: 12px 0; }
+  .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }
+  .mobile-filter-panel { margin-bottom: 16px; }
+}
+
+@media (min-width: 769px) {
+  .mobile-filter-toggle, .mobile-filter-panel { display: none; }
 }
 </style>
 
