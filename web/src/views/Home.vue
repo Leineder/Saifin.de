@@ -207,10 +207,10 @@ onMounted(() => { storeTrackingParams() })
       <h2 class="cta-title text-2xl md:text-3xl">Bereit zum Vergleichen?</h2>
       <p class="cta-sub">Kreditkarten oder Broker – starte jetzt deinen Vergleich.</p>
       <div class="cta-buttons">
-        <router-link to="/kreditkarten" class="p-button p-button-rounded p-button-lg">
+        <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised">
           <span class="p-button-label">Kreditkarten vergleichen</span>
         </router-link>
-        <router-link to="/broker" class="p-button p-button-rounded p-button-lg p-button-outlined">
+        <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised">
           <span class="p-button-label">Broker vergleichen</span>
         </router-link>
       </div>
@@ -299,6 +299,8 @@ onMounted(() => { storeTrackingParams() })
   border-radius: 12px !important;
   box-shadow: 0 8px 24px var(--shadow-color) !important;
   padding: 0.7rem 1rem !important;
+  min-width: clamp(160px, 24vw, 220px);
+  white-space: nowrap;
   display: inline-flex;
   align-items: center;
   transition: box-shadow .15s ease, transform .15s ease, background-color .15s ease, color .15s ease;
