@@ -118,14 +118,14 @@ function transformContent(article) {
 .scroll-x::-webkit-scrollbar { height: 0; background: transparent; }
 .scroll-x { scrollbar-width: none; }
 .scroll-x::-webkit-scrollbar-thumb { background: transparent; }
-.mag-item { scroll-snap-align: start; flex: 0 0 calc((100% - 36px) / 4); min-width: calc((100% - 36px) / 4); }
+.mag-item { scroll-snap-align: start; flex: 0 0 calc(25% - 18px); max-width: calc(25% - 18px); }
 .mag-card { position: relative; overflow: hidden; border-radius: 16px; height: 260px; background: var(--surface); box-shadow: 0 8px 24px var(--shadow-color); border: 1px solid var(--border); }
 @media (max-width: 1024px) {
-  .mag-item { flex-basis: calc((100% - 12px) / 2); }
+  .mag-item { flex-basis: calc(50% - 6px); max-width: calc(50% - 6px); }
   .mag-card { height: 280px; }
 }
 @media (max-width: 640px) {
-  .mag-item { flex-basis: 100%; }
+  .mag-item { flex-basis: 100%; max-width: 100%; }
   .mag-card { height: 240px; }
 }
 
