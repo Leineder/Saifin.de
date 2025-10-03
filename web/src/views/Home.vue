@@ -207,10 +207,10 @@ onMounted(() => { storeTrackingParams() })
       <h2 class="cta-title text-2xl md:text-3xl">Bereit zum Vergleichen?</h2>
       <p class="cta-sub">Kreditkarten oder Broker – starte jetzt deinen Vergleich.</p>
       <div class="cta-buttons">
-        <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised">
+        <router-link to="/kreditkarten" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
           <span class="p-button-label">Kreditkarten vergleichen</span>
         </router-link>
-        <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised">
+        <router-link to="/broker" class="p-button p-button-lg p-button-rounded p-button-raised hero-cta">
           <span class="p-button-label">Broker vergleichen</span>
         </router-link>
       </div>
