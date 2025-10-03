@@ -112,8 +112,8 @@ function transformContent(article) {
 .mag-strip {
   display: grid;
   grid-auto-flow: column;
-  /* Exakt 4 Karten sichtbar (mit 12px Lücken dazwischen) */
-  grid-auto-columns: calc((100% - 36px) / 4);
+  /* Exakt 4 Karten sichtbar (mit 12px Lücken + Rand/Borders kompensiert) */
+  grid-auto-columns: calc((100% - 48px) / 4 - 2px);
   gap: 12px;
   scroll-snap-type: x mandatory;
 }
