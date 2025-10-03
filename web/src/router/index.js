@@ -12,6 +12,7 @@ import Contact from '../views/Contact.vue'
 import Brokers from '../views/Brokers.vue'
 import BrokerDetail from '../views/BrokerDetail.vue'
 import Savings from '../views/Savings.vue'
+import SavingsDetail from '../views/SavingsDetail.vue'
 import Guide from '../views/Guide.vue'
 import GuideDetail from '../views/GuideDetail.vue'
 
@@ -22,6 +23,7 @@ const routes = [
   { path: '/broker', name: 'brokers', component: Brokers },
   { path: '/broker/:slug', name: 'broker-detail', component: BrokerDetail },
   { path: '/tagesgeld', name: 'savings', component: Savings },
+  { path: '/tagesgeld/:slug', name: 'savings-detail', component: SavingsDetail },
   { path: '/ratgeber', name: 'guide', component: Guide },
   { path: '/ratgeber/:slug', name: 'guide-detail', component: GuideDetail },
   { path: '/antrag/:slug', name: 'apply', component: Apply },

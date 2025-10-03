@@ -168,7 +168,7 @@ function goToApply(o) {
                   </div>
                   <div class="action-buttons">
                     <button class="p-button apply-cta" @click.stop="goToApply(o)"><span class="p-button-label">Zum Antrag</span></button>
-                    <button class="expand-btn" @click.stop="goToApply(o)">Details <i class="pi pi-chevron-right"></i></button>
+                    <router-link :to="`/tagesgeld/${o.slug}`" class="expand-btn">Details <i class="pi pi-chevron-right"></i></router-link>
                   </div>
                 </div>
               </div>
