@@ -8,7 +8,17 @@ const broker = brokers.find(b => b.slug === route.params.slug)
 if (!broker) router.replace('/broker')
 
 const goBack = () => router.push('/broker')
-const goApply = () => router.push(`/antrag/${broker.slug}`)
+const goApply = () => {
+  if (broker?.applyUrl) {
+    const url = broker.applyUrl
+    if (/^https?:\/\//i.test(url)) {
+      window.open(url, '_blank', 'noopener,noreferrer')
+      return
+    }
+    return router.push(url)
+  }
+  router.push(`/antrag/${broker.slug}`)
+}
 </script>
 
 <template>
@@ -83,8 +93,8 @@ const goApply = () => router.push(`/antrag/${broker.slug}`)
 }
 </style>
 <style scoped>
-.logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
-.logo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+.logo-frame img { width: 100%; height: 100%; object-fit: cover; display: block; border-radius: 8px; }
 /* Voll lesbar lassen */
 .logo-frame img.detail-logo.justtrade,
 .logo-frame img.detail-logo.flatex { object-fit: contain; }

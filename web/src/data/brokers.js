@@ -1,165 +1,135 @@
 export const brokers = [
   {
-    id: 'trade-republic',
-    slug: 'trade-republic',
-    name: 'Trade Republic Bank GmbH',
-    image: '/images/brokers/Trade-Republic.jpg',
+    id: 'captrader',
+    slug: 'captrader',
+    name: 'CapTrader',
+    image: '/images/brokers/captrader_cover.png',
     highlights: [
-      '0 € Gebühren (zzgl. Spreads/Marktkosten)',
-      'Karte ohne Abo; Abhebungen ab 100 € kostenlos',
-      'ETF-Sparpläne verfügbar',
-      'Vollbank, BaFin-Aufsicht'
+      'Zugang zu >150 Börsen, >1,2 Mio. Wertpapieren',
+      'Plattformen: Trader Workstation (TWS), Desktop, App',
+      'Telefonische Notfall-Order-Schließung (IB-Infrastruktur)'
     ],
     pricing: {
-      orderCostsDE: '0 € Gebühren (zzgl. Spreads/Marktkosten)'
+      orderCostsDE: 'Aktien/ETFs ab 2 € (DE) / 2 $ (US); Optionen ab 2 € (DE) / 3,50 $ (US); Futures ab 1 € (DE) / 1,25 $ (US); Anleihen ab 8 €'
     },
     features: {
-      atm: 'Abhebungen ab 100 € kostenlos',
-      card: 'Karte ohne Abo',
+      productRange: 'Aktien, ETFs, Optionen, Futures, CFDs, FX, Zertifikate, Anleihen, Fonds',
       etfPlans: true
     },
-    regulation: 'Vollbank, BaFin-Aufsicht',
-    recommendation: {
-      title: 'Die moderne, kosteneffiziente Wahl',
-      pros: [
-        'Kommissionsfreier Handel mit Aktien & ETFs; nur 1 € Fremdkostenpauschale',
-        'Mobil-zentriertes Interface, steuerkonform, Sparpläne inklusive',
-        'BaFin-Lizenz, ~8 Mio. Kunden in DE (Jan 2025)'
-      ],
-      idealFor: 'Einsteiger und langfristige Investoren'
-    }
-  },
-  {
-    id: 'scalable-capital',
-    slug: 'scalable-capital',
-    name: 'Scalable Capital Broker',
-    image: '/images/brokers/Scalable-Capital.jpg',
-    highlights: [
-      'FREE ab 0,99 € je Order',
-      'PRIME+ 0 € ab 250 € Order (4,99 €/Monat)',
-      '2 % p. a. Zinsen auf Cash (variabel)'
-    ],
-    pricing: {
-      orderCostsDE: 'FREE: ab 0,99 €; PRIME+: 0 € ab 250 € (4,99 €/Monat)'
-    },
-    features: {
-      cashInterest: '2 % p. a. variabel',
-      taxAllowance: 'Infos & 2025er Freibeträge'
-    },
-    regulation: 'BaFin-Aufsicht',
-    recommendation: {
-      title: 'Für ETFs, Sparpläne & stabile Plattform',
-      pros: [
-        'Flexible Preispläne (kostenlos/Flat-Fee)',
-        'Robo-Advisor-Komponente, ETF-Fokus',
-        'Unterstützt von BlackRock, klare BaFin-Stellung'
-      ],
-      idealFor: 'Regelmäßige ETF-Sparer, die Komfort wünschen'
-    }
-  },
-  {
-    id: 'degiro',
-    slug: 'degiro',
-    name: 'DEGIRO (flatexDEGIRO Bank Dutch Branch)',
-    image: '/images/brokers/Degiro.jpg',
-    highlights: [
-      'Günstig national & international',
-      'Core-Selection-ETFs ohne Transaktionsgebühr (Fair-Use)'
-    ],
-    pricing: {
-      orderCostsDE: 'Siehe Preisverzeichnis; 1 € Bearbeitungsgebühr für Drittkosten'
-    },
-    features: {
-      productRange: 'Breites Angebot (US-Aktien, Optionen, ETFs etc.)'
-    },
-    regulation: 'flatexDEGIRO Bank AG (BaFin); in NL DNB/AFM',
-    recommendation: {
-      title: 'International, günstig, vielseitig',
-      pros: [
-        'Sehr günstiger Handel auch im Ausland',
-        'Großer Produktumfang',
-        'MiFID-II-konforme Regulierung'
-      ],
-      idealFor: 'Fortgeschrittene mit Fokus auf internationale Märkte'
-    }
-  },
-  {
-    id: 'flatex',
-    slug: 'flatex',
-    name: 'flatex (flatexDEGIRO Bank AG)',
-    image: '/images/brokers/Flatex.jpg',
-    highlights: [
-      'Pauschal 5,90 € zzgl. Fremdspesen',
-      'ETF-/Fonds-Sparpläne ohne Orderprovision',
-      'Krypto: 0,6–0,7 % inkl. Spread (DE)'
-    ],
-    pricing: { orderCostsDE: '5,90 € pauschal + Fremdspesen' },
-    regulation: 'BaFin',
-  },
-  {
-    id: 'comdirect',
-    slug: 'comdirect',
-    name: 'comdirect (Commerzbank)',
-    image: '/images/brokers/Comdirect.jpg',
-    highlights: [
-      'Neukundenaktion 3,90 € je Trade',
-      'Danach i. d. R. 9,90 € Standard',
-      'Viele ETF-Aktionssparpläne mit 0 € Ausführungsgebühr'
-    ]
-  },
-  {
-    id: 'consorsbank',
-    slug: 'consorsbank',
-    name: 'Consorsbank (BNP Paribas)',
-    image: '/images/brokers/Consors-bank.jpg',
-    highlights: [
-      'Preis- & Leistungsverzeichnis',
-      'Breites ETF-Angebot & Sparpläne'
-    ]
-  },
-  {
-    id: 'ing',
-    slug: 'ing',
-    name: 'ING Direkt-Depot',
-    image: '/images/brokers/ing.jpg',
-    highlights: [
-      '4,90 € + 0,25 %, max. 69,90 € (Bsp. 500 € → 6,15 €)',
-      'Depot kostenlos; Sparpläne ab 1 €'
-    ]
-  },
-  {
-    id: 'dkb',
-    slug: 'dkb',
-    name: 'DKB Broker',
-    image: '/images/brokers/DKB.jpg',
-    highlights: [
-      'Aktionen z. B. 1,90 € über Baader Trading',
-      'Sparpläne ab 25 €; Kosten gemäß PLV'
-    ]
+    regulation: 'Anbindung an Interactive Brokers (IB) – internationale Infrastruktur',
+    notes: 'Ein-/Auszahlungen: 1×/Monat kostenlos; danach 1 € (SEPA) bzw. 8 € (Auslandsüberweisung). Ersteinzahlung 2.000 €.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C46922232T'
   },
   {
     id: 'smartbroker-plus',
     slug: 'smartbroker-plus',
     name: 'SMARTBROKER+',
-    image: '/images/brokers/smartbroker-plus.jpg',
+    image: '/images/brokers/smartbroker.png',
     highlights: [
-      '4 € an Tradegate/LSX/Baader OTC',
-      'Xetra 4 € + 0,01 % (min. 1,50 €)',
-      'Premiumpartner 0 € ab 500 €'
-    ]
+      'Depotbank: Baader Bank – gesetzliche + freiwillige Einlagensicherung',
+      'gettex 0 € ab 500 € Ordervolumen; < 500 €: 1 € Mindermengenzuschlag',
+      'Xetra ab 4 € + Börsengebühren; Inlandsplätze typ. 4 € Flat',
+      '>4.600 Sparpläne, vielfach 0 € Ausführung'
+    ],
+    pricing: { orderCostsDE: 'gettex 0 € ab 500 €, sonst 1 €; Inlandsplätze 4 € Flat; Xetra ab 4 € + Börsengebühren' },
+    features: { etfPlans: true, productRange: 'Aktien, ETFs, Fonds, Anleihen, Derivate' },
+    regulation: 'Baader Bank AG (Depot/Konto)',
+    notes: 'Migration alter Smartbroker-Depots (DAB/BNP) zu Baader seit Ende 2023; neues Markenauftritt „SMARTBROKER+“.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C296855636T'
   },
   {
-    id: 'justtrade',
-    slug: 'justtrade',
-    name: 'justTRADE',
-    image: '/images/brokers/Justtrade.jpg',
+    id: 'fidelity-ffb',
+    slug: 'fidelity-ffb',
+    name: 'Fidelity – FondsdepotPlus (FIL Fondsbank/FFB)',
+    image: '/images/brokers/Fidelity-Logo.png',
     highlights: [
-      '0 € Orderprovision + max. 1 € Fremdkosten',
-      'Depot 0 €; ETF-Sparpläne ohne Kaufgebühr',
-      'Krypto-Handel echter Coins; Verwahrung via Tangany (BaFin)'
-    ]
+      'Depotführungsentgelt 0,25 % p.a., mind. 25 €, max. 45 € p.a.',
+      'Fondsplattform mit Rabattaktionen',
+      'Depot kostenlos bei Ø Depotwert ≥ 20.000 € (Sonderregel)'
+    ],
+    pricing: { orderCostsDE: '0,25 % p.a. vom Ø Depotwert, mind. 25 €, max. 45 € p.a.' },
+    features: { productRange: 'Fondsplattform, ETF-/Fonds-Sparen' },
+    regulation: 'FIL Fondsbank (FFB)',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C4368115768T'
+  },
+  {
+    id: 'brokerpoint',
+    slug: 'brokerpoint',
+    name: 'Brokerpoint',
+    image: '/images/brokers/Brokerpoint.png',
+    highlights: [
+      'Reseller von Interactive Brokers (IB-Infrastruktur)',
+      'Xetra ab 2,29 € bzw. 0,10 %; US ab 2 $; Depot 0 €',
+      'Optionen ab 1,89 € / 2 $ je Kontrakt'
+    ],
+    pricing: { orderCostsDE: 'Xetra ab 2,29 € bzw. 0,10 %; US-Börsen ab 2 $; Optionen ab 1,89 € / 2 $' },
+    features: { productRange: 'TWS, API; international; für Vieltrader attraktiv' },
+    regulation: 'Anbindung an Interactive Brokers (IB) – MiFID-Umfeld',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C236261384T'
+  },
+  {
+    id: 'finanzen-net-zero',
+    slug: 'finanzen-net-zero',
+    name: 'finanzen.net zero',
+    image: '/images/brokers/Finanzen.net.png',
+    highlights: [
+      'Depotbank Baader Bank; Handel über gettex (Baader OTC optional)',
+      '0 € pro Order über gettex ab 500 €; sonst 1 € Mindermenge',
+      'Nur gettex (kein Xetra/Tradegate)'
+    ],
+    pricing: { orderCostsDE: '0 € über gettex ab 500 €, sonst 1 €; nur gettex' },
+    features: { productRange: '7.700–8.500 Aktien, >2.000 ETFs/ETPs; Aktionen/Prämien' },
+    regulation: 'Baader Bank',
+    notes: 'Nur ein Market-Maker-Handelsplatz (gettex) – Platzwahl eingeschränkt; gemischte Erfahrungen',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C372273516T'
+  },
+  {
+    id: 'fonds-super-markt',
+    slug: 'fonds-super-markt',
+    name: 'Fonds-Super-Markt.de (Vermittler, Depot bei FNZ Bank)',
+    image: '/images/brokers/Fonds Supermarkt.png',
+    highlights: [
+      '100 % Rabatt auf Ausgabeaufschlag (Kauf & Sparpläne)',
+      '0 € Transaktionskosten online (ETFs ausgenommen)',
+      'Depotgebühr 0 € ab 1.500 € in aktiven Fonds'
+    ],
+    pricing: { orderCostsDE: 'Sonderkonditionen (ab 01.07.2025 bestätigt); sonst PLV FNZ' },
+    features: { productRange: 'Fondsplattform, laufende Prämienaktionen' },
+    regulation: 'Depotführung FNZ Bank',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C113829504B'
+  },
+  {
+    id: 'quirion',
+    slug: 'quirion',
+    name: 'quirion (Robo-Advisor der Quirin Privatbank)',
+    image: '/images/brokers/Quirion.png',
+    highlights: [
+      'Servicegebühr 0,48 % p.a. (Digital) + ~0,17 % ETF-Kosten',
+      'Erstes Jahr: 0 € Servicegebühr auf die ersten 10.000 € (Digital)',
+      'Depotführung Quirin Privatbank, BaFin-reguliert; Mindestanlage 1 €; Sparplan ab 25 €'
+    ],
+    pricing: { orderCostsDE: '0,48 % p.a. Servicegebühr (Digital-Paket), staffelt bis 1,48 % in Premium/Privat' },
+    features: { productRange: 'ETF-Multi-Asset-Portfolios (10 Strategien, optional ESG), Rebalancing' },
+    regulation: 'Quirin Privatbank (BaFin)',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C65520725T'
+  },
+  {
+    id: 'etoro',
+    slug: 'etoro',
+    name: 'eToro (Multi-Asset-Broker, viele Instrumente als CFD)',
+    image: '/images/brokers/eToro.png',
+    highlights: [
+      'Aktien-Kommission: seit 11.08.2024 $1 oder $2 pro Trade (je Land/Börse)',
+      'ETFs teils $0 Kommission (regionsabhängig; Details im Help-Center)',
+      'Krypto: 1 % je Kauf und 1 % je Verkauf (seit Mitte 2025 separat)'
+    ],
+    pricing: { orderCostsDE: 'Aktien: $1/$2; ETFs teils $0; Krypto 1 % je Seite' },
+    features: { productRange: 'Aktien, ETFs, Krypto, CFDs, CopyTrading (regionale Verfügbarkeit beachten)' },
+    regulation: 'Mehrländer-Regulierung, Details in den Rechtstexten',
+    notes: 'Nicht-Handelsgebühren: Auszahlung $5 (USD), EUR/GBP-Auszahlungen gebührenfrei; Währungsumrechnung 1,5–3,0 %; Inaktivität $10/Monat nach 12 Monaten',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C106535032B'
   }
 ]
 
-export const recommendedBrokers = ['trade-republic', 'scalable-capital', 'degiro']
+export const recommendedBrokers = ['captrader', 'smartbroker-plus', 'finanzen-net-zero']
 

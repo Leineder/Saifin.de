@@ -72,7 +72,13 @@ function goToDetail(broker) {
 }
 
 function goToApply(broker) {
-  router.push(`/antrag/${broker.slug}`)
+  if (!broker || !broker.applyUrl) return router.push(`/antrag/${broker.slug}`)
+  const url = broker.applyUrl
+  if (/^https?:\/\//i.test(url)) {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  } else {
+    router.push(url)
+  }
 }
 
 // Mobile: Filter einklappbar
@@ -354,8 +360,8 @@ onBeforeUnmount(() => {
 .offers-section { margin-bottom: 3rem; }
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
-.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
-.card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
+.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; }
+.card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.5rem; border: none; }
 
 /* Logos, die vollständig lesbar bleiben sollen */
 .card-image.logo-justtrade,
