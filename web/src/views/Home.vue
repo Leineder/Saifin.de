@@ -283,7 +283,7 @@ onMounted(() => { storeTrackingParams() })
 .offer-card { transition: transform .15s ease, box-shadow .15s ease; }
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }
 .offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
-.offer-thumb { width: 96px; height: 60px; object-fit: cover; }
+.offer-thumb { width: 96px; height: 60px; object-fit: cover; border-radius: 0.5rem; border: 1px solid var(--border); }
 
 /* Vertikale Zentrierung der Textbox neben den Bildern auf Desktop */
 @media (min-width: 768px) {

@@ -29,7 +29,7 @@ const formatEuro = (n) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="w-full border-round-lg shadow-2" style="max-height:360px;object-fit:cover" loading="lazy">
+        <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="w-full shadow-2" style="max-height:360px;object-fit:cover;border-radius:8px;border:1px solid var(--border)" loading="lazy">
       </div>
       <div class="content">
         <div class="section-eyebrow">Kreditkarte</div>
