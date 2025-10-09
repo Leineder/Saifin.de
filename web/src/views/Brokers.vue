@@ -365,7 +365,10 @@ onBeforeUnmount(() => {
 
 /* Logos, die vollständig lesbar bleiben sollen */
 .card-image.logo-justtrade,
-.card-image.logo-flatex { object-fit: contain; transform: none; }
+.card-image.logo-flatex,
+.card-image.logo-brokerpoint,
+.card-image.logo-fidelity-ffb,
+.card-image.logo-quirion { object-fit: contain; transform: none; }
 
 /* Logos, die etwas größer dargestellt werden sollen */
 .card-image.logo-smartbroker-plus,
