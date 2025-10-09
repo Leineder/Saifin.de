@@ -7,7 +7,17 @@ const offer = offers.find(o => o.slug === route.params.slug)
 if (!offer) router.replace('/kreditkarten')
 
 const goBack = () => router.push('/kreditkarten')
-const goApply = () => router.push(`/antrag/${offer.slug}`)
+const goApply = () => {
+  if (offer?.applyUrl) {
+    const url = offer.applyUrl
+    if (/^https?:\/\//i.test(url)) {
+      window.open(url, '_blank', 'noopener,noreferrer')
+      return
+    }
+    return router.push(url)
+  }
+  router.push(`/antrag/${offer.slug}`)
+}
 const formatEuro = (n) => {
   if (n === 0) return '0,00 €'
   if (typeof n === 'number') return `${n.toFixed(2).replace('.', ',')} €`
@@ -34,7 +44,7 @@ const formatEuro = (n) => {
             <div class="fact-label">Jahresgebühr</div>
             <div class="fact-value">{{ offer.details?.annualFeeText || formatEuro(offer.annualFee) }}</div>
           </div>
-          <div class="surface-card border-round-lg p-3 card-accent">
+          <div class="surface-card border-round-lg p-3 card-accent" v-if="offer.graceWeeks != null">
             <div class="fact-label">Zinsfreie Phase</div>
             <div class="fact-value">bis {{ offer.graceWeeks }} Wochen</div>
           </div>

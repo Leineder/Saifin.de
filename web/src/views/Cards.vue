@@ -107,8 +107,12 @@ const formatEuro = (n) => {
 }
 
 const goToApply = (offer) => {
-  if (offer.applyUrl) {
-    router.push(offer.applyUrl)
+  if (!offer || !offer.applyUrl) return
+  const url = offer.applyUrl
+  if (/^https?:\/\//i.test(url)) {
+    window.open(url, '_blank', 'noopener,noreferrer')
+  } else {
+    router.push(url)
   }
 }
 
