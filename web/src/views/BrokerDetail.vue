@@ -94,7 +94,7 @@ const goApply = () => {
 </style>
 <style scoped>
 .logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
-.logo-frame img { width: 100%; height: 100%; object-fit: contain; display: block; border-radius: 8px; background: #fff; }
+.logo-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; border-radius: 8px; background: #fff; }
 /* Voll lesbar lassen (Detail) */
 .logo-frame img.detail-logo.brokerpoint,
 .logo-frame img.detail-logo.fidelity-ffb,
