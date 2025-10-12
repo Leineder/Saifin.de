@@ -29,8 +29,8 @@ const formatEuro = (n) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <div class="card-image-container">
-          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="card-image" loading="lazy" decoding="async">
+        <div style="width: 100%; height: 700px; background: white; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center; padding: 40px; box-sizing: border-box;">
+          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 4px;" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="content">
