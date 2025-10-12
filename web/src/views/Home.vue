@@ -22,7 +22,7 @@ onMounted(() => { storeTrackingParams() })
   <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
   <section class="hero relative">
     <picture>
-      <source srcset="/images/landing-hero.webp 1200w, /images/landing-hero.webp 1600w" type="image/webp" />
+      <source srcset="/images/landing-hero.webp 768w, /images/landing-hero.webp 1200w, /images/landing-hero.webp 1600w" type="image/webp" />
       <img class="hero-img" src="/images/landing-hero.webp" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" decoding="async" width="1600" height="900" sizes="100vw" />
     </picture>
     <div class="hero-overlay"></div>
