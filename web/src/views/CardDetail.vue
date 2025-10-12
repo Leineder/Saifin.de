@@ -110,23 +110,26 @@ const formatEuro = (n) => {
 .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr 320px; gap: 24px; }
 .media { grid-column: 1 / 2; }
 .card-image-container { 
-  width: 100%; 
-  height: 600px; 
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  background: #fff; 
-  border-radius: 8px; 
-  border: 1px solid var(--border); 
-  overflow: hidden; 
+  width: 100% !important; 
+  height: 600px !important; 
+  display: flex !important; 
+  align-items: center !important; 
+  justify-content: center !important; 
+  background: #fff !important; 
+  border-radius: 8px !important; 
+  border: 1px solid var(--border) !important; 
+  overflow: visible !important; 
+  padding: 20px !important;
+  box-sizing: border-box !important;
 }
 .card-image { 
-  max-width: 100%; 
-  max-height: 100%; 
-  width: auto; 
-  height: auto; 
-  object-fit: contain; 
-  display: block; 
+  max-width: 100% !important; 
+  max-height: 100% !important; 
+  width: auto !important; 
+  height: auto !important; 
+  object-fit: contain !important; 
+  display: block !important;
+  border-radius: 8px !important;
 }
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
