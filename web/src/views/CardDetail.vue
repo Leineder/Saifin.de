@@ -29,7 +29,9 @@ const formatEuro = (n) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="shadow-2" style="max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border)" loading="lazy" decoding="async">
+        <div class="card-image-container">
+          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="card-image" loading="lazy" decoding="async">
+        </div>
       </div>
       <div class="content">
         <div class="section-eyebrow">Kreditkarte</div>
@@ -106,7 +108,26 @@ const formatEuro = (n) => {
 
 <style scoped>
 .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr 320px; gap: 24px; }
-.media { grid-column: 1 / 2; min-height: 500px; display: flex; align-items: center; justify-content: center; }
+.media { grid-column: 1 / 2; }
+.card-image-container { 
+  width: 100%; 
+  height: 600px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #fff; 
+  border-radius: 8px; 
+  border: 1px solid var(--border); 
+  overflow: hidden; 
+}
+.card-image { 
+  max-width: 100%; 
+  max-height: 100%; 
+  width: auto; 
+  height: auto; 
+  object-fit: contain; 
+  display: block; 
+}
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
 .cta-col { display: grid; grid-template-columns: 1fr; gap: 10px; }
