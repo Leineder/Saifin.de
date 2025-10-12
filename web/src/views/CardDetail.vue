@@ -107,20 +107,21 @@ const formatEuro = (n) => {
 </template>
 
 <style scoped>
-.detail-grid { display: grid; grid-template-columns: 1.2fr 1fr 320px; gap: 24px; }
+.detail-grid { display: grid; grid-template-columns: 1.5fr 1fr 320px; gap: 24px; }
 .media { grid-column: 1 / 2; }
 .card-image-container { 
   width: 100%; 
-  height: 700px; 
+  min-height: 500px; 
+  max-height: 800px;
   display: flex; 
   align-items: center; 
   justify-content: center; 
   background: #fff; 
   border-radius: 8px; 
   border: 1px solid #e0e0e0; 
-  padding: 20px;
+  padding: 30px;
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible;
 }
 .card-image { 
   max-width: 100%; 
@@ -130,6 +131,7 @@ const formatEuro = (n) => {
   object-fit: contain; 
   display: block;
   border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
@@ -145,10 +147,10 @@ const formatEuro = (n) => {
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: 1fr 1fr; }
   .sticky-cta { grid-column: 1 / -1; position: static; }
-  .card-image-container { height: 500px; padding: 15px; }
+  .card-image-container { min-height: 400px; max-height: 600px; padding: 20px; }
 }
 @media (max-width: 767px) {
   .detail-grid { grid-template-columns: 1fr; }
-  .card-image-container { height: 400px; padding: 10px; }
+  .card-image-container { min-height: 350px; max-height: 500px; padding: 15px; }
 }
 </style>
