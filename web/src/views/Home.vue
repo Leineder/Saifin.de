@@ -136,7 +136,7 @@ onMounted(() => { storeTrackingParams() })
         </div>
       </div>
       <div class="col-12 md:col-6">
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200" alt="Team"
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format" alt="Team"
              class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320">
       </div>
     </div>
@@ -144,7 +144,7 @@ onMounted(() => { storeTrackingParams() })
     <!-- Block 2 -->
     <div class="grid align-items-stretch mb-5">
       <div class="col-12 md:col-6 order-2 md:order-1">
-        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200" alt="Analyse"
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format" alt="Analyse"
              class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320">
       </div>
       <div class="col-12 md:col-6 order-1 md:order-2">
@@ -176,7 +176,7 @@ onMounted(() => { storeTrackingParams() })
         </div>
       </div>
       <div class="col-12 md:col-6">
-        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200" alt="Partnerschaft"
+        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200&auto=format" alt="Partnerschaft"
              class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320">
             </div>
     </div>
