@@ -8,6 +8,17 @@ if (!offer) router.replace('/kreditkarten')
 
 const goBack = () => router.push('/kreditkarten')
 const goApply = () => {
+  // TikTok Event: Kreditkartenantrag initiiert (Detailseite)
+  if (window.ttq && offer) {
+    window.ttq.track('InitiateCheckout', {
+      content_type: 'product',
+      content_name: offer.title,
+      content_id: offer.id || offer.slug,
+      value: offer.annualFee || 0,
+      currency: 'EUR'
+    })
+  }
+  
   if (offer?.applyUrl) {
     const url = offer.applyUrl
     if (/^https?:\/\//i.test(url)) {

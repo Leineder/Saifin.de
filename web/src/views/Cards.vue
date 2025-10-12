@@ -108,6 +108,18 @@ const formatEuro = (n) => {
 
 const goToApply = (offer) => {
   if (!offer || !offer.applyUrl) return
+  
+  // TikTok Event: Kreditkartenantrag initiiert
+  if (window.ttq) {
+    window.ttq.track('InitiateCheckout', {
+      content_type: 'product',
+      content_name: offer.title,
+      content_id: offer.id || offer.slug,
+      value: offer.annualFee || 0,
+      currency: 'EUR'
+    })
+  }
+  
   const url = offer.applyUrl
   if (/^https?:\/\//i.test(url)) {
     window.open(url, '_blank', 'noopener,noreferrer')
