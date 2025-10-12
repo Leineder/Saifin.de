@@ -29,7 +29,7 @@ const formatEuro = (n) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="w-full shadow-2" style="width:100%;height:auto;max-height:360px;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border)" loading="lazy" decoding="async">
+        <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="shadow-2" style="max-width:100%;height:auto;object-fit:contain;background:#fff;border-radius:8px;border:1px solid var(--border)" loading="lazy" decoding="async">
       </div>
       <div class="content">
         <div class="section-eyebrow">Kreditkarte</div>
@@ -106,7 +106,7 @@ const formatEuro = (n) => {
 
 <style scoped>
 .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr 320px; gap: 24px; }
-.media { grid-column: 1 / 2; }
+.media { grid-column: 1 / 2; min-height: 400px; display: flex; align-items: flex-start; }
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
 .cta-col { display: grid; grid-template-columns: 1fr; gap: 10px; }
