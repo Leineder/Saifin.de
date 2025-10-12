@@ -22,8 +22,8 @@ onMounted(() => { storeTrackingParams() })
   <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
   <section class="hero relative">
     <picture>
-      <source srcset="/images/landing-hero.webp" type="image/webp" />
-      <img class="hero-img" src="/images/landing-hero.webp" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" decoding="async" width="1600" height="900" />
+      <source srcset="/images/landing-hero.webp 1200w, /images/landing-hero.webp 1600w" type="image/webp" />
+      <img class="hero-img" src="/images/landing-hero.webp" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" decoding="async" width="1600" height="900" sizes="100vw" />
     </picture>
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -47,7 +47,7 @@ onMounted(() => { storeTrackingParams() })
   </section>
 
   <!-- Why Choose Us / USP-Kacheln -->
-  <section class="section-muted">
+  <section class="section-muted cv-auto">
     <div class="container">
       <div class="section-eyebrow">Warum Saifin</div>
       <h2 class="section-title text-2xl md:text-3xl mb-4">Schnell. Transparent. Unabhängig.</h2>
@@ -75,7 +75,7 @@ onMounted(() => { storeTrackingParams() })
   </section>
 
   <!-- Top-Angebote Preview Cards -->
-  <section class="section">
+  <section class="section cv-auto">
     <div class="container">
       <div class="section-eyebrow">Top-Angebote</div>
       <h2 class="section-title text-2xl md:text-3xl mb-3">Beliebte Karten</h2>
@@ -99,7 +99,7 @@ onMounted(() => { storeTrackingParams() })
   </section>
 
   <!-- Testimonials -->
-  <section class="section">
+  <section class="section cv-auto">
     <h2 class="text-2xl md:text-3xl text-center mb-4">Das sagen unsere Nutzer</h2>
     <div class="surface-card border-round-lg">
       <div v-for="(t, idx) in testimonials" :key="t.name" class="testimonial">
@@ -118,7 +118,7 @@ onMounted(() => { storeTrackingParams() })
   </section>
 
   <!-- Über uns -->
-  <section id="about" class="section">
+  <section id="about" class="section cv-auto">
     <h2 class="text-2xl md:text-3xl text-center mb-4">Über uns</h2>
 
     <!-- Block 1 -->
@@ -137,7 +137,7 @@ onMounted(() => { storeTrackingParams() })
       </div>
       <div class="col-12 md:col-6">
         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format" alt="Team"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px">
       </div>
     </div>
 
@@ -145,7 +145,7 @@ onMounted(() => { storeTrackingParams() })
     <div class="grid align-items-stretch mb-5">
       <div class="col-12 md:col-6 order-2 md:order-1">
         <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format" alt="Analyse"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px">
       </div>
       <div class="col-12 md:col-6 order-1 md:order-2">
         <div class="content-box about-text">
@@ -177,13 +177,13 @@ onMounted(() => { storeTrackingParams() })
       </div>
       <div class="col-12 md:col-6">
         <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200&auto=format" alt="Partnerschaft"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px">
             </div>
     </div>
   </section>
 
   <!-- FAQ -->
-  <section class="section-muted">
+  <section class="section-muted cv-auto">
     <div class="container">
       <div class="section-eyebrow">FAQ</div>
       <h2 class="section-title text-2xl md:text-3xl mb-3">Häufige Fragen</h2>
@@ -205,7 +205,7 @@ onMounted(() => { storeTrackingParams() })
   </section>
 
   <!-- CTA Band -->
-  <section class="cta-band">
+  <section class="cta-band cv-auto">
     <div class="container" style="text-align:center">
       <h2 class="cta-title text-2xl md:text-3xl">Bereit zum Vergleichen?</h2>
       <p class="cta-sub">Kreditkarten oder Broker – starte jetzt deinen Vergleich.</p>

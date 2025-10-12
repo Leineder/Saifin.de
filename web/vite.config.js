@@ -5,6 +5,10 @@ import vue from '@vitejs/plugin-vue'
 export default defineConfig({
   plugins: [vue()],
   base: '/',
+  build: {
+    target: 'es2020',
+    cssMinify: true
+  },
   server: {
     host: true,
     port: 5173,

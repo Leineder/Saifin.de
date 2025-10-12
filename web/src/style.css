@@ -120,6 +120,9 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 .section-title { margin: 0 0 10px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; color: var(--text); }
 .section-eyebrow { color: var(--muted-text); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: .75rem; }
 
+/* Contain layout/paint/style to reduzieren Reflows (CLS/TBT) */
+.cv-auto { contain: content; }
+
 /* CTA-Band */
 .cta-band { background: var(--brand-primary); color: #fff; padding: 44px 0; text-align: center; }
 .cta-band .cta-title { font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; font-weight: 800; margin: 0 0 10px; }

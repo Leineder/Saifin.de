@@ -127,6 +127,13 @@ export function applyRouteMeta(route) {
         title = `${offer.title} – Details, Gebühren & Vorteile | Saifin`
         description = summarizeBullets(offer.bullets) || 'Alle Konditionen im Überblick.'
         ogImage = offer.image || defaultOg
+        // Preload LCP image on detail route
+        setMetaProperty('og:image', ogImage)
+        const link = document.createElement('link')
+        link.setAttribute('rel', 'preload')
+        link.setAttribute('as', 'image')
+        link.setAttribute('href', ogImage)
+        document.head.appendChild(link)
       }
     } else if (name === 'brokers') {
       title = 'Broker Vergleich 2025 | Saifin'
@@ -137,6 +144,11 @@ export function applyRouteMeta(route) {
         title = `${broker.name} – Gebühren, Sparpläne & Regulierung | Saifin`
         description = summarizeBullets(broker.highlights) || 'Alle Fakten im Überblick.'
         ogImage = broker.image || defaultOg
+        const link = document.createElement('link')
+        link.setAttribute('rel', 'preload')
+        link.setAttribute('as', 'image')
+        link.setAttribute('href', ogImage)
+        document.head.appendChild(link)
       }
     } else if (name === 'savings') {
       title = 'Tagesgeld Vergleich 2025 | Saifin'
@@ -150,6 +162,11 @@ export function applyRouteMeta(route) {
         title = `${article.title} | Saifin`
         description = (article.excerpt || '').toString().slice(0, 160)
         ogImage = article.hero || defaultOg
+        const link = document.createElement('link')
+        link.setAttribute('rel', 'preload')
+        link.setAttribute('as', 'image')
+        link.setAttribute('href', ogImage)
+        document.head.appendChild(link)
       }
     } else if (name === 'apply') {
       const key = route.params.slug
@@ -159,6 +176,13 @@ export function applyRouteMeta(route) {
       title = `Antrag: ${label} | Saifin`
       description = 'Jetzt direkt und sicher den Antrag starten.'
       ogImage = offer?.image || broker?.image || defaultOg
+      if (ogImage) {
+        const link = document.createElement('link')
+        link.setAttribute('rel', 'preload')
+        link.setAttribute('as', 'image')
+        link.setAttribute('href', ogImage)
+        document.head.appendChild(link)
+      }
     } else if (name === 'privacy') {
       title = 'Datenschutzerklärung | Saifin'
       description = 'Informationen zum Datenschutz auf einen Blick.'
