@@ -29,8 +29,8 @@ const formatEuro = (n) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <div style="width: 100%; height: 700px; background: white; border-radius: 8px; border: 1px solid #e0e0e0; display: flex; align-items: center; justify-content: center; padding: 40px; box-sizing: border-box;">
-          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" style="max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; border-radius: 4px;" loading="lazy" decoding="async">
+        <div class="card-image-container">
+          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="card-image" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="content">
@@ -110,26 +110,26 @@ const formatEuro = (n) => {
 .detail-grid { display: grid; grid-template-columns: 1.2fr 1fr 320px; gap: 24px; }
 .media { grid-column: 1 / 2; }
 .card-image-container { 
-  width: 100% !important; 
-  height: 600px !important; 
-  display: flex !important; 
-  align-items: center !important; 
-  justify-content: center !important; 
-  background: #fff !important; 
-  border-radius: 8px !important; 
-  border: 1px solid var(--border) !important; 
-  overflow: visible !important; 
-  padding: 20px !important;
-  box-sizing: border-box !important;
+  width: 100%; 
+  height: 700px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #fff; 
+  border-radius: 8px; 
+  border: 1px solid #e0e0e0; 
+  padding: 20px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 .card-image { 
-  max-width: 100% !important; 
-  max-height: 100% !important; 
-  width: auto !important; 
-  height: auto !important; 
-  object-fit: contain !important; 
-  display: block !important;
-  border-radius: 8px !important;
+  max-width: 100%; 
+  max-height: 100%; 
+  width: auto; 
+  height: auto; 
+  object-fit: contain; 
+  display: block;
+  border-radius: 4px;
 }
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
@@ -145,8 +145,10 @@ const formatEuro = (n) => {
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: 1fr 1fr; }
   .sticky-cta { grid-column: 1 / -1; position: static; }
+  .card-image-container { height: 500px; padding: 15px; }
 }
 @media (max-width: 767px) {
   .detail-grid { grid-template-columns: 1fr; }
+  .card-image-container { height: 400px; padding: 10px; }
 }
 </style>
