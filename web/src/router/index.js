@@ -1,20 +1,20 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { applyRouteMeta } from '../seo'
 
-import Home from '../views/Home.vue'
-import Cards from '../views/Cards.vue'
-import CardDetail from '../views/CardDetail.vue'
-import Apply from '../views/Apply.vue'
-import Thanks from '../views/Thanks.vue'
-import Privacy from '../views/Privacy.vue'
-import Imprint from '../views/Imprint.vue'
-import Contact from '../views/Contact.vue'
-import Brokers from '../views/Brokers.vue'
-import BrokerDetail from '../views/BrokerDetail.vue'
-import Savings from '../views/Savings.vue'
-import SavingsDetail from '../views/SavingsDetail.vue'
-import Guide from '../views/Guide.vue'
-import GuideDetail from '../views/GuideDetail.vue'
+const Home = () => import('../views/Home.vue')
+const Cards = () => import('../views/Cards.vue')
+const CardDetail = () => import('../views/CardDetail.vue')
+const Apply = () => import('../views/Apply.vue')
+const Thanks = () => import('../views/Thanks.vue')
+const Privacy = () => import('../views/Privacy.vue')
+const Imprint = () => import('../views/Imprint.vue')
+const Contact = () => import('../views/Contact.vue')
+const Brokers = () => import('../views/Brokers.vue')
+const BrokerDetail = () => import('../views/BrokerDetail.vue')
+const Savings = () => import('../views/Savings.vue')
+const SavingsDetail = () => import('../views/SavingsDetail.vue')
+const Guide = () => import('../views/Guide.vue')
+const GuideDetail = () => import('../views/GuideDetail.vue')
 
 const routes = [
   { path: '/', name: 'home', component: Home },
