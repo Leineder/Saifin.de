@@ -31,6 +31,7 @@
                 :src="card.image" 
                 :alt="card.title" 
                 class="w-full card-image-height object-cover rounded shadow-sm"
+                loading="lazy" decoding="async" width="200" height="120"
               />
               <!-- Karten-Typ Badge -->
               <div class="absolute bottom-0 right-0 bg-white bg-opacity-90 px-1 py-0.5 rounded text-xs font-semibold text-gray-700">

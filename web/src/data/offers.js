@@ -9,7 +9,7 @@ export const offers = [
       'Inland 3,95 € je Abhebung, Ausland 0 €',
       'Teilzahlung voreingestellt (3 % / min. 20 €)'
     ],
-    image: '/images/creditcards/hanseatic-bank-genialcard.png',
+    image: '/images/creditcards/hanseatic-bank-genialcard.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'VISA – Revolving',
@@ -36,7 +36,7 @@ export const offers = [
       'Bargeld weltweit gebührenfrei (seitens Hanseatic)',
       'Reiseversicherungspaket inklusive'
     ],
-    image: '/images/creditcards/hanseatic-goldcard.png',
+    image: '/images/creditcards/hanseatic-goldcard.webp',
     annualFee: 58.8,
     foreignFee: '0 %',
     cardType: 'VISA – Revolving',
@@ -65,7 +65,7 @@ export const offers = [
       'Bargeld weltweit gebührenfrei',
       'Reiseversicherungspaket inkl.'
     ],
-    image: '/images/creditcards/TFBank_MastercardGold.png',
+    image: '/images/creditcards/TFBank_MastercardGold.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
@@ -89,7 +89,7 @@ export const offers = [
       '1 % Tankrabatt (bis 200 €/Monat)',
       'Apple Pay/Google Pay/Garmin Pay'
     ],
-    image: '/images/creditcards/santander-bestcard-basic.png',
+    image: '/images/creditcards/santander-bestcard-basic.webp',
     annualFee: 0,
     foreignFee: '1,85 %',
     cardType: 'VISA – Revolving',
@@ -114,7 +114,7 @@ export const offers = [
       'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
       'Bis 4.000 € Kreditrahmen*'
     ],
-    image: '/images/creditcards/extra-mastercard.png',
+    image: '/images/creditcards/extra-mastercard.webp',
     annualFee: 0,
     foreignFee: '2,99 %',
     cardType: 'Mastercard – Revolving',
@@ -137,7 +137,7 @@ export const offers = [
       'Bis zu 8 Wochen zinsfrei (beworben)',
       'Kreditrahmen bis 4.000 €*'
     ],
-    image: '/images/creditcards/NetKredit24-Kreditkarte.png',
+    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
     annualFee: 0,
     foreignFee: 'variabel (je Partnerbank)',
     cardType: 'Mastercard – Revolving (vermittelt)',
@@ -157,7 +157,7 @@ export const offers = [
       'Bargeld ab 300 € kostenlos, darunter 3,95 €',
       'Bis 5.000 € Kreditrahmen*'
     ],
-    image: '/images/creditcards/consors-finanz-mastercard.png',
+    image: '/images/creditcards/consors-finanz-mastercard.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
@@ -184,7 +184,7 @@ export const offers = [
       'Classic ca. 36 €/Jahr, Gold ca. 72 €/Jahr',
       'Girokontobindung erforderlich'
     ],
-    image: '/images/creditcards/1822 direkt Visa.jpg',
+    image: '/images/creditcards/1822 direkt Visa.webp',
     annualFee: 36,
     foreignFee: 'ca. 2,25 %',
     cardType: 'VISA – Charge (Girokonto-Abrechnung)',

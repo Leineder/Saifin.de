@@ -21,7 +21,10 @@ onMounted(() => { storeTrackingParams() })
 <template>
   <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
   <section class="hero relative">
-    <img class="hero-img" src="/images/landing-hero.jpg?v=1" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" />
+    <picture>
+      <source srcset="/images/landing-hero.webp" type="image/webp" />
+      <img class="hero-img" src="/images/landing-hero.webp" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" decoding="async" width="1600" height="900" />
+    </picture>
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">
@@ -81,7 +84,7 @@ onMounted(() => { storeTrackingParams() })
           <router-link :to="`/kreditkarten/${o.slug}`" class="offer-link">
             <div class="surface-card border-round-xl card-accent w-full" style="max-width:100%">
               <div class="p-3 flex align-items-center gap-3">
-                <img :src="o.image" :alt="`${o.title} – Kartenmotiv`" class="offer-thumb border-round" loading="lazy" />
+                <img :src="o.image" :alt="`${o.title} – Kartenmotiv`" class="offer-thumb border-round" loading="lazy" decoding="async" width="96" height="60" />
                 <div class="flex-1">
                   <div class="text-900 text-lg font-bold line-height-2">{{ o.title }}</div>
                   <div class="text-600 text-sm">Jahresgebühr</div>
@@ -134,7 +137,7 @@ onMounted(() => { storeTrackingParams() })
       </div>
       <div class="col-12 md:col-6">
         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200" alt="Team"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320">
       </div>
     </div>
 
@@ -142,7 +145,7 @@ onMounted(() => { storeTrackingParams() })
     <div class="grid align-items-stretch mb-5">
       <div class="col-12 md:col-6 order-2 md:order-1">
         <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200" alt="Analyse"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320">
       </div>
       <div class="col-12 md:col-6 order-1 md:order-2">
         <div class="content-box about-text">
@@ -174,7 +177,7 @@ onMounted(() => { storeTrackingParams() })
       </div>
       <div class="col-12 md:col-6">
         <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200" alt="Partnerschaft"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320">
             </div>
     </div>
   </section>

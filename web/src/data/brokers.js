@@ -3,7 +3,7 @@ export const brokers = [
     id: 'captrader',
     slug: 'captrader',
     name: 'CapTrader',
-    image: '/images/brokers/captrader_cover.png',
+    image: '/images/brokers/captrader_cover.webp',
     highlights: [
       'Zugang zu >150 Börsen, >1,2 Mio. Wertpapieren',
       'Plattformen: Trader Workstation (TWS), Desktop, App',
@@ -24,7 +24,7 @@ export const brokers = [
     id: 'smartbroker-plus',
     slug: 'smartbroker-plus',
     name: 'SMARTBROKER+',
-    image: '/images/brokers/smartbroker.png',
+    image: '/images/brokers/smartbroker.webp',
     highlights: [
       'Depotbank: Baader Bank – gesetzliche + freiwillige Einlagensicherung',
       'gettex 0 € ab 500 € Ordervolumen; < 500 €: 1 € Mindermengenzuschlag',
@@ -41,7 +41,7 @@ export const brokers = [
     id: 'fidelity-ffb',
     slug: 'fidelity-ffb',
     name: 'Fidelity – FondsdepotPlus (FIL Fondsbank/FFB)',
-    image: '/images/brokers/Fidelity-Logo.png',
+    image: '/images/brokers/Fidelity-Logo.webp',
     highlights: [
       'Depotführungsentgelt 0,25 % p.a., mind. 25 €, max. 45 € p.a.',
       'Fondsplattform mit Rabattaktionen',
@@ -56,7 +56,7 @@ export const brokers = [
     id: 'brokerpoint',
     slug: 'brokerpoint',
     name: 'Brokerpoint',
-    image: '/images/brokers/Brokerpoint.png',
+    image: '/images/brokers/Brokerpoint.webp',
     highlights: [
       'Reseller von Interactive Brokers (IB-Infrastruktur)',
       'Xetra ab 2,29 € bzw. 0,10 %; US ab 2 $; Depot 0 €',
@@ -71,7 +71,7 @@ export const brokers = [
     id: 'finanzen-net-zero',
     slug: 'finanzen-net-zero',
     name: 'finanzen.net zero',
-    image: '/images/brokers/Finanzen.net.png',
+    image: '/images/brokers/Finanzen.net.webp',
     highlights: [
       'Depotbank Baader Bank; Handel über gettex (Baader OTC optional)',
       '0 € pro Order über gettex ab 500 €; sonst 1 € Mindermenge',
@@ -87,7 +87,7 @@ export const brokers = [
     id: 'fonds-super-markt',
     slug: 'fonds-super-markt',
     name: 'Fonds-Super-Markt.de (Vermittler, Depot bei FNZ Bank)',
-    image: '/images/brokers/Fonds Supermarkt.png',
+    image: '/images/brokers/Fonds Supermarkt.webp',
     highlights: [
       '100 % Rabatt auf Ausgabeaufschlag (Kauf & Sparpläne)',
       '0 € Transaktionskosten online (ETFs ausgenommen)',
@@ -102,7 +102,7 @@ export const brokers = [
     id: 'quirion',
     slug: 'quirion',
     name: 'quirion (Robo-Advisor der Quirin Privatbank)',
-    image: '/images/brokers/Quirion.png',
+    image: '/images/brokers/Quirion.webp',
     highlights: [
       'Servicegebühr 0,48 % p.a. (Digital) + ~0,17 % ETF-Kosten',
       'Erstes Jahr: 0 € Servicegebühr auf die ersten 10.000 € (Digital)',
@@ -117,7 +117,7 @@ export const brokers = [
     id: 'etoro',
     slug: 'etoro',
     name: 'eToro (Multi-Asset-Broker, viele Instrumente als CFD)',
-    image: '/images/brokers/eToro.png',
+    image: '/images/brokers/eToro.webp',
     highlights: [
       'Aktien-Kommission: seit 11.08.2024 $1 oder $2 pro Trade (je Land/Börse)',
       'ETFs teils $0 Kommission (regionsabhängig; Details im Help-Center)',

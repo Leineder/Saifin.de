@@ -157,7 +157,7 @@ function goToApply(o) {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="o.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${o.title} – Logo/Bild`" :class="['card-image', o.slug]" loading="lazy" />
+                  <img :src="o.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${o.title} – Logo/Bild`" :class="['card-image', o.slug]" loading="lazy" decoding="async" width="120" height="75" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">

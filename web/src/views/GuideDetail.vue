@@ -63,7 +63,7 @@ function transformContent(article) {
       <div class="section-eyebrow">{{ article.category }}</div>
       <h1 class="section-title text-3xl mb-3">{{ article.title }}</h1>
       <div class="hero-wrap">
-        <img :src="article.hero" :alt="article.title" class="hero-img" loading="lazy" />
+        <img :src="article.hero" :alt="article.title" class="hero-img" loading="lazy" decoding="async" width="1200" height="320" />
       </div>
       <article class="content surface-card border-round-lg p-3 card-accent" v-html="transformContent(article)"></article>
       <div class="actions">

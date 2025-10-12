@@ -108,7 +108,7 @@ function summarizeBullets(bullets) {
 export function applyRouteMeta(route) {
   const name = route.name
   const canonical = buildCanonicalFromRoute(route)
-  const defaultOg = '/images/landing-hero.jpg'
+  const defaultOg = '/images/landing-hero.webp'
 
   let title = 'Saifin – Finanzprodukte vergleichen'
   let description = 'Vergleiche Kreditkarten, Broker und Tagesgeld. Schnell, transparent, unabhängig.'

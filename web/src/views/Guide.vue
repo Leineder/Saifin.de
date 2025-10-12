@@ -72,7 +72,7 @@ function transformContent(article) {
         <div v-for="card in stripCards" :key="card.slug" class="mag-item">
           <div class="mag-card">
             <router-link v-if="!card.isPlaceholder" :to="{ path: '/ratgeber', hash: '#' + card.slug }" class="mag-link" :aria-label="card.title">
-              <img class="mag-img" :src="card.hero" :alt="card.title" />
+              <img class="mag-img" :src="card.hero" :alt="card.title" loading="lazy" decoding="async" width="600" height="240" />
               <div class="mag-overlay"></div>
               <div class="mag-meta">
                 <div class="mag-cat">{{ card.category }}</div>
@@ -81,7 +81,7 @@ function transformContent(article) {
               </div>
             </router-link>
             <div v-else class="mag-ph">
-              <img class="mag-img" :src="card.hero" alt="Platzhalter" loading="lazy" />
+              <img class="mag-img" :src="card.hero" alt="Platzhalter" loading="lazy" decoding="async" width="600" height="240" />
               <div class="mag-overlay"></div>
               <div class="mag-meta">
                 <div class="mag-cat">Bald</div>
@@ -96,7 +96,7 @@ function transformContent(article) {
       <!-- Volle Artikel unterhalb anzeigen -->
       <div class="articles">
         <article v-for="a in fullArticles" :key="a.slug" :id="a.slug" class="article surface-card border-round-lg card-accent">
-          <img :src="a.hero" :alt="a.title" class="article-hero" loading="lazy" />
+          <img :src="a.hero" :alt="a.title" class="article-hero" loading="lazy" decoding="async" width="1200" height="260" />
           <div class="article-body">
             <div class="section-eyebrow">{{ a.category }}</div>
             <h2 class="section-title text-2xl mb-2">{{ a.title }}</h2>

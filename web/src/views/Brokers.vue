@@ -219,7 +219,7 @@ onBeforeUnmount(() => {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" />
+                  <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -253,7 +253,7 @@ onBeforeUnmount(() => {
               >
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" />
+                    <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">
