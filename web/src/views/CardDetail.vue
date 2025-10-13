@@ -22,6 +22,20 @@ const goApply = () => {
   if (offer?.applyUrl) {
     const url = offer.applyUrl
     if (/^https?:\/\//i.test(url)) {
+      // Meta Pixel: CompleteRegistration bei externem Antrag
+      try {
+        if (window.fbq && offer) {
+          window.fbq('track', 'CompleteRegistration', {
+            content_name: offer.title,
+            content_category: 'card',
+            content_id: offer.id || offer.slug,
+            value: offer.annualFee || 0,
+            currency: 'EUR',
+            status: 'external_redirect'
+          })
+        }
+      } catch (_) {}
+      
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }

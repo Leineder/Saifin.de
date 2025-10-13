@@ -12,6 +12,19 @@ const goApply = () => {
   if (!offer?.applyUrl) return
   const url = offer.applyUrl
   if (/^https?:\/\//i.test(url)) {
+    // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
+    try {
+      if (window.fbq && offer) {
+        window.fbq('track', 'CompleteRegistration', {
+          content_name: offer.title,
+          content_category: 'savings',
+          content_id: offer.id || offer.slug,
+          value: offer.rate || 0,
+          status: 'external_redirect'
+        })
+      }
+    } catch (_) {}
+    
     window.open(url, '_blank', 'noopener,noreferrer')
   } else {
     router.push(url)

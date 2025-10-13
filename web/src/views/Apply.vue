@@ -122,6 +122,55 @@ function submit() {
   try { localStorage.removeItem(storageKey.value) } catch (_) {}
   const type = offer ? 'card' : (broker ? 'broker' : (savings ? 'savings' : 'unknown'))
   console.log('Lead (demo):', { type, offerId: offer?.id, brokerId: broker?.id, savingsId: savings?.id, ...form.value })
+  
+  // Meta Pixel: CompleteRegistration Event bei Kreditkartenantrag
+  try {
+    if (typeof window !== 'undefined' && window.fbq && typeof window.fbq === 'function') {
+      const eventData = {
+        content_name: applySubjectTitle.value,
+        content_category: type,
+        status: 'completed'
+      }
+      
+      if (offer) {
+        eventData.content_id = offer.id || offer.slug
+        eventData.value = offer.annualFee || 0
+        eventData.currency = 'EUR'
+      } else if (broker) {
+        eventData.content_id = broker.id || broker.slug
+      } else if (savings) {
+        eventData.content_id = savings.id || savings.slug
+        eventData.value = savings.rate || 0
+      }
+      
+      window.fbq('track', 'CompleteRegistration', eventData)
+    }
+    
+    // TikTok Pixel: CompleteRegistration Event
+    if (typeof window !== 'undefined' && window.ttq && typeof window.ttq.track === 'function') {
+      const ttqData = {
+        content_type: type,
+        content_name: applySubjectTitle.value
+      }
+      
+      if (offer) {
+        ttqData.content_id = offer.id || offer.slug
+        ttqData.value = offer.annualFee || 0
+        ttqData.currency = 'EUR'
+      } else if (broker) {
+        ttqData.content_id = broker.id || broker.slug
+      } else if (savings) {
+        ttqData.content_id = savings.id || savings.slug
+        ttqData.value = savings.rate || 0
+      }
+      
+      window.ttq.track('CompleteRegistration', ttqData)
+    }
+  } catch (e) {
+    // Tracking-Fehler nicht zum Absturz führen
+    console.error('Tracking error:', e)
+  }
+  
   router.push('/danke')
 }
 </script>

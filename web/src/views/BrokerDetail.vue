@@ -12,6 +12,18 @@ const goApply = () => {
   if (broker?.applyUrl) {
     const url = broker.applyUrl
     if (/^https?:\/\//i.test(url)) {
+      // Meta Pixel: CompleteRegistration bei externem Broker-Antrag
+      try {
+        if (window.fbq && broker) {
+          window.fbq('track', 'CompleteRegistration', {
+            content_name: broker.name,
+            content_category: 'broker',
+            content_id: broker.id || broker.slug,
+            status: 'external_redirect'
+          })
+        }
+      } catch (_) {}
+      
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }
