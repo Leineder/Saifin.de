@@ -19,12 +19,19 @@ onMounted(() => { storeTrackingParams() })
 </script>
 
 <template>
-  <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie -->
+  <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie - OPTIMIZED FOR LCP -->
   <section class="hero relative">
-    <picture>
-      <source srcset="/images/landing-hero.webp 768w, /images/landing-hero.webp 1200w, /images/landing-hero.webp 1600w" type="image/webp" />
-      <img class="hero-img" src="/images/landing-hero.webp" alt="Kartenzahlung mit Karte und Terminal" fetchpriority="high" decoding="async" width="1600" height="900" sizes="100vw" />
-    </picture>
+    <!-- Simplified picture element for better LCP performance -->
+    <img 
+      class="hero-img" 
+      src="/images/landing-hero.webp" 
+      alt="Kartenzahlung mit Karte und Terminal" 
+      fetchpriority="high" 
+      decoding="sync"
+      width="1600" 
+      height="900" 
+      loading="eager"
+    />
     <div class="hero-overlay"></div>
     <div class="hero-content">
       <h1 class="hero-title">
@@ -120,7 +127,10 @@ onMounted(() => { storeTrackingParams() })
   <!-- Über uns -->
   <section id="about" class="section cv-auto">
     <div class="container">
-      <h2 class="text-2xl md:text-3xl text-center mb-4">Über uns</h2>
+      <div class="about-section-header">
+        <h2 class="about-main-title">Über uns</h2>
+        <p class="about-subtitle">Transparenz, Unabhängigkeit und Qualität stehen bei uns im Fokus</p>
+      </div>
 
       <!-- Block 1: Text links, Bild rechts -->
       <div class="about-block mb-5">
@@ -136,12 +146,16 @@ onMounted(() => { storeTrackingParams() })
         </div>
         <div class="about-image">
           <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop" alt="Team bei der Arbeit"
-               class="w-full border-round-lg shadow-2 about-img" loading="lazy" decoding="async" width="600" height="400" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
+               class="w-full border-round-lg shadow-2 about-img" loading="lazy" decoding="async" width="600" height="400">
         </div>
       </div>
 
-      <!-- Block 2: Text links, Bild rechts -->
-      <div class="about-block mb-5">
+      <!-- Block 2: Bild links, Text rechts -->
+      <div class="about-block mb-5 about-block-reverse">
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse und Bewertung"
+               class="w-full border-round-lg shadow-2 about-img" loading="lazy" decoding="async" width="600" height="400">
+        </div>
         <div class="about-content">
           <div class="content-box about-text">
             <h3 class="section-title text-xl md:text-2xl mb-3">Wie bewerten wir?</h3>
@@ -151,10 +165,6 @@ onMounted(() => { storeTrackingParams() })
               unsere Mindestkriterien erfüllen, werden dargestellt.
             </p>
           </div>
-        </div>
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse und Bewertung"
-               class="w-full border-round-lg shadow-2 about-img" loading="lazy" decoding="async" width="600" height="400" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
         </div>
       </div>
 
@@ -172,7 +182,7 @@ onMounted(() => { storeTrackingParams() })
         </div>
         <div class="about-image">
           <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop" alt="Partnerschaft und Transparenz"
-               class="w-full border-round-lg shadow-2 about-img" style="filter:grayscale(100%)" loading="lazy" decoding="async" width="600" height="400" srcset="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
+               class="w-full border-round-lg shadow-2 about-img" style="filter:grayscale(100%)" loading="lazy" decoding="async" width="600" height="400">
         </div>
       </div>
     </div>
@@ -221,11 +231,42 @@ onMounted(() => { storeTrackingParams() })
 </template>
 
 <style scoped>
-/* Hero in Brandfarben */
-.hero { height: clamp(420px, 62vh, 640px); }
-.hero-img { width: 100%; height: 100%; object-fit: cover; display: block; filter: saturate(0.85) contrast(1.05); object-position: center 30%; }
-.hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,31,58,0.65) 0%, rgba(11,31,58,0.45) 40%, rgba(11,31,58,0.2) 75%, rgba(11,31,58,0.08) 100%); }
-.hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; padding: 16px; text-align: center; color: #fff; }
+/* Hero in Brandfarben - OPTIMIZED FOR LCP */
+.hero { 
+  height: clamp(420px, 62vh, 640px); 
+  contain: layout style paint;
+  position: relative;
+  overflow: hidden;
+}
+.hero-img { 
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  display: block; 
+  filter: saturate(0.85) contrast(1.05); 
+  object-position: center 30%;
+  /* Prevent layout shifts */
+  aspect-ratio: 16/9;
+}
+.hero-overlay { 
+  position: absolute; 
+  inset: 0; 
+  background: linear-gradient(180deg, rgba(11,31,58,0.65) 0%, rgba(11,31,58,0.45) 40%, rgba(11,31,58,0.2) 75%, rgba(11,31,58,0.08) 100%);
+  pointer-events: none;
+}
+.hero-content { 
+  position: absolute; 
+  inset: 0; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 0; 
+  padding: 16px; 
+  text-align: center; 
+  color: #fff;
+  z-index: 1;
+}
 .hero-title { color: #fff; font-size: clamp(2rem, 6vw, 3.5rem); line-height: 1.1; font-weight: 800; letter-spacing: -0.01em; text-shadow: 0 6px 24px rgba(0,0,0,0.25); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; margin: 0 0 28px; }
 .hero-title-line { display: block; }
 .hero-sub { color: rgba(255,255,255,0.92); font-size: clamp(1rem, 2.3vw, 1.35rem); margin: 0 0 48px; }
@@ -284,78 +325,184 @@ onMounted(() => { storeTrackingParams() })
 .offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
 .offer-thumb { width: 96px; height: 60px; object-fit: cover; border-radius: 0.5rem; border: 1px solid var(--border); }
 
-/* Neues Layout für abwechselnde Bilder links/rechts */
+/* Premium Sektions-Header */
+.about-section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  position: relative;
+}
+
+.about-main-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: var(--text);
+  margin: 0 0 1rem 0;
+  font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.02em;
+  position: relative;
+}
+
+.about-main-title::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+  border-radius: 2px;
+}
+
+.about-subtitle {
+  font-size: 1.2rem;
+  color: var(--muted-text);
+  margin: 0;
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Premium Layout für abwechselnde Bilder links/rechts */
 .about-block {
   display: flex;
   align-items: center;
-  gap: 2.5rem;
-  margin-bottom: 3rem;
+  gap: 3rem;
+  margin-bottom: 2.5rem;
+  padding: 2rem 0;
+  position: relative;
+}
+
+.about-block::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+  border-radius: 2px;
+  opacity: 0.3;
+}
+
+.about-block-reverse {
+  flex-direction: row-reverse;
 }
 
 .about-content {
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
 .about-image {
   flex: 1;
   min-width: 0;
+  position: relative;
 }
 
 .about-img {
   width: 100%;
-  height: 350px;
+  height: 320px;
   object-fit: cover;
-  transition: transform .2s ease, box-shadow .2s ease;
+  border-radius: 16px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
 }
 
 .about-img:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 32px var(--shadow-color);
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 48px rgba(11, 31, 58, 0.2);
 }
 
-/* Kompaktere Textsegmente */
+/* Premium Textsegmente */
 .about-text {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  min-height: 350px;
-  padding: 1.5rem;
+  min-height: 320px;
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--surface) 0%, rgba(255, 255, 255, 0.8) 100%);
+  border-radius: 20px;
+  border: 1px solid rgba(11, 31, 58, 0.08);
+  box-shadow: 0 4px 24px rgba(11, 31, 58, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-text::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--brand-primary), var(--brand-accent));
+  border-radius: 20px 20px 0 0;
 }
 
 .about-text h3 {
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   color: var(--text);
-  font-size: 1.5rem;
-  line-height: 1.3;
+  font-size: 1.75rem;
+  line-height: 1.2;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;
 }
 
 .about-text p {
   margin: 0;
-  line-height: 1.6;
-  font-size: 1rem;
+  line-height: 1.7;
+  font-size: 1.05rem;
+  color: var(--muted-text);
+  position: relative;
+  z-index: 1;
 }
 
-/* Mobile Layout: Übereinander statt nebeneinander */
+/* Subtile Animation beim Hover */
+.about-text:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
+}
+
+/* Mobile Layout: Kompakt und elegant */
 @media (max-width: 767px) {
   .about-block {
     flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 2.5rem;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem 0;
+  }
+  
+  .about-block::before {
+    width: 40px;
+    height: 2px;
+  }
+  
+  .about-block-reverse {
+    flex-direction: column;
   }
   
   .about-img {
-    height: 250px;
+    height: 240px;
+    border-radius: 12px;
   }
   
   .about-text {
     min-height: auto;
-    padding: 1rem;
+    padding: 1.5rem;
+    border-radius: 16px;
   }
   
   .about-text h3 {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .about-text p {
+    font-size: 1rem;
   }
 }
 
