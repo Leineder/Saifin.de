@@ -20,10 +20,13 @@
     <meta name="twitter:description" content="Vergleiche Kreditkarten, Broker und Tagesgeld. Schnell, transparent, unabhängig." />
     <meta name="twitter:image" content="/images/landing-hero.webp" />
     <!-- Preload ONLY critical LCP hero image for mobile (most important) -->
-    <link rel="preload" as="image" href="/images/landing-hero.webp" fetchpriority="high" />
+    <link rel="preload" as="image" href="/images/landing-hero.webp" fetchpriority="high" imagesrcset="/images/landing-hero.webp" imagesizes="100vw" />
     <!-- Preload ONLY the 2 most critical fonts to reduce blocking time -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-400.woff2" crossorigin="anonymous">
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cinzel/cinzel-800.woff2" crossorigin="anonymous">
+    <!-- Prefetch likely next pages for faster navigation -->
+    <link rel="prefetch" href="/kreditkarten" as="document">
+    <link rel="prefetch" href="/broker" as="document">
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -124,9 +127,10 @@
         width: auto;
       }
       
-      /* Critical hero styles - OPTIMIZED for LCP */
+      /* Critical hero styles - OPTIMIZED for LCP & CLS */
       .hero {
         height: clamp(420px, 62vh, 640px);
+        min-height: 420px;
         position: relative;
         overflow: hidden;
         contain: layout style paint;
@@ -137,6 +141,7 @@
         object-fit: cover;
         display: block;
         content-visibility: auto;
+        aspect-ratio: 16/9;
       }
       .hero-overlay {
         position: absolute;
@@ -242,16 +247,16 @@
       }
     </style>
     <noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-    <script type="module" crossorigin src="/assets/index-DIWpTBfi.js"></script>
+    <script type="module" crossorigin src="/assets/index-BMMZhy2J.js"></script>
     <link rel="modulepreload" crossorigin href="/assets/vendor-CsIK5E6y.js">
     <link rel="modulepreload" crossorigin href="/assets/vue-reactivity-CiUM2OwM.js">
     <link rel="modulepreload" crossorigin href="/assets/vue-core-BJt1JJMw.js">
     <link rel="modulepreload" crossorigin href="/assets/pinia-CIdhGARn.js">
     <link rel="modulepreload" crossorigin href="/assets/vue-router-DOKYjbK4.js">
-    <link rel="modulepreload" crossorigin href="/assets/data-offers-DBX5tgwp.js">
+    <link rel="modulepreload" crossorigin href="/assets/data-offers-DV1Zadsm.js">
     <link rel="modulepreload" crossorigin href="/assets/data-brokers-PJHmSzOt.js">
     <link rel="modulepreload" crossorigin href="/assets/data-articles-CxCU_FaI.js">
-    <link rel="stylesheet" crossorigin href="/assets/index-BHUVxYkh.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-CvbI_YW9.css">
   </head>
   <body>
     <div id="app"></div>

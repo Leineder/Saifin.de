@@ -19,9 +19,9 @@ onMounted(() => { storeTrackingParams() })
 </script>
 
 <template>
-  <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie - OPTIMIZED FOR LCP -->
+  <!-- Moderner Hero mit Bild, Gradient-Overlay und weißer Typografie - ULTRA OPTIMIZED FOR LCP & CLS -->
   <section class="hero relative">
-    <!-- Simplified picture element for better LCP performance -->
+    <!-- Ultra-optimized image loading for best LCP -->
     <img 
       class="hero-img" 
       src="/images/landing-hero.webp" 
@@ -31,6 +31,7 @@ onMounted(() => { storeTrackingParams() })
       width="1600" 
       height="900" 
       loading="eager"
+      importance="high"
     />
     <div class="hero-overlay"></div>
     <div class="hero-content">
@@ -231,9 +232,11 @@ onMounted(() => { storeTrackingParams() })
 </template>
 
 <style scoped>
-/* Hero in Brandfarben - OPTIMIZED FOR LCP */
+/* Hero in Brandfarben - OPTIMIZED FOR LCP & CLS */
 .hero { 
-  height: clamp(420px, 62vh, 640px); 
+  /* Fixed height to prevent CLS */
+  height: clamp(420px, 62vh, 640px);
+  min-height: 420px;
   contain: layout style paint;
   position: relative;
   overflow: hidden;
@@ -245,8 +248,9 @@ onMounted(() => { storeTrackingParams() })
   display: block; 
   filter: saturate(0.85) contrast(1.05); 
   object-position: center 30%;
-  /* Prevent layout shifts */
+  /* Prevent layout shifts with explicit aspect ratio and dimensions */
   aspect-ratio: 16/9;
+  max-height: 640px;
 }
 .hero-overlay { 
   position: absolute; 
@@ -293,8 +297,16 @@ onMounted(() => { storeTrackingParams() })
 }
 .hero-cta.p-button:active { transform: translateY(0); }
 
-/* Abstand/Anordnung der Hero-Buttons */
-.hero-cta-group { display: flex; gap: clamp(12px, 3.5vw, 28px); flex-wrap: wrap; justify-content: center; margin-top: 0; }
+/* Abstand/Anordnung der Hero-Buttons - Fixed height to prevent CLS */
+.hero-cta-group { 
+  display: flex; 
+  gap: clamp(12px, 3.5vw, 28px); 
+  flex-wrap: wrap; 
+  justify-content: center; 
+  margin-top: 0;
+  /* Reserve space to prevent layout shift */
+  min-height: 52px;
+}
 .hero-cta.alt { background: transparent !important; color: #fff !important; border: 1px solid rgba(255,255,255,0.7) !important; }
 
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
@@ -402,14 +414,17 @@ onMounted(() => { storeTrackingParams() })
   position: relative;
 }
 
-.about-img {
-  width: 100%;
-  height: 320px;
-  object-fit: cover;
-  border-radius: 16px;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
-}
+  .about-img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
+    /* Prevent CLS with explicit dimensions */
+    aspect-ratio: 3/2;
+    display: block;
+  }
 
 .about-img:hover {
   transform: translateY(-4px) scale(1.02);

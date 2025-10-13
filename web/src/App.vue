@@ -76,7 +76,7 @@ onMounted(() => {
 .app-root { background: var(--background); color: var(--text); }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
-/* Header */
+/* Header - OPTIMIZED for CLS */
 .site-header {
   position: sticky;
   top: 0;
@@ -84,12 +84,17 @@ onMounted(() => {
   background: #141833;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.12);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  /* Fixed height to prevent CLS */
+  min-height: 96px;
+  contain: layout style;
 }
 .header-inner {
   display: flex;
   align-items: center;
   justify-content: space-between;
   height: 96px;
+  /* Prevent layout shifts */
+  min-height: 96px;
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-name { font-weight: 800; color: var(--brand-primary-contrast); letter-spacing: -0.01em; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
@@ -131,9 +136,25 @@ onMounted(() => {
 }
 .site-nav.is-open .nav-link { padding: 10px 4px; }
 
-/* Footer */
-.site-footer { border-top: 1px solid var(--border); background: var(--surface); }
-.footer-inner { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 18px 16px; color: var(--muted-text); font-size: 0.9rem; }
+/* Footer - OPTIMIZED for CLS */
+.site-footer { 
+  border-top: 1px solid var(--border); 
+  background: var(--surface);
+  /* Fixed height to prevent CLS */
+  min-height: 60px;
+  contain: layout style;
+}
+.footer-inner { 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 10px; 
+  padding: 18px 16px; 
+  color: var(--muted-text); 
+  font-size: 0.9rem;
+  /* Prevent layout shifts */
+  min-height: 60px;
+}
 .footer-link { color: var(--link-color); text-decoration: none; }
 .footer-link:hover { text-decoration: underline; }
 .sep { color: var(--subtle-text); }

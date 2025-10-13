@@ -120,10 +120,19 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 .section-title { margin: 0 0 10px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; color: var(--text); }
 .section-eyebrow { color: var(--muted-text); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: .75rem; }
 
-/* Containment: initial paint separation ohne Layout-Bugs */
+/* Containment: initial paint separation ohne Layout-Bugs - OPTIMIZED for CLS */
 .cv-auto { 
   content-visibility: auto; 
-  contain-intrinsic-size: auto 800px;
+  /* Fixed intrinsic sizes to prevent layout shifts */
+  contain-intrinsic-size: auto 600px;
+}
+
+/* Section-specific intrinsic sizes for better CLS */
+.section { 
+  contain: layout style;
+}
+.section-muted {
+  contain: layout style;
 }
 
 /* Performance optimizations */
@@ -225,15 +234,21 @@ picture { display: block; }
 /* Shadow-Utilities */
 .shadow-2 { box-shadow: 0 10px 24px var(--shadow-color); }
 
-/* Reduce layout shifts - explicit aspect ratios */
+/* Reduce layout shifts - explicit aspect ratios and dimensions */
 .hero-img {
   aspect-ratio: 16/9;
   object-fit: cover;
+  display: block;
+  /* Reserve space immediately */
+  min-height: 420px;
 }
 .about-img {
   aspect-ratio: 3/2;
   object-fit: cover;
-  height: auto;
+  height: 320px;
+  display: block;
+  /* Explicit width to prevent shifts */
+  width: 100%;
 }
 
 /* Font loading - critical fonts are inlined in index.html, these are optional/fallback */
