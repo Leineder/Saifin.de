@@ -41,7 +41,7 @@ export const brokers = [
     id: 'fidelity-ffb',
     slug: 'fidelity-ffb',
     name: 'Fidelity – FondsdepotPlus (FIL Fondsbank/FFB)',
-    image: '/images/brokers/Fidelity-Logo.webp',
+    image: '/images/brokers/Fidelity-Logo_11zon.webp',
     highlights: [
       'Depotführungsentgelt 0,25 % p.a., mind. 25 €, max. 45 € p.a.',
       'Fondsplattform mit Rabattaktionen',
@@ -102,7 +102,7 @@ export const brokers = [
     id: 'quirion',
     slug: 'quirion',
     name: 'quirion (Robo-Advisor der Quirin Privatbank)',
-    image: '/images/brokers/Quirion.webp',
+    image: '/images/brokers/Quirion_11zon.webp',
     highlights: [
       'Servicegebühr 0,48 % p.a. (Digital) + ~0,17 % ETF-Kosten',
       'Erstes Jahr: 0 € Servicegebühr auf die ersten 10.000 € (Digital)',

@@ -81,6 +81,11 @@ function goToApply(broker) {
   }
 }
 
+function handleImageError(event) {
+  console.log('Image failed to load:', event.target.src)
+  event.target.src = '/images/saifin_logo_vectorized_final.svg'
+}
+
 // Mobile: Filter einklappbar
 const showFilters = ref(false)
 const isDesktop = ref(false)
@@ -219,7 +224,7 @@ onBeforeUnmount(() => {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" :srcset="`${b.image || '/images/saifin_logo_vectorized_final.svg'} 120w, ${b.image || '/images/saifin_logo_vectorized_final.svg'} 240w`" sizes="(max-width: 768px) 200px, 120px" />
+                  <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -253,7 +258,7 @@ onBeforeUnmount(() => {
               >
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" :srcset="`${b.image || '/images/saifin_logo_vectorized_final.svg'} 120w, ${b.image || '/images/saifin_logo_vectorized_final.svg'} 240w`" sizes="(max-width: 768px) 200px, 120px" />
+                    <img :src="b.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">
@@ -368,7 +373,17 @@ onBeforeUnmount(() => {
 .card-image.logo-flatex,
 .card-image.logo-brokerpoint,
 .card-image.logo-fidelity-ffb,
-.card-image.logo-quirion { object-fit: contain; transform: none; }
+.card-image.logo-quirion,
+.card-image.logo-captrader,
+.card-image.logo-smartbroker-plus,
+.card-image.logo-finanzen-net-zero,
+.card-image.logo-fonds-super-markt,
+.card-image.logo-etoro { 
+  object-fit: contain; 
+  transform: none; 
+  background: #fff;
+  padding: 8px;
+}
 
 /* Logos, die etwas größer dargestellt werden sollen */
 .card-image.logo-smartbroker-plus,
