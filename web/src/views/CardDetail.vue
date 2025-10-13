@@ -162,10 +162,46 @@ const formatEuro = (n) => {
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: 1fr 1fr; }
   .sticky-cta { grid-column: 1 / -1; position: static; }
-  .card-image-container { min-height: 400px; max-height: 600px; padding: 20px; }
+  .card-image-container { 
+    min-height: 400px; 
+    max-height: 600px; 
+    padding: 20px; 
+    aspect-ratio: 1.6 / 1;
+    max-width: 100%;
+  }
 }
 @media (max-width: 767px) {
-  .detail-grid { grid-template-columns: 1fr; }
-  .card-image-container { min-height: 350px; max-height: 500px; padding: 15px; }
+  .detail-grid { 
+    grid-template-columns: 1fr; 
+    gap: 16px;
+  }
+  .media { 
+    grid-column: 1; 
+    order: 1; /* Foto ganz oben */
+  }
+  .content { 
+    grid-column: 1; 
+    order: 2; /* Inhalt in der Mitte */
+  }
+  .sticky-cta { 
+    grid-column: 1; 
+    order: 3; /* CTA ganz unten */
+    position: static;
+  }
+  .card-image-container { 
+    aspect-ratio: 1.6 / 1;
+    max-width: 100%;
+    padding: 20px;
+    margin: 0 auto;
+  }
+  .facts-grid {
+    grid-template-columns: 1fr; /* Einspaltig auf mobil */
+    gap: 8px;
+  }
+  .cta-col {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 }
 </style>
