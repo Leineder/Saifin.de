@@ -137,7 +137,7 @@ onMounted(() => { storeTrackingParams() })
       </div>
       <div class="col-12 md:col-6">
         <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format" alt="Team"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px" fetchpriority="low">
       </div>
     </div>
 
@@ -145,7 +145,7 @@ onMounted(() => { storeTrackingParams() })
     <div class="grid align-items-stretch mb-5">
       <div class="col-12 md:col-6 order-2 md:order-1">
         <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format" alt="Analyse"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px">
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px" fetchpriority="low">
       </div>
       <div class="col-12 md:col-6 order-1 md:order-2">
         <div class="content-box about-text">

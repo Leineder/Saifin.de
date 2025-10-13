@@ -41,22 +41,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/american-express-platinum</loc>
+    <loc>https://www.saifin.de/kreditkarten/hanseatic-bank-genialcard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/consors-finanz-mastercard</loc>
+    <loc>https://www.saifin.de/kreditkarten/hanseatic-bank-goldcard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/barclays-visa</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/kreditkarten/gebuehrenfrei-mastercard-gold</loc>
+    <loc>https://www.saifin.de/kreditkarten/tf-bank-mastercard-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -71,62 +66,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/trade-republic-kreditkarte</loc>
+    <loc>https://www.saifin.de/kreditkarten/netkredit24-mastercard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/instabank-visa</loc>
+    <loc>https://www.saifin.de/kreditkarten/consors-finanz-mastercard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/awa7-visa</loc>
+    <loc>https://www.saifin.de/kreditkarten/1822direkt-visa-classic-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/hanseatic-bank-goldcard</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/trade-republic</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/scalable-capital</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/degiro</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/flatex</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/comdirect</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/consorsbank</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/ing</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/broker/dkb</loc>
+    <loc>https://www.saifin.de/broker/captrader</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -136,7 +91,32 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/broker/justtrade</loc>
+    <loc>https://www.saifin.de/broker/fidelity-ffb</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/broker/brokerpoint</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/broker/finanzen-net-zero</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/broker/fonds-super-markt</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/broker/quirion</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/broker/etoro</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

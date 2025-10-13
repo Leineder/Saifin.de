@@ -19,6 +19,9 @@
     <meta name="twitter:image" content="/images/landing-hero.webp" />
     <!-- Preload/priority for LCP hero image -->
     <link rel="preload" as="image" href="/images/landing-hero.webp" imagesrcset="/images/landing-hero.webp 768w, /images/landing-hero.webp 1200w, /images/landing-hero.webp 1600w" imagesizes="100vw" fetchpriority="high" />
+    <!-- Preload critical fonts -->
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-400.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-600.woff2" crossorigin>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -56,8 +59,10 @@
       .hero-overlay { position: absolute; inset: 0 }
     </style>
     <noscript><link rel="stylesheet" href="/fonts/fonts.css"></noscript>
-    <script type="module" crossorigin src="/assets/index-CePh5r05.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-C738OO1b.css">
+    <script type="module" crossorigin src="/assets/index-ByGfNzLf.js"></script>
+    <link rel="modulepreload" crossorigin href="/assets/vendor-DRqNm0XR.js">
+    <link rel="modulepreload" crossorigin href="/assets/primevue-Br1jG_62.js">
+    <link rel="stylesheet" crossorigin href="/assets/index-C8g7UoV4.css">
   </head>
   <body>
     <div id="app"></div>

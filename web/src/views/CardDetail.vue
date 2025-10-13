@@ -141,8 +141,15 @@ const formatEuro = (n) => {
   height: auto; 
   object-fit: contain; 
   display: block;
-  border-radius: 4px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  transform: rotate(-2deg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.card-image:hover {
+  transform: rotate(-1deg) scale(1.02);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
 }
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }

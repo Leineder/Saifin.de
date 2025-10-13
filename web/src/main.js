@@ -9,6 +9,7 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 import { initWebVitals } from './vitals'
+import { initPerformanceMonitoring, optimizeImageLoading, preloadCriticalResources } from './utils/performance'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -26,5 +27,14 @@ router.afterEach(() => {
 app.use(PrimeVue, { theme: { preset: Aura } })
 app.mount('#app')
 
-// Web Vitals initialisieren (nicht-blockierend)
-try { initWebVitals() } catch (_) {}
+// Performance optimizations (non-blocking)
+try { 
+  initWebVitals() 
+  initPerformanceMonitoring()
+  
+  // Optimize images after app is mounted
+  setTimeout(() => {
+    optimizeImageLoading()
+    preloadCriticalResources()
+  }, 1000)
+} catch (_) {}

@@ -7,7 +7,23 @@ export default defineConfig({
   base: '/',
   build: {
     target: 'es2020',
-    cssMinify: true
+    cssMinify: true,
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    },
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['vue', 'vue-router'],
+          primevue: ['primevue']
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
   },
   server: {
     host: true,

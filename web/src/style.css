@@ -123,6 +123,58 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 /* Containment: initial paint separation ohne Layout-Bugs */
 .cv-auto { content-visibility: auto; contain-intrinsic-size: 1px 800px; }
 
+/* Performance optimizations */
+* { box-sizing: border-box; }
+img { max-width: 100%; height: auto; }
+picture { display: block; }
+
+/* Reduce layout shifts */
+.hero-img, .about-img {
+  aspect-ratio: attr(width) / attr(height);
+  object-fit: cover;
+}
+
+/* Optimize font loading */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/inter/inter-400.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/inter/inter-600.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/inter/inter-700.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/inter/inter-800.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Cinzel';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url('/fonts/cinzel/cinzel-800.woff2') format('woff2');
+}
+
 /* CTA-Band */
 .cta-band { background: var(--brand-primary); color: #fff; padding: 44px 0; text-align: center; }
 .cta-band .cta-title { font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; font-weight: 800; margin: 0 0 10px; }
