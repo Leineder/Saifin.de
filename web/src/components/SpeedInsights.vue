@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { track } from '@vercel/speed-insights'
+import { injectSpeedInsights } from '@vercel/speed-insights'
 
 export default {
   name: 'SpeedInsights',
@@ -15,7 +15,7 @@ export default {
     initSpeedInsights() {
       try {
         // Speed Insights für Vue.js SPA initialisieren
-        track()
+        injectSpeedInsights()
         
         // Zusätzliche Performance-Metriken sammeln
         this.collectWebVitals()
@@ -31,27 +31,27 @@ export default {
       if (typeof window !== 'undefined' && window.webVitals) {
         // CLS (Cumulative Layout Shift)
         window.webVitals.getCLS((metric) => {
-          track('web-vital', { name: 'CLS', value: metric.value })
+          console.log('CLS:', metric.value)
         })
         
         // FID (First Input Delay)
         window.webVitals.getFID((metric) => {
-          track('web-vital', { name: 'FID', value: metric.value })
+          console.log('FID:', metric.value)
         })
         
         // FCP (First Contentful Paint)
         window.webVitals.getFCP((metric) => {
-          track('web-vital', { name: 'FCP', value: metric.value })
+          console.log('FCP:', metric.value)
         })
         
         // LCP (Largest Contentful Paint)
         window.webVitals.getLCP((metric) => {
-          track('web-vital', { name: 'LCP', value: metric.value })
+          console.log('LCP:', metric.value)
         })
         
         // TTFB (Time to First Byte)
         window.webVitals.getTTFB((metric) => {
-          track('web-vital', { name: 'TTFB', value: metric.value })
+          console.log('TTFB:', metric.value)
         })
       }
     }
