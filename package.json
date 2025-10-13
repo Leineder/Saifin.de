@@ -1,0 +1,14 @@
+{
+  "name": "saifin-de",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "cd web && npm run build",
+    "dev": "cd web && npm run dev",
+    "preview": "cd web && npm run preview",
+    "install-deps": "cd web && npm install"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
