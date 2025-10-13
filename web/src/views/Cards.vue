@@ -23,6 +23,11 @@ function parsePercentToNumber(text) {
   return m ? parseFloat(m[1]) : NaN
 }
 
+function handleImageError(event) {
+  console.log('Image failed to load:', event.target.src)
+  event.target.src = '/images/saifin_logo_vectorized_final.svg'
+}
+
 const filteredOffers = computed(() => {
   let filtered = offers
 
@@ -288,7 +293,7 @@ onBeforeUnmount(() => {
 
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="120" height="75" :srcset="`${offer.image} 120w, ${offer.image} 240w`" sizes="(max-width: 768px) 200px, 120px" />
+                  <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -331,7 +336,7 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="120" height="75" :srcset="`${offer.image} 120w, ${offer.image} 240w`" sizes="(max-width: 768px) 200px, 120px" />
+                    <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">

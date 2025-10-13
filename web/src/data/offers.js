@@ -65,7 +65,7 @@ export const offers = [
       'Bargeld weltweit gebührenfrei',
       'Reiseversicherungspaket inkl.'
     ],
-    image: '/images/creditcards/TFBank_MastercardGold.webp',
+    image: '/images/creditcards/TFBank_MastercardGold_11zon.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
