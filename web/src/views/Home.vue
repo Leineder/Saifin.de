@@ -140,12 +140,8 @@ onMounted(() => { storeTrackingParams() })
         </div>
       </div>
 
-      <!-- Block 2: Bild links, Text rechts -->
-      <div class="about-block mb-5 about-block-reverse">
-        <div class="about-image">
-          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse und Bewertung"
-               class="w-full border-round-lg shadow-2 about-img" loading="lazy" decoding="async" width="600" height="400" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
-        </div>
+      <!-- Block 2: Text links, Bild rechts -->
+      <div class="about-block mb-5">
         <div class="about-content">
           <div class="content-box about-text">
             <h3 class="section-title text-xl md:text-2xl mb-3">Wie bewerten wir?</h3>
@@ -155,6 +151,10 @@ onMounted(() => { storeTrackingParams() })
               unsere Mindestkriterien erfüllen, werden dargestellt.
             </p>
           </div>
+        </div>
+        <div class="about-image">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse und Bewertung"
+               class="w-full border-round-lg shadow-2 about-img" loading="lazy" decoding="async" width="600" height="400" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
         </div>
       </div>
 
@@ -288,12 +288,8 @@ onMounted(() => { storeTrackingParams() })
 .about-block {
   display: flex;
   align-items: center;
-  gap: 3rem;
-  margin-bottom: 4rem;
-}
-
-.about-block-reverse {
-  flex-direction: row-reverse;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
 }
 
 .about-content {
@@ -308,7 +304,7 @@ onMounted(() => { storeTrackingParams() })
 
 .about-img {
   width: 100%;
-  height: 400px;
+  height: 350px;
   object-fit: cover;
   transition: transform .2s ease, box-shadow .2s ease;
 }
@@ -318,23 +314,34 @@ onMounted(() => { storeTrackingParams() })
   box-shadow: 0 12px 32px var(--shadow-color);
 }
 
-/* Vertikale Zentrierung der Textbox neben den Bildern */
+/* Kompaktere Textsegmente */
 .about-text {
   display: flex;
-  align-items: center;
-  min-height: 400px;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 350px;
+  padding: 1.5rem;
+}
+
+.about-text h3 {
+  margin-bottom: 1rem;
+  color: var(--text);
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.about-text p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 1rem;
 }
 
 /* Mobile Layout: Übereinander statt nebeneinander */
 @media (max-width: 767px) {
   .about-block {
     flex-direction: column;
-    gap: 2rem;
-    margin-bottom: 3rem;
-  }
-  
-  .about-block-reverse {
-    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
   }
   
   .about-img {
@@ -343,6 +350,12 @@ onMounted(() => { storeTrackingParams() })
   
   .about-text {
     min-height: auto;
+    padding: 1rem;
+  }
+  
+  .about-text h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
   }
 }
 
