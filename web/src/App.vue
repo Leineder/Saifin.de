@@ -76,6 +76,11 @@ onMounted(() => {
 .app-root { background: var(--background); color: var(--text); }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
+/* Mobile Optimierung für Container */
+@media (max-width: 767px) {
+  .container { padding: 0 12px; }
+}
+
 /* Header - OPTIMIZED for CLS */
 .site-header {
   position: sticky;

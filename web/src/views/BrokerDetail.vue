@@ -103,6 +103,28 @@ const goApply = () => {
 @media (max-width: 1100px) {
   .detail-grid { grid-template-columns: 1fr; }
 }
+
+@media (max-width: 767px) {
+  .detail-grid {
+    gap: 16px;
+  }
+  .media {
+    order: 1;
+  }
+  .content {
+    order: 2;
+  }
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .cta-col {
+    gap: 12px;
+  }
+  .logo-frame {
+    height: 180px;
+  }
+}
 </style>
 <style scoped>
 .logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }

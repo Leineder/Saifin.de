@@ -95,6 +95,28 @@ const goApply = () => {
   .detail-grid { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 767px) {
+  .detail-grid {
+    gap: 16px;
+  }
+  .media {
+    order: 1;
+  }
+  .content {
+    order: 2;
+  }
+  .facts-grid {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .cta-col {
+    gap: 12px;
+  }
+  .logo-frame {
+    height: 180px;
+  }
+}
+
 .logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 12px; border: 1px solid var(--border); overflow: hidden; }
 .logo-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; background: #fff; }
 </style>

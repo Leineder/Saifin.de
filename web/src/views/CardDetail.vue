@@ -205,17 +205,44 @@ const formatEuro = (n) => {
   .card-image-container { 
     aspect-ratio: 1.6 / 1;
     max-width: 100%;
-    padding: 20px;
+    padding: 12px;
     margin: 0 auto;
+    min-height: unset;
+  }
+  .card-image {
+    transform: rotate(-1deg);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   }
   .facts-grid {
     grid-template-columns: 1fr; /* Einspaltig auf mobil */
     gap: 8px;
   }
+  .fact-label {
+    font-size: 0.7rem;
+  }
+  .fact-value {
+    font-size: 0.9rem;
+    word-break: break-word;
+    overflow-wrap: break-word;
+  }
   .cta-col {
     display: flex;
     flex-direction: column;
     gap: 12px;
+  }
+  .section-title {
+    font-size: 1.5rem !important;
+    line-height: 1.3;
+  }
+  .bullets {
+    padding: 0.75rem !important;
+  }
+  .bullets ul {
+    font-size: 0.9rem;
+    padding-left: 1rem !important;
+  }
+  .text-600 {
+    font-size: 0.8rem !important;
   }
 }
 </style>

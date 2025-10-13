@@ -81,6 +81,28 @@ function transformContent(article) {
 .content :deep(p) { margin: .5rem 0; color: var(--text); }
 .content :deep(ul), .content :deep(ol) { margin: .25rem 0 .5rem 1.25rem; color: var(--muted-text); }
 .actions { margin-top: 12px; }
+
+@media (max-width: 767px) {
+  .hero-img {
+    height: 200px;
+  }
+  .section-title {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+  .content {
+    padding: 1rem;
+  }
+  .content :deep(h2) {
+    font-size: 1.25rem;
+  }
+  .content :deep(h3) {
+    font-size: 1rem;
+  }
+  .content :deep(ul), .content :deep(ol) {
+    margin-left: 1rem;
+  }
+}
 </style>
 
 
