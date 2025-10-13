@@ -19,17 +19,27 @@ let mediaQuery
 let onChange
 
 onMounted(() => {
-  mediaQuery = window.matchMedia('(min-width: 769px)')
-  onChange = () => {
-    isDesktop.value = mediaQuery.matches
-    if (isDesktop.value) showFilters.value = false
+  // Use requestIdleCallback for non-critical media query setup
+  const setupMediaQuery = () => {
+    mediaQuery = window.matchMedia('(min-width: 769px)')
+    onChange = () => {
+      isDesktop.value = mediaQuery.matches
+      if (isDesktop.value) showFilters.value = false
+    }
+    mediaQuery.addEventListener('change', onChange)
+    onChange()
   }
-  mediaQuery.addEventListener ? mediaQuery.addEventListener('change', onChange) : mediaQuery.addListener(onChange)
-  onChange()
+  
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(setupMediaQuery, { timeout: 500 })
+  } else {
+    setupMediaQuery()
+  }
 })
+
 onBeforeUnmount(() => {
   if (mediaQuery && onChange) {
-    mediaQuery.removeEventListener ? mediaQuery.removeEventListener('change', onChange) : mediaQuery.removeListener(onChange)
+    mediaQuery.removeEventListener('change', onChange)
   }
 })
 

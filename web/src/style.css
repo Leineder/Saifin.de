@@ -121,15 +121,40 @@ input::placeholder, textarea::placeholder { color: var(--subtle-text); }
 .section-eyebrow { color: var(--muted-text); text-transform: uppercase; letter-spacing: .12em; font-weight: 700; font-size: .75rem; }
 
 /* Containment: initial paint separation ohne Layout-Bugs */
-.cv-auto { content-visibility: auto; contain-intrinsic-size: 1px 800px; }
+.cv-auto { 
+  content-visibility: auto; 
+  contain-intrinsic-size: auto 800px;
+}
 
 /* Performance optimizations */
 * { box-sizing: border-box; }
-img { max-width: 100%; height: auto; }
+img { 
+  max-width: 100%; 
+  height: auto; 
+  /* Prevent image dragging */
+  user-drag: none;
+  -webkit-user-drag: none;
+  /* Optimize image rendering */
+  image-rendering: -webkit-optimize-contrast;
+}
 picture { display: block; }
 
+/* Optimize will-change usage - only on elements that actually animate */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-img:hover,
+  .about-img:hover {
+    will-change: transform;
+  }
+}
+
 /* Minimales Grid-System (ersetzt PrimeFlex) */
-.grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 1rem; }
+.grid { 
+  display: grid; 
+  grid-template-columns: repeat(12, 1fr); 
+  gap: 1rem;
+  /* Optimize grid performance */
+  contain: layout style;
+}
 .grid > [class*='col-'] { grid-column: span 12; }
 
 /* Spalten-Klassen */
@@ -200,26 +225,23 @@ picture { display: block; }
 /* Shadow-Utilities */
 .shadow-2 { box-shadow: 0 10px 24px var(--shadow-color); }
 
-/* Reduce layout shifts */
-.hero-img, .about-img {
-  aspect-ratio: attr(width) / attr(height);
+/* Reduce layout shifts - explicit aspect ratios */
+.hero-img {
+  aspect-ratio: 16/9;
   object-fit: cover;
 }
-
-/* Optimize font loading */
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/fonts/inter/inter-400.woff2') format('woff2');
+.about-img {
+  aspect-ratio: 3/2;
+  object-fit: cover;
+  height: auto;
 }
 
+/* Font loading - critical fonts are inlined in index.html, these are optional/fallback */
 @font-face {
   font-family: 'Inter';
   font-style: normal;
   font-weight: 600;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/inter/inter-600.woff2') format('woff2');
 }
 
@@ -227,7 +249,7 @@ picture { display: block; }
   font-family: 'Inter';
   font-style: normal;
   font-weight: 700;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/inter/inter-700.woff2') format('woff2');
 }
 
@@ -235,16 +257,8 @@ picture { display: block; }
   font-family: 'Inter';
   font-style: normal;
   font-weight: 800;
-  font-display: swap;
+  font-display: optional;
   src: url('/fonts/inter/inter-800.woff2') format('woff2');
-}
-
-@font-face {
-  font-family: 'Cinzel';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('/fonts/cinzel/cinzel-800.woff2') format('woff2');
 }
 
 /* CTA-Band */

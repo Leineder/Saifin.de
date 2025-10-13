@@ -30,37 +30,58 @@ export default defineConfig({
         drop_console: true,
         drop_debugger: true,
         pure_funcs: ['console.log', 'console.info', 'console.debug', 'console.warn'],
-        passes: 2
+        passes: 3,
+        // More aggressive compression
+        unsafe: true,
+        unsafe_comps: true,
+        unsafe_math: true,
+        unsafe_proto: true,
+        unsafe_regexp: true
       },
       format: {
         comments: false
+      },
+      mangle: {
+        safari10: true
       }
     },
     rollupOptions: {
       output: {
-        // Aggressiveres Code-Splitting
+        // ULTRA aggressive Code-Splitting for smaller initial bundles
         manualChunks(id) {
-          // Vendor chunks
+          // Vendor chunks - split more aggressively
           if (id.includes('node_modules')) {
-            if (id.includes('vue')) {
+            // Core Vue runtime
+            if (id.includes('@vue/runtime-core') || id.includes('@vue/runtime-dom')) {
               return 'vue-core'
             }
-            if (id.includes('router')) {
+            // Vue reactivity can be separate
+            if (id.includes('@vue/reactivity')) {
+              return 'vue-reactivity'
+            }
+            // Router separate
+            if (id.includes('vue-router')) {
               return 'vue-router'
             }
+            // Pinia separate
             if (id.includes('pinia')) {
               return 'pinia'
             }
-            if (id.includes('primeflex')) {
-              return 'primeflex'
-            }
+            // Other vendor code
             return 'vendor'
           }
-          // Route-basiertes Splitting
+          // Route-basiertes Splitting - each view is its own chunk
           if (id.includes('/views/')) {
             const match = id.match(/\/views\/([^/]+)\.vue/)
             if (match) {
               return `view-${match[1].toLowerCase()}`
+            }
+          }
+          // Split data files
+          if (id.includes('/data/')) {
+            const match = id.match(/\/data\/([^/]+)\.js/)
+            if (match) {
+              return `data-${match[1]}`
             }
           }
         },
@@ -80,13 +101,19 @@ export default defineConfig({
         }
       }
     },
-    chunkSizeWarningLimit: 400,
-    // Preload strategy
+    chunkSizeWarningLimit: 300,
+    // Disable module preload polyfill for faster initial load
     modulePreload: {
       polyfill: false
     },
-    // Optimize CSS
-    cssCodeSplit: true
+    // Aggressive CSS code splitting
+    cssCodeSplit: true,
+    // Reduce asset inlining threshold
+    assetsInlineLimit: 2048,
+    // Enable source map in production for better debugging (optional, can remove for smaller builds)
+    sourcemap: false,
+    // Optimize chunk size
+    reportCompressedSize: false
   },
   server: {
     host: true,

@@ -37,9 +37,19 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    if (savedPosition) return savedPosition
-    if (to.hash) return { el: to.hash, behavior: 'smooth' }
-    return { top: 0 }
+    // Return a promise to wait for page transition
+    return new Promise((resolve) => {
+      // Use setTimeout to defer scroll after DOM update
+      setTimeout(() => {
+        if (savedPosition) {
+          resolve(savedPosition)
+        } else if (to.hash) {
+          resolve({ el: to.hash, behavior: 'smooth', top: 80 })
+        } else {
+          resolve({ top: 0, behavior: 'auto' })
+        }
+      }, 100)
+    })
   }
 })
 

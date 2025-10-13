@@ -3,21 +3,21 @@
     <!-- Hauptinhalt -->
     <header class="site-header">
       <div class="container header-inner">
-        <router-link to="/" class="brand" aria-label="Startseite">
+        <router-link to="/" class="brand" aria-label="Startseite" @click="closeMenu">
           <span class="brand-mark">
-            <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="Saifin Logo" draggable="false" @error="(e) => (e.target.src = '/images/saifin_logo_square_originalscale.svg')" />
+            <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="Saifin Logo" width="80" height="80" draggable="false" loading="eager" fetchpriority="high" />
           </span>
         </router-link>
 
-        <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten">
+        <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten" aria-expanded="isMenuOpen">
           <i class="pi pi-bars"></i>
         </button>
 
-        <nav :class="['site-nav', { 'is-open': isMenuOpen }]">
-          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu">Kreditkarten</router-link>
-          <router-link to="/broker" class="nav-link" @click="closeMenu">Broker</router-link>
-          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu">Tagesgeldkonto</router-link>
-          <router-link to="/ratgeber" class="nav-link" @click="closeMenu">Ratgeber</router-link>
+        <nav :class="['site-nav', { 'is-open': isMenuOpen }]" :aria-hidden="!isMenuOpen && !isDesktop">
+          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu" rel="prefetch">Kreditkarten</router-link>
+          <router-link to="/broker" class="nav-link" @click="closeMenu" rel="prefetch">Broker</router-link>
+          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu" rel="prefetch">Tagesgeldkonto</router-link>
+          <router-link to="/ratgeber" class="nav-link" @click="closeMenu" rel="prefetch">Ratgeber</router-link>
         </nav>
       </div>
     </header>
@@ -46,17 +46,28 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const isMenuOpen = ref(false)
+const isDesktop = ref(false)
 
 const closeMenu = () => { isMenuOpen.value = false }
 
 onMounted(() => {
-  // Bereinige alle Passwort-bezogenen localStorage-Daten
-  localStorage.removeItem('siteAuthenticated')
-  localStorage.removeItem('password')
-  localStorage.removeItem('isAuthenticated')
+  // Bereinige alle Passwort-bezogenen localStorage-Daten (non-blocking)
+  requestAnimationFrame(() => {
+    try {
+      localStorage.removeItem('siteAuthenticated')
+      localStorage.removeItem('password')
+      localStorage.removeItem('isAuthenticated')
+    } catch (_) {}
+  })
+  
+  // Setup media query for navigation visibility
+  const mediaQuery = window.matchMedia('(min-width: 768px)')
+  const updateDesktop = () => { isDesktop.value = mediaQuery.matches }
+  mediaQuery.addEventListener('change', updateDesktop)
+  updateDesktop()
 })
 </script>
 

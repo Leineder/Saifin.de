@@ -19,12 +19,10 @@
     <meta name="twitter:title" content="Saifin – Kreditkarten, Broker & Tagesgeld vergleichen" />
     <meta name="twitter:description" content="Vergleiche Kreditkarten, Broker und Tagesgeld. Schnell, transparent, unabhängig." />
     <meta name="twitter:image" content="/images/landing-hero.webp" />
-    <!-- Preload/priority for LCP hero image -->
-    <link rel="preload" as="image" href="/images/landing-hero.webp" imagesrcset="/images/landing-hero.webp 768w, /images/landing-hero.webp 1200w, /images/landing-hero.webp 1600w" imagesizes="100vw" fetchpriority="high" />
-    <!-- Preload critical fonts with font-display swap -->
+    <!-- Preload ONLY critical LCP hero image for mobile (most important) -->
+    <link rel="preload" as="image" href="/images/landing-hero.webp" fetchpriority="high" />
+    <!-- Preload ONLY the 2 most critical fonts to reduce blocking time -->
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-400.woff2" crossorigin="anonymous">
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-600.woff2" crossorigin="anonymous">
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-700.woff2" crossorigin="anonymous">
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cinzel/cinzel-800.woff2" crossorigin="anonymous">
     <script type="application/ld+json">
     {
@@ -48,13 +46,18 @@
       }
     }
     </script>
-    <!-- Optimize third-party connections (defer for non-critical resources) -->
-    <link rel="dns-prefetch" href="https://images.unsplash.com">
-    <link rel="dns-prefetch" href="https://connect.facebook.net">
-    <link rel="dns-prefetch" href="https://analytics.tiktok.com">
-    <!-- Local fonts (no external blocking) -->
+    <!-- Optimize third-party connections - ONLY preconnect, not dns-prefetch for faster connection -->
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <!-- Defer tracking connections until after page load -->
+    <!-- <link rel="dns-prefetch" href="https://connect.facebook.net">
+    <link rel="dns-prefetch" href="https://analytics.tiktok.com"> -->
+    <!-- Inline critical font-face declarations to avoid render-blocking -->
+    <style>
+      @font-face{font-family:'Inter';font-style:normal;font-weight:400;font-display:swap;src:url('/fonts/inter/inter-400.woff2') format('woff2')}
+      @font-face{font-family:'Cinzel';font-style:normal;font-weight:800;font-display:swap;src:url('/fonts/cinzel/cinzel-800.woff2') format('woff2')}
+    </style>
+    <!-- Load non-critical fonts and icons async -->
     <link rel="stylesheet" href="/fonts/fonts.css" media="print" onload="this.media='all'">
-    <!-- Minimale Icon-Font statt 342kB PrimeIcons -->
     <link rel="stylesheet" href="/fonts/icons.css" media="print" onload="this.media='all'">
     <style>
       /* Critical CSS - Above the fold styles only */
@@ -121,17 +124,19 @@
         width: auto;
       }
       
-      /* Critical hero styles */
+      /* Critical hero styles - OPTIMIZED for LCP */
       .hero {
         height: clamp(420px, 62vh, 640px);
         position: relative;
         overflow: hidden;
+        contain: layout style paint;
       }
       .hero-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
         display: block;
+        content-visibility: auto;
       }
       .hero-overlay {
         position: absolute;
@@ -241,23 +246,27 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
-    <!-- Service Worker Registration (deferred) -->
+    <!-- Service Worker Registration (heavily deferred - after interaction) -->
     <script>
-      if ('serviceWorker' in navigator) {
-        // Register SW after page load using requestIdleCallback
+      if ('serviceWorker' in navigator && 'requestIdleCallback' in window) {
+        // Only register SW on interaction or after 5s idle to avoid blocking
         const registerSW = () => {
-          navigator.serviceWorker.register('/sw.js').catch(() => {});
+          requestIdleCallback(() => {
+            navigator.serviceWorker.register('/sw.js').catch(() => {});
+          }, { timeout: 5000 });
         };
         
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(registerSW, { timeout: 3000 });
-        } else {
-          window.addEventListener('load', registerSW);
-        }
+        // Defer until user interaction
+        ['click', 'scroll', 'keydown'].forEach(event => {
+          document.addEventListener(event, registerSW, { once: true, passive: true });
+        });
+        
+        // Fallback: register after 5s
+        setTimeout(registerSW, 5000);
       }
     </script>
     
-    <!-- Meta Pixel Code (deferred on idle/load) -->
+    <!-- Meta Pixel Code (HEAVILY DEFERRED - load after interaction or 6s) -->
     <script>
       (function(){
         function initMetaPixel(){
@@ -272,16 +281,25 @@
           fbq('init', '704761698638212');
           fbq('track', 'PageView');
         }
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initMetaPixel, { timeout: 4000 });
-        } else {
-          window.addEventListener('load', initMetaPixel);
-        }
+        
+        // Defer until user interaction or 6s idle
+        const loadPixel = () => {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(initMetaPixel, { timeout: 6000 });
+          } else {
+            setTimeout(initMetaPixel, 6000);
+          }
+        };
+        
+        ['click', 'scroll', 'touchstart'].forEach(event => {
+          document.addEventListener(event, loadPixel, { once: true, passive: true });
+        });
+        setTimeout(loadPixel, 6000);
       })();
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=704761698638212&ev=PageView&noscript=1" /></noscript>
     
-    <!-- TikTok Pixel Code (deferred on idle/load) -->
+    <!-- TikTok Pixel Code (HEAVILY DEFERRED - load after interaction or 6s) -->
     <script>
       (function(){
         function initTikTok(){
@@ -293,11 +311,20 @@
             ttq.page();
           }(window, document, 'ttq');
         }
-        if ('requestIdleCallback' in window) {
-          requestIdleCallback(initTikTok, { timeout: 4000 });
-        } else {
-          window.addEventListener('load', initTikTok);
-        }
+        
+        // Defer until user interaction or 6s idle
+        const loadTikTok = () => {
+          if ('requestIdleCallback' in window) {
+            requestIdleCallback(initTikTok, { timeout: 6000 });
+          } else {
+            setTimeout(initTikTok, 6000);
+          }
+        };
+        
+        ['click', 'scroll', 'touchstart'].forEach(event => {
+          document.addEventListener(event, loadTikTok, { once: true, passive: true });
+        });
+        setTimeout(loadTikTok, 6000);
       })();
     </script>
   </body>
