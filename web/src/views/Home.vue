@@ -104,7 +104,7 @@ onMounted(() => { storeTrackingParams() })
     <div class="surface-card border-round-lg">
       <div v-for="(t, idx) in testimonials" :key="t.name" class="testimonial">
         <div class="p-3 md:p-4 flex align-items-start gap-3">
-          <img :src="t.avatar" :alt="`Avatar von ${t.name}`" class="border-circle" style="width:64px;height:64px;object-fit:cover" loading="lazy" />
+          <img :src="t.avatar" :alt="`Avatar von ${t.name}`" class="border-circle" style="width:64px;height:64px;object-fit:cover" loading="lazy" decoding="async" width="64" height="64" />
           <div class="flex-1">
             <div class="text-900 font-bold mb-1">{{ t.name }}</div>
             <div class="stars mb-2">
@@ -136,16 +136,16 @@ onMounted(() => { storeTrackingParams() })
         </div>
       </div>
       <div class="col-12 md:col-6">
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format" alt="Team"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px" fetchpriority="low">
+        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop" alt="Team"
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
       </div>
     </div>
 
     <!-- Block 2 -->
     <div class="grid align-items-stretch mb-5">
       <div class="col-12 md:col-6 order-2 md:order-1">
-        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format" alt="Analyse"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px" fetchpriority="low">
+        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse"
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
       </div>
       <div class="col-12 md:col-6 order-1 md:order-2">
         <div class="content-box about-text">
@@ -176,8 +176,8 @@ onMounted(() => { storeTrackingParams() })
         </div>
       </div>
       <div class="col-12 md:col-6">
-        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200&auto=format" alt="Partnerschaft"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=600&auto=format 600w, https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=80&w=1200&auto=format 1200w" sizes="(max-width: 640px) 600px, 1200px">
+        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop" alt="Partnerschaft"
+             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
             </div>
     </div>
   </section>

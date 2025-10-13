@@ -39,6 +39,9 @@
         <router-link to="/kontakt" class="footer-link">Kontakt</router-link>
       </div>
     </footer>
+    
+    <!-- Speed Insights für Performance-Monitoring -->
+    <SpeedInsights />
   </div>
 </template>
 

@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 // REMOVED: PrimeVue komplett entfernt - nur CSS-Klassen werden verwendet!
-// Nur PrimeFlex CSS behalten für Grid-System
-import 'primeflex/primeflex.css'
+// OPTIMIZED: PrimeFlex durch eigenes minimales Grid-System ersetzt
+// import 'primeflex/primeflex.css' - ENTFERNT für bessere Performance
 // Minimale Icon-Font statt 342kB PrimeIcons
 // import '/fonts/icons.css' - wird über HTML geladen
 
@@ -11,10 +11,14 @@ import router from './router'
 import './style.css'
 import { initWebVitals } from './vitals'
 import { initPerformanceMonitoring, optimizeImageLoading, preloadCriticalResources } from './utils/performance'
+import SpeedInsights from './components/SpeedInsights.vue'
 
 const app = createApp(App)
 app.use(createPinia())
 app.use(router)
+
+// Speed Insights Komponente global registrieren
+app.component('SpeedInsights', SpeedInsights)
 // Meta Pixel & TikTok Pixel: SPA-Pageviews bei jedem Routenwechsel
 router.afterEach(() => {
   try {

@@ -10,11 +10,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@primevue/themes": "^4.3.7",
+    "@vercel/speed-insights": "^1.2.0",
     "pinia": "^3.0.3",
-    "primeflex": "^4.0.0",
-    "primeicons": "^7.0.0",
-    "primevue": "^4.3.7",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1",
     "web-vitals": "^4.2.4"
