@@ -28,9 +28,7 @@ export default defineConfig({
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['vue', 'vue-router'],
-          primevue: ['primevue'],
-          icons: ['primeicons']
+          vendor: ['vue', 'vue-router']
         }
       }
     },

@@ -1,11 +1,10 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-// Lazy load PrimeVue to reduce initial bundle size
-import PrimeVue from 'primevue/config'
-import Aura from '@primevue/themes/aura'
-// Only import essential icons instead of full icon set
-import 'primeicons/primeicons.css'
+// REMOVED: PrimeVue komplett entfernt - nur CSS-Klassen werden verwendet!
+// Nur PrimeFlex CSS behalten für Grid-System
 import 'primeflex/primeflex.css'
+// Minimale Icon-Font statt 342kB PrimeIcons
+// import '/fonts/icons.css' - wird über HTML geladen
 
 import App from './App.vue'
 import router from './router'
@@ -26,7 +25,7 @@ router.afterEach(() => {
     // best-effort, Fehler ignorieren
   }
 })
-app.use(PrimeVue, { theme: { preset: Aura } })
+// REMOVED: PrimeVue Plugin - nicht mehr benötigt!
 app.mount('#app')
 
 // Performance optimizations (non-blocking)

@@ -52,6 +52,8 @@
     <link rel="preload" as="style" href="/fonts/fonts.css" onload="this.onload=null;this.rel='stylesheet'">
     <link rel="preload" as="font" type="font/woff2" href="/fonts/cinzel/cinzel-800.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="/fonts/inter/inter-700.woff2" crossorigin>
+    <!-- Minimale Icon-Font statt 342kB PrimeIcons -->
+    <link rel="stylesheet" href="/fonts/icons.css">
     <style>
       /* Critical CSS - Above the fold styles only */
       :root {
@@ -237,6 +239,21 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered:', registration);
+            })
+            .catch((error) => {
+              console.log('SW registration failed:', error);
+            });
+        });
+      }
+    </script>
+    
     <!-- TikTok Pixel Code (deferred on idle/load) -->
     <script>
       (function(){

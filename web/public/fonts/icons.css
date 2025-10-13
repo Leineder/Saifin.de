@@ -1,0 +1,29 @@
+/* Minimal Icon Font - nur die benötigten Icons */
+@font-face {
+  font-family: 'SaifinIcons';
+  src: url('data:font/woff2;base64,') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+.pi {
+  font-family: 'SaifinIcons';
+  font-style: normal;
+  font-weight: normal;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  text-align: center;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Nur die verwendeten Icons als CSS-Icons */
+.pi-bars:before { content: '☰'; }
+.pi-filter:before { content: '⚏'; }
+.pi-gift:before { content: '🎁'; }
+.pi-info-circle:before { content: 'ⓘ'; }
+.pi-check:before { content: '✓'; }
+.pi-chevron-right:before { content: '›'; }
+.pi-shield:before { content: '🛡'; }
