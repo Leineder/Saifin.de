@@ -9,7 +9,7 @@ export const offers = [
       'Inland 3,95 € je Abhebung, Ausland 0 €',
       'Teilzahlung voreingestellt (3 % / min. 20 €)'
     ],
-    image: '/images/creditcards/hanseatic-bank-genialcard.webp',
+    image: '/images/creditcards/hanseatic-bank-genialcard_11zon.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'VISA – Revolving',
@@ -36,7 +36,7 @@ export const offers = [
       'Bargeld weltweit gebührenfrei (seitens Hanseatic)',
       'Reiseversicherungspaket inklusive'
     ],
-    image: '/images/creditcards/hanseatic-goldcard.webp',
+    image: '/images/creditcards/hanseatic-goldcard_11zon.webp',
     annualFee: 58.8,
     foreignFee: '0 %',
     cardType: 'VISA – Revolving',
@@ -89,7 +89,7 @@ export const offers = [
       '1 % Tankrabatt (bis 200 €/Monat)',
       'Apple Pay/Google Pay/Garmin Pay'
     ],
-    image: '/images/creditcards/santander-bestcard-basic.webp',
+    image: '/images/creditcards/santander-bestcard-basic_11zon.webp',
     annualFee: 0,
     foreignFee: '1,85 %',
     cardType: 'VISA – Revolving',
@@ -184,7 +184,7 @@ export const offers = [
       'Classic ca. 36 €/Jahr, Gold ca. 72 €/Jahr',
       'Girokontobindung erforderlich'
     ],
-    image: '/images/creditcards/1822 direkt Visa.webp',
+    image: '/images/creditcards/1822 direkt Visa_11zon.webp',
     annualFee: 36,
     foreignFee: 'ca. 2,25 %',
     cardType: 'VISA – Charge (Girokonto-Abrechnung)',

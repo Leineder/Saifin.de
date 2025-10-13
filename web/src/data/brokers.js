@@ -3,7 +3,7 @@ export const brokers = [
     id: 'captrader',
     slug: 'captrader',
     name: 'CapTrader',
-    image: '/images/brokers/captrader_cover.webp',
+    image: '/images/brokers/captrader_cover_11zon.webp',
     highlights: [
       'Zugang zu >150 Börsen, >1,2 Mio. Wertpapieren',
       'Plattformen: Trader Workstation (TWS), Desktop, App',
