@@ -40,7 +40,7 @@ const formatEuro = (n) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <div class="card-image-container">
+        <div class="card-image-container surface-card border-round-xl card-accent">
           <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="card-image" loading="lazy" decoding="async">
         </div>
       </div>
@@ -122,14 +122,11 @@ const formatEuro = (n) => {
 .media { grid-column: 1 / 2; }
 .card-image-container { 
   width: 100%; 
-  min-height: 500px; 
-  max-height: 800px;
+  aspect-ratio: 1.6 / 1; /* Gleiches Seitenverhältnis wie Übersichtsseite (120:75) */
+  max-width: 600px; /* Maximal 5x größer als 120px */
   display: flex; 
   align-items: center; 
   justify-content: center; 
-  background: #fff; 
-  border-radius: 8px; 
-  border: 1px solid #e0e0e0; 
   padding: 30px;
   box-sizing: border-box;
   overflow: visible;

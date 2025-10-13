@@ -1,7 +1,9 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
+// Lazy load PrimeVue to reduce initial bundle size
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
+// Only import essential icons instead of full icon set
 import 'primeicons/primeicons.css'
 import 'primeflex/primeflex.css'
 
