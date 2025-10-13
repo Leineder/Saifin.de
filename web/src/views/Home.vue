@@ -119,66 +119,68 @@ onMounted(() => { storeTrackingParams() })
 
   <!-- Über uns -->
   <section id="about" class="section cv-auto">
-    <h2 class="text-2xl md:text-3xl text-center mb-4">Über uns</h2>
+    <div class="container">
+      <h2 class="text-2xl md:text-3xl text-center mb-4">Über uns</h2>
 
-    <!-- Block 1 -->
-    <div class="grid align-items-stretch mb-5">
-      <div class="col-12 md:col-6">
-        <div class="content-box about-text">
-          <div>
-            <h3 class="section-title text-xl md:text-2xl mb-2">Was ist Saifin?</h3>
-            <p class="text-700">
-              Wir sind ein unabhängiges Vergleichsportal für Finanzprodukte. Unser Ziel: Dir eine
-              klare, schnelle und zuverlässige Übersicht über Angebote zu liefern, damit du ohne
-              Umwege die passende Kreditkarte findest.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 md:col-6">
-        <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop" alt="Team"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
-      </div>
-    </div>
-
-    <!-- Block 2 -->
-    <div class="grid align-items-stretch mb-5">
-      <div class="col-12 md:col-6 order-2 md:order-1">
-        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
-      </div>
-      <div class="col-12 md:col-6 order-1 md:order-2">
-        <div class="content-box about-text">
-          <div>
-            <h3 class="section-title text-xl md:text-2xl mb-2">Wie bewerten wir?</h3>
-            <p class="text-700">
-              Produkte landen erst nach einer sorgfältigen Prüfung in unserem Vergleich. Wir schauen
-              auf Konditionen wie Gebühren, Leistungen, Service und Transparenz. Nur Angebote, die
-              unsere Mindestkriterien erfüllen, werden dargestellt.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Block 3 -->
-    <div class="grid align-items-stretch">
-      <div class="col-12 md:col-6">
-        <div class="content-box about-text">
-          <div>
-            <h3 class="section-title text-xl md:text-2xl mb-2">Wie finanzieren wir uns?</h3>
-            <p class="text-700">
-              Für einige Produktlinks können wir eine Vergütung von Partnern erhalten. Das hilft uns,
-              den Service kostenlos anzubieten. Unsere redaktionellen Kriterien bleiben davon unberührt;
-              wir kennzeichnen Angebote transparent und achten auf eine faire Darstellung.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 md:col-6">
-        <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop" alt="Partnerschaft"
-             class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:320px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="320" srcset="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
+      <!-- Block 1: Text links, Bild rechts -->
+      <div class="grid align-items-center mb-5">
+        <div class="col-12 md:col-6">
+          <div class="content-box about-text">
+            <div>
+              <h3 class="section-title text-xl md:text-2xl mb-3">Was ist Saifin?</h3>
+              <p class="text-700">
+                Wir sind ein unabhängiges Vergleichsportal für Finanzprodukte. Unser Ziel: Dir eine
+                klare, schnelle und zuverlässige Übersicht über Angebote zu liefern, damit du ohne
+                Umwege die passende Kreditkarte findest.
+              </p>
             </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6">
+          <img src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop" alt="Team bei der Arbeit"
+               class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:400px" loading="lazy" decoding="async" width="1200" height="400" srcset="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
+        </div>
+      </div>
+
+      <!-- Block 2: Bild links, Text rechts -->
+      <div class="grid align-items-center mb-5">
+        <div class="col-12 md:col-6 order-2 md:order-1">
+          <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop" alt="Analyse und Bewertung"
+               class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:400px" loading="lazy" decoding="async" width="1200" height="400" srcset="https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1553877522-43269d4ea984?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
+        </div>
+        <div class="col-12 md:col-6 order-1 md:order-2">
+          <div class="content-box about-text">
+            <div>
+              <h3 class="section-title text-xl md:text-2xl mb-3">Wie bewerten wir?</h3>
+              <p class="text-700">
+                Produkte landen erst nach einer sorgfältigen Prüfung in unserem Vergleich. Wir schauen
+                auf Konditionen wie Gebühren, Leistungen, Service und Transparenz. Nur Angebote, die
+                unsere Mindestkriterien erfüllen, werden dargestellt.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Block 3: Text links, Bild rechts -->
+      <div class="grid align-items-center">
+        <div class="col-12 md:col-6">
+          <div class="content-box about-text">
+            <div>
+              <h3 class="section-title text-xl md:text-2xl mb-3">Wie finanzieren wir uns?</h3>
+              <p class="text-700">
+                Für einige Produktlinks können wir eine Vergütung von Partnern erhalten. Das hilft uns,
+                den Service kostenlos anzubieten. Unsere redaktionellen Kriterien bleiben davon unberührt;
+                wir kennzeichnen Angebote transparent und achten auf eine faire Darstellung.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 md:col-6">
+          <img src="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop" alt="Partnerschaft und Transparenz"
+               class="w-full border-round-lg shadow-2 about-img" style="object-fit:cover;max-height:400px;filter:grayscale(100%)" loading="lazy" decoding="async" width="1200" height="400" srcset="https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=600&auto=format&fit=crop 600w, https://images.unsplash.com/photo-1556745757-8d76bdb6984b?q=60&w=1200&auto=format&fit=crop 1200w" sizes="(max-width: 768px) 100vw, 50vw">
+        </div>
+      </div>
     </div>
   </section>
 
@@ -288,9 +290,39 @@ onMounted(() => { storeTrackingParams() })
 .offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
 .offer-thumb { width: 96px; height: 60px; object-fit: cover; border-radius: 0.5rem; border: 1px solid var(--border); }
 
+/* Layout für abwechselnde Bilder links/rechts */
+.about-img {
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+
+.about-img:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px var(--shadow-color);
+}
+
 /* Vertikale Zentrierung der Textbox neben den Bildern auf Desktop */
 @media (min-width: 768px) {
-  .about-text { min-height: 320px; display: flex; align-items: center; }
+  .about-text { 
+    min-height: 400px; 
+    display: flex; 
+    align-items: center; 
+  }
+  
+  /* Bessere Abstände zwischen den Blöcken */
+  .grid.mb-5 {
+    margin-bottom: 4rem;
+  }
+}
+
+/* Mobile Optimierung */
+@media (max-width: 767px) {
+  .about-text {
+    margin-bottom: 1.5rem;
+  }
+  
+  .about-img {
+    margin-bottom: 1.5rem;
+  }
 }
 
 /* CTA-Band unten: Ausrichtung und Buttons wie im Hero */
