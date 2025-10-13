@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Card Detail</title>
+    <style>
+        .card-image-container { 
+            width: 100%; 
+            aspect-ratio: 1.6 / 1;
+            max-width: 600px;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 30px;
+            box-sizing: border-box;
+            overflow: visible;
+            background: #fff;
+            border-radius: 0.75rem;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.1);
+        }
+        .card-image { 
+            max-width: 100%; 
+            max-height: 100%; 
+            width: auto; 
+            height: auto; 
+            object-fit: contain; 
+            display: block;
+            border-radius: 0.5rem;
+            border: 1px solid #e0e0e0;
+            transform: rotate(-2deg);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-image:hover {
+            transform: rotate(-1deg) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+        }
+        body {
+            padding: 50px;
+            background: #f7f9fc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test: Kreditkarten-Detailseite Styling</h1>
+    <p>Hier sollten Sie die Änderungen sehen:</p>
+    
+    <div class="card-image-container">
+        <img src="/images/creditcards/hanseatic-bank-genialcard.webp" alt="Hanseatic Bank GenialCard" class="card-image">
+    </div>
+    
+    <p>Die Kreditkarte sollte:</p>
+    <ul>
+        <li>Leicht rotiert sein (-2deg)</li>
+        <li>Einen Schatten haben</li>
+        <li>In einem weißen Container mit abgerundeten Ecken stehen</li>
+        <li>Das Seitenverhältnis 1.6:1 haben</li>
+        <li>Beim Hover weniger rotiert und leicht vergrößert werden</li>
+    </ul>
+</body>
+</html>
