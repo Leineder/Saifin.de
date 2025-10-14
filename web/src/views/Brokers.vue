@@ -381,6 +381,10 @@ onBeforeUnmount(() => {
   transform: scale(1.25);
   padding: 1px;
   background: #fff !important;
+  object-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-image.logo-finanzen-net-zero,

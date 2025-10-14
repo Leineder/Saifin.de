@@ -142,6 +142,10 @@ const goApply = () => {
   transform: scale(1.25);
   padding: 2px;
   background: #fff !important;
+  object-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .logo-frame img.detail-logo.finanzen-net-zero,

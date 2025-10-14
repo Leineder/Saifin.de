@@ -256,18 +256,75 @@ function goToApply(o) {
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
 .card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
-.card-image.pbb-direkt,
-.card-image.suresse-direkt-bank,
-.card-image.ferratum,
-.card-image.consorsbank { object-fit: contain; background: #fff; }
+/* Alle Tagesgeld-Logos optimiert für Rahmenausfüllung */
+.card-image.pbb-direkt { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.15);
+  padding: 2px;
+}
 
-/* J&T Direktbank und Raisin Logos vergrößern */
-.card-image.jt-direktbank,
-.card-image.raisin { 
+.card-image.suresse-direkt-bank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.2);
+  padding: 1px;
+}
+
+.card-image.tf-bank { 
   object-fit: contain; 
   background: #fff; 
   transform: scale(1.1);
-  padding: 4px;
+  padding: 3px;
+}
+
+.card-image.distingo-bank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.15);
+  padding: 2px;
+}
+
+.card-image.raisin { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.2);
+  padding: 1px;
+}
+
+.card-image.jt-direktbank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.15);
+  padding: 2px;
+}
+
+.card-image.openbank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.1);
+  padding: 3px;
+}
+
+.card-image.santander-consumer-bank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.15);
+  padding: 2px;
+}
+
+.card-image.ferratum { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.1);
+  padding: 3px;
+}
+
+.card-image.consorsbank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.15);
+  padding: 2px;
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
