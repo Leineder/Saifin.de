@@ -378,7 +378,7 @@ onBeforeUnmount(() => {
 }
 
 .card-image.logo-captrader { 
-  transform: scale(1.25);
+  transform: scale(1.25) translateX(-2px);
   padding: 0px;
   background: #fff !important;
   object-position: center center;
