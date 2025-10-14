@@ -38,7 +38,7 @@ const goApply = () => {
     <div class="container detail-grid">
       <div class="media">
         <div class="logo-frame">
-          <img :src="broker.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${broker.name} – Logo`" :class="'detail-logo ' + broker.slug" loading="lazy" decoding="async" width="720" height="240" />
+          <img :src="(broker.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241014'" :alt="`${broker.name} – Logo`" :class="'detail-logo ' + broker.slug" loading="lazy" decoding="async" width="720" height="240" />
         </div>
       </div>
       <div class="content">
