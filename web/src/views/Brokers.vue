@@ -378,6 +378,7 @@ onBeforeUnmount(() => {
 .card-image.logo-etoro { 
   transform: scale(1.1);
   padding: 4px;
+  background: #fff !important;
 }
 
 .card-image.logo-smartbroker-plus { 

@@ -139,6 +139,7 @@ const goApply = () => {
 .logo-frame img.detail-logo.etoro { 
   transform: scale(1.1);
   padding: 8px;
+  background: #fff !important;
 }
 .logo-frame img.detail-logo.smartbroker-plus { 
   transform: scale(1.2);
