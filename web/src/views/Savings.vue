@@ -267,8 +267,8 @@ function goToApply(o) {
 .card-image.suresse-direkt-bank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.2);
-  padding: 1px;
+  transform: scale(1.1);
+  padding: 3px;
 }
 
 .card-image.tf-bank { 
@@ -316,15 +316,15 @@ function goToApply(o) {
 .card-image.ferratum { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.1);
-  padding: 3px;
+  transform: scale(1.05);
+  padding: 4px;
 }
 
 .card-image.consorsbank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.15);
-  padding: 2px;
+  transform: scale(1.25);
+  padding: 1px;
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
