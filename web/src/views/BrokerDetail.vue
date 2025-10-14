@@ -133,12 +133,17 @@ const goApply = () => {
 .logo-frame img.detail-logo.captrader,
 .logo-frame img.detail-logo.brokerpoint,
 .logo-frame img.detail-logo.fidelity-ffb,
-.logo-frame img.detail-logo.quirion,
+.logo-frame img.detail-logo.quirion { 
+  transform: scale(1.1);
+  padding: 8px;
+  background: #fff !important;
+}
+
 .logo-frame img.detail-logo.finanzen-net-zero,
 .logo-frame img.detail-logo.fonds-super-markt,
 .logo-frame img.detail-logo.etoro { 
-  transform: scale(1.1);
-  padding: 8px;
+  transform: scale(1.15);
+  padding: 6px;
   background: #fff !important;
 }
 .logo-frame img.detail-logo.smartbroker-plus { 

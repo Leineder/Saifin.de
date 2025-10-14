@@ -372,12 +372,17 @@ onBeforeUnmount(() => {
 .card-image.logo-captrader,
 .card-image.logo-brokerpoint,
 .card-image.logo-fidelity-ffb,
-.card-image.logo-quirion,
+.card-image.logo-quirion { 
+  transform: scale(1.1);
+  padding: 4px;
+  background: #fff !important;
+}
+
 .card-image.logo-finanzen-net-zero,
 .card-image.logo-fonds-super-markt,
 .card-image.logo-etoro { 
-  transform: scale(1.1);
-  padding: 4px;
+  transform: scale(1.15);
+  padding: 2px;
   background: #fff !important;
 }
 
