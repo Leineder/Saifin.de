@@ -369,12 +369,17 @@ onBeforeUnmount(() => {
 .card-image { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 6px; border-radius: 1rem; border: none; }
 
 /* Spezifische Logo-Anpassungen für optimale Darstellung */
-.card-image.logo-captrader,
 .card-image.logo-brokerpoint,
 .card-image.logo-fidelity-ffb,
 .card-image.logo-quirion { 
   transform: scale(1.1);
   padding: 4px;
+  background: #fff !important;
+}
+
+.card-image.logo-captrader { 
+  transform: scale(1.25);
+  padding: 1px;
   background: #fff !important;
 }
 

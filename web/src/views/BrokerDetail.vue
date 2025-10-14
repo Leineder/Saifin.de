@@ -130,12 +130,17 @@ const goApply = () => {
 .logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 1rem; border: 1px solid var(--border); overflow: hidden; }
 .logo-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; border-radius: 1rem; background: #fff; padding: 12px; }
 /* Spezifische Logo-Anpassungen für Detailseite */
-.logo-frame img.detail-logo.captrader,
 .logo-frame img.detail-logo.brokerpoint,
 .logo-frame img.detail-logo.fidelity-ffb,
 .logo-frame img.detail-logo.quirion { 
   transform: scale(1.1);
   padding: 8px;
+  background: #fff !important;
+}
+
+.logo-frame img.detail-logo.captrader { 
+  transform: scale(1.25);
+  padding: 2px;
   background: #fff !important;
 }
 
