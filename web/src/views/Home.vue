@@ -116,7 +116,9 @@ onMounted(() => { storeTrackingParams() })
           <div class="flex-1">
             <div class="text-900 font-bold mb-1">{{ t.name }}</div>
             <div class="stars mb-2">
-              <i v-for="n in 5" :key="n" :class="['pi', n <= t.rating ? 'pi-star-fill' : 'pi-star']"></i>
+              <span v-for="n in 5" :key="n" :class="['star', n <= t.rating ? 'star-filled' : 'star-empty']">
+                {{ n <= t.rating ? '★' : '☆' }}
+              </span>
             </div>
             <p class="text-900 m-0">{{ t.text }}</p>
           </div>
@@ -327,7 +329,23 @@ onMounted(() => { storeTrackingParams() })
     box-shadow: 0 12px 28px var(--shadow-color) !important;
   }
 }
-.stars { color: #facc15; }
+.stars { 
+  display: flex; 
+  gap: 2px; 
+  align-items: center; 
+}
+.star { 
+  font-size: 1.1rem; 
+  line-height: 1; 
+  transition: color 0.2s ease;
+}
+.star-filled { 
+  color: #facc15; 
+  text-shadow: 0 1px 2px rgba(250, 204, 21, 0.3);
+}
+.star-empty { 
+  color: #e5e7eb; 
+}
 .testimonial + .testimonial { border-top: 1px solid var(--border); }
 .content-box { background: var(--surface); color: var(--text); border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px var(--shadow-color); border: 1px solid var(--border) }
 .section-title { color: var(--text); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
@@ -335,7 +353,7 @@ onMounted(() => { storeTrackingParams() })
 .offer-card { transition: transform .15s ease, box-shadow .15s ease; }
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }
 .offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
-.offer-thumb { width: 96px; height: 60px; object-fit: cover; border-radius: 0.5rem; border: 1px solid var(--border); }
+.offer-thumb { width: 96px; height: 60px; object-fit: cover; border-radius: 1rem; border: 1px solid var(--border); background: transparent; overflow: hidden; }
 
 /* Premium Sektions-Header */
 .about-section-header {

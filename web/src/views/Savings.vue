@@ -260,6 +260,15 @@ function goToApply(o) {
 .card-image.suresse-direkt-bank,
 .card-image.ferratum,
 .card-image.consorsbank { object-fit: contain; background: #fff; }
+
+/* J&T Direktbank und Raisin Logos vergrößern */
+.card-image.jt-direktbank,
+.card-image.raisin { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.1);
+  padding: 4px;
+}
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }

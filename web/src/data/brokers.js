@@ -91,11 +91,13 @@ export const brokers = [
     highlights: [
       '100 % Rabatt auf Ausgabeaufschlag (Kauf & Sparpläne)',
       '0 € Transaktionskosten online (ETFs ausgenommen)',
-      'Depotgebühr 0 € ab 1.500 € in aktiven Fonds'
+      'Depotgebühr 0 € ab 1.500 € in aktiven Fonds',
+      'Prämienaktion: Bis zu 4.000 € Barprämie bei Depotwechsel (bis 30.12.2025)'
     ],
     pricing: { orderCostsDE: 'Sonderkonditionen (ab 01.07.2025 bestätigt); sonst PLV FNZ' },
     features: { productRange: 'Fondsplattform, laufende Prämienaktionen' },
     regulation: 'Depotführung FNZ Bank',
+    notes: 'Prämienaktion bis 30.12.2025: 100 € (ab 20.000 €), 250 € (ab 50.000 €), 500 € (ab 100.000 €), 1.000 € (ab 200.000 €), 2.000 € (ab 400.000 €), 4.000 € (ab 800.000 €)',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C113829504B'
   },
   {

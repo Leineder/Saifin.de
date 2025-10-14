@@ -365,30 +365,31 @@ onBeforeUnmount(() => {
 .offers-section { margin-bottom: 3rem; }
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
-.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.5rem; overflow: hidden; }
-.card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.5rem; border: none; }
+.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; }
+.card-image { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 6px; border-radius: 1rem; border: none; }
 
-/* Logos, die vollständig lesbar bleiben sollen */
-.card-image.logo-justtrade,
-.card-image.logo-flatex,
+/* Spezifische Logo-Anpassungen für optimale Darstellung */
+.card-image.logo-captrader,
 .card-image.logo-brokerpoint,
 .card-image.logo-fidelity-ffb,
 .card-image.logo-quirion,
-.card-image.logo-captrader,
-.card-image.logo-smartbroker-plus,
 .card-image.logo-finanzen-net-zero,
 .card-image.logo-fonds-super-markt,
 .card-image.logo-etoro { 
-  object-fit: contain; 
-  transform: none; 
-  background: #fff;
-  padding: 8px;
+  transform: scale(1.1);
+  padding: 4px;
 }
 
-/* Logos, die etwas größer dargestellt werden sollen */
-.card-image.logo-smartbroker-plus,
+.card-image.logo-smartbroker-plus { 
+  transform: scale(1.2);
+  padding: 3px;
+}
+
 .card-image.logo-trade-republic,
-.card-image.logo-ing { transform: scale(1.24); }
+.card-image.logo-ing { 
+  transform: scale(1.15);
+  padding: 5px;
+}
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }

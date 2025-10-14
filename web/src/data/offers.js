@@ -20,7 +20,7 @@ export const offers = [
       foreignCurrency: '0 % Auslandseinsatz (ATM-Betreiber können Entgelte verlangen)',
       cashWithdrawal: 'Inland 3,95 € je Abhebung; Ausland 0 €; Mindestabhebung 50 €*',
       limits: 'Tageslimit Bargeld ca. 500 €*, Online-Zahlungslimit ca. 6.000 €*',
-      creditLimit: 'Typischer Startrahmen bis 3.000 €* (bonitätsabhängig)',
+      creditLimit: 'Typischer Startrahmen bis 4.000 €* (bonitätsabhängig)',
       interest: 'Teilzahlung voreingestellt; Sollzins 16,05 % p.a., eff. 17,29 % p.a.'
     },
     disclaimer: '*Angaben erfahrungsbasiert/bonitätsabhängig; Preis-/Leistungsverzeichnis beachten.',
@@ -48,7 +48,7 @@ export const offers = [
       annualFeeText: '4,90 € pro Monat (58,80 € p.a.)',
       foreignCurrency: '0 % Auslandseinsatz',
       cashWithdrawal: 'Weltweit gebührenfrei (seitens Hanseatic); Mindestabhebung 50 €*',
-      creditLimit: 'Typische Obergrenze ca. 4.000 €*',
+      creditLimit: 'Typische Obergrenze ca. 5.000 €*',
       interest: 'Teilzahlung voreingestellt (3 % / min. 20 €); Sollzins 16,05 % p.a., eff. ca. 25,49 % p.a.',
       notes: 'Sondergebühr Casinotransaktionen 3 % (min. 3,95 €)'
     },

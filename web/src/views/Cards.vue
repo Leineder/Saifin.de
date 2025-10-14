@@ -509,11 +509,13 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 75px;
   object-fit: cover;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border: 1px solid var(--border);
   transform: rotate(-2deg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: transparent;
+  overflow: hidden;
 }
 .card-image:hover {
   transform: rotate(-1deg) scale(1.02);

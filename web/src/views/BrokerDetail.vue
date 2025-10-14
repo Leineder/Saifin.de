@@ -127,14 +127,27 @@ const goApply = () => {
 }
 </style>
 <style scoped>
-.logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
-.logo-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; border-radius: 8px; background: #fff; }
-/* Voll lesbar lassen (Detail) */
+.logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 1rem; border: 1px solid var(--border); overflow: hidden; }
+.logo-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; border-radius: 1rem; background: #fff; padding: 12px; }
+/* Spezifische Logo-Anpassungen für Detailseite */
+.logo-frame img.detail-logo.captrader,
 .logo-frame img.detail-logo.brokerpoint,
 .logo-frame img.detail-logo.fidelity-ffb,
-.logo-frame img.detail-logo.quirion { object-fit: contain; }
-/* Voll lesbar lassen */
-.logo-frame img.detail-logo.justtrade,
-.logo-frame img.detail-logo.flatex { object-fit: contain; }
+.logo-frame img.detail-logo.quirion,
+.logo-frame img.detail-logo.finanzen-net-zero,
+.logo-frame img.detail-logo.fonds-super-markt,
+.logo-frame img.detail-logo.etoro { 
+  transform: scale(1.1);
+  padding: 8px;
+}
+.logo-frame img.detail-logo.smartbroker-plus { 
+  transform: scale(1.2);
+  padding: 6px;
+}
+.logo-frame img.detail-logo.trade-republic,
+.logo-frame img.detail-logo.ing { 
+  transform: scale(1.15);
+  padding: 10px;
+}
 </style>
 
