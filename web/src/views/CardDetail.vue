@@ -152,7 +152,7 @@ const formatEuro = (n) => {
   height: auto; 
   object-fit: contain; 
   display: block;
-  border-radius: 1.5rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--border);
   transform: rotate(-2deg);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
@@ -214,7 +214,7 @@ const formatEuro = (n) => {
   .card-image {
     transform: rotate(-1deg);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    border-radius: 1.2rem;
+    border-radius: 0.6rem;
   }
   .facts-grid {
     grid-template-columns: 1fr; /* Einspaltig auf mobil */

@@ -509,7 +509,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 75px;
   object-fit: cover;
-  border-radius: 1rem;
+  border-radius: 0.75rem;
   border: 1px solid var(--border);
   transform: rotate(-2deg);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
