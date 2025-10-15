@@ -355,12 +355,11 @@ img[alt*="Kreditkarte"],
 img[src*="/creditcards/"] {
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
   /* Kreditkarten-Eckenradius: 3,18mm - angepasst an Bildgröße */
   border-radius: 5px;
-  /* Entferne weiße Ecken durch minimales Upscaling */
-  transform: scale(1.07);
+  /* Entferne weiße Ecken durch cover statt contain */
   /* Entferne jegliche Hintergrund-Reste */
   background-color: transparent !important;
 }

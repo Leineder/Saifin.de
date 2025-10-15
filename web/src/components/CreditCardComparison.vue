@@ -171,11 +171,10 @@ function goDetail(slug) {
   min-width: 60px;
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
-  object-fit: contain;
+  object-fit: cover;
   object-position: center center;
   border-radius: 2px;
-  /* Entferne weiße Ecken durch minimales Upscaling */
-  transform: scale(1.07);
+  /* Entferne weiße Ecken durch cover statt contain */
 }
 
 .card-content {

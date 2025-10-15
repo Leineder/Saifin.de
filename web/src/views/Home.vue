@@ -356,7 +356,7 @@ onMounted(() => { storeTrackingParams() })
 .offer-thumb { 
   width: 112px; 
   height: 70px; 
-  object-fit: contain; 
+  object-fit: cover; 
   object-position: center center;
   border-radius: 4px; 
   border: 1px solid var(--border); 
@@ -364,8 +364,7 @@ onMounted(() => { storeTrackingParams() })
   overflow: hidden; 
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
-  /* Entferne weiße Ecken durch minimales Upscaling */
-  transform: scale(1.07);
+  /* Entferne weiße Ecken durch cover statt contain */
 }
 
 /* Premium Sektions-Header */
