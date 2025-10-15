@@ -353,7 +353,18 @@ onMounted(() => { storeTrackingParams() })
 .offer-card { transition: transform .15s ease, box-shadow .15s ease; }
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }
 .offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
-.offer-thumb { width: 96px; height: 60px; object-fit: cover; border-radius: 0.75rem; border: 1px solid var(--border); background: transparent; overflow: hidden; }
+.offer-thumb { 
+  width: 96px; 
+  height: 60px; 
+  object-fit: contain; 
+  object-position: center center;
+  border-radius: 0.75rem; 
+  border: 1px solid var(--border); 
+  background: transparent; 
+  overflow: hidden; 
+  /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
+  aspect-ratio: 1.586 / 1;
+}
 
 /* Premium Sektions-Header */
 .about-section-header {

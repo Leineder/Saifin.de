@@ -509,10 +509,17 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 75px;
   object-fit: cover;
+  object-position: center center;
   border-radius: 0.75rem;
   border: 1px solid var(--border);
   background: transparent;
   overflow: hidden;
+  /* Präzises Cropping für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
+  aspect-ratio: 1.586 / 1;
+  /* Stelle sicher, dass die Karte vollständig sichtbar ist */
+  object-fit: contain;
+  /* Entferne jegliche Hintergrund-Reste durch präzises Cropping */
+  background-color: transparent;
 }
 
 .offer-details {

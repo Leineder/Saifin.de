@@ -347,3 +347,27 @@ picture { display: block; }
 }
 .apply-cta:active { transform: translateY(0); }
 .apply-cta .p-button-label { font-weight: 700; letter-spacing: .01em; }
+
+/* Globale Optimierungen für Kreditkarten-Bilder */
+/* Stelle sicher, dass alle Kreditkarten-Bilder das korrekte Seitenverhältnis haben */
+img[alt*="Kartenmotiv"], 
+img[alt*="Kreditkarte"],
+img[src*="/creditcards/"] {
+  /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
+  aspect-ratio: 1.586 / 1;
+  object-fit: contain;
+  object-position: center center;
+  /* Entferne jegliche Hintergrund-Reste */
+  background-color: transparent !important;
+}
+
+/* Container für Kreditkarten-Bilder optimieren */
+.card-image-container,
+.card-image-container[class*="card-image"] {
+  /* Stelle sicher, dass der Container das richtige Seitenverhältnis hat */
+  aspect-ratio: 1.586 / 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -260,70 +260,70 @@ function goToApply(o) {
 .card-image.pbb-direkt { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.15);
+  transform: scale(1.35);
   padding: 2px;
 }
 
 .card-image.suresse-direkt-bank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.1);
+  transform: scale(1.3);
   padding: 3px;
 }
 
 .card-image.tf-bank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.1);
+  transform: scale(1.3);
   padding: 3px;
 }
 
 .card-image.distingo-bank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.15);
+  transform: scale(1.35);
   padding: 2px;
 }
 
 .card-image.raisin { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.2);
+  transform: scale(1.4);
   padding: 1px;
 }
 
 .card-image.jt-direktbank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.15);
+  transform: scale(1.35);
   padding: 2px;
 }
 
 .card-image.openbank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.1);
+  transform: scale(1.3);
   padding: 3px;
 }
 
 .card-image.santander-consumer-bank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.15);
+  transform: scale(1.35);
   padding: 2px;
 }
 
 .card-image.ferratum { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.05);
+  transform: scale(1.25);
   padding: 4px;
 }
 
 .card-image.consorsbank { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.25);
+  transform: scale(1.45);
   padding: 1px;
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
