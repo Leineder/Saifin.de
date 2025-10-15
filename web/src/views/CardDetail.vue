@@ -1,13 +1,28 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 import { offers } from '../data/offers'
+import { trackCreditCardView, trackCreditCardApply } from '../utils/analytics'
+
 const route = useRoute()
 const router = useRouter()
 const offer = offers.find(o => o.slug === route.params.slug)
 if (!offer) router.replace('/kreditkarten')
 
+// Analytics: Produktansicht tracken
+onMounted(() => {
+  if (offer) {
+    trackCreditCardView(offer.id, offer.title)
+  }
+})
+
 const goBack = () => router.push('/kreditkarten')
 const goApply = () => {
+  // Vercel Analytics: Produktanfrage tracken
+  if (offer) {
+    trackCreditCardApply(offer.id, offer.title, offer.applyUrl || `/antrag/${offer.slug}`)
+  }
+  
   // TikTok Event: Kreditkartenantrag initiiert (Detailseite)
   if (window.ttq && offer) {
     window.ttq.track('InitiateCheckout', {

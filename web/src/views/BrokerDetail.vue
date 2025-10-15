@@ -1,14 +1,28 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 import { brokers } from '../data/brokers'
+import { trackBrokerView, trackBrokerApply } from '../utils/analytics'
 
 const route = useRoute()
 const router = useRouter()
 const broker = brokers.find(b => b.slug === route.params.slug)
 if (!broker) router.replace('/broker')
 
+// Analytics: Broker-Ansicht tracken
+onMounted(() => {
+  if (broker) {
+    trackBrokerView(broker.id, broker.name)
+  }
+})
+
 const goBack = () => router.push('/broker')
 const goApply = () => {
+  // Vercel Analytics: Broker-Anfrage tracken
+  if (broker) {
+    trackBrokerApply(broker.id, broker.name, broker.applyUrl || `/antrag/${broker.slug}`)
+  }
+  
   if (broker?.applyUrl) {
     const url = broker.applyUrl
     if (/^https?:\/\//i.test(url)) {

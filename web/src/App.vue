@@ -42,12 +42,16 @@
     
     <!-- Speed Insights für Performance-Monitoring -->
     <SpeedInsights />
+    
+    <!-- Vercel Analytics -->
+    <Analytics />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 import SpeedInsights from './components/SpeedInsights.vue'
+import { Analytics } from '@vercel/analytics/vue'
 
 const isMenuOpen = ref(false)
 const isDesktop = ref(false)

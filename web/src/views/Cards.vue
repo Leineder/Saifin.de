@@ -1,7 +1,8 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { offers } from '../data/offers'
+import { trackCreditCardApply, trackFilterUsage } from '../utils/analytics'
 
 const router = useRouter()
 
@@ -105,6 +106,42 @@ const topOffers = computed(() => {
   return offers.slice(0, 3)
 })
 
+// Analytics: Filter-Nutzung tracken
+watch([maxAnnualFee, foreignFee, cardTypes, supportsApplePay, supportsGooglePay, hasInsurance, hasCashback, schufaFree, instantDecision], 
+  ([newMaxAnnualFee, newForeignFee, newCardTypes, newApplePay, newGooglePay, newInsurance, newCashback, newSchufaFree, newInstantDecision], 
+   [oldMaxAnnualFee, oldForeignFee, oldCardTypes, oldApplePay, oldGooglePay, oldInsurance, oldCashback, oldSchufaFree, oldInstantDecision]) => {
+    
+    // Track filter changes
+    if (newMaxAnnualFee !== oldMaxAnnualFee && newMaxAnnualFee !== 'alle') {
+      trackFilterUsage('annual_fee', newMaxAnnualFee, 'kreditkarten')
+    }
+    if (newForeignFee !== oldForeignFee && newForeignFee !== 'alle') {
+      trackFilterUsage('foreign_fee', newForeignFee, 'kreditkarten')
+    }
+    if (newCardTypes !== oldCardTypes && newCardTypes.length > 0) {
+      trackFilterUsage('card_types', newCardTypes.join(','), 'kreditkarten')
+    }
+    if (newApplePay !== oldApplePay && newApplePay) {
+      trackFilterUsage('apple_pay', 'enabled', 'kreditkarten')
+    }
+    if (newGooglePay !== oldGooglePay && newGooglePay) {
+      trackFilterUsage('google_pay', 'enabled', 'kreditkarten')
+    }
+    if (newInsurance !== oldInsurance && newInsurance) {
+      trackFilterUsage('insurance', 'enabled', 'kreditkarten')
+    }
+    if (newCashback !== oldCashback && newCashback) {
+      trackFilterUsage('cashback', 'enabled', 'kreditkarten')
+    }
+    if (newSchufaFree !== oldSchufaFree && newSchufaFree) {
+      trackFilterUsage('schufa_free', 'enabled', 'kreditkarten')
+    }
+    if (newInstantDecision !== oldInstantDecision && newInstantDecision) {
+      trackFilterUsage('instant_decision', 'enabled', 'kreditkarten')
+    }
+  }, { deep: true }
+)
+
 const formatEuro = (n) => {
   if (n === 0) return '0,00 €'
   if (typeof n === 'number') return `${n.toFixed(2).replace('.', ',')} €`
@@ -113,6 +150,9 @@ const formatEuro = (n) => {
 
 const goToApply = (offer) => {
   if (!offer || !offer.applyUrl) return
+  
+  // Vercel Analytics: Kreditkarten-Anfrage tracken
+  trackCreditCardApply(offer.id, offer.title, offer.applyUrl)
   
   // TikTok Event: Kreditkartenantrag initiiert
   if (window.ttq) {

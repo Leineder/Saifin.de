@@ -1,15 +1,30 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
 import { savingsOffers } from '../data/savings'
+import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
 
 const route = useRoute()
 const router = useRouter()
 const offer = savingsOffers.find(o => o.slug === route.params.slug)
 if (!offer) router.replace('/tagesgeld')
 
+// Analytics: Tagesgeld-Ansicht tracken
+onMounted(() => {
+  if (offer) {
+    trackSavingsView(offer.id, offer.title)
+  }
+})
+
 const goBack = () => router.push('/tagesgeld')
 const goApply = () => {
   if (!offer?.applyUrl) return
+  
+  // Vercel Analytics: Tagesgeld-Anfrage tracken
+  if (offer) {
+    trackSavingsApply(offer.id, offer.title, offer.applyUrl)
+  }
+  
   const url = offer.applyUrl
   if (/^https?:\/\//i.test(url)) {
     // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
