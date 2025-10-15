@@ -1,40 +1,43 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { savingsOffers } from '../data/savings'
 import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
 
 const route = useRoute()
 const router = useRouter()
-const offer = savingsOffers.find(o => o.slug === route.params.slug)
-if (!offer) router.replace('/tagesgeld')
+const offer = computed(() => savingsOffers.find(o => o.slug === route.params.slug))
 
-// Analytics: Tagesgeld-Ansicht tracken
+// Redirect if offer not found
 onMounted(() => {
-  if (offer) {
-    trackSavingsView(offer.id, offer.title)
+  if (!offer.value) {
+    router.replace('/tagesgeld')
+    return
   }
+  
+  // Analytics: Tagesgeld-Ansicht tracken
+  trackSavingsView(offer.value.id, offer.value.title)
 })
 
 const goBack = () => router.push('/tagesgeld')
 const goApply = () => {
-  if (!offer?.applyUrl) return
+  if (!offer.value?.applyUrl) return
   
   // Vercel Analytics: Tagesgeld-Anfrage tracken
-  if (offer) {
-    trackSavingsApply(offer.id, offer.title, offer.applyUrl)
+  if (offer.value) {
+    trackSavingsApply(offer.value.id, offer.value.title, offer.value.applyUrl)
   }
   
-  const url = offer.applyUrl
+  const url = offer.value.applyUrl
   if (/^https?:\/\//i.test(url)) {
     // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
     try {
-      if (window.fbq && offer) {
+      if (window.fbq && offer.value) {
         window.fbq('track', 'CompleteRegistration', {
-          content_name: offer.title,
+          content_name: offer.value.title,
           content_category: 'savings',
-          content_id: offer.id || offer.slug,
-          value: offer.rate || 0,
+          content_id: offer.value.id || offer.value.slug,
+          value: offer.value.rate || 0,
           status: 'external_redirect'
         })
       }

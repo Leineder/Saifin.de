@@ -1,38 +1,41 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { brokers } from '../data/brokers'
 import { trackBrokerView, trackBrokerApply } from '../utils/analytics'
 
 const route = useRoute()
 const router = useRouter()
-const broker = brokers.find(b => b.slug === route.params.slug)
-if (!broker) router.replace('/broker')
+const broker = computed(() => brokers.find(b => b.slug === route.params.slug))
 
-// Analytics: Broker-Ansicht tracken
+// Redirect if broker not found
 onMounted(() => {
-  if (broker) {
-    trackBrokerView(broker.id, broker.name)
+  if (!broker.value) {
+    router.replace('/broker')
+    return
   }
+  
+  // Analytics: Broker-Ansicht tracken
+  trackBrokerView(broker.value.id, broker.value.name)
 })
 
 const goBack = () => router.push('/broker')
 const goApply = () => {
-  // Vercel Analytics: Broker-Anfrage tracken
-  if (broker) {
-    trackBrokerApply(broker.id, broker.name, broker.applyUrl || `/antrag/${broker.slug}`)
-  }
+  if (!broker.value) return
   
-  if (broker?.applyUrl) {
-    const url = broker.applyUrl
+  // Vercel Analytics: Broker-Anfrage tracken
+  trackBrokerApply(broker.value.id, broker.value.name, broker.value.applyUrl || `/antrag/${broker.value.slug}`)
+  
+  if (broker.value.applyUrl) {
+    const url = broker.value.applyUrl
     if (/^https?:\/\//i.test(url)) {
       // Meta Pixel: CompleteRegistration bei externem Broker-Antrag
       try {
-        if (window.fbq && broker) {
+        if (window.fbq) {
           window.fbq('track', 'CompleteRegistration', {
-            content_name: broker.name,
+            content_name: broker.value.name,
             content_category: 'broker',
-            content_id: broker.id || broker.slug,
+            content_id: broker.value.id || broker.value.slug,
             status: 'external_redirect'
           })
         }
@@ -43,7 +46,7 @@ const goApply = () => {
     }
     return router.push(url)
   }
-  router.push(`/antrag/${broker.slug}`)
+  router.push(`/antrag/${broker.value.slug}`)
 }
 </script>
 
