@@ -92,7 +92,7 @@ onMounted(() => { storeTrackingParams() })
           <router-link :to="`/kreditkarten/${o.slug}`" class="offer-link">
             <div class="surface-card border-round-xl card-accent w-full" style="max-width:100%">
               <div class="p-3 flex align-items-center gap-3">
-                <img :src="o.image" :alt="`${o.title} – Kartenmotiv`" class="offer-thumb border-round" loading="lazy" decoding="async" width="96" height="60" />
+                <img :src="o.image" :alt="`${o.title} – Kartenmotiv`" class="offer-thumb border-round" loading="lazy" decoding="async" width="112" height="70" />
                 <div class="flex-1">
                   <div class="text-900 text-lg font-bold line-height-2">{{ o.title }}</div>
                   <div class="text-600 text-sm">Jahresgebühr</div>
@@ -354,8 +354,8 @@ onMounted(() => { storeTrackingParams() })
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }
 .offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
 .offer-thumb { 
-  width: 96px; 
-  height: 60px; 
+  width: 112px; 
+  height: 70px; 
   object-fit: contain; 
   object-position: center center;
   border-radius: 0.75rem; 
@@ -364,6 +364,8 @@ onMounted(() => { storeTrackingParams() })
   overflow: hidden; 
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
+  /* Entferne weiße Ecken durch minimales Upscaling */
+  transform: scale(1.05);
 }
 
 /* Premium Sektions-Header */

@@ -293,7 +293,7 @@ onBeforeUnmount(() => {
 
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
+                  <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -336,7 +336,7 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
+                    <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">
@@ -502,13 +502,14 @@ onBeforeUnmount(() => {
 
 .card-image-container {
   flex-shrink: 0;
-  width: 120px;
+  width: 140px;
+  height: 88px;
 }
 
 .card-image {
   width: 100%;
-  height: 75px;
-  object-fit: cover;
+  height: 88px;
+  object-fit: contain;
   object-position: center center;
   border-radius: 0.75rem;
   border: 1px solid var(--border);
@@ -516,9 +517,9 @@ onBeforeUnmount(() => {
   overflow: hidden;
   /* Präzises Cropping für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
-  /* Stelle sicher, dass die Karte vollständig sichtbar ist */
-  object-fit: contain;
-  /* Entferne jegliche Hintergrund-Reste durch präzises Cropping */
+  /* Entferne weiße Ecken durch minimales Upscaling */
+  transform: scale(1.05);
+  /* Stelle sicher, dass die gesamte Karte sichtbar ist */
   background-color: transparent;
 }
 
