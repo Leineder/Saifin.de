@@ -511,15 +511,8 @@ onBeforeUnmount(() => {
   object-fit: cover;
   border-radius: 0.75rem;
   border: 1px solid var(--border);
-  transform: rotate(-2deg);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
   background: transparent;
   overflow: hidden;
-}
-.card-image:hover {
-  transform: rotate(-1deg) scale(1.02);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .offer-details {
