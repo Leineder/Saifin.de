@@ -47,6 +47,7 @@
 
 <script setup>
 import { ref, onMounted, computed } from 'vue'
+import SpeedInsights from './components/SpeedInsights.vue'
 
 const isMenuOpen = ref(false)
 const isDesktop = ref(false)
