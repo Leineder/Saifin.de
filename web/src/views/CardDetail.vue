@@ -136,14 +136,16 @@ const formatEuro = (n) => {
 .media { grid-column: 1 / 2; }
 .card-image-container { 
   width: 100%; 
-  aspect-ratio: 1.6 / 1; /* Gleiches Seitenverhältnis wie Übersichtsseite (120:75) */
-  max-width: 600px; /* Maximal 5x größer als 120px */
+  aspect-ratio: 1.586 / 1; /* Exaktes Kreditkarten-Seitenverhältnis */
+  max-width: 600px;
   display: flex; 
   align-items: center; 
   justify-content: center; 
   padding: 30px;
   box-sizing: border-box;
-  overflow: visible;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid var(--border);
 }
 .card-image { 
   width: 100%; 
@@ -152,9 +154,7 @@ const formatEuro = (n) => {
   object-position: center center;
   display: block;
   border-radius: 8px;
-  border: 1px solid var(--border);
   background: transparent;
-  overflow: hidden;
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
   /* Entferne weiße Ecken durch minimales Upscaling */

@@ -504,17 +504,18 @@ onBeforeUnmount(() => {
   flex-shrink: 0;
   width: 140px;
   height: 88px;
+  overflow: hidden;
+  border-radius: 5px;
+  border: 1px solid var(--border);
 }
 
 .card-image {
   width: 100%;
-  height: 88px;
+  height: 100%;
   object-fit: contain;
   object-position: center center;
   border-radius: 5px;
-  border: 1px solid var(--border);
   background: transparent;
-  overflow: hidden;
   /* Präzises Cropping für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
   /* Entferne weiße Ecken durch minimales Upscaling */
