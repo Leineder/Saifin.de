@@ -363,7 +363,8 @@ onBeforeUnmount(() => {
 .checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text); }
 
 .offers-section { margin-bottom: 3rem; }
-.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.offer-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; }
 .card-image { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 6px; border-radius: 1rem; border: none; }
@@ -428,7 +429,8 @@ onBeforeUnmount(() => {
 .recommendations-section { margin-top: 3rem; }
 .recommendations-title { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
 .recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
-.recommendation-card { background: var(--surface); border-radius: 0.75rem; box-shadow: 0 1px 3px var(--shadow-color); position: relative; overflow: hidden; }
+.recommendation-card { background: var(--surface); border-radius: 0.75rem; box-shadow: 0 1px 3px var(--shadow-color); position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.recommendation-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
 .recommendation-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .recommendation-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 

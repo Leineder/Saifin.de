@@ -514,7 +514,8 @@ onBeforeUnmount(() => {
   margin-bottom: 3rem;
 }
 
-.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.offer-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
 
 .bonus-banner {
   position: absolute;

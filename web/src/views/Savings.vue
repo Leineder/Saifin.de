@@ -164,6 +164,7 @@ function goToApply(o) {
               v-for="o in filtered" 
               :key="o.slug" 
               class="offer-card surface-card border-round-xl card-accent"
+              @click="router.push(`/tagesgeld/${o.slug}`)"
             >
               <div class="offer-content">
                 <div class="card-image-container">
@@ -252,7 +253,8 @@ function goToApply(o) {
 .checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text); }
 
 .offers-section { margin-bottom: 3rem; }
-.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; }
+.offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
+.offer-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
 .card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
