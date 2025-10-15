@@ -270,6 +270,7 @@ const formatEuro = (n) => {
   padding: 5px !important;
   box-sizing: border-box;
   transform: scale(0.97) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
+  border-radius: 3px !important; /* Minimal abrunden für Perfektion */
 }
 
 .card-image.santander-bestcard-basic { 
@@ -277,5 +278,6 @@ const formatEuro = (n) => {
   padding: 5px !important;
   box-sizing: border-box;
   transform: scale(0.97) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
+  border-radius: 3px !important; /* Minimal abrunden für Perfektion */
 }
 </style>

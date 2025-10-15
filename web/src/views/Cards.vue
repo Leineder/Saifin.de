@@ -750,6 +750,7 @@ onBeforeUnmount(() => {
   padding: 4px !important;
   box-sizing: border-box;
   transform: scale(0.98) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
+  border-radius: 2px !important; /* Minimal abrunden für Perfektion */
 }
 
 .card-image.santander-bestcard-basic { 
@@ -757,6 +758,7 @@ onBeforeUnmount(() => {
   padding: 4px !important;
   box-sizing: border-box;
   transform: scale(0.98) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
+  border-radius: 2px !important; /* Minimal abrunden für Perfektion */
 }
 
 /* Desktop: Mobile-Filter ausblenden */

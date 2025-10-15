@@ -399,6 +399,7 @@ img[alt*="TF Bank Mastercard Gold"] {
   padding: 4px;
   box-sizing: border-box;
   transform: scale(0.98);
+  border-radius: 2px; /* Minimal abrunden für Perfektion */
 }
 
 /* Santander BestCard Basic - spezielle Behandlung */
@@ -408,6 +409,7 @@ img[alt*="Santander BestCard Basic"] {
   padding: 4px;
   box-sizing: border-box;
   transform: scale(0.98);
+  border-radius: 2px; /* Minimal abrunden für Perfektion */
 }
 
 /* Spezifische Korrekturen für problematische Logos */
