@@ -1,4 +1,4 @@
-import { track } from '@vercel/analytics'
+// Manuelle Vercel Analytics Integration für Vue.js
 
 /**
  * Analytics Events für Produktinteraktionen
@@ -25,14 +25,22 @@ export const EVENT_TYPES = {
  */
 export function trackProductView(productId, productName, category) {
   try {
-    track(EVENT_TYPES.PRODUCT_VIEW, {
-      product_id: productId,
-      product_name: productName,
-      category: category,
-      timestamp: new Date().toISOString()
-    })
+    console.log('🔍 Tracking product view:', { productId, productName, category })
+    
+    // Vercel Analytics Event tracken
+    if (typeof window !== 'undefined' && window.va) {
+      window.va('event', EVENT_TYPES.PRODUCT_VIEW, {
+        product_id: productId,
+        product_name: productName,
+        category: category,
+        timestamp: new Date().toISOString()
+      })
+      console.log('✅ Product view tracked successfully')
+    } else {
+      console.warn('⚠️ Vercel Analytics nicht verfügbar')
+    }
   } catch (error) {
-    console.warn('Analytics tracking failed:', error)
+    console.error('❌ Analytics tracking failed:', error)
   }
 }
 
@@ -45,15 +53,23 @@ export function trackProductView(productId, productName, category) {
  */
 export function trackProductApply(productId, productName, category, applyUrl) {
   try {
-    track(EVENT_TYPES.PRODUCT_APPLY, {
-      product_id: productId,
-      product_name: productName,
-      category: category,
-      apply_url: applyUrl,
-      timestamp: new Date().toISOString()
-    })
+    console.log('🚀 Tracking product apply:', { productId, productName, category, applyUrl })
+    
+    // Vercel Analytics Event tracken
+    if (typeof window !== 'undefined' && window.va) {
+      window.va('event', EVENT_TYPES.PRODUCT_APPLY, {
+        product_id: productId,
+        product_name: productName,
+        category: category,
+        apply_url: applyUrl,
+        timestamp: new Date().toISOString()
+      })
+      console.log('✅ Product apply tracked successfully')
+    } else {
+      console.warn('⚠️ Vercel Analytics nicht verfügbar')
+    }
   } catch (error) {
-    console.warn('Analytics tracking failed:', error)
+    console.error('❌ Analytics tracking failed:', error)
   }
 }
 
@@ -105,12 +121,14 @@ export function trackApplyButtonClick(productId, productName, category, applyUrl
 // Tracking für Filterinteraktionen
 export function trackFilterUsage(filterType, filterValue, category) {
   try {
-    track('filter_used', {
-      filter_type: filterType,
-      filter_value: filterValue,
-      category: category,
-      timestamp: new Date().toISOString()
-    })
+    if (typeof window !== 'undefined' && window.va) {
+      window.va('event', 'filter_used', {
+        filter_type: filterType,
+        filter_value: filterValue,
+        category: category,
+        timestamp: new Date().toISOString()
+      })
+    }
   } catch (error) {
     console.warn('Analytics tracking failed:', error)
   }
@@ -119,12 +137,14 @@ export function trackFilterUsage(filterType, filterValue, category) {
 // Tracking für Suchanfragen
 export function trackSearch(query, resultsCount, category) {
   try {
-    track('search_performed', {
-      search_query: query,
-      results_count: resultsCount,
-      category: category,
-      timestamp: new Date().toISOString()
-    })
+    if (typeof window !== 'undefined' && window.va) {
+      window.va('event', 'search_performed', {
+        search_query: query,
+        results_count: resultsCount,
+        category: category,
+        timestamp: new Date().toISOString()
+      })
+    }
   } catch (error) {
     console.warn('Analytics tracking failed:', error)
   }
