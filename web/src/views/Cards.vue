@@ -519,7 +519,7 @@ onBeforeUnmount(() => {
   /* Präzises Cropping für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
   /* Entferne weiße Ecken durch minimales Upscaling */
-  transform: scale(1.05);
+  transform: scale(1.07);
   /* Stelle sicher, dass die gesamte Karte sichtbar ist */
   background-color: transparent;
 }

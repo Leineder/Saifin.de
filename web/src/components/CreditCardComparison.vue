@@ -173,9 +173,9 @@ function goDetail(slug) {
   aspect-ratio: 1.586 / 1;
   object-fit: contain;
   object-position: center center;
-  border-radius: 3px;
+  border-radius: 2px;
   /* Entferne weiße Ecken durch minimales Upscaling */
-  transform: scale(1.05);
+  transform: scale(1.07);
 }
 
 .card-content {

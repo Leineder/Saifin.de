@@ -360,7 +360,7 @@ img[src*="/creditcards/"] {
   /* Kreditkarten-Eckenradius: 3,18mm - angepasst an Bildgröße */
   border-radius: 5px;
   /* Entferne weiße Ecken durch minimales Upscaling */
-  transform: scale(1.05);
+  transform: scale(1.07);
   /* Entferne jegliche Hintergrund-Reste */
   background-color: transparent !important;
 }
