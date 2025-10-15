@@ -168,7 +168,19 @@ function goToApply(o) {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="o.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${o.title} – Logo/Bild`" :class="['card-image', o.slug]" loading="lazy" decoding="async" width="120" height="75" :srcset="`${o.image || '/images/saifin_logo_vectorized_final.svg'} 120w, ${o.image || '/images/saifin_logo_vectorized_final.svg'} 240w`" sizes="(max-width: 768px) 200px, 120px" />
+                  <img 
+                    :src="o.image || '/images/saifin_logo_vectorized_final.svg'" 
+                    :alt="`${o.title} – Logo/Bild`" 
+                    :class="['card-image', o.slug]" 
+                    loading="lazy" 
+                    decoding="async" 
+                    width="120" 
+                    height="75" 
+                    :srcset="`${o.image || '/images/saifin_logo_vectorized_final.svg'} 120w, ${o.image || '/images/saifin_logo_vectorized_final.svg'} 240w`" 
+                    sizes="(max-width: 768px) 200px, 120px"
+                    crossorigin="anonymous"
+                    style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
+                  />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -335,6 +347,11 @@ function goToApply(o) {
   background: #fff; 
   transform: scale(1.45);
   padding: 1px;
+  /* Browser-Kompatibilität für bessere Farbdarstellung */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  /* Fallback für ältere Browser */
+  filter: contrast(1.1) brightness(1.05);
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
