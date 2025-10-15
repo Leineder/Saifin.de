@@ -358,7 +358,7 @@ onMounted(() => { storeTrackingParams() })
   height: 70px; 
   object-fit: cover; 
   object-position: center center;
-  border-radius: 4px; 
+  border-radius: 3px; 
   border: 1px solid var(--border); 
   background: transparent; 
   overflow: hidden; 

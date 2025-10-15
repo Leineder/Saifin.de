@@ -505,7 +505,7 @@ onBeforeUnmount(() => {
   width: 140px;
   height: 88px;
   overflow: hidden;
-  border-radius: 5px;
+  border-radius: 4px;
   border: 1px solid var(--border);
 }
 
@@ -514,7 +514,7 @@ onBeforeUnmount(() => {
   height: 100%;
   object-fit: cover;
   object-position: center center;
-  border-radius: 5px;
+  border-radius: 4px;
   background: transparent;
   /* Präzises Cropping für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;

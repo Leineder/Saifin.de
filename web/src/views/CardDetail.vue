@@ -144,7 +144,7 @@ const formatEuro = (n) => {
   padding: 30px;
   box-sizing: border-box;
   overflow: hidden;
-  border-radius: 22px;
+  border-radius: 18px;
   border: 1px solid var(--border);
 }
 .card-image { 
@@ -153,7 +153,7 @@ const formatEuro = (n) => {
   object-fit: cover; 
   object-position: center center;
   display: block;
-  border-radius: 22px;
+  border-radius: 18px;
   background: transparent;
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;

@@ -173,7 +173,7 @@ function goDetail(slug) {
   aspect-ratio: 1.586 / 1;
   object-fit: cover;
   object-position: center center;
-  border-radius: 2px;
+  border-radius: 1px;
   /* Entferne weiße Ecken durch cover statt contain */
 }
 

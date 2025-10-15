@@ -358,7 +358,7 @@ img[src*="/creditcards/"] {
   object-fit: cover;
   object-position: center center;
   /* Kreditkarten-Eckenradius: 3,18mm - angepasst an Bildgröße */
-  border-radius: 5px;
+  border-radius: 4px;
   /* Entferne weiße Ecken durch cover statt contain */
   /* Entferne jegliche Hintergrund-Reste */
   background-color: transparent !important;
