@@ -390,3 +390,45 @@ img[src*="/creditcards/"] {
     width: 140px;
   }
 }
+
+/* Spezifische Korrekturen für problematische Kreditkarten */
+/* TF Bank Mastercard Gold - spezielle Behandlung */
+img[src*="TFBank_MastercardGold"],
+img[alt*="TF Bank Mastercard Gold"] {
+  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+/* Santander BestCard Basic - spezielle Behandlung */
+img[src*="santander-bestcard-basic"],
+img[alt*="Santander BestCard Basic"] {
+  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
+  padding: 2px;
+  box-sizing: border-box;
+}
+
+/* Spezifische Korrekturen für problematische Logos */
+/* Suresse Logo - mehr Platz für vollständige Lesbarkeit */
+img[src*="Suresse"],
+img[alt*="Suresse"] {
+  /* Mehr Padding für vollständige Logo-Darstellung */
+  padding: 8px;
+  box-sizing: border-box;
+  /* Stelle sicher, dass das Logo vollständig sichtbar ist */
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+/* Ferratum Logo - mehr Platz für vollständige Lesbarkeit */
+img[src*="Ferratum"],
+img[alt*="Ferratum"] {
+  /* Mehr Padding für vollständige Logo-Darstellung */
+  padding: 8px;
+  box-sizing: border-box;
+  /* Stelle sicher, dass das Logo vollständig sichtbar ist */
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+}

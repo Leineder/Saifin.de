@@ -70,7 +70,7 @@ const formatEuro = (n) => {
     <div class="container detail-grid">
       <div class="media">
         <div class="card-image-container surface-card border-round-xl card-accent">
-          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" class="card-image" loading="lazy" decoding="async">
+          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" :class="['card-image', offer.id]" loading="lazy" decoding="async">
         </div>
       </div>
       <div class="content">
@@ -262,5 +262,18 @@ const formatEuro = (n) => {
   .text-600 {
     font-size: 0.8rem !important;
   }
+}
+
+/* Spezifische Korrekturen für problematische Kreditkarten */
+.card-image.tf-bank-mastercard-gold { 
+  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
+  padding: 3px !important;
+  box-sizing: border-box;
+}
+
+.card-image.santander-bestcard-basic { 
+  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
+  padding: 3px !important;
+  box-sizing: border-box;
 }
 </style>

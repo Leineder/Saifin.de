@@ -333,7 +333,7 @@ onBeforeUnmount(() => {
 
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
+                  <img :src="offer.image" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -376,7 +376,7 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="offer.image" :alt="offer.title" class="card-image" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
+                    <img :src="offer.image" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">
@@ -742,6 +742,19 @@ onBeforeUnmount(() => {
   .mobile-filter-toggle { display: flex; justify-content: center; margin: 12px 0; }
   .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }
   .mobile-filter-panel { margin-bottom: 16px; }
+}
+
+/* Spezifische Korrekturen für problematische Kreditkarten */
+.card-image.tf-bank-mastercard-gold { 
+  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
+  padding: 2px !important;
+  box-sizing: border-box;
+}
+
+.card-image.santander-bestcard-basic { 
+  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
+  padding: 2px !important;
+  box-sizing: border-box;
 }
 
 /* Desktop: Mobile-Filter ausblenden */

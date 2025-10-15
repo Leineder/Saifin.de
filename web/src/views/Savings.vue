@@ -318,8 +318,16 @@ function goToApply(o) {
 .card-image.ferratum { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.25);
-  padding: 4px;
+  transform: scale(1.15); /* Reduziere Scale für bessere Lesbarkeit */
+  padding: 6px; /* Mehr Padding für vollständige Logo-Darstellung */
+}
+
+/* Suresse Logo - spezielle Behandlung für vollständige Lesbarkeit */
+.card-image.suresse-direkt-bank { 
+  object-fit: contain; 
+  background: #fff; 
+  transform: scale(1.1); /* Konservativer Scale für vollständige Sichtbarkeit */
+  padding: 8px; /* Mehr Padding für vollständige Logo-Darstellung */
 }
 
 .card-image.consorsbank { 
