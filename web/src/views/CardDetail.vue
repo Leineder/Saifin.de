@@ -151,7 +151,7 @@ const formatEuro = (n) => {
   object-fit: contain; 
   object-position: center center;
   display: block;
-  border-radius: 0.75rem;
+  border-radius: 8px;
   border: 1px solid var(--border);
   background: transparent;
   overflow: hidden;

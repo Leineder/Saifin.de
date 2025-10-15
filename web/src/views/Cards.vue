@@ -511,7 +511,7 @@ onBeforeUnmount(() => {
   height: 88px;
   object-fit: contain;
   object-position: center center;
-  border-radius: 0.75rem;
+  border-radius: 5px;
   border: 1px solid var(--border);
   background: transparent;
   overflow: hidden;
