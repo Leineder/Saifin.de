@@ -27,17 +27,29 @@ export function trackProductView(productId, productName, category) {
   try {
     console.log('🔍 Tracking product view:', { productId, productName, category })
     
-    // Vercel Analytics Event tracken
-    if (typeof window !== 'undefined' && window.va) {
-      window.va('event', EVENT_TYPES.PRODUCT_VIEW, {
-        product_id: productId,
-        product_name: productName,
-        category: category,
-        timestamp: new Date().toISOString()
-      })
-      console.log('✅ Product view tracked successfully')
-    } else {
-      console.warn('⚠️ Vercel Analytics nicht verfügbar')
+    // Warten bis Analytics geladen ist
+    const sendEvent = () => {
+      if (typeof window !== 'undefined' && window.va) {
+        window.va('event', EVENT_TYPES.PRODUCT_VIEW, {
+          product_id: productId,
+          product_name: productName,
+          category: category,
+          timestamp: new Date().toISOString()
+        })
+        console.log('✅ Product view tracked successfully')
+        return true
+      }
+      return false
+    }
+    
+    // Sofort versuchen
+    if (!sendEvent()) {
+      // Falls nicht verfügbar, nach kurzer Zeit nochmal versuchen
+      setTimeout(() => {
+        if (!sendEvent()) {
+          console.warn('⚠️ Vercel Analytics nicht verfügbar nach Wartezeit')
+        }
+      }, 1000)
     }
   } catch (error) {
     console.error('❌ Analytics tracking failed:', error)
@@ -55,18 +67,30 @@ export function trackProductApply(productId, productName, category, applyUrl) {
   try {
     console.log('🚀 Tracking product apply:', { productId, productName, category, applyUrl })
     
-    // Vercel Analytics Event tracken
-    if (typeof window !== 'undefined' && window.va) {
-      window.va('event', EVENT_TYPES.PRODUCT_APPLY, {
-        product_id: productId,
-        product_name: productName,
-        category: category,
-        apply_url: applyUrl,
-        timestamp: new Date().toISOString()
-      })
-      console.log('✅ Product apply tracked successfully')
-    } else {
-      console.warn('⚠️ Vercel Analytics nicht verfügbar')
+    // Warten bis Analytics geladen ist
+    const sendEvent = () => {
+      if (typeof window !== 'undefined' && window.va) {
+        window.va('event', EVENT_TYPES.PRODUCT_APPLY, {
+          product_id: productId,
+          product_name: productName,
+          category: category,
+          apply_url: applyUrl,
+          timestamp: new Date().toISOString()
+        })
+        console.log('✅ Product apply tracked successfully')
+        return true
+      }
+      return false
+    }
+    
+    // Sofort versuchen
+    if (!sendEvent()) {
+      // Falls nicht verfügbar, nach kurzer Zeit nochmal versuchen
+      setTimeout(() => {
+        if (!sendEvent()) {
+          console.warn('⚠️ Vercel Analytics nicht verfügbar nach Wartezeit')
+        }
+      }, 1000)
     }
   } catch (error) {
     console.error('❌ Analytics tracking failed:', error)
