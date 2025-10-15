@@ -178,8 +178,6 @@ function goToApply(o) {
                     height="75" 
                     :srcset="`${o.image || '/images/saifin_logo_vectorized_final.svg'} 120w, ${o.image || '/images/saifin_logo_vectorized_final.svg'} 240w`" 
                     sizes="(max-width: 768px) 200px, 120px"
-                    crossorigin="anonymous"
-                    style="image-rendering: -webkit-optimize-contrast; image-rendering: crisp-edges;"
                   />
                 </div>
                 <div class="offer-details">
@@ -253,7 +251,14 @@ function goToApply(o) {
 
 <style scoped>
 .savings-page { background: var(--surface-muted); min-height: 100vh; }
-.layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
+.layout { 
+  display: grid; 
+  grid-template-columns: 320px 1fr; 
+  gap: 24px; 
+  /* Safari-Kompatibilität */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
 .sidebar { position: relative; }
 .sidebar-card { position: sticky; top: 86px; }
 .content { min-width: 0; }
@@ -268,7 +273,21 @@ function goToApply(o) {
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .offer-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
-.card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 0.75rem; overflow: hidden; }
+.card-image-container { 
+  flex-shrink: 0; 
+  width: 120px; 
+  height: 75px; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  background: #fff; 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  overflow: hidden; 
+  /* Safari-Kompatibilität */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
 .card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
 /* Alle Tagesgeld-Logos optimiert für Rahmenausfüllung */
 .card-image.pbb-direkt { 
@@ -347,11 +366,12 @@ function goToApply(o) {
   background: #fff; 
   transform: scale(1.45);
   padding: 1px;
-  /* Browser-Kompatibilität für bessere Farbdarstellung */
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  /* Fallback für ältere Browser */
-  filter: contrast(1.1) brightness(1.05);
+  /* Entfernt grünliche Farbstiche */
+  filter: hue-rotate(-10deg) saturate(0.8) contrast(1.2);
+  /* Alternative Browser-Rendering-Methoden */
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
