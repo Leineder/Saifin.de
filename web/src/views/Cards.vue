@@ -746,15 +746,17 @@ onBeforeUnmount(() => {
 
 /* Spezifische Korrekturen für problematische Kreditkarten */
 .card-image.tf-bank-mastercard-gold { 
-  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
-  padding: 2px !important;
+  /* Diese Karte braucht mehr Padding und geringeren Scale für perfekte Ecken */
+  padding: 4px !important;
   box-sizing: border-box;
+  transform: scale(0.98) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
 }
 
 .card-image.santander-bestcard-basic { 
-  /* Diese Karte braucht etwas mehr Padding um die Ecken perfekt zu zeigen */
-  padding: 2px !important;
+  /* Diese Karte braucht mehr Padding und geringeren Scale für perfekte Ecken */
+  padding: 4px !important;
   box-sizing: border-box;
+  transform: scale(0.98) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
 }
 
 /* Desktop: Mobile-Filter ausblenden */
