@@ -266,18 +266,20 @@ const formatEuro = (n) => {
 
 /* Spezifische Korrekturen für problematische Kreditkarten */
 .card-image.tf-bank-mastercard-gold { 
-  /* Diese Karte braucht mehr Padding und geringeren Scale für perfekte Ecken */
-  padding: 5px !important;
+  /* Aggressive Korrektur für schwarze Ecken */
+  padding: 10px !important;
   box-sizing: border-box;
-  transform: scale(0.97) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
-  border-radius: 3px !important; /* Minimal abrunden für Perfektion */
+  transform: scale(0.92) !important; /* Kleiner für mehr Padding-Raum */
+  border-radius: 8px !important; /* Größerer border-radius für schwarze Ecken */
+  background-color: white !important; /* Weißer Hintergrund gegen schwarze Ecken */
 }
 
 .card-image.santander-bestcard-basic { 
-  /* Diese Karte braucht mehr Padding und geringeren Scale für perfekte Ecken */
-  padding: 5px !important;
+  /* Aggressive Korrektur für schwarze Ecken */
+  padding: 10px !important;
   box-sizing: border-box;
-  transform: scale(0.97) !important; /* Leicht kleiner für bessere Ecken-Darstellung */
-  border-radius: 3px !important; /* Minimal abrunden für Perfektion */
+  transform: scale(0.92) !important; /* Kleiner für mehr Padding-Raum */
+  border-radius: 8px !important; /* Größerer border-radius für schwarze Ecken */
+  background-color: white !important; /* Weißer Hintergrund gegen schwarze Ecken */
 }
 </style>
