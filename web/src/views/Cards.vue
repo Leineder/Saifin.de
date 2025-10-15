@@ -560,7 +560,7 @@ onBeforeUnmount(() => {
   height: 100%;
   object-fit: contain; /* Ändere zu contain um Abschneiden zu vermeiden */
   object-position: center center;
-  border-radius: 4px;
+  border-radius: 0; /* Entferne border-radius vom Bild - Container hat bereits abgerundete Ecken */
   background: transparent;
   /* Entferne doppelte aspect-ratio Definition */
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */

@@ -170,7 +170,7 @@ const formatEuro = (n) => {
   object-fit: contain; /* Ändere zu contain um Abschneiden zu vermeiden */
   object-position: center center;
   display: block;
-  border-radius: 18px;
+  border-radius: 0; /* Entferne border-radius vom Bild - Container hat bereits abgerundete Ecken */
   background: transparent;
   /* Entferne doppelte aspect-ratio Definition */
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
@@ -229,7 +229,7 @@ const formatEuro = (n) => {
     min-height: 200px; /* Stelle sicher, dass genug Platz vorhanden ist */
   }
   .card-image {
-    border-radius: 0.6rem;
+    border-radius: 0; /* Entferne border-radius vom Bild - Container hat bereits abgerundete Ecken */
   }
   .facts-grid {
     grid-template-columns: 1fr; /* Einspaltig auf mobil */
