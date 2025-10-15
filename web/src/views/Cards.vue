@@ -547,19 +547,28 @@ onBeforeUnmount(() => {
   overflow: hidden;
   border-radius: 4px;
   border: 1px solid var(--border);
+  /* Stelle sicher, dass der Container das richtige Seitenverhältnis hat */
+  aspect-ratio: 1.586 / 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain; /* Ändere zu contain um Abschneiden zu vermeiden */
   object-position: center center;
   border-radius: 4px;
   background: transparent;
-  /* Präzises Cropping für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
-  aspect-ratio: 1.586 / 1;
-  /* Entferne weiße Ecken durch cover statt contain */
+  /* Entferne doppelte aspect-ratio Definition */
+  /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
+  /* aspect-ratio: 1.586 / 1; - wird vom Container gehandhabt */
+  /* Entferne weiße Ecken durch contain statt cover */
   background-color: transparent;
+  /* Stelle sicher, dass das Bild vollständig sichtbar ist */
+  max-width: 100%;
+  max-height: 100%;
 }
 
 .offer-details {
@@ -711,6 +720,9 @@ onBeforeUnmount(() => {
     width: 100%;
     max-width: 200px;
     margin: 0 auto;
+    /* Stelle sicher, dass der Container das richtige Seitenverhältnis beibehält */
+    aspect-ratio: 1.586 / 1;
+    height: auto;
   }
   
   .action-buttons {

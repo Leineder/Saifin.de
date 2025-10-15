@@ -161,19 +161,25 @@ const formatEuro = (n) => {
   overflow: hidden;
   border-radius: 18px;
   border: 1px solid var(--border);
+  /* Stelle sicher, dass der Container die richtige Höhe hat */
+  min-height: 200px;
 }
 .card-image { 
   width: 100%; 
   height: 100%; 
-  object-fit: cover; 
+  object-fit: contain; /* Ändere zu contain um Abschneiden zu vermeiden */
   object-position: center center;
   display: block;
   border-radius: 18px;
   background: transparent;
+  /* Entferne doppelte aspect-ratio Definition */
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
-  aspect-ratio: 1.586 / 1;
-  /* Entferne weiße Ecken durch cover statt contain */
+  /* aspect-ratio: 1.586 / 1; - wird vom Container gehandhabt */
+  /* Entferne weiße Ecken durch contain statt cover */
   background-color: transparent;
+  /* Stelle sicher, dass das Bild vollständig sichtbar ist */
+  max-width: 100%;
+  max-height: 100%;
 }
 .content { grid-column: 2 / 3; }
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
@@ -190,10 +196,10 @@ const formatEuro = (n) => {
   .detail-grid { grid-template-columns: 1fr 1fr; }
   .sticky-cta { grid-column: 1 / -1; position: static; }
   .card-image-container { 
-    min-height: 400px; 
-    max-height: 600px; 
+    min-height: 300px; 
+    max-height: 500px; 
     padding: 20px; 
-    aspect-ratio: 1.6 / 1;
+    aspect-ratio: 1.586 / 1; /* Konsistentes Seitenverhältnis */
     max-width: 100%;
   }
 }
@@ -216,11 +222,11 @@ const formatEuro = (n) => {
     position: static;
   }
   .card-image-container { 
-    aspect-ratio: 1.6 / 1;
+    aspect-ratio: 1.586 / 1; /* Konsistentes Seitenverhältnis */
     max-width: 100%;
     padding: 12px;
     margin: 0 auto;
-    min-height: unset;
+    min-height: 200px; /* Stelle sicher, dass genug Platz vorhanden ist */
   }
   .card-image {
     border-radius: 0.6rem;

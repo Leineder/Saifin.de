@@ -355,13 +355,16 @@ img[alt*="Kreditkarte"],
 img[src*="/creditcards/"] {
   /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
-  object-fit: cover;
+  object-fit: contain; /* Ändere zu contain um Abschneiden zu vermeiden */
   object-position: center center;
   /* Kreditkarten-Eckenradius: 3,18mm - angepasst an Bildgröße */
   border-radius: 4px;
-  /* Entferne weiße Ecken durch cover statt contain */
+  /* Entferne weiße Ecken durch contain statt cover */
   /* Entferne jegliche Hintergrund-Reste */
   background-color: transparent !important;
+  /* Stelle sicher, dass das Bild vollständig sichtbar ist */
+  max-width: 100%;
+  max-height: 100%;
 }
 
 /* Container für Kreditkarten-Bilder optimieren */
@@ -373,4 +376,17 @@ img[src*="/creditcards/"] {
   display: flex;
   align-items: center;
   justify-content: center;
+  /* Stelle sicher, dass der Container genug Platz für das Bild hat */
+  min-height: 88px;
+  /* Browser-kompatible Fallbacks für aspect-ratio */
+  position: relative;
+}
+
+/* Fallback für Browser ohne aspect-ratio Support */
+@supports not (aspect-ratio: 1.586 / 1) {
+  .card-image-container,
+  .card-image-container[class*="card-image"] {
+    height: 88px;
+    width: 140px;
+  }
 }
