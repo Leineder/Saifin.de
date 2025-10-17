@@ -333,7 +333,7 @@ onBeforeUnmount(() => {
 
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="offer.image" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
+                  <img :src="offer.image + '?v=20241016'" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -376,7 +376,7 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="offer.image" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
+                    <img :src="offer.image + '?v=20241016'" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">
@@ -547,12 +547,13 @@ onBeforeUnmount(() => {
   height: 88px;
   overflow: hidden;
   border-radius: 4px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border); /* Ursprünglicher Rahmen */
   /* Stelle sicher, dass der Container das richtige Seitenverhältnis hat */
   aspect-ratio: 1.586 / 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #fff !important; /* Komplett weißer Hintergrund für den Container */
 }
 
 .card-image {
@@ -745,22 +746,14 @@ onBeforeUnmount(() => {
 }
 
 /* Spezifische Korrekturen für problematische Kreditkarten */
-.card-image.tf-bank-mastercard-gold { 
-  /* Aggressive Korrektur für schwarze Ecken */
-  padding: 8px !important;
-  box-sizing: border-box;
-  transform: scale(0.95) !important; /* Kleiner für mehr Padding-Raum */
-  border-radius: 6px !important; /* Größerer border-radius für schwarze Ecken */
-  background-color: white !important; /* Weißer Hintergrund gegen schwarze Ecken */
-}
-
+.card-image.tf-bank-mastercard-gold,
 .card-image.santander-bestcard-basic { 
-  /* Aggressive Korrektur für schwarze Ecken */
-  padding: 8px !important;
-  box-sizing: border-box;
-  transform: scale(0.95) !important; /* Kleiner für mehr Padding-Raum */
-  border-radius: 6px !important; /* Größerer border-radius für schwarze Ecken */
-  background-color: white !important; /* Weißer Hintergrund gegen schwarze Ecken */
+  /* Beide Karten auf gleiche Größe bringen */
+  object-fit: cover; /* Füllt den Container vollständig aus */
+  border-radius: 4px; /* Gleicher border-radius wie Container */
+  background: transparent; /* Kein zusätzlicher Hintergrund */
+  transform: none !important; /* Keine Skalierung - normale Größe */
+  padding: 0 !important; /* Kein zusätzliches Padding */
 }
 
 /* Desktop: Mobile-Filter ausblenden */

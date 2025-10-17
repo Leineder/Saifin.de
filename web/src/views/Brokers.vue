@@ -224,7 +224,7 @@ onBeforeUnmount(() => {
             >
               <div class="offer-content">
                 <div class="card-image-container">
-                  <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241014'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
+                  <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
                 </div>
                 <div class="offer-details">
                   <div class="offer-header">
@@ -258,7 +258,7 @@ onBeforeUnmount(() => {
               >
                 <div class="recommendation-content">
                   <div class="card-image-container">
-                    <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241014'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
+                    <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
                   </div>
                   <div class="recommendation-details">
                     <div class="offer-header">
@@ -370,7 +370,14 @@ onBeforeUnmount(() => {
 .card-image { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 6px; border-radius: 1rem; border: none; }
 
 /* Spezifische Logo-Anpassungen für optimale Darstellung */
-.card-image.logo-brokerpoint,
+.card-image.logo-brokerpoint { 
+  transform: scale(0.9);
+  padding: 8px;
+  background: #fff !important;
+  object-fit: contain;
+  object-position: center center;
+}
+
 .card-image.logo-fidelity-ffb,
 .card-image.logo-quirion { 
   transform: scale(1.1);
@@ -386,7 +393,14 @@ onBeforeUnmount(() => {
   object-fit: contain;
 }
 
-.card-image.logo-finanzen-net-zero,
+.card-image.logo-finanzen-net-zero { 
+  transform: scale(0.95);
+  padding: 6px;
+  background: #fff !important;
+  object-fit: contain;
+  object-position: center center;
+}
+
 .card-image.logo-fonds-super-markt,
 .card-image.logo-etoro { 
   transform: scale(1.15);

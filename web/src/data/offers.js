@@ -1,5 +1,28 @@
 export const offers = [
   {
+    id: 'extra-karte-mastercard',
+    slug: 'extra-karte-mastercard',
+    title: 'Extra Karte (Novum Bank) – Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
+      'Bis 4.000 € Kreditrahmen*'
+    ],
+    image: '/images/creditcards/extra-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '2,99 %',
+    cardType: 'Mastercard – Revolving',
+    details: {
+      foreignCurrency: '2,99 % Auslandseinsatz',
+      cashWithdrawal: '3 % (mind. 3 €)',
+      creditLimit: 'Kreditrahmen bis 4.000 €*',
+      interest: 'Effektivzins ca. 24,60 %',
+      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen'
+    },
+    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
+  },
+  {
     id: 'hanseatic-bank-genialcard',
     slug: 'hanseatic-bank-genialcard',
     title: 'Hanseatic Bank GenialCard (Visa)',
@@ -89,7 +112,7 @@ export const offers = [
       '1 % Tankrabatt (bis 200 €/Monat)',
       'Apple Pay/Google Pay/Garmin Pay'
     ],
-    image: '/images/creditcards/santander-bestcard-basic_11zon.webp',
+    image: '/images/creditcards/Santander_BestCardBasic_2023_compressed.webp',
     annualFee: 0,
     foreignFee: '1,85 %',
     cardType: 'VISA – Revolving',
@@ -104,29 +127,6 @@ export const offers = [
       benefits: '5 % Reiserabatt über Partner Urlaubsplus'
     },
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
-  },
-  {
-    id: 'extra-karte-mastercard',
-    slug: 'extra-karte-mastercard',
-    title: 'Extra Karte (Novum Bank) – Mastercard',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
-      'Bis 4.000 € Kreditrahmen*'
-    ],
-    image: '/images/creditcards/extra-mastercard.webp',
-    annualFee: 0,
-    foreignFee: '2,99 %',
-    cardType: 'Mastercard – Revolving',
-    details: {
-      foreignCurrency: '2,99 % Auslandseinsatz',
-      cashWithdrawal: '3 % (mind. 3 €)',
-      creditLimit: 'Kreditrahmen bis 4.000 €*',
-      interest: 'Effektivzins ca. 24,60 %',
-      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen'
-    },
-    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
   },
   {
     id: 'netkredit24-mastercard',

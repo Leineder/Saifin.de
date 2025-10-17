@@ -160,7 +160,8 @@ const formatEuro = (n) => {
   box-sizing: border-box;
   overflow: hidden;
   border-radius: 18px;
-  border: 1px solid var(--border);
+  border: 1px solid var(--border); /* Ursprünglicher Rahmen */
+  background: #fff !important; /* Komplett weißer Hintergrund für den Container */
   /* Stelle sicher, dass der Container die richtige Höhe hat */
   min-height: 200px;
 }
@@ -265,21 +266,13 @@ const formatEuro = (n) => {
 }
 
 /* Spezifische Korrekturen für problematische Kreditkarten */
-.card-image.tf-bank-mastercard-gold { 
-  /* Aggressive Korrektur für schwarze Ecken */
-  padding: 10px !important;
-  box-sizing: border-box;
-  transform: scale(0.92) !important; /* Kleiner für mehr Padding-Raum */
-  border-radius: 8px !important; /* Größerer border-radius für schwarze Ecken */
-  background-color: white !important; /* Weißer Hintergrund gegen schwarze Ecken */
-}
-
+.card-image.tf-bank-mastercard-gold,
 .card-image.santander-bestcard-basic { 
-  /* Aggressive Korrektur für schwarze Ecken */
-  padding: 10px !important;
-  box-sizing: border-box;
-  transform: scale(0.92) !important; /* Kleiner für mehr Padding-Raum */
-  border-radius: 8px !important; /* Größerer border-radius für schwarze Ecken */
-  background-color: white !important; /* Weißer Hintergrund gegen schwarze Ecken */
+  /* Beide Karten auf gleiche Größe bringen ohne Abschneiden */
+  object-fit: contain; /* Zeigt die komplette Karte ohne Abschneiden */
+  border-radius: 18px; /* Gleicher border-radius wie Container */
+  background: transparent; /* Kein zusätzlicher Hintergrund */
+  transform: none !important; /* Keine Skalierung - normale Größe */
+  padding: 0 !important; /* Kein zusätzliches Padding */
 }
 </style>

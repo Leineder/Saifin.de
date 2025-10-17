@@ -55,7 +55,7 @@ const goApply = () => {
     <div class="container detail-grid">
       <div class="media">
         <div class="logo-frame">
-          <img :src="(broker.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241014'" :alt="`${broker.name} – Logo`" :class="'detail-logo ' + broker.slug" loading="lazy" decoding="async" width="720" height="240" />
+          <img :src="(broker.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${broker.name} – Logo`" :class="'detail-logo ' + broker.slug" loading="lazy" decoding="async" width="720" height="240" />
         </div>
       </div>
       <div class="content">
@@ -147,7 +147,14 @@ const goApply = () => {
 .logo-frame { width: 100%; height: 240px; display: flex; align-items: center; justify-content: center; background: #fff; border-radius: 1rem; border: 1px solid var(--border); overflow: hidden; }
 .logo-frame img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; display: block; border-radius: 1rem; background: #fff; padding: 12px; }
 /* Spezifische Logo-Anpassungen für Detailseite */
-.logo-frame img.detail-logo.brokerpoint,
+.logo-frame img.detail-logo.brokerpoint { 
+  transform: scale(0.85);
+  padding: 16px;
+  background: #fff !important;
+  object-fit: contain;
+  object-position: center center;
+}
+
 .logo-frame img.detail-logo.fidelity-ffb,
 .logo-frame img.detail-logo.quirion { 
   transform: scale(1.1);
@@ -165,7 +172,14 @@ const goApply = () => {
   justify-content: center;
 }
 
-.logo-frame img.detail-logo.finanzen-net-zero,
+.logo-frame img.detail-logo.finanzen-net-zero { 
+  transform: scale(0.9);
+  padding: 12px;
+  background: #fff !important;
+  object-fit: contain;
+  object-position: center center;
+}
+
 .logo-frame img.detail-logo.fonds-super-markt,
 .logo-frame img.detail-logo.etoro { 
   transform: scale(1.15);
