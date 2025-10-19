@@ -560,6 +560,8 @@ onBeforeUnmount(() => {
   box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
   min-height: 2.5rem;
   line-height: 1.2;
+  /* Desktop: Keine Abschneidung */
+  clip-path: none;
 }
 
 /* Mobile: Noch etwas mehr vom Banner abschneiden für perfekte Zentrierung */
