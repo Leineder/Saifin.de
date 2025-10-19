@@ -331,6 +331,7 @@ onBeforeUnmount(() => {
               <div v-if="offer.id === 'extra-karte-mastercard'" class="testsieger-banner">
                 <i class="pi pi-trophy"></i>
                 <span>Testsieger</span>
+                <i class="pi pi-trophy trophy-small"></i>
               </div>
               
               <div v-if="offer.bonus" class="bonus-banner">
@@ -551,8 +552,8 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, #d4af37, #b8860b);
-  color: #ffffff;
+  background: linear-gradient(135deg, #ffd700, #ffb347);
+  color: #1a1a1a;
   padding: 0.375rem 1rem;
   border-radius: 0.75rem 0.75rem 0 0;
   font-size: 0.75rem;
@@ -564,12 +565,18 @@ onBeforeUnmount(() => {
   z-index: 10;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
 }
 
 .testsieger-banner i {
   font-size: 0.875rem;
-  color: #ffffff;
+  color: #1a1a1a;
+}
+
+.testsieger-banner .trophy-small {
+  font-size: 0.625rem;
+  opacity: 0.8;
+  margin-left: 0.125rem;
 }
 
 
