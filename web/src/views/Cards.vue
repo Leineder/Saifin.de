@@ -259,11 +259,14 @@ onBeforeUnmount(() => {
 
         <!-- Offers -->
         <main class="content">
+          <h1 class="section-title text-2xl md:text-3xl mb-2">Top 10 Kreditkarten 2025</h1>
+          <p class="last-updated">zuletzt aktualisiert am 13. Oktober 2025</p>
+          
           <!-- Mobile Filter Toggle -->
           <div class="mobile-filter-toggle">
-            <button class="p-button apply-cta" @click="showFilters = !showFilters">
-              <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
-              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
+            <button class="filter-toggle-btn" @click="showFilters = !showFilters">
+              <i class="pi pi-filter"></i>
+              <span>{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
             </button>
           </div>
 
@@ -315,8 +318,6 @@ onBeforeUnmount(() => {
               <label class="checkbox"><input type="checkbox" v-model="instantDecision" /> <span>Sofortentscheidung</span></label>
             </div>
           </div>
-          <div class="section-eyebrow">Angebote</div>
-          <h1 class="section-title text-2xl md:text-3xl mb-3">Top 10 Kreditkarten 2025</h1>
 
           <div class="offers-section">
             <div 
@@ -707,6 +708,49 @@ onBeforeUnmount(() => {
 .faq-item summary { cursor: pointer; font-weight: 600; color: var(--text); list-style: none; }
 .faq-item p { margin: 0.5rem 0 0; color: var(--muted-text); }
 
+/* Last Updated Text */
+.last-updated {
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  margin: 0 0 1rem 0;
+  font-weight: 400;
+}
+
+/* Mobile Filter Toggle Button */
+.filter-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.filter-toggle-btn:hover {
+  background: var(--surface-hover);
+  border-color: var(--brand-accent);
+}
+
+.filter-toggle-btn i {
+  font-size: 0.875rem;
+}
+
+.mobile-filter-toggle {
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0 1rem 0;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
@@ -740,8 +784,6 @@ onBeforeUnmount(() => {
     grid-template-columns: 1fr;
   }
 
-  .mobile-filter-toggle { display: flex; justify-content: center; margin: 12px 0; }
-  .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }
   .mobile-filter-panel { margin-bottom: 16px; }
 }
 
