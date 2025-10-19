@@ -259,7 +259,7 @@ onBeforeUnmount(() => {
 
         <!-- Offers -->
         <main class="content">
-          <h1 class="section-title text-2xl md:text-3xl mb-2">Top 10 Kreditkarten 2025</h1>
+          <h1 class="section-title text-2xl md:text-3xl mb-1">Top 10 Kreditkarten 2025</h1>
           <p class="last-updated">zuletzt aktualisiert am 13. Oktober 2025</p>
           
           <!-- Mobile Filter Toggle -->
@@ -712,7 +712,7 @@ onBeforeUnmount(() => {
 .last-updated {
   font-size: 0.75rem;
   color: var(--muted-text);
-  margin: 0 0 1rem 0;
+  margin: 0.25rem 0 0.5rem 0;
   font-weight: 400;
 }
 
@@ -748,7 +748,7 @@ onBeforeUnmount(() => {
 .mobile-filter-toggle {
   display: flex;
   justify-content: center;
-  margin: 0.75rem 0 1rem 0;
+  margin: 0 0 0.75rem 0;
 }
 
 /* Responsive Design */
