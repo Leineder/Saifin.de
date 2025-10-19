@@ -562,10 +562,10 @@ onBeforeUnmount(() => {
   line-height: 1.2;
 }
 
-/* Mobile: Banner unten etwas abschneiden für bessere Zentrierung */
+/* Mobile: Unteres Drittel des Banners abschneiden für perfekte Zentrierung */
 @media (max-width: 768px) {
   .testsieger-banner {
-    clip-path: inset(0 0 15% 0);
+    clip-path: inset(0 0 33% 0);
   }
 }
 
