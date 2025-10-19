@@ -106,6 +106,21 @@ onMounted(() => {
   /* Prevent layout shifts */
   min-height: 96px;
 }
+
+/* Mobile Header - dünner */
+@media (max-width: 767px) {
+  .site-header {
+    min-height: 64px;
+  }
+  .header-inner {
+    height: 64px;
+    min-height: 64px;
+  }
+  .brand-mark {
+    width: 60px;
+    height: 60px;
+  }
+}
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
 .brand-name { font-weight: 800; color: var(--brand-primary-contrast); letter-spacing: -0.01em; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 .brand-mark { width: 80px; height: 80px; border-radius: 8px; overflow: hidden; display: inline-block; }

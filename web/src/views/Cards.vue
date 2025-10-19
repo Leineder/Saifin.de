@@ -327,6 +327,12 @@ onBeforeUnmount(() => {
               @click="goToDetail(offer)"
               style="cursor: pointer;"
             >
+              <!-- Testsieger Banner für Extra-Karte -->
+              <div v-if="offer.id === 'extra-karte-mastercard'" class="testsieger-banner">
+                <i class="pi pi-trophy"></i>
+                <span>Testsieger</span>
+              </div>
+              
               <div v-if="offer.bonus" class="bonus-banner">
                 <i class="pi pi-gift"></i>
                 {{ offer.bonus }} Bonus
@@ -538,6 +544,32 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 0.25rem;
   z-index: 10;
+}
+
+.testsieger-banner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(135deg, #ffd700, #ffed4e);
+  color: #1a1a1a;
+  padding: 0.375rem 1rem;
+  border-radius: 0.75rem 0.75rem 0 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  z-index: 10;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.testsieger-banner i {
+  font-size: 0.875rem;
+  color: #1a1a1a;
 }
 
 
