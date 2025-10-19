@@ -316,7 +316,7 @@ onBeforeUnmount(() => {
             </div>
           </div>
           <div class="section-eyebrow">Angebote</div>
-          <h1 class="section-title text-2xl md:text-3xl mb-3">Kreditkarten im Vergleich</h1>
+          <h1 class="section-title text-2xl md:text-3xl mb-3">Top 10 Kreditkarten 2025</h1>
 
           <div class="offers-section">
             <div 
