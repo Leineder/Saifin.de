@@ -551,8 +551,8 @@ onBeforeUnmount(() => {
   top: 0;
   left: 0;
   right: 0;
-  background: linear-gradient(135deg, #ffd700, #ffed4e);
-  color: #1a1a1a;
+  background: linear-gradient(135deg, #d4af37, #b8860b);
+  color: #ffffff;
   padding: 0.375rem 1rem;
   border-radius: 0.75rem 0.75rem 0 0;
   font-size: 0.75rem;
@@ -564,12 +564,12 @@ onBeforeUnmount(() => {
   z-index: 10;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
 }
 
 .testsieger-banner i {
   font-size: 0.875rem;
-  color: #1a1a1a;
+  color: #ffffff;
 }
 
 

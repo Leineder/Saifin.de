@@ -107,18 +107,18 @@ onMounted(() => {
   min-height: 96px;
 }
 
-/* Mobile Header - dünner */
+/* Mobile Header - noch dünner */
 @media (max-width: 767px) {
   .site-header {
-    min-height: 64px;
+    min-height: 56px;
   }
   .header-inner {
-    height: 64px;
-    min-height: 64px;
+    height: 56px;
+    min-height: 56px;
   }
   .brand-mark {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
   }
 }
 .brand { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; }
