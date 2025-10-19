@@ -562,6 +562,13 @@ onBeforeUnmount(() => {
   line-height: 1.2;
 }
 
+/* Mobile: Banner unten etwas abschneiden für bessere Zentrierung */
+@media (max-width: 768px) {
+  .testsieger-banner {
+    clip-path: inset(0 0 15% 0);
+  }
+}
+
 .testsieger-banner i {
   font-size: 0.875rem;
   color: #1a1a1a;
