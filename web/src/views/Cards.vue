@@ -261,7 +261,55 @@ onBeforeUnmount(() => {
         <main class="content">
           <h1 class="section-title text-2xl md:text-3xl mb-1">Top 10 Kreditkarten 2025</h1>
           <p class="last-updated">zuletzt aktualisiert am 13. Oktober 2025</p>
-          
+
+          <div class="offers-section">
+            <div 
+              v-for="offer in filteredOffers" 
+              :key="offer.id" 
+              class="offer-card surface-card border-round-xl card-accent"
+              @click="goToDetail(offer)"
+              style="cursor: pointer;"
+            >
+              <!-- Testsieger Banner für Extra-Karte -->
+              <div v-if="offer.id === 'extra-karte-mastercard'" class="testsieger-banner">
+                <i class="pi pi-trophy"></i>
+                <span>Testsieger</span>
+                <i class="pi pi-trophy trophy-small"></i>
+              </div>
+              
+              <div v-if="offer.bonus" class="bonus-banner">
+                <i class="pi pi-gift"></i>
+                {{ offer.bonus }} Bonus
+              </div>
+
+              <div class="offer-content">
+                <div class="card-image-container">
+                  <img :src="offer.image + '?v=20241016'" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
+                </div>
+                <div class="offer-details">
+                  <div class="offer-header">
+                    <h3 class="offer-title">{{ offer.title }}</h3>
+                    <div class="payment-type">
+                      <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
+                      <i class="pi pi-info-circle"></i>
+                    </div>
+                  </div>
+                  <div class="features-list">
+                    <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
+                      <i class="pi pi-check"></i>
+                      <span>{{ feature }}</span>
+                    </div>
+                  </div>
+                  <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
+                  <div class="action-buttons">
+                    <button class="p-button apply-cta" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <!-- Mobile Filter Toggle -->
           <div class="mobile-filter-toggle">
             <button class="filter-toggle-btn" @click="showFilters = !showFilters">
@@ -316,54 +364,6 @@ onBeforeUnmount(() => {
               <h3 class="filter-title">Bedingungen</h3>
               <label class="checkbox"><input type="checkbox" v-model="schufaFree" /> <span>Ohne SCHUFA</span></label>
               <label class="checkbox"><input type="checkbox" v-model="instantDecision" /> <span>Sofortentscheidung</span></label>
-            </div>
-          </div>
-
-          <div class="offers-section">
-            <div 
-              v-for="offer in filteredOffers" 
-              :key="offer.id" 
-              class="offer-card surface-card border-round-xl card-accent"
-              @click="goToDetail(offer)"
-              style="cursor: pointer;"
-            >
-              <!-- Testsieger Banner für Extra-Karte -->
-              <div v-if="offer.id === 'extra-karte-mastercard'" class="testsieger-banner">
-                <i class="pi pi-trophy"></i>
-                <span>Testsieger</span>
-                <i class="pi pi-trophy trophy-small"></i>
-              </div>
-              
-              <div v-if="offer.bonus" class="bonus-banner">
-                <i class="pi pi-gift"></i>
-                {{ offer.bonus }} Bonus
-              </div>
-
-              <div class="offer-content">
-                <div class="card-image-container">
-                  <img :src="offer.image + '?v=20241016'" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
-                </div>
-                <div class="offer-details">
-                  <div class="offer-header">
-                    <h3 class="offer-title">{{ offer.title }}</h3>
-                    <div class="payment-type">
-                      <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
-                      <i class="pi pi-info-circle"></i>
-                    </div>
-                  </div>
-                  <div class="features-list">
-                    <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                      <i class="pi pi-check"></i>
-                      <span>{{ feature }}</span>
-                    </div>
-                  </div>
-                  <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
-                  <div class="action-buttons">
-                    <button class="p-button apply-cta" @click.stop="goToApply(offer)"><span class="p-button-label">Zum Antrag</span></button>
-                    <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
 
