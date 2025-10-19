@@ -474,10 +474,16 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .cards-page { background: var(--surface-muted); min-height: 100vh; }
+
+/* Reduzierte Abstände für die Section - vor allem mobil */
+.cards-page .section {
+  padding: 24px 0;
+}
+
 .layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
 .sidebar { position: relative; }
 .sidebar-card { position: sticky; top: 86px; }
-.content { min-width: 0; }
+.content { min-width: 0; padding-top: 0; }
 
 /* Filter Section */
 .filter-group {
@@ -753,6 +759,25 @@ onBeforeUnmount(() => {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  /* Noch weniger Abstand oben für mobile */
+  .cards-page .section {
+    padding: 8px 0;
+  }
+  
+  .content h1 {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0.25rem !important;
+  }
+  
+  .last-updated {
+    margin: 0.125rem 0 0.375rem 0;
+  }
+  
+  .mobile-filter-toggle {
+    margin: 0 0 0.5rem 0;
+  }
+  
   .layout { grid-template-columns: 1fr; }
   .sidebar-card { position: static; }
   
