@@ -558,7 +558,7 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
-  min-height: 1.33rem;
+  min-height: 1.75rem;
   line-height: 1.2;
   /* Desktop: Keine Abschneidung */
   clip-path: none;
