@@ -558,7 +558,7 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
-  min-height: 2.5rem;
+  height: 2.5rem;
   line-height: 1;
 }
 
