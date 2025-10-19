@@ -541,7 +541,7 @@ onBeforeUnmount(() => {
 
 .testsieger-banner {
   position: absolute;
-  top: -1rem;
+  top: -0.75rem;
   left: 0;
   right: 0;
   background: linear-gradient(135deg, #ffd700, #ffb347);
