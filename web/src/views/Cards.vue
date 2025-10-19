@@ -561,7 +561,7 @@ onBeforeUnmount(() => {
   min-height: 2.5rem;
   line-height: 1.2;
   overflow: hidden;
-  clip-path: inset(0 0 50% 0);
+  clip-path: inset(0 0 25% 0);
 }
 
 .testsieger-banner i {
