@@ -541,12 +541,12 @@ onBeforeUnmount(() => {
 
 .testsieger-banner {
   position: absolute;
-  top: -0.75rem;
+  top: -1.25rem;
   left: 0;
   right: 0;
   background: linear-gradient(135deg, #ffd700, #ffb347);
   color: #1a1a1a;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   border-radius: 0.75rem;
   font-size: 0.75rem;
   font-weight: 700;
@@ -558,7 +558,7 @@ onBeforeUnmount(() => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4);
-  height: 2rem;
+  height: 3rem;
   line-height: 1;
 }
 
