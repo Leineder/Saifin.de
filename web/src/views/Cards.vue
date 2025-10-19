@@ -564,10 +564,13 @@ onBeforeUnmount(() => {
   clip-path: none;
 }
 
-/* Mobile: Noch etwas mehr vom Banner abschneiden für perfekte Zentrierung */
+/* Mobile: Gleiche Behandlung wie Desktop */
 @media (max-width: 768px) {
   .testsieger-banner {
-    clip-path: inset(0 0 40% 0);
+    padding: 0.25rem 1rem 0 1rem;
+    align-items: flex-end;
+    min-height: 1.75rem;
+    clip-path: none;
   }
 }
 
