@@ -289,10 +289,6 @@ onBeforeUnmount(() => {
                 <div class="offer-details">
                   <div class="offer-header">
                     <h3 class="offer-title">{{ offer.title }}</h3>
-                    <div class="payment-type">
-                      <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
-                      <i class="pi pi-info-circle"></i>
-                    </div>
                   </div>
                   <div class="features-list">
                     <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
@@ -389,10 +385,6 @@ onBeforeUnmount(() => {
                   <div class="recommendation-details">
                     <div class="offer-header">
                       <h3 class="offer-title">{{ offer.title }}</h3>
-                      <div class="payment-type">
-                        <span>Zahlungsart {{ offer.cardType.includes('Charge') ? 'Charge' : 'Credit' }}</span>
-                        <i class="pi pi-info-circle"></i>
-                      </div>
                     </div>
                     <div class="features-list">
                       <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
@@ -639,13 +631,6 @@ onBeforeUnmount(() => {
   margin: 0;
 }
 
-.payment-type {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  color: var(--subtle-text);
-  font-size: 0.875rem;
-}
 
 .features-list {
   display: flex;
