@@ -85,12 +85,13 @@ export function initEngagementTracking() {
           }
         } catch (_) {}
 
-        // TikTok Pixel: ViewContent Event
+        // TikTok Pixel: Custom Event "Interaktion"
         try {
           if (window.ttq && typeof window.ttq.track === 'function') {
-            window.ttq.track('ViewContent', {
+            window.ttq.track('Interaktion', {
               content_type: 'engagement',
-              description: trigger
+              trigger: trigger,
+              scroll_depth: scrollDepth
             })
           }
         } catch (_) {}

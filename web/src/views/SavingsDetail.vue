@@ -43,6 +43,19 @@ const goApply = () => {
       }
     } catch (_) {}
     
+    // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Tagesgeld-Antrag
+    try {
+      if (window.ttq && typeof window.ttq.track === 'function' && offer.value) {
+        window.ttq.track('Antrag gestellt', {
+          content_type: 'savings',
+          content_name: offer.value.title,
+          content_id: offer.value.id || offer.value.slug,
+          value: offer.value.rate || 0,
+          status: 'external_redirect'
+        })
+      }
+    } catch (_) {}
+    
     window.open(url, '_blank', 'noopener,noreferrer')
   } else {
     router.push(url)

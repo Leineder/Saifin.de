@@ -150,7 +150,8 @@ function submit() {
     if (typeof window !== 'undefined' && window.ttq && typeof window.ttq.track === 'function') {
       const ttqData = {
         content_type: type,
-        content_name: applySubjectTitle.value
+        content_name: applySubjectTitle.value,
+        status: 'internal_form_completed'
       }
       
       if (offer) {
@@ -164,7 +165,11 @@ function submit() {
         ttqData.value = savings.rate || 0
       }
       
+      // Standard Event
       window.ttq.track('CompleteRegistration', ttqData)
+      
+      // Custom Event "Antrag gestellt" für einheitliches Tracking
+      window.ttq.track('Antrag gestellt', ttqData)
     }
   } catch (e) {
     // Tracking-Fehler nicht zum Absturz führen

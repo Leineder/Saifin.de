@@ -41,6 +41,18 @@ const goApply = () => {
         }
       } catch (_) {}
       
+      // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Broker-Antrag
+      try {
+        if (window.ttq && typeof window.ttq.track === 'function') {
+          window.ttq.track('Antrag gestellt', {
+            content_type: 'broker',
+            content_name: broker.value.name,
+            content_id: broker.value.id || broker.value.slug,
+            status: 'external_redirect'
+          })
+        }
+      } catch (_) {}
+      
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }

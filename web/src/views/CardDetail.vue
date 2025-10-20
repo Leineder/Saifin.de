@@ -51,6 +51,20 @@ const goApply = () => {
         }
       } catch (_) {}
       
+      // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Kreditkarten-Antrag
+      try {
+        if (window.ttq && typeof window.ttq.track === 'function' && offer) {
+          window.ttq.track('Antrag gestellt', {
+            content_type: 'card',
+            content_name: offer.title,
+            content_id: offer.id || offer.slug,
+            value: offer.annualFee || 0,
+            currency: 'EUR',
+            status: 'external_redirect'
+          })
+        }
+      } catch (_) {}
+      
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }
