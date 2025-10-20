@@ -9,6 +9,7 @@ import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 import './style.css'
+import { initEngagementTracking } from './tracking'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -42,6 +43,14 @@ router.afterEach(() => {
 
 // Mount app immediately without waiting for anything
 app.mount('#app')
+
+// Engagement Tracking initialisieren (verzögert nach App-Mount)
+if (typeof window !== 'undefined') {
+  // Nach kurzer Verzögerung, damit die App zuerst lädt
+  setTimeout(() => {
+    initEngagementTracking()
+  }, 2000)
+}
 
 // Performance optimizations (heavily deferred and non-blocking)
 if (import.meta.env.PROD) {
