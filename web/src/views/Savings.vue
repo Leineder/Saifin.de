@@ -343,15 +343,15 @@ function goToApply(o) {
 .card-image.quirion { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.3);
-  padding: 3px;
+  transform: scale(1.05);
+  padding: 8px;
 }
 
 .card-image.comdirect { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.3);
-  padding: 3px;
+  transform: scale(1.1);
+  padding: 8px;
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
