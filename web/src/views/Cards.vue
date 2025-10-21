@@ -270,8 +270,8 @@ onBeforeUnmount(() => {
               @click="goToDetail(offer)"
               style="cursor: pointer;"
             >
-              <!-- Testsieger Banner für Extra-Karte -->
-              <div v-if="offer.id === 'extra-karte-mastercard'" class="testsieger-banner">
+              <!-- Testsieger Banner für Hanseatic GenialCard -->
+              <div v-if="offer.id === 'hanseatic-bank-genialcard'" class="testsieger-banner">
                 <i class="pi pi-trophy"></i>
                 <span>Testsieger</span>
                 <i class="pi pi-trophy trophy-small"></i>

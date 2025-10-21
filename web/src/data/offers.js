@@ -1,28 +1,5 @@
 export const offers = [
   {
-    id: 'extra-karte-mastercard',
-    slug: 'extra-karte-mastercard',
-    title: 'Extra Karte (Novum Bank) – Mastercard',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
-      'Bis 4.000 € Kreditrahmen*'
-    ],
-    image: '/images/creditcards/extra-mastercard.webp',
-    annualFee: 0,
-    foreignFee: '2,99 %',
-    cardType: 'Mastercard – Revolving',
-    details: {
-      foreignCurrency: '2,99 % Auslandseinsatz',
-      cashWithdrawal: '3 % (mind. 3 €)',
-      creditLimit: 'Kreditrahmen bis 4.000 €*',
-      interest: 'Effektivzins ca. 24,60 %',
-      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen'
-    },
-    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
-  },
-  {
     id: 'hanseatic-bank-genialcard',
     slug: 'hanseatic-bank-genialcard',
     title: 'Hanseatic Bank GenialCard (Visa)',
@@ -48,6 +25,73 @@ export const offers = [
     },
     disclaimer: '*Angaben erfahrungsbasiert/bonitätsabhängig; Preis-/Leistungsverzeichnis beachten.',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
+  },
+  {
+    id: 'extra-karte-mastercard',
+    slug: 'extra-karte-mastercard',
+    title: 'Extra Karte (Novum Bank) – Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
+      'Bis 4.000 € Kreditrahmen*'
+    ],
+    image: '/images/creditcards/extra-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '2,99 %',
+    cardType: 'Mastercard – Revolving',
+    details: {
+      foreignCurrency: '2,99 % Auslandseinsatz',
+      cashWithdrawal: '3 % (mind. 3 €)',
+      creditLimit: 'Kreditrahmen bis 4.000 €*',
+      interest: 'Effektivzins ca. 24,60 %',
+      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen'
+    },
+    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
+  },
+  {
+    id: 'tf-bank-mastercard-gold',
+    slug: 'tf-bank-mastercard-gold',
+    title: 'TF Bank Mastercard Gold',
+    bullets: [
+      '0 € Jahresgebühr',
+      '0 % Auslandseinsatz',
+      'Bargeld weltweit gebührenfrei',
+      'Reiseversicherungspaket inkl.'
+    ],
+    image: '/images/creditcards/TFBank_MastercardGold_11zon.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Mastercard – Revolving',
+    details: {
+      foreignCurrency: '0 % Auslandseinsatz',
+      cashWithdrawal: 'Weltweit gebührenfrei; Bargeld und Überweisungen verzinsen sich ab Buchungstag',
+      interest: 'Einkäufe bis 51 Tage zinsfrei bei Vollzahlung; Mindestrate 3 % / min. 30 €; Sollzins 22,35 % p.a., eff. 24,79 % p.a.',
+      creditLimit: 'Rahmen bis 10.000 €*',
+      notes: 'Keine automatische Abbuchung – Rechnung aktiv überweisen'
+    },
+    disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
+  },
+  {
+    id: 'netkredit24-mastercard',
+    slug: 'netkredit24-mastercard',
+    title: 'Netkredit24 Mastercard (Vermittelt)',
+    bullets: [
+      '0 € Jahresgebühr (beworben)',
+      'Bis zu 8 Wochen zinsfrei (beworben)',
+      'Kreditrahmen bis 4.000 €*'
+    ],
+    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
+    annualFee: 0,
+    foreignFee: 'variabel (je Partnerbank)',
+    cardType: 'Mastercard – Revolving (vermittelt)',
+    details: {
+      foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
+      notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
+    },
+    disclaimer: '*Abhängig vom vermittelten Institut; Angaben Werbestand.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
   },
   {
     id: 'hanseatic-bank-goldcard',
@@ -79,30 +123,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328118428T'
   },
   {
-    id: 'tf-bank-mastercard-gold',
-    slug: 'tf-bank-mastercard-gold',
-    title: 'TF Bank Mastercard Gold',
-    bullets: [
-      '0 € Jahresgebühr',
-      '0 % Auslandseinsatz',
-      'Bargeld weltweit gebührenfrei',
-      'Reiseversicherungspaket inkl.'
-    ],
-    image: '/images/creditcards/TFBank_MastercardGold_11zon.webp',
-    annualFee: 0,
-    foreignFee: '0 %',
-    cardType: 'Mastercard – Revolving',
-    details: {
-      foreignCurrency: '0 % Auslandseinsatz',
-      cashWithdrawal: 'Weltweit gebührenfrei; Bargeld und Überweisungen verzinsen sich ab Buchungstag',
-      interest: 'Einkäufe bis 51 Tage zinsfrei bei Vollzahlung; Mindestrate 3 % / min. 30 €; Sollzins 22,35 % p.a., eff. 24,79 % p.a.',
-      creditLimit: 'Rahmen bis 10.000 €*',
-      notes: 'Keine automatische Abbuchung – Rechnung aktiv überweisen'
-    },
-    disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
-  },
-  {
     id: 'santander-bestcard-basic',
     slug: 'santander-bestcard-basic',
     title: 'Santander BestCard Basic (Visa)',
@@ -127,26 +147,6 @@ export const offers = [
       benefits: '5 % Reiserabatt über Partner Urlaubsplus'
     },
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
-  },
-  {
-    id: 'netkredit24-mastercard',
-    slug: 'netkredit24-mastercard',
-    title: 'Netkredit24 Mastercard (Vermittelt)',
-    bullets: [
-      '0 € Jahresgebühr (beworben)',
-      'Bis zu 8 Wochen zinsfrei (beworben)',
-      'Kreditrahmen bis 4.000 €*'
-    ],
-    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
-    annualFee: 0,
-    foreignFee: 'variabel (je Partnerbank)',
-    cardType: 'Mastercard – Revolving (vermittelt)',
-    details: {
-      foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
-      notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
-    },
-    disclaimer: '*Abhängig vom vermittelten Institut; Angaben Werbestand.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
   },
   {
     id: 'consors-finanz-mastercard',
