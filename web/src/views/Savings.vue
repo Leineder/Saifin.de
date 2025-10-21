@@ -289,19 +289,13 @@ function goToApply(o) {
   transform: translateZ(0);
 }
 .card-image { width: 100%; height: 100%; object-fit: cover; background: transparent; padding: 0; border-radius: 0.75rem; border: none; }
+
 /* Alle Tagesgeld-Logos optimiert für Rahmenausfüllung */
 .card-image.pbb-direkt { 
   object-fit: contain; 
   background: #fff; 
   transform: scale(1.35);
   padding: 2px;
-}
-
-.card-image.suresse-direkt-bank { 
-  object-fit: contain; 
-  background: #fff; 
-  transform: scale(1.3);
-  padding: 3px;
 }
 
 .card-image.tf-bank { 
@@ -332,13 +326,6 @@ function goToApply(o) {
   padding: 2px;
 }
 
-.card-image.openbank { 
-  object-fit: contain; 
-  background: #fff; 
-  transform: scale(1.3);
-  padding: 3px;
-}
-
 .card-image.santander-consumer-bank { 
   object-fit: contain; 
   background: #fff; 
@@ -346,32 +333,25 @@ function goToApply(o) {
   padding: 2px;
 }
 
-.card-image.ferratum { 
+.card-image.\31 822-direkt { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.05); /* Noch kleiner für vollständige Lesbarkeit */
-  padding: 8px; /* Mehr Padding für vollständige Logo-Darstellung */
+  transform: scale(1.25);
+  padding: 4px;
 }
 
-/* Suresse Logo - spezielle Behandlung für vollständige Lesbarkeit */
-.card-image.suresse-direkt-bank { 
+.card-image.quirion { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.1); /* Konservativer Scale für vollständige Sichtbarkeit */
-  padding: 8px; /* Mehr Padding für vollständige Logo-Darstellung */
+  transform: scale(1.3);
+  padding: 3px;
 }
 
-.card-image.consorsbank { 
+.card-image.comdirect { 
   object-fit: contain; 
   background: #fff; 
-  transform: scale(1.45);
-  padding: 1px;
-  /* Entfernt grünliche Farbstiche */
-  filter: hue-rotate(-10deg) saturate(0.8) contrast(1.2);
-  /* Alternative Browser-Rendering-Methoden */
-  image-rendering: auto;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  transform: scale(1.3);
+  padding: 3px;
 }
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }

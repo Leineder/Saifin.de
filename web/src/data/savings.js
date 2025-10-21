@@ -17,26 +17,7 @@ export const savingsOffers = [
       'Kostenlose Kontoführung, täglich verfügbar',
       'Gesetzliche Einlagensicherung bis 100.000 €'
     ],
-    applyUrl: '/antrag/pbb-direkt'
-  },
-  {
-    id: 'suresse-direkt-bank',
-    slug: 'suresse-direkt-bank',
-    title: 'Suresse Direkt Bank Tagesgeld',
-    image: '/images/tagesgeldkonten/Suresse_11zon.webp',
-    interest: 'Variabler Zins (kampagnenabhängig)',
-    payout: 'regelmäßig',
-    depositMin: '0 €',
-    security: 'ES – Spanischer Einlagensicherungsfonds (100.000 €)',
-    countryCode: 'ES',
-    euDgs: true,
-    isNeukundenaktion: false,
-    highlights: [
-      'Tägliche Verfügbarkeit, 100% online',
-      'EU-Einlagensicherung bis 100.000 € (200.000 € gemeinsam)',
-      'Einfache Rücküberweisung aufs Referenzkonto'
-    ],
-    applyUrl: '/antrag/suresse-direkt-bank'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C55324199B'
   },
   {
     id: 'tf-bank',
@@ -115,25 +96,6 @@ export const savingsOffers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C4422100650T'
   },
   {
-    id: 'openbank',
-    slug: 'openbank',
-    title: 'Openbank Tagesgeld',
-    image: '/images/tagesgeldkonten/Openbank_11zon.webp',
-    interest: '3,00% p.a. (Neukunden 6 Monate), danach ca. 1,50% p.a.',
-    payout: 'monatlich',
-    depositMin: '1 €',
-    security: 'ES – Spanische Einlagensicherung 100.000 €',
-    countryCode: 'ES',
-    euDgs: true,
-    isNeukundenaktion: true,
-    highlights: [
-      '3,00% p.a. für Neukunden (6 Monate)',
-      'Deutsche IBAN, volle EU-Sicherung',
-      'Gebührenfrei, 100% digital'
-    ],
-    applyUrl: '/antrag/openbank'
-  },
-  {
     id: 'santander-consumer-bank',
     slug: 'santander-consumer-bank',
     title: 'Santander Consumer Bank Tagesgeld',
@@ -153,45 +115,65 @@ export const savingsOffers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C19399348B'
   },
   {
-    id: 'ferratum',
-    slug: 'ferratum',
-    title: 'Ferratum Sparkonto (Tagesgeld)',
-    image: '/images/tagesgeldkonten/Ferratum_11zon.webp',
-    interest: 'Variabel, häufig ~3,00% p.a.',
-    payout: 'monatlich',
+    id: '1822-direkt',
+    slug: '1822-direkt',
+    title: '1822direkt Tagesgeldkonto',
+    image: '/images/tagesgeldkonten/1822direkt_11zon.webp',
+    interest: '2,25% p.a. für 6 Monate (bis 250.000 €), danach 0,60% p.a.',
+    payout: 'jährlich',
     depositMin: '0 €',
-    security: 'MT – Maltesische Einlagensicherung 100.000 €',
-    countryCode: 'MT',
+    security: 'DE – Institutssicherung Sparkassen-Finanzgruppe',
+    countryCode: 'DE',
+    euDgs: true,
+    isNeukundenaktion: true,
+    highlights: [
+      '2,25% p.a. Neukunden für 6 Monate (bis 250.000 €)',
+      'Jährliche Zinsgutschrift zum 31.12.',
+      'Kostenfreie Kontoführung, täglich verfügbar',
+      'Institutssicherung der Sparkassen-Finanzgruppe'
+    ],
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C10710506T'
+  },
+  {
+    id: 'quirion',
+    slug: 'quirion',
+    title: 'quirion Tagesgeld (Notgroschen)',
+    image: '/images/tagesgeldkonten/Quirion_11zon.webp',
+    interest: 'Variable Verzinsung (kombinierbar mit ETF-Portfolio)',
+    payout: 'regelmäßig',
+    depositMin: '0 €',
+    security: 'DE – Einlagensicherung über Partnerbank',
+    countryCode: 'DE',
     euDgs: true,
     isNeukundenaktion: false,
     highlights: [
-      'Monatliche Zinsgutschrift, volle Flexibilität',
-      'Keine Kontoführungsgebühr',
-      'EU-regulierte Bank, DGS bis 100.000 €'
+      'Tagesgeld oder Cash-Invest – kurzfristig optimiert',
+      'Kombinierbar mit automatisiertem ETF-Portfolio',
+      'Ausgezeichneter Robo-Advisor des Jahres 2024',
+      'Digitale und persönliche Beratung'
     ],
-    applyUrl: '/antrag/ferratum'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C655108962T'
   },
   {
-    id: 'consorsbank',
-    slug: 'consorsbank',
-    title: 'Consorsbank Tagesgeld',
-    image: '/images/tagesgeldkonten/Consorsbank_11zon.webp',
-    interest: 'Variabler Zins (Details laut Bank)',
-    payout: 'monatlich',
+    id: 'comdirect',
+    slug: 'comdirect',
+    title: 'comdirect Tagesgeld PLUS',
+    image: '/images/tagesgeldkonten/Comdirect_11zon.webp',
+    interest: 'Variable Verzinsung (aktuelle Konditionen auf Website)',
+    payout: 'vierteljährlich',
     depositMin: '0 €',
-    security: 'DE – EdB gesetzliche Einlagensicherung 100.000 €',
+    security: 'DE – EdB gesetzlich + Einlagensicherungsfonds',
     countryCode: 'DE',
     euDgs: true,
     isNeukundenaktion: false,
     highlights: [
       'Kostenfreie Kontoführung, täglich verfügbar',
-      'Deutsche Einlagensicherung bis 100.000 €'
+      'Vierteljährliche Zinsgutschrift',
+      'Deutsche Bank mit vollständiger Einlagensicherung',
+      'Kombinierbar mit kostenfreiem Girokonto'
     ],
-    applyUrl: '/antrag/consorsbank'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C870103588T'
   }
 ]
 
-export const recommendedSavings = ['distingo-bank', 'openbank', 'tf-bank']
-
-
-
+export const recommendedSavings = ['distingo-bank', 'tf-bank', 'santander-consumer-bank']
