@@ -155,7 +155,7 @@ export const savingsOffers = [
       'Tochter der Quirin Privatbank - verlässlicher Partner',
       'Aktionscode: ZINS25'
     ],
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C655108962T&code=ZINS25'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C655108962T'
   },
   {
     id: 'comdirect',
