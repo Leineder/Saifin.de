@@ -314,21 +314,7 @@ onMounted(() => { storeTrackingParams() })
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .hero-cta.p-button .p-button-label { font-weight: 700; letter-spacing: .01em; }
 
-/* Dark Mode: gleicher Look (weiß, ohne Rand) */
-@media (prefers-color-scheme: dark) {
-  .hero-cta.p-button {
-    background: #fff !important;
-    color: #111 !important;
-    border: none !important;
-  }
-  .hero-cta.p-button:hover,
-  .hero-cta.p-button:focus,
-  .hero-cta.p-button:focus-visible {
-    background: #fff !important;
-    color: #111 !important;
-    box-shadow: 0 12px 28px var(--shadow-color) !important;
-  }
-}
+/* Dark Mode entfernt - Website läuft permanent im Light Mode */
 .stars { 
   display: flex; 
   gap: 2px; 
@@ -575,9 +561,7 @@ onMounted(() => { storeTrackingParams() })
 .cta-buttons .p-button:active { transform: translateY(0); }
 .cta-buttons .p-button .p-button-label { font-weight: 700; letter-spacing: .01em; line-height: 1; }
 
-@media (prefers-color-scheme: dark) {
-  .cta-buttons .p-button { background: #fff !important; color: #111 !important; border: none !important; }
-}
+/* Dark Mode entfernt - Website läuft permanent im Light Mode */
 </style>
 
 

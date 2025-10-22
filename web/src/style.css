@@ -307,25 +307,7 @@ picture { display: block; }
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --background: #0b0f1a;
-    --text: #e5e7eb;
-    --muted-text: #cbd5e1;
-    --subtle-text: #94a3b8;
-    --surface: #131732; /* brand navy 700 */
-    --surface-muted: #0f1426;
-    --border: rgba(255,255,255,0.12);
-    --shadow-color: rgba(0,0,0,0.5);
-    --link-color: var(--brand-accent);
-  }
-
-  /* Buttons im Dark Mode kontraststark */
-  .p-button.p-button-outlined { color: var(--brand-accent); border-color: var(--brand-accent); background: transparent; }
-  .p-button.p-button-outlined .p-button-label { color: var(--brand-accent); }
-  .p-button.p-button-text { color: var(--brand-accent); }
-}
+/* Dark Mode entfernt - Website läuft permanent im Light Mode */
 
 /* Einheitlicher Apply-CTA im Markenblau (analog Hero-Buttons) */
 .apply-cta,
