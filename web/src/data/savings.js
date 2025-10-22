@@ -137,22 +137,25 @@ export const savingsOffers = [
   {
     id: 'quirion',
     slug: 'quirion',
-    title: 'quirion Tagesgeld (Notgroschen)',
+    title: 'quirion Tagesgeld (3% Aktion)',
     image: '/images/tagesgeldkonten/Quirion_11zon.webp',
-    interest: 'Variable Verzinsung (kombinierbar mit ETF-Portfolio)',
-    payout: 'regelmäßig',
+    interest: '3,00% p.a. für Neukunden (3 Monate bis 28.02.2026), danach 1,00% p.a.',
+    payout: 'monatlich',
     depositMin: '0 €',
-    security: 'DE – Einlagensicherung über Partnerbank',
+    security: 'DE – Einlagensicherung über Quirin Privatbank AG',
     countryCode: 'DE',
     euDgs: true,
-    isNeukundenaktion: false,
+    isNeukundenaktion: true,
+    aktionszeitraum: '27.10.2025 - 23.11.2025',
+    aktionscode: 'ZINS25',
     highlights: [
-      'Tagesgeld oder Cash-Invest – kurzfristig optimiert',
-      'Kombinierbar mit automatisiertem ETF-Portfolio',
-      'Ausgezeichneter Robo-Advisor des Jahres 2024',
-      'Digitale und persönliche Beratung'
+      '3,00% p.a. für Neukunden (3 Monate bis 28.02.2026)',
+      '1% Quirin Privatbank AG Zinssatz + 2% Bonuszins p.a.',
+      'Kostenlose Kontoführung, täglich verfügbar',
+      'Tochter der Quirin Privatbank - verlässlicher Partner',
+      'Aktionscode: ZINS25'
     ],
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C655108962T'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C655108962T&code=ZINS25'
   },
   {
     id: 'comdirect',
@@ -176,4 +179,4 @@ export const savingsOffers = [
   }
 ]
 
-export const recommendedSavings = ['distingo-bank', 'tf-bank', 'santander-consumer-bank']
+export const recommendedSavings = ['quirion', 'distingo-bank', 'tf-bank']
