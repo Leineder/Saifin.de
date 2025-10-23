@@ -4,10 +4,15 @@ import { onMounted, computed } from 'vue'
 import { savingsOffers } from '../data/savings'
 import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
+import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { useAffiliatePerformance } from '../utils/affiliate-performance'
 
 const route = useRoute()
 const router = useRouter()
 const offer = computed(() => savingsOffers.find(o => o.slug === route.params.slug))
+
+// Performance-Monitoring für Affiliate-Links
+const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance(offer.value?.id || 'unknown')
 
 // Redirect if offer not found and track analytics
 onMounted(() => {
@@ -18,45 +23,82 @@ onMounted(() => {
   
   // Analytics: Tagesgeld-Ansicht tracken
   trackSavingsView(offer.value.id, offer.value.title)
+  
+  // Preload Affiliate-Link wenn verfügbar
+  if (offer.value?.applyUrl && /^https?:\/\//i.test(offer.value.applyUrl)) {
+    preloadAffiliateLink(offer.value.applyUrl)
+  }
 })
 
 const goBack = () => safeNavigate(router, '/tagesgeld')
+
+// Erstelle optimierten Affiliate-Link-Handler
+const affiliateLinkHandler = computed(() => {
+  if (!offer.value?.applyUrl) return null
+  
+  const url = offer.value.applyUrl
+  if (!/^https?:\/\//i.test(url)) return null
+  
+  return createAffiliateLinkHandler(url, {
+    onClick: () => {
+      // Starte Performance-Messung
+      const measurementId = startMeasurement(url)
+      if (measurementId) {
+        collectWebVitals(measurementId)
+      }
+      
+      // Vercel Analytics: Tagesgeld-Anfrage tracken
+      trackSavingsApply(offer.value.id, offer.value.title, url)
+      
+      // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
+      try {
+        if (window.fbq) {
+          window.fbq('track', 'CompleteRegistration', {
+            content_name: offer.value.title,
+            content_category: 'savings',
+            content_id: offer.value.id || offer.value.slug,
+            value: offer.value.rate || 0,
+            status: 'external_redirect'
+          })
+        }
+      } catch (_) {}
+      
+      // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Tagesgeld-Antrag
+      try {
+        if (window.ttq && typeof window.ttq.track === 'function') {
+          window.ttq.track('Antrag gestellt', {
+            content_type: 'savings',
+            content_name: offer.value.title,
+            content_id: offer.value.id || offer.value.slug,
+            value: offer.value.rate || 0,
+            status: 'external_redirect'
+          })
+        }
+      } catch (_) {}
+      
+      // Beende Performance-Messung nach kurzer Verzögerung
+      setTimeout(() => {
+        if (measurementId) {
+          endMeasurement(measurementId, { success: true })
+        }
+      }, 1000)
+    }
+  })
+})
+
 const goApply = () => {
   if (!offer.value?.applyUrl) return
   
-  // Vercel Analytics: Tagesgeld-Anfrage tracken
-  if (offer.value) {
-    trackSavingsApply(offer.value.id, offer.value.title, offer.value.applyUrl)
+  // Verwende optimierten Affiliate-Link-Handler wenn verfügbar
+  if (affiliateLinkHandler.value) {
+    affiliateLinkHandler.value.onClick({ preventDefault: () => {} })
+    return
   }
   
+  // Fallback für interne Links
   const url = offer.value.applyUrl
   if (/^https?:\/\//i.test(url)) {
-    // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
-    try {
-      if (window.fbq && offer.value) {
-        window.fbq('track', 'CompleteRegistration', {
-          content_name: offer.value.title,
-          content_category: 'savings',
-          content_id: offer.value.id || offer.value.slug,
-          value: offer.value.rate || 0,
-          status: 'external_redirect'
-        })
-      }
-    } catch (_) {}
-    
-    // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Tagesgeld-Antrag
-    try {
-      if (window.ttq && typeof window.ttq.track === 'function' && offer.value) {
-        window.ttq.track('Antrag gestellt', {
-          content_type: 'savings',
-          content_name: offer.value.title,
-          content_id: offer.value.id || offer.value.slug,
-          value: offer.value.rate || 0,
-          status: 'external_redirect'
-        })
-      }
-    } catch (_) {}
-    
+    // Sollte nicht hier ankommen, da affiliateLinkHandler das abfängt
     window.open(url, '_blank', 'noopener,noreferrer')
   } else {
     safeNavigate(router, url)
@@ -105,7 +147,11 @@ const goApply = () => {
           <button class="p-button p-component p-button-outlined w-full" @click="goBack">
             <span class="p-button-label">Zur Übersicht</span>
           </button>
-          <button class="p-button p-component w-full apply-cta" @click="goApply">
+          <button 
+            class="p-button p-component w-full apply-cta" 
+            @click="goApply"
+            @mouseenter="affiliateLinkHandler?.onMouseEnter"
+          >
             <span class="p-button-label">Jetzt beantragen</span>
           </button>
         </div>

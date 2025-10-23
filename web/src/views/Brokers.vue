@@ -2,6 +2,8 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { brokers, recommendedBrokers } from '../data/brokers'
+import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { useAffiliatePerformance } from '../utils/affiliate-performance'
 
 const router = useRouter()
 
@@ -67,16 +69,64 @@ const filteredBrokers = computed(() => {
 
 const top3 = computed(() => brokers.filter(b => recommendedBrokers.includes(b.slug)))
 
+// Performance-Monitoring für Affiliate-Links
+const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance('brokers-overview')
+
 function goToDetail(broker) {
   router.push(`/broker/${broker.slug}`)
 }
 
 function goToApply(broker) {
   if (!broker || !broker.applyUrl) return router.push(`/antrag/${broker.slug}`)
+  
   const url = broker.applyUrl
+  
+  // Verwende optimierten Affiliate-Link-Handler für externe Links
   if (/^https?:\/\//i.test(url)) {
-    window.open(url, '_blank', 'noopener,noreferrer')
+    const affiliateHandler = createAffiliateLinkHandler(url, {
+      onClick: () => {
+        // Starte Performance-Messung
+        const measurementId = startMeasurement(url)
+        if (measurementId) {
+          collectWebVitals(measurementId)
+        }
+        
+        // Meta Pixel: CompleteRegistration bei externem Broker-Antrag
+        try {
+          if (window.fbq) {
+            window.fbq('track', 'CompleteRegistration', {
+              content_name: broker.name,
+              content_category: 'broker',
+              content_id: broker.id || broker.slug,
+              status: 'external_redirect'
+            })
+          }
+        } catch (_) {}
+        
+        // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Broker-Antrag
+        try {
+          if (window.ttq && typeof window.ttq.track === 'function') {
+            window.ttq.track('Antrag gestellt', {
+              content_type: 'broker',
+              content_name: broker.name,
+              content_id: broker.id || broker.slug,
+              status: 'external_redirect'
+            })
+          }
+        } catch (_) {}
+        
+        // Beende Performance-Messung nach kurzer Verzögerung
+        setTimeout(() => {
+          if (measurementId) {
+            endMeasurement(measurementId, { success: true })
+          }
+        }, 1000)
+      }
+    })
+    
+    affiliateHandler.onClick({ preventDefault: () => {} })
   } else {
+    // Interne Links
     router.push(url)
   }
 }
@@ -237,7 +287,13 @@ onBeforeUnmount(() => {
                     </div>
                   </div>
                   <div class="action-buttons">
-                    <button class="p-button apply-cta" @click.stop="goToApply(b)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button 
+                      class="p-button apply-cta" 
+                      @click.stop="goToApply(b)"
+                      @mouseenter="b.applyUrl && /^https?:\/\//i.test(b.applyUrl) ? preloadAffiliateLink(b.applyUrl) : null"
+                    >
+                      <span class="p-button-label">Zum Antrag</span>
+                    </button>
                     <button class="expand-btn" @click.stop="goToDetail(b)">Details <i class="pi pi-chevron-right"></i></button>
                   </div>
                 </div>
@@ -271,7 +327,13 @@ onBeforeUnmount(() => {
                       </div>
                     </div>
                     <div class="action-buttons">
-                      <button class="p-button apply-cta" @click.stop="goToApply(b)"><span class="p-button-label">Zum Antrag</span></button>
+                      <button 
+                      class="p-button apply-cta" 
+                      @click.stop="goToApply(b)"
+                      @mouseenter="b.applyUrl && /^https?:\/\//i.test(b.applyUrl) ? preloadAffiliateLink(b.applyUrl) : null"
+                    >
+                      <span class="p-button-label">Zum Antrag</span>
+                    </button>
                       <button class="expand-btn" @click.stop="goToDetail(b)">Details <i class="pi pi-chevron-right"></i></button>
                     </div>
                   </div>

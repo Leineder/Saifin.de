@@ -4,10 +4,15 @@ import { onMounted, computed } from 'vue'
 import { offers } from '../data/offers'
 import { trackCreditCardView, trackCreditCardApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
+import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { useAffiliatePerformance } from '../utils/affiliate-performance'
 
 const route = useRoute()
 const router = useRouter()
 const offer = computed(() => offers.find(o => o.slug === route.params.slug))
+
+// Performance-Monitoring für Affiliate-Links
+const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance(offer.value?.id || 'unknown')
 
 // Redirect if offer not found and track analytics
 onMounted(() => {
@@ -18,29 +23,43 @@ onMounted(() => {
   
   // Analytics: Produktansicht tracken
   trackCreditCardView(offer.value.id, offer.value.title)
+  
+  // Preload Affiliate-Link wenn verfügbar
+  if (offer.value?.applyUrl && /^https?:\/\//i.test(offer.value.applyUrl)) {
+    preloadAffiliateLink(offer.value.applyUrl)
+  }
 })
 
 const goBack = () => safeNavigate(router, '/kreditkarten')
-const goApply = () => {
-  if (!offer.value) return
+// Erstelle optimierten Affiliate-Link-Handler
+const affiliateLinkHandler = computed(() => {
+  if (!offer.value?.applyUrl) return null
   
-  // Vercel Analytics: Produktanfrage tracken
-  trackCreditCardApply(offer.value.id, offer.value.title, offer.value.applyUrl || `/antrag/${offer.value.slug}`)
+  const url = offer.value.applyUrl
+  if (!/^https?:\/\//i.test(url)) return null
   
-  // TikTok Event: Kreditkartenantrag initiiert (Detailseite)
-  if (window.ttq) {
-    window.ttq.track('InitiateCheckout', {
-      content_type: 'product',
-      content_name: offer.value.title,
-      content_id: offer.value.id || offer.value.slug,
-      value: offer.value.annualFee || 0,
-      currency: 'EUR'
-    })
-  }
-  
-  if (offer.value?.applyUrl) {
-    const url = offer.value.applyUrl
-    if (/^https?:\/\//i.test(url)) {
+  return createAffiliateLinkHandler(url, {
+    onClick: () => {
+      // Starte Performance-Messung
+      const measurementId = startMeasurement(url)
+      if (measurementId) {
+        collectWebVitals(measurementId)
+      }
+      
+      // Vercel Analytics: Produktanfrage tracken
+      trackCreditCardApply(offer.value.id, offer.value.title, url)
+      
+      // TikTok Event: Kreditkartenantrag initiiert (Detailseite)
+      if (window.ttq) {
+        window.ttq.track('InitiateCheckout', {
+          content_type: 'product',
+          content_name: offer.value.title,
+          content_id: offer.value.id || offer.value.slug,
+          value: offer.value.annualFee || 0,
+          currency: 'EUR'
+        })
+      }
+      
       // Meta Pixel: CompleteRegistration bei externem Antrag
       try {
         if (window.fbq) {
@@ -69,6 +88,30 @@ const goApply = () => {
         }
       } catch (_) {}
       
+      // Beende Performance-Messung nach kurzer Verzögerung
+      setTimeout(() => {
+        if (measurementId) {
+          endMeasurement(measurementId, { success: true })
+        }
+      }, 1000)
+    }
+  })
+})
+
+const goApply = () => {
+  if (!offer.value) return
+  
+  // Verwende optimierten Affiliate-Link-Handler wenn verfügbar
+  if (affiliateLinkHandler.value) {
+    affiliateLinkHandler.value.onClick({ preventDefault: () => {} })
+    return
+  }
+  
+  // Fallback für interne Links
+  if (offer.value?.applyUrl) {
+    const url = offer.value.applyUrl
+    if (/^https?:\/\//i.test(url)) {
+      // Sollte nicht hier ankommen, da affiliateLinkHandler das abfängt
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }
@@ -147,7 +190,11 @@ const formatEuro = (n) => {
           <button class="p-button p-component p-button-outlined w-full" @click="goBack">
             <span class="p-button-label">Zur Übersicht</span>
           </button>
-          <button class="p-button p-component w-full apply-cta" @click="goApply">
+          <button 
+            class="p-button p-component w-full apply-cta" 
+            @click="goApply"
+            @mouseenter="affiliateLinkHandler?.onMouseEnter"
+          >
             <span class="p-button-label">Jetzt beantragen</span>
           </button>
         </div>
@@ -156,7 +203,13 @@ const formatEuro = (n) => {
         <div class="surface-card border-round-lg p-3 card-accent">
           <h3 class="m-0 mb-2 section-title text-lg">Direkt beantragen</h3>
           <p class="m-0 text-700 mb-2">Schnell und sicher zum Antrag.</p>
-          <button class="p-button w-full apply-cta" @click="goApply"><span class="p-button-label">Jetzt beantragen</span></button>
+          <button 
+            class="p-button w-full apply-cta" 
+            @click="goApply"
+            @mouseenter="affiliateLinkHandler?.onMouseEnter"
+          >
+            <span class="p-button-label">Jetzt beantragen</span>
+          </button>
         </div>
       </aside>
     </div>

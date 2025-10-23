@@ -2,6 +2,8 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { savingsOffers, recommendedSavings } from '../data/savings'
+import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { useAffiliatePerformance } from '../utils/affiliate-performance'
 
 const router = useRouter()
 
@@ -65,12 +67,62 @@ const filtered = computed(() => {
   return list
 })
 
+// Performance-Monitoring für Affiliate-Links
+const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance('savings-overview')
+
 function goToApply(o) {
   if (!o || !o.applyUrl) return
+  
   const url = o.applyUrl
+  
+  // Verwende optimierten Affiliate-Link-Handler für externe Links
   if (/^https?:\/\//i.test(url)) {
-    window.open(url, '_blank', 'noopener,noreferrer')
+    const affiliateHandler = createAffiliateLinkHandler(url, {
+      onClick: () => {
+        // Starte Performance-Messung
+        const measurementId = startMeasurement(url)
+        if (measurementId) {
+          collectWebVitals(measurementId)
+        }
+        
+        // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
+        try {
+          if (window.fbq) {
+            window.fbq('track', 'CompleteRegistration', {
+              content_name: o.title,
+              content_category: 'savings',
+              content_id: o.id || o.slug,
+              value: o.rate || 0,
+              status: 'external_redirect'
+            })
+          }
+        } catch (_) {}
+        
+        // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Tagesgeld-Antrag
+        try {
+          if (window.ttq && typeof window.ttq.track === 'function') {
+            window.ttq.track('Antrag gestellt', {
+              content_type: 'savings',
+              content_name: o.title,
+              content_id: o.id || o.slug,
+              value: o.rate || 0,
+              status: 'external_redirect'
+            })
+          }
+        } catch (_) {}
+        
+        // Beende Performance-Messung nach kurzer Verzögerung
+        setTimeout(() => {
+          if (measurementId) {
+            endMeasurement(measurementId, { success: true })
+          }
+        }, 1000)
+      }
+    })
+    
+    affiliateHandler.onClick({ preventDefault: () => {} })
   } else {
+    // Interne Links
     router.push(url)
   }
 }
@@ -194,7 +246,13 @@ function goToApply(o) {
                     </div>
                   </div>
                   <div class="action-buttons">
-                    <button class="p-button apply-cta" @click.stop="goToApply(o)"><span class="p-button-label">Zum Antrag</span></button>
+                    <button 
+                      class="p-button apply-cta" 
+                      @click.stop="goToApply(o)"
+                      @mouseenter="o.applyUrl && /^https?:\/\//i.test(o.applyUrl) ? preloadAffiliateLink(o.applyUrl) : null"
+                    >
+                      <span class="p-button-label">Zum Antrag</span>
+                    </button>
                     <router-link :to="`/tagesgeld/${o.slug}`" class="expand-btn">Details <i class="pi pi-chevron-right"></i></router-link>
                   </div>
                 </div>

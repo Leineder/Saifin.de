@@ -4,10 +4,15 @@ import { onMounted, computed } from 'vue'
 import { brokers } from '../data/brokers'
 import { trackBrokerView, trackBrokerApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
+import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { useAffiliatePerformance } from '../utils/affiliate-performance'
 
 const route = useRoute()
 const router = useRouter()
 const broker = computed(() => brokers.find(b => b.slug === route.params.slug))
+
+// Performance-Monitoring für Affiliate-Links
+const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance(broker.value?.id || 'unknown')
 
 // Redirect if broker not found and track analytics
 onMounted(() => {
@@ -18,18 +23,33 @@ onMounted(() => {
   
   // Analytics: Broker-Ansicht tracken
   trackBrokerView(broker.value.id, broker.value.name)
+  
+  // Preload Affiliate-Link wenn verfügbar
+  if (broker.value?.applyUrl && /^https?:\/\//i.test(broker.value.applyUrl)) {
+    preloadAffiliateLink(broker.value.applyUrl)
+  }
 })
 
 const goBack = () => safeNavigate(router, '/broker')
-const goApply = () => {
-  if (!broker.value) return
+
+// Erstelle optimierten Affiliate-Link-Handler
+const affiliateLinkHandler = computed(() => {
+  if (!broker.value?.applyUrl) return null
   
-  // Vercel Analytics: Broker-Anfrage tracken
-  trackBrokerApply(broker.value.id, broker.value.name, broker.value.applyUrl || `/antrag/${broker.value.slug}`)
+  const url = broker.value.applyUrl
+  if (!/^https?:\/\//i.test(url)) return null
   
-  if (broker.value.applyUrl) {
-    const url = broker.value.applyUrl
-    if (/^https?:\/\//i.test(url)) {
+  return createAffiliateLinkHandler(url, {
+    onClick: () => {
+      // Starte Performance-Messung
+      const measurementId = startMeasurement(url)
+      if (measurementId) {
+        collectWebVitals(measurementId)
+      }
+      
+      // Vercel Analytics: Broker-Anfrage tracken
+      trackBrokerApply(broker.value.id, broker.value.name, url)
+      
       // Meta Pixel: CompleteRegistration bei externem Broker-Antrag
       try {
         if (window.fbq) {
@@ -54,6 +74,30 @@ const goApply = () => {
         }
       } catch (_) {}
       
+      // Beende Performance-Messung nach kurzer Verzögerung
+      setTimeout(() => {
+        if (measurementId) {
+          endMeasurement(measurementId, { success: true })
+        }
+      }, 1000)
+    }
+  })
+})
+
+const goApply = () => {
+  if (!broker.value) return
+  
+  // Verwende optimierten Affiliate-Link-Handler wenn verfügbar
+  if (affiliateLinkHandler.value) {
+    affiliateLinkHandler.value.onClick({ preventDefault: () => {} })
+    return
+  }
+  
+  // Fallback für interne Links
+  if (broker.value?.applyUrl) {
+    const url = broker.value.applyUrl
+    if (/^https?:\/\//i.test(url)) {
+      // Sollte nicht hier ankommen, da affiliateLinkHandler das abfängt
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }
@@ -112,7 +156,11 @@ const goApply = () => {
           <button class="p-button p-component p-button-outlined w-full" @click="goBack">
             <span class="p-button-label">Zur Übersicht</span>
           </button>
-          <button class="p-button p-component w-full apply-cta" @click="goApply">
+          <button 
+            class="p-button p-component w-full apply-cta" 
+            @click="goApply"
+            @mouseenter="affiliateLinkHandler?.onMouseEnter"
+          >
             <span class="p-button-label">Jetzt beantragen</span>
           </button>
         </div>

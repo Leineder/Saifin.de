@@ -10,6 +10,7 @@ import App from './App.vue'
 import router from './router'
 import './style.css'
 import { initEngagementTracking } from './tracking'
+import { globalAffiliateManager } from './utils/global-affiliate-manager'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -49,6 +50,8 @@ if (typeof window !== 'undefined') {
   // Nach kurzer Verzögerung, damit die App zuerst lädt
   setTimeout(() => {
     initEngagementTracking()
+    // Initialisiere globalen Affiliate-Manager
+    globalAffiliateManager.initialize()
   }, 2000)
 }
 

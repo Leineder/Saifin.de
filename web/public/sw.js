@@ -17,6 +17,22 @@ const CRITICAL_RESOURCES = [
   '/images/saifin_logo_vectorized_final.svg'
 ];
 
+// Affiliate-Link-Domains für DNS-Prefetch-Caching
+const AFFILIATE_DOMAINS = [
+  'www.financeads.net',
+  'financeads.net'
+];
+
+// Affiliate-Link-Cache-Strategien
+const AFFILIATE_CACHE_STRATEGIES = {
+  // Kurzes Caching für Affiliate-Links (5 Minuten)
+  SHORT_CACHE: 5 * 60 * 1000, // 5 Minuten
+  // Mittleres Caching für häufig verwendete Links (15 Minuten)
+  MEDIUM_CACHE: 15 * 60 * 1000, // 15 Minuten
+  // Langes Caching für statische Affiliate-Seiten (1 Stunde)
+  LONG_CACHE: 60 * 60 * 1000 // 1 Stunde
+};
+
 // Install Event - Cache kritische Ressourcen
 self.addEventListener('install', (event) => {
   console.log('SW: Installing...');
@@ -62,6 +78,12 @@ self.addEventListener('fetch', (event) => {
 
   // Nur HTTPS und nicht Chrome-Extensions
   if (!request.url.startsWith('http') || url.protocol === 'chrome-extension:') {
+    return;
+  }
+
+  // Spezielle Behandlung für Affiliate-Links
+  if (isAffiliateLink(request)) {
+    event.respondWith(handleAffiliateLink(request));
     return;
   }
 
@@ -161,4 +183,74 @@ function isHTMLRequest(request) {
          request.url.includes('/kreditkarten') ||
          request.url.includes('/broker') ||
          request.url.includes('/tagesgeld');
+}
+
+// Affiliate-Link-Handling
+function isAffiliateLink(request) {
+  const url = new URL(request.url);
+  return AFFILIATE_DOMAINS.some(domain => url.hostname.includes(domain));
+}
+
+async function handleAffiliateLink(request) {
+  const url = new URL(request.url);
+  const cache = await caches.open(DYNAMIC_CACHE);
+  
+  // Prüfe zuerst den Cache
+  const cachedResponse = await cache.match(request);
+  const now = Date.now();
+  
+  // Wenn gecachte Response vorhanden und noch nicht abgelaufen
+  if (cachedResponse) {
+    const cacheTime = cachedResponse.headers.get('sw-cache-time');
+    if (cacheTime && (now - parseInt(cacheTime)) < AFFILIATE_CACHE_STRATEGIES.SHORT_CACHE) {
+      console.log('SW: Serving cached affiliate link');
+      return cachedResponse;
+    }
+  }
+  
+  // Für Affiliate-Links: Network First mit optimierter Performance
+  try {
+    // Erstelle optimierte Request mit besseren Headers
+    const optimizedRequest = new Request(request.url, {
+      method: request.method,
+      headers: {
+        ...request.headers,
+        'Cache-Control': 'no-cache',
+        'Pragma': 'no-cache',
+        'User-Agent': 'Mozilla/5.0 (compatible; SaifinBot/1.0)'
+      },
+      mode: 'cors',
+      credentials: 'omit'
+    });
+
+    const networkResponse = await fetch(optimizedRequest);
+    
+    // Cache die Response mit Zeitstempel
+    if (networkResponse.ok) {
+      const responseToCache = networkResponse.clone();
+      responseToCache.headers.set('sw-cache-time', now.toString());
+      responseToCache.headers.set('Cache-Control', 'max-age=300'); // 5 Minuten
+      cache.put(request, responseToCache);
+      
+      console.log('SW: Cached affiliate link response');
+    }
+    
+    return networkResponse;
+  } catch (error) {
+    console.log('SW: Affiliate link failed, trying cache:', error);
+    
+    // Fallback: Versuche gecachte Version (auch wenn abgelaufen)
+    if (cachedResponse) {
+      console.log('SW: Serving stale cached affiliate link');
+      return cachedResponse;
+    }
+    
+    // Letzter Fallback: Redirect zur Hauptseite
+    return new Response(null, {
+      status: 302,
+      headers: {
+        'Location': '/'
+      }
+    });
+  }
 }

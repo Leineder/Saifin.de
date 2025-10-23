@@ -2,6 +2,9 @@
 import { onMounted, computed } from 'vue'
 import { storeTrackingParams } from '../tracking'
 import { offers } from '../data/offers'
+import { brokers } from '../data/brokers'
+import { savingsOffers } from '../data/savings'
+import { batchPreloadAffiliateLinks } from '../utils/affiliate-links'
 
 const testimonials = [
   { name: 'Max Kowal', avatar: 'https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=200', rating: 5,
@@ -15,7 +18,37 @@ const testimonials = [
 const topOffers = computed(() => offers.slice(0, 2))
 const formatEuro = (n) => `${Number(n).toFixed(2).replace('.', ',')} €`
 
-onMounted(() => { storeTrackingParams() })
+onMounted(() => { 
+  storeTrackingParams()
+  
+  // Batch-Preload der wichtigsten Affiliate-Links nach 3 Sekunden
+  setTimeout(() => {
+    // Sammle alle externen Affiliate-Links
+    const allAffiliateUrls = [
+      // Top 3 Kreditkarten
+      ...offers
+        .filter(offer => offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl))
+        .slice(0, 3)
+        .map(offer => offer.applyUrl),
+      
+      // Top 2 Broker
+      ...brokers
+        .filter(broker => broker.applyUrl && /^https?:\/\//i.test(broker.applyUrl))
+        .slice(0, 2)
+        .map(broker => broker.applyUrl),
+      
+      // Top 2 Tagesgeld
+      ...savingsOffers
+        .filter(savings => savings.applyUrl && /^https?:\/\//i.test(savings.applyUrl))
+        .slice(0, 2)
+        .map(savings => savings.applyUrl)
+    ]
+    
+    if (allAffiliateUrls.length > 0) {
+      batchPreloadAffiliateLinks(allAffiliateUrls, 150) // 150ms Verzögerung zwischen Preloads
+    }
+  }, 3000)
+})
 </script>
 
 <template>
