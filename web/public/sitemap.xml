@@ -46,27 +46,22 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/hanseatic-bank-goldcard</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.saifin.de/kreditkarten/tf-bank-mastercard-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/santander-bestcard-basic</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/kreditkarten/extra-karte-mastercard</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
     <loc>https://www.saifin.de/kreditkarten/netkredit24-mastercard</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/kreditkarten/hanseatic-bank-goldcard</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/kreditkarten/santander-bestcard-basic</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -77,6 +72,11 @@
   </url>
   <url>
     <loc>https://www.saifin.de/kreditkarten/1822direkt-visa-classic-gold</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/kreditkarten/extra-karte-mastercard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

@@ -53,6 +53,28 @@ const router = createRouter({
   }
 })
 
+// Error handling for router
+router.onError((error) => {
+  console.error('Router error:', error)
+  // Fallback to home page on critical errors
+  if (error.message.includes('Loading chunk') || error.message.includes('Loading CSS chunk')) {
+    // Chunk loading failed, likely due to network issues
+    window.location.reload()
+  }
+})
+
+// Navigation guards for better error handling
+router.beforeEach((to, from, next) => {
+  // Ensure navigation is always possible
+  try {
+    next()
+  } catch (error) {
+    console.error('Navigation error:', error)
+    // Fallback to home page
+    next('/')
+  }
+})
+
 router.afterEach((to) => {
   try { applyRouteMeta(to) } catch (_) {}
 })

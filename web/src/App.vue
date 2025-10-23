@@ -14,16 +14,18 @@
         </button>
 
         <nav :class="['site-nav', { 'is-open': isMenuOpen }]" :aria-hidden="!isMenuOpen && !isDesktop">
-          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu" rel="prefetch">Kreditkarten</router-link>
-          <router-link to="/broker" class="nav-link" @click="closeMenu" rel="prefetch">Broker</router-link>
-          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu" rel="prefetch">Tagesgeldkonto</router-link>
-          <router-link to="/ratgeber" class="nav-link" @click="closeMenu" rel="prefetch">Ratgeber</router-link>
+          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('cards')" rel="prefetch">Kreditkarten</router-link>
+          <router-link to="/broker" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('brokers')" rel="prefetch">Broker</router-link>
+          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('savings')" rel="prefetch">Tagesgeldkonto</router-link>
+          <router-link to="/ratgeber" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('guide')" rel="prefetch">Ratgeber</router-link>
         </nav>
       </div>
     </header>
 
     <main class="flex-1">
-      <router-view />
+      <ErrorBoundary>
+        <router-view />
+      </ErrorBoundary>
     </main>
 
     <footer class="site-footer">
@@ -52,11 +54,14 @@
 import { ref, onMounted, computed } from 'vue'
 import SpeedInsights from './components/SpeedInsights.vue'
 import VercelAnalytics from './components/VercelAnalytics.vue'
+import ErrorBoundary from './components/ErrorBoundary.vue'
+import { preloadRoute } from './utils/navigation'
 
 const isMenuOpen = ref(false)
 const isDesktop = ref(false)
 
 const closeMenu = () => { isMenuOpen.value = false }
+
 
 onMounted(() => {
   // Bereinige alle Passwort-bezogenen localStorage-Daten (non-blocking)

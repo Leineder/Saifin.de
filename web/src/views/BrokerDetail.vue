@@ -3,15 +3,16 @@ import { useRoute, useRouter } from 'vue-router'
 import { onMounted, computed } from 'vue'
 import { brokers } from '../data/brokers'
 import { trackBrokerView, trackBrokerApply } from '../utils/analytics'
+import { safeReplace, safeNavigate } from '../utils/navigation'
 
 const route = useRoute()
 const router = useRouter()
 const broker = computed(() => brokers.find(b => b.slug === route.params.slug))
 
-// Redirect if broker not found
+// Redirect if broker not found and track analytics
 onMounted(() => {
   if (!broker.value) {
-    router.replace('/broker')
+    safeReplace(router, '/broker')
     return
   }
   
@@ -19,7 +20,7 @@ onMounted(() => {
   trackBrokerView(broker.value.id, broker.value.name)
 })
 
-const goBack = () => router.push('/broker')
+const goBack = () => safeNavigate(router, '/broker')
 const goApply = () => {
   if (!broker.value) return
   
@@ -56,9 +57,9 @@ const goApply = () => {
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }
-    return router.push(url)
+    return safeNavigate(router, url)
   }
-  router.push(`/antrag/${broker.value.slug}`)
+  safeNavigate(router, `/antrag/${broker.value.slug}`)
 }
 </script>
 

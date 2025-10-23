@@ -1,50 +1,54 @@
 <script setup>
 import { useRoute, useRouter } from 'vue-router'
-import { onMounted } from 'vue'
+import { onMounted, computed } from 'vue'
 import { offers } from '../data/offers'
 import { trackCreditCardView, trackCreditCardApply } from '../utils/analytics'
+import { safeReplace, safeNavigate } from '../utils/navigation'
 
 const route = useRoute()
 const router = useRouter()
-const offer = offers.find(o => o.slug === route.params.slug)
-if (!offer) router.replace('/kreditkarten')
+const offer = computed(() => offers.find(o => o.slug === route.params.slug))
 
-// Analytics: Produktansicht tracken
+// Redirect if offer not found and track analytics
 onMounted(() => {
-  if (offer) {
-    trackCreditCardView(offer.id, offer.title)
-  }
-})
-
-const goBack = () => router.push('/kreditkarten')
-const goApply = () => {
-  // Vercel Analytics: Produktanfrage tracken
-  if (offer) {
-    trackCreditCardApply(offer.id, offer.title, offer.applyUrl || `/antrag/${offer.slug}`)
+  if (!offer.value) {
+    safeReplace(router, '/kreditkarten')
+    return
   }
   
+  // Analytics: Produktansicht tracken
+  trackCreditCardView(offer.value.id, offer.value.title)
+})
+
+const goBack = () => safeNavigate(router, '/kreditkarten')
+const goApply = () => {
+  if (!offer.value) return
+  
+  // Vercel Analytics: Produktanfrage tracken
+  trackCreditCardApply(offer.value.id, offer.value.title, offer.value.applyUrl || `/antrag/${offer.value.slug}`)
+  
   // TikTok Event: Kreditkartenantrag initiiert (Detailseite)
-  if (window.ttq && offer) {
+  if (window.ttq) {
     window.ttq.track('InitiateCheckout', {
       content_type: 'product',
-      content_name: offer.title,
-      content_id: offer.id || offer.slug,
-      value: offer.annualFee || 0,
+      content_name: offer.value.title,
+      content_id: offer.value.id || offer.value.slug,
+      value: offer.value.annualFee || 0,
       currency: 'EUR'
     })
   }
   
-  if (offer?.applyUrl) {
-    const url = offer.applyUrl
+  if (offer.value?.applyUrl) {
+    const url = offer.value.applyUrl
     if (/^https?:\/\//i.test(url)) {
       // Meta Pixel: CompleteRegistration bei externem Antrag
       try {
-        if (window.fbq && offer) {
+        if (window.fbq) {
           window.fbq('track', 'CompleteRegistration', {
-            content_name: offer.title,
+            content_name: offer.value.title,
             content_category: 'card',
-            content_id: offer.id || offer.slug,
-            value: offer.annualFee || 0,
+            content_id: offer.value.id || offer.value.slug,
+            value: offer.value.annualFee || 0,
             currency: 'EUR',
             status: 'external_redirect'
           })
@@ -53,12 +57,12 @@ const goApply = () => {
       
       // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Kreditkarten-Antrag
       try {
-        if (window.ttq && typeof window.ttq.track === 'function' && offer) {
+        if (window.ttq && typeof window.ttq.track === 'function') {
           window.ttq.track('Antrag gestellt', {
             content_type: 'card',
-            content_name: offer.title,
-            content_id: offer.id || offer.slug,
-            value: offer.annualFee || 0,
+            content_name: offer.value.title,
+            content_id: offer.value.id || offer.value.slug,
+            value: offer.value.annualFee || 0,
             currency: 'EUR',
             status: 'external_redirect'
           })
@@ -68,9 +72,9 @@ const goApply = () => {
       window.open(url, '_blank', 'noopener,noreferrer')
       return
     }
-    return router.push(url)
+    return safeNavigate(router, url)
   }
-  router.push(`/antrag/${offer.slug}`)
+  safeNavigate(router, `/antrag/${offer.value.slug}`)
 }
 const formatEuro = (n) => {
   if (n === 0) return '0,00 €'

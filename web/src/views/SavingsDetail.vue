@@ -3,15 +3,16 @@ import { useRoute, useRouter } from 'vue-router'
 import { onMounted, computed } from 'vue'
 import { savingsOffers } from '../data/savings'
 import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
+import { safeReplace, safeNavigate } from '../utils/navigation'
 
 const route = useRoute()
 const router = useRouter()
 const offer = computed(() => savingsOffers.find(o => o.slug === route.params.slug))
 
-// Redirect if offer not found
+// Redirect if offer not found and track analytics
 onMounted(() => {
   if (!offer.value) {
-    router.replace('/tagesgeld')
+    safeReplace(router, '/tagesgeld')
     return
   }
   
@@ -19,7 +20,7 @@ onMounted(() => {
   trackSavingsView(offer.value.id, offer.value.title)
 })
 
-const goBack = () => router.push('/tagesgeld')
+const goBack = () => safeNavigate(router, '/tagesgeld')
 const goApply = () => {
   if (!offer.value?.applyUrl) return
   
@@ -58,7 +59,7 @@ const goApply = () => {
     
     window.open(url, '_blank', 'noopener,noreferrer')
   } else {
-    router.push(url)
+    safeNavigate(router, url)
   }
 }
 </script>
