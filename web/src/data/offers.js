@@ -27,29 +27,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
   },
   {
-    id: 'extra-karte-mastercard',
-    slug: 'extra-karte-mastercard',
-    title: 'Extra Karte (Novum Bank) – Mastercard',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
-      'Bis 4.000 € Kreditrahmen*'
-    ],
-    image: '/images/creditcards/extra-mastercard.webp',
-    annualFee: 0,
-    foreignFee: '2,99 %',
-    cardType: 'Mastercard – Revolving',
-    details: {
-      foreignCurrency: '2,99 % Auslandseinsatz',
-      cashWithdrawal: '3 % (mind. 3 €)',
-      creditLimit: 'Kreditrahmen bis 4.000 €*',
-      interest: 'Effektivzins ca. 24,60 %',
-      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen'
-    },
-    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
-  },
-  {
     id: 'tf-bank-mastercard-gold',
     slug: 'tf-bank-mastercard-gold',
     title: 'TF Bank Mastercard Gold',
@@ -196,5 +173,29 @@ export const offers = [
     },
     disclaimer: '*Konditionen abhängig vom jeweiligen Kontomodell/Preisverzeichnis.',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C10722509B'
+  },
+  {
+    id: 'extra-karte-mastercard',
+    slug: 'extra-karte-mastercard',
+    title: 'Extra Karte (Novum Bank) – Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
+      'Bis 4.000 € Kreditrahmen*',
+      'Bei Schufa Einträgen Ablehnung'
+    ],
+    image: '/images/creditcards/extra-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '2,99 %',
+    cardType: 'Mastercard – Revolving',
+    details: {
+      foreignCurrency: '2,99 % Auslandseinsatz',
+      cashWithdrawal: '3 % (mind. 3 €)',
+      creditLimit: 'Kreditrahmen bis 4.000 €*',
+      interest: 'Effektivzins ca. 24,60 %',
+      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen; Bei Schufa Einträgen Ablehnung'
+    },
+    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
   }
 ]
