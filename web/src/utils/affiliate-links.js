@@ -1,14 +1,169 @@
 // affiliate-links.js
-// Optimierte Affiliate-Link-Verwaltung für schnellere Ladezeiten
+// Tracking-sichere Affiliate-Link-Verwaltung
+
+import { trackingSafePreload, trackingSafeOpenAffiliateLink, trackingSafeBatchPreload } from './tracking-safe-preloading.js'
 
 /**
- * Aggressives Preloading für Affiliate-Links - RADIKAL OPTIMIERT
+ * Tracking-sichere Preloading für Affiliate-Links
  * @param {string} url - Die Affiliate-URL
  * @param {Object} options - Zusätzliche Optionen
  */
 export function preloadAffiliateLink(url, options = {}) {
   if (!url || typeof url !== 'string') return
   
+  const {
+    trackingSafe = true, // Standard: tracking-sicher
+    dnsOnly = true,
+    preserveTracking = false
+  } = options
+  
+  if (trackingSafe) {
+    // Verwende tracking-sichere Preloading-Funktion
+    trackingSafePreload(url, { dnsOnly, preserveTracking })
+  } else {
+    // Legacy-Verhalten (nicht empfohlen)
+    console.warn('Using legacy preloading - may cause tracking issues')
+    legacyPreloadAffiliateLink(url, options)
+  }
+}
+
+/**
+ * Legacy iframe-basiertes Preloading (NICHT EMPFOHLEN - verursacht Tracking-Probleme)
+ * @param {string} url - Die Affiliate-URL
+ */
+function legacyPreloadWithIframe(url) {
+  console.warn('Legacy iframe preloading used - this may cause tracking issues!')
+  try {
+    // Prüfe iframe-Unterstützung
+    if (!document.createElement('iframe').contentWindow) {
+      console.warn('Iframe preloading not supported, skipping')
+      return
+    }
+    
+    // Erstelle unsichtbares iframe für Preloading
+    const iframe = document.createElement('iframe')
+    iframe.style.display = 'none'
+    iframe.style.width = '0'
+    iframe.style.height = '0'
+    iframe.style.border = 'none'
+    iframe.style.position = 'absolute'
+    iframe.style.left = '-9999px'
+    iframe.src = url
+    
+    // Füge iframe zum DOM hinzu
+    document.body.appendChild(iframe)
+    
+    // Entferne iframe nach 30 Sekunden
+    setTimeout(() => {
+      if (iframe.parentNode) {
+        iframe.parentNode.removeChild(iframe)
+      }
+    }, 30000)
+  } catch (error) {
+    // Fallback bei iframe-Fehlern
+    console.warn('Iframe preloading failed:', error)
+  }
+}
+
+/**
+ * Öffnet Affiliate-Link mit tracking-sicherer Performance
+ * @param {string} url - Die Affiliate-URL
+ * @param {Object} options - Zusätzliche Optionen
+ */
+export function openAffiliateLink(url, options = {}) {
+  if (!url) return
+  
+  const {
+    target = '_blank',
+    noopener = true,
+    noreferrer = true,
+    preload = false, // Standard: kein Preload beim Öffnen
+    trackingSafe = true
+  } = options
+  
+  if (trackingSafe) {
+    // Verwende tracking-sichere Link-Öffnung
+    trackingSafeOpenAffiliateLink(url, { target, noopener, noreferrer })
+  } else {
+    // Legacy-Verhalten
+    legacyOpenAffiliateLink(url, options)
+  }
+}
+
+/**
+ * Erstellt optimierte Affiliate-Link-Handler für Vue-Komponenten
+ * @param {string} url - Die Affiliate-URL
+ * @param {Object} trackingData - Tracking-Daten
+ */
+export function createAffiliateLinkHandler(url, trackingData = {}) {
+  return {
+    onMouseEnter: () => {
+      // Preload beim Hover
+      preloadAffiliateLink(url)
+    },
+    onClick: (event) => {
+      event.preventDefault()
+      
+      // Tracking vor dem Öffnen
+      if (trackingData.onClick) {
+        trackingData.onClick()
+      }
+      
+      // Öffne Link
+      openAffiliateLink(url, { preload: false }) // Preload bereits beim Hover
+    }
+  }
+}
+
+/**
+ * Tracking-sichere Batch-Preloading für mehrere Affiliate-Links
+ * @param {Array} urls - Array von Affiliate-URLs
+ * @param {number} delay - Verzögerung zwischen Preloads (ms)
+ * @param {Object} options - Zusätzliche Optionen
+ */
+export function batchPreloadAffiliateLinks(urls, delay = 100, options = {}) {
+  if (!Array.isArray(urls) || urls.length === 0) return
+  
+  const {
+    trackingSafe = true,
+    dnsOnly = true,
+    maxConcurrent = 3
+  } = options
+  
+  if (trackingSafe) {
+    // Verwende tracking-sichere Batch-Preloading
+    trackingSafeBatchPreload(urls, delay, { dnsOnly, maxConcurrent })
+  } else {
+    // Legacy-Verhalten (nicht empfohlen)
+    console.warn('Using legacy batch preloading - may cause tracking issues')
+    legacyBatchPreloadAffiliateLinks(urls, delay, options)
+  }
+}
+
+/**
+ * Tracking-sichere Preloading kritischer Affiliate-Links
+ * @param {Array} urls - Array von kritischen URLs
+ */
+export function instantPreloadCriticalLinks(urls) {
+  if (!Array.isArray(urls) || urls.length === 0) return
+  
+  // Tracking-sichere Preloading ohne Verzögerung
+  urls.forEach(url => {
+    preloadAffiliateLink(url, {
+      trackingSafe: true,
+      dnsOnly: true,
+      preserveTracking: false
+    })
+  })
+}
+
+// ===== LEGACY FUNKTIONEN (NICHT EMPFOHLEN) =====
+
+/**
+ * Legacy Preloading (verursacht Tracking-Probleme)
+ */
+function legacyPreloadAffiliateLink(url, options = {}) {
+  console.warn('Legacy preloading used - this may cause tracking issues!')
   const {
     aggressive = true,
     preconnect = true,
@@ -49,7 +204,7 @@ export function preloadAffiliateLink(url, options = {}) {
   
   // 4. Aggressives iframe-Preloading für sofortige Navigation
   if (aggressive) {
-    preloadWithIframe(url)
+    legacyPreloadWithIframe(url)
   }
   
   // Entferne Links nach 60 Sekunden (länger für aggressive Strategie)
@@ -64,50 +219,10 @@ export function preloadAffiliateLink(url, options = {}) {
 }
 
 /**
- * Iframe-basiertes Preloading für sofortige Navigation
- * @param {string} url - Die Affiliate-URL
+ * Legacy Link-Öffnung
  */
-function preloadWithIframe(url) {
-  try {
-    // Prüfe iframe-Unterstützung
-    if (!document.createElement('iframe').contentWindow) {
-      console.warn('Iframe preloading not supported, skipping')
-      return
-    }
-    
-    // Erstelle unsichtbares iframe für Preloading
-    const iframe = document.createElement('iframe')
-    iframe.style.display = 'none'
-    iframe.style.width = '0'
-    iframe.style.height = '0'
-    iframe.style.border = 'none'
-    iframe.style.position = 'absolute'
-    iframe.style.left = '-9999px'
-    iframe.src = url
-    
-    // Füge iframe zum DOM hinzu
-    document.body.appendChild(iframe)
-    
-    // Entferne iframe nach 30 Sekunden
-    setTimeout(() => {
-      if (iframe.parentNode) {
-        iframe.parentNode.removeChild(iframe)
-      }
-    }, 30000)
-  } catch (error) {
-    // Fallback bei iframe-Fehlern
-    console.warn('Iframe preloading failed:', error)
-  }
-}
-
-/**
- * Öffnet Affiliate-Link mit optimierter Performance
- * @param {string} url - Die Affiliate-URL
- * @param {Object} options - Zusätzliche Optionen
- */
-export function openAffiliateLink(url, options = {}) {
-  if (!url) return
-  
+function legacyOpenAffiliateLink(url, options = {}) {
+  console.warn('Legacy link opening used - this may cause tracking issues!')
   const {
     target = '_blank',
     noopener = true,
@@ -117,7 +232,7 @@ export function openAffiliateLink(url, options = {}) {
   
   // Preload wenn gewünscht
   if (preload) {
-    preloadAffiliateLink(url)
+    legacyPreloadAffiliateLink(url)
   }
   
   try {
@@ -152,39 +267,10 @@ export function openAffiliateLink(url, options = {}) {
 }
 
 /**
- * Erstellt optimierte Affiliate-Link-Handler für Vue-Komponenten
- * @param {string} url - Die Affiliate-URL
- * @param {Object} trackingData - Tracking-Daten
+ * Legacy Batch-Preloading
  */
-export function createAffiliateLinkHandler(url, trackingData = {}) {
-  return {
-    onMouseEnter: () => {
-      // Preload beim Hover
-      preloadAffiliateLink(url)
-    },
-    onClick: (event) => {
-      event.preventDefault()
-      
-      // Tracking vor dem Öffnen
-      if (trackingData.onClick) {
-        trackingData.onClick()
-      }
-      
-      // Öffne Link
-      openAffiliateLink(url, { preload: false }) // Preload bereits beim Hover
-    }
-  }
-}
-
-/**
- * Aggressives Batch-Preloading für mehrere Affiliate-Links - RADIKAL OPTIMIERT
- * @param {Array} urls - Array von Affiliate-URLs
- * @param {number} delay - Verzögerung zwischen Preloads (ms)
- * @param {Object} options - Zusätzliche Optionen
- */
-export function batchPreloadAffiliateLinks(urls, delay = 50, options = {}) {
-  if (!Array.isArray(urls) || urls.length === 0) return
-  
+function legacyBatchPreloadAffiliateLinks(urls, delay = 50, options = {}) {
+  console.warn('Legacy batch preloading used - this may cause tracking issues!')
   const {
     aggressive = true,
     parallel = true,
@@ -195,7 +281,7 @@ export function batchPreloadAffiliateLinks(urls, delay = 50, options = {}) {
     // Parallel preloading für maximale Geschwindigkeit
     urls.forEach((url, index) => {
       // Sofortiges Preloading ohne Verzögerung
-      preloadAffiliateLink(url, { 
+      legacyPreloadAffiliateLink(url, { 
         aggressive: true, 
         preconnect: true, 
         prefetch: true,
@@ -206,28 +292,10 @@ export function batchPreloadAffiliateLinks(urls, delay = 50, options = {}) {
     // Sequenzielles Preloading mit minimaler Verzögerung
     urls.forEach((url, index) => {
       setTimeout(() => {
-        preloadAffiliateLink(url, { aggressive: true })
+        legacyPreloadAffiliateLink(url, { aggressive: true })
       }, index * delay)
     })
   }
-}
-
-/**
- * Sofortiges Preloading aller kritischen Affiliate-Links
- * @param {Array} urls - Array von kritischen URLs
- */
-export function instantPreloadCriticalLinks(urls) {
-  if (!Array.isArray(urls) || urls.length === 0) return
-  
-  // Sofortiges Preloading ohne Verzögerung
-  urls.forEach(url => {
-    preloadAffiliateLink(url, {
-      aggressive: true,
-      preconnect: true,
-      prefetch: true,
-      prerender: true // Prerender für kritische Links
-    })
-  })
 }
 
 /**

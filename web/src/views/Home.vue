@@ -18,40 +18,43 @@ const testimonials = [
 const topOffers = computed(() => offers.slice(0, 2))
 const formatEuro = (n) => `${Number(n).toFixed(2).replace('.', ',')} €`
 
-// Vereinfachte Preloading-Strategie für bessere Kompatibilität
+// Tracking-sichere Preloading-Strategie
 
 onMounted(() => { 
   storeTrackingParams()
   
-  // RADIKALES SOFORTIGES PRELOADING - KEINE VERZÖGERUNG!
+  // TRACKING-SICHERES PRELOADING - Verhindert Conversion-Pixel-Probleme
   // Sammle alle externen Affiliate-Links
   const allAffiliateUrls = [
-    // Top 5 Kreditkarten (mehr für bessere Coverage)
+    // Top 3 Kreditkarten (reduziert für bessere Performance)
     ...offers
       .filter(offer => offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl))
-      .slice(0, 5)
+      .slice(0, 3)
       .map(offer => offer.applyUrl),
     
-    // Top 3 Broker (mehr für bessere Coverage)
+    // Top 2 Broker (reduziert für bessere Performance)
     ...brokers
       .filter(broker => broker.applyUrl && /^https?:\/\//i.test(broker.applyUrl))
-      .slice(0, 3)
+      .slice(0, 2)
       .map(broker => broker.applyUrl),
     
-    // Top 3 Tagesgeld (mehr für bessere Coverage)
+    // Top 2 Tagesgeld (reduziert für bessere Performance)
     ...savingsOffers
       .filter(savings => savings.applyUrl && /^https?:\/\//i.test(savings.applyUrl))
-      .slice(0, 3)
+      .slice(0, 2)
       .map(savings => savings.applyUrl)
   ]
   
   if (allAffiliateUrls.length > 0) {
-    // Vereinfachtes Preloading für bessere Kompatibilität
+    // Tracking-sicheres Preloading mit Verzögerung
     try {
-      instantPreloadCriticalLinks(allAffiliateUrls)
-      console.log(`Preloading: ${allAffiliateUrls.length} URLs preloaded`)
+      // Verzögerung von 2 Sekunden für bessere Tracking-Kompatibilität
+      setTimeout(() => {
+        instantPreloadCriticalLinks(allAffiliateUrls)
+        console.log(`Tracking-safe preloading: ${allAffiliateUrls.length} URLs preloaded`)
+      }, 2000)
     } catch (error) {
-      console.warn('Preloading failed:', error)
+      console.warn('Tracking-safe preloading failed:', error)
     }
   }
 })

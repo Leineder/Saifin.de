@@ -3,6 +3,7 @@
 
 import { batchPreloadAffiliateLinks, preloadAffiliateLink } from './affiliate-links.js'
 import { affiliatePerformanceMonitor } from './affiliate-performance.js'
+import { trackingSafeBatchPreload, trackingSafePreload } from './tracking-safe-preloading.js'
 
 /**
  * Globaler Affiliate-Link-Manager
@@ -40,7 +41,7 @@ export class GlobalAffiliateManager {
   }
 
   /**
-   * Preloadet die kritischsten Affiliate-Links
+   * Preloadet die kritischsten Affiliate-Links (tracking-sicher)
    */
   async preloadCriticalLinks() {
     try {
@@ -70,9 +71,14 @@ export class GlobalAffiliateManager {
       ].filter(url => !this.preloadedUrls.has(url))
 
       if (criticalUrls.length > 0) {
-        batchPreloadAffiliateLinks(criticalUrls, 100) // 100ms Verzögerung
+        // Verwende tracking-sichere Batch-Preloading
+        trackingSafeBatchPreload(criticalUrls, 200, { 
+          dnsOnly: true, 
+          maxConcurrent: 2,
+          preserveTracking: false 
+        })
         criticalUrls.forEach(url => this.preloadedUrls.add(url))
-        console.log(`Preloaded ${criticalUrls.length} critical affiliate links`)
+        console.log(`Tracking-safe preloaded ${criticalUrls.length} critical affiliate links`)
       }
     } catch (error) {
       console.error('Failed to preload critical links:', error)
@@ -80,7 +86,7 @@ export class GlobalAffiliateManager {
   }
 
   /**
-   * Preloadet sekundäre Affiliate-Links
+   * Preloadet sekundäre Affiliate-Links (tracking-sicher)
    */
   async preloadSecondaryLinks() {
     try {
@@ -92,26 +98,31 @@ export class GlobalAffiliateManager {
         // Weitere Kreditkarten
         ...offers
           .filter(offer => offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl))
-          .slice(2, 5)
+          .slice(2, 4) // Reduziert von 5 auf 4
           .map(offer => offer.applyUrl),
         
         // Weitere Broker
         ...brokers
           .filter(broker => broker.applyUrl && /^https?:\/\//i.test(broker.applyUrl))
-          .slice(1, 3)
+          .slice(1, 2) // Reduziert von 3 auf 2
           .map(broker => broker.applyUrl),
         
         // Weitere Tagesgeld
         ...savingsOffers
           .filter(savings => savings.applyUrl && /^https?:\/\//i.test(savings.applyUrl))
-          .slice(1, 3)
+          .slice(1, 2) // Reduziert von 3 auf 2
           .map(savings => savings.applyUrl)
       ].filter(url => !this.preloadedUrls.has(url))
 
       if (secondaryUrls.length > 0) {
-        batchPreloadAffiliateLinks(secondaryUrls, 200) // 200ms Verzögerung
+        // Verwende tracking-sichere Batch-Preloading
+        trackingSafeBatchPreload(secondaryUrls, 300, { 
+          dnsOnly: true, 
+          maxConcurrent: 1,
+          preserveTracking: false 
+        })
         secondaryUrls.forEach(url => this.preloadedUrls.add(url))
-        console.log(`Preloaded ${secondaryUrls.length} secondary affiliate links`)
+        console.log(`Tracking-safe preloaded ${secondaryUrls.length} secondary affiliate links`)
       }
     } catch (error) {
       console.error('Failed to preload secondary links:', error)
@@ -119,7 +130,7 @@ export class GlobalAffiliateManager {
   }
 
   /**
-   * Preloadet einen spezifischen Affiliate-Link
+   * Preloadet einen spezifischen Affiliate-Link (tracking-sicher)
    * @param {string} url - Die URL zum Preloaden
    * @param {string} category - Kategorie (cards, brokers, savings)
    */
@@ -127,7 +138,11 @@ export class GlobalAffiliateManager {
     if (!url || this.preloadedUrls.has(url)) return
 
     try {
-      preloadAffiliateLink(url)
+      // Verwende tracking-sichere Preloading-Funktion
+      trackingSafePreload(url, { 
+        dnsOnly: true, 
+        preserveTracking: false 
+      })
       this.preloadedUrls.add(url)
       
       // Track Preload-Performance
