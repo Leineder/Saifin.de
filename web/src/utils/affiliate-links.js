@@ -2,28 +2,92 @@
 // Optimierte Affiliate-Link-Verwaltung für schnellere Ladezeiten
 
 /**
- * Preloadet Affiliate-Links beim Hover für schnellere Navigation
+ * Aggressives Preloading für Affiliate-Links - RADIKAL OPTIMIERT
  * @param {string} url - Die Affiliate-URL
  * @param {Object} options - Zusätzliche Optionen
  */
 export function preloadAffiliateLink(url, options = {}) {
   if (!url || typeof url !== 'string') return
   
-  // Erstelle unsichtbaren Link für Preloading
-  const link = document.createElement('link')
-  link.rel = 'prefetch'
-  link.href = url
-  link.as = 'document'
+  const {
+    aggressive = true,
+    preconnect = true,
+    prefetch = true,
+    prerender = false
+  } = options
   
-  // Füge Link zum Head hinzu
-  document.head.appendChild(link)
+  // 1. DNS-Prefetch + Preconnect für sofortige Verbindung
+  if (preconnect) {
+    const preconnectLink = document.createElement('link')
+    preconnectLink.rel = 'preconnect'
+    preconnectLink.href = new URL(url).origin
+    preconnectLink.crossOrigin = 'anonymous'
+    document.head.appendChild(preconnectLink)
+  }
   
-  // Entferne Link nach 30 Sekunden um Speicher zu sparen
+  // 2. Aggressives Prefetch mit höchster Priorität
+  if (prefetch) {
+    const link = document.createElement('link')
+    link.rel = 'prefetch'
+    link.href = url
+    link.as = 'document'
+    link.fetchPriority = 'high' // Höchste Priorität
+    document.head.appendChild(link)
+  }
+  
+  // 3. Prerender für kritische Links (experimentell)
+  if (prerender && aggressive) {
+    const prerenderLink = document.createElement('link')
+    prerenderLink.rel = 'prerender'
+    prerenderLink.href = url
+    document.head.appendChild(prerenderLink)
+  }
+  
+  // 4. Aggressives iframe-Preloading für sofortige Navigation
+  if (aggressive) {
+    preloadWithIframe(url)
+  }
+  
+  // Entferne Links nach 60 Sekunden (länger für aggressive Strategie)
   setTimeout(() => {
-    if (link.parentNode) {
-      link.parentNode.removeChild(link)
-    }
-  }, 30000)
+    const links = document.querySelectorAll(`link[href="${url}"]`)
+    links.forEach(link => {
+      if (link.parentNode) {
+        link.parentNode.removeChild(link)
+      }
+    })
+  }, 60000)
+}
+
+/**
+ * Iframe-basiertes Preloading für sofortige Navigation
+ * @param {string} url - Die Affiliate-URL
+ */
+function preloadWithIframe(url) {
+  try {
+    // Erstelle unsichtbares iframe für Preloading
+    const iframe = document.createElement('iframe')
+    iframe.style.display = 'none'
+    iframe.style.width = '0'
+    iframe.style.height = '0'
+    iframe.style.border = 'none'
+    iframe.style.position = 'absolute'
+    iframe.style.left = '-9999px'
+    iframe.src = url
+    
+    // Füge iframe zum DOM hinzu
+    document.body.appendChild(iframe)
+    
+    // Entferne iframe nach 30 Sekunden
+    setTimeout(() => {
+      if (iframe.parentNode) {
+        iframe.parentNode.removeChild(iframe)
+      }
+    }, 30000)
+  } catch (error) {
+    // Fallback bei iframe-Fehlern
+    console.warn('Iframe preloading failed:', error)
+  }
 }
 
 /**
@@ -87,17 +151,56 @@ export function createAffiliateLinkHandler(url, trackingData = {}) {
 }
 
 /**
- * Batch-Preloading für mehrere Affiliate-Links
+ * Aggressives Batch-Preloading für mehrere Affiliate-Links - RADIKAL OPTIMIERT
  * @param {Array} urls - Array von Affiliate-URLs
  * @param {number} delay - Verzögerung zwischen Preloads (ms)
+ * @param {Object} options - Zusätzliche Optionen
  */
-export function batchPreloadAffiliateLinks(urls, delay = 100) {
+export function batchPreloadAffiliateLinks(urls, delay = 50, options = {}) {
   if (!Array.isArray(urls) || urls.length === 0) return
   
-  urls.forEach((url, index) => {
-    setTimeout(() => {
-      preloadAffiliateLink(url)
-    }, index * delay)
+  const {
+    aggressive = true,
+    parallel = true,
+    priority = 'high'
+  } = options
+  
+  if (parallel && aggressive) {
+    // Parallel preloading für maximale Geschwindigkeit
+    urls.forEach((url, index) => {
+      // Sofortiges Preloading ohne Verzögerung
+      preloadAffiliateLink(url, { 
+        aggressive: true, 
+        preconnect: true, 
+        prefetch: true,
+        prerender: index < 2 // Prerender nur die ersten 2 Links
+      })
+    })
+  } else {
+    // Sequenzielles Preloading mit minimaler Verzögerung
+    urls.forEach((url, index) => {
+      setTimeout(() => {
+        preloadAffiliateLink(url, { aggressive: true })
+      }, index * delay)
+    })
+  }
+}
+
+/**
+ * Sofortiges Preloading aller kritischen Affiliate-Links
+ * @param {Array} urls - Array von kritischen URLs
+ */
+export function instantPreloadCriticalLinks(urls) {
+  if (!Array.isArray(urls) || urls.length === 0) return
+  
+  // Sofortiges Preloading ohne Verzögerung
+  urls.forEach(url => {
+    preloadAffiliateLink(url, {
+      aggressive: true,
+      preconnect: true,
+      prefetch: true,
+      prerender: true // Prerender für kritische Links
+    })
   })
 }
 

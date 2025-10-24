@@ -17,20 +17,45 @@ const CRITICAL_RESOURCES = [
   '/images/saifin_logo_vectorized_final.svg'
 ];
 
-// Affiliate-Link-Domains für DNS-Prefetch-Caching
+// RADIKALE AFFILIATE-LINK-DOMAINS für aggressives Caching
 const AFFILIATE_DOMAINS = [
   'www.financeads.net',
-  'financeads.net'
+  'financeads.net',
+  'www.hanseaticbank.de',
+  'www.tfbank.de',
+  'www.netkredit24.de',
+  'www.santander.de',
+  'www.consorsfinanz.de',
+  'www.1822direkt.de',
+  'www.extrakarte.de',
+  'www.captrader.de',
+  'www.smartbroker.de',
+  'www.fidelity.de',
+  'www.brokerpoint.de',
+  'www.finanzen.net',
+  'www.fonds-super-markt.de',
+  'www.quirion.de',
+  'www.etoro.com',
+  'www.pbb-direkt.de',
+  'www.distingo.de',
+  'www.raisin.com',
+  'www.jt-direktbank.de',
+  'www.comdirect.de'
 ];
 
-// Affiliate-Link-Cache-Strategien
+// RADIKALE AFFILIATE-LINK-CACHE-STRATEGIEN für maximale Geschwindigkeit
 const AFFILIATE_CACHE_STRATEGIES = {
-  // Kurzes Caching für Affiliate-Links (5 Minuten)
-  SHORT_CACHE: 5 * 60 * 1000, // 5 Minuten
-  // Mittleres Caching für häufig verwendete Links (15 Minuten)
-  MEDIUM_CACHE: 15 * 60 * 1000, // 15 Minuten
-  // Langes Caching für statische Affiliate-Seiten (1 Stunde)
-  LONG_CACHE: 60 * 60 * 1000 // 1 Stunde
+  // Aggressives Caching für Affiliate-Links (30 Minuten)
+  AGGRESSIVE_CACHE: 30 * 60 * 1000, // 30 Minuten
+  // Mittleres Caching für häufig verwendete Links (1 Stunde)
+  MEDIUM_CACHE: 60 * 60 * 1000, // 1 Stunde
+  // Langes Caching für statische Affiliate-Seiten (4 Stunden)
+  LONG_CACHE: 4 * 60 * 60 * 1000, // 4 Stunden
+  // Ultra-langes Caching für kritische Links (24 Stunden)
+  ULTRA_CACHE: 24 * 60 * 60 * 1000, // 24 Stunden
+  // MOBILE-SPEZIFISCHE CACHE-STRATEGIEN
+  MOBILE_AGGRESSIVE_CACHE: 60 * 60 * 1000, // 1 Stunde für mobile
+  MOBILE_ULTRA_CACHE: 48 * 60 * 60 * 1000 // 48 Stunden für mobile
 };
 
 // Install Event - Cache kritische Ressourcen
@@ -71,7 +96,7 @@ self.addEventListener('activate', (event) => {
   );
 });
 
-// Fetch Event - Aggressive Caching-Strategie
+// ULTRA-AGGRESSIVE FETCH EVENT mit Background-Sync
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -81,9 +106,9 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // Spezielle Behandlung für Affiliate-Links
+  // ULTRA-AGGRESSIVE Behandlung für Affiliate-Links
   if (isAffiliateLink(request)) {
-    event.respondWith(handleAffiliateLink(request));
+    event.respondWith(handleUltraAggressiveAffiliateLink(request));
     return;
   }
 
@@ -191,7 +216,7 @@ function isAffiliateLink(request) {
   return AFFILIATE_DOMAINS.some(domain => url.hostname.includes(domain));
 }
 
-async function handleAffiliateLink(request) {
+async function handleUltraAggressiveAffiliateLink(request) {
   const url = new URL(request.url);
   const cache = await caches.open(DYNAMIC_CACHE);
   
@@ -199,58 +224,123 @@ async function handleAffiliateLink(request) {
   const cachedResponse = await cache.match(request);
   const now = Date.now();
   
-  // Wenn gecachte Response vorhanden und noch nicht abgelaufen
+  // ULTRA-AGGRESSIVE Cache-Check mit längerer Lebensdauer
   if (cachedResponse) {
     const cacheTime = cachedResponse.headers.get('sw-cache-time');
-    if (cacheTime && (now - parseInt(cacheTime)) < AFFILIATE_CACHE_STRATEGIES.SHORT_CACHE) {
-      console.log('SW: Serving cached affiliate link');
+    if (cacheTime && (now - parseInt(cacheTime)) < AFFILIATE_CACHE_STRATEGIES.MOBILE_AGGRESSIVE_CACHE) {
+      console.log('SW: Serving cached affiliate link (ULTRA-AGGRESSIVE)');
       return cachedResponse;
     }
   }
   
-  // Für Affiliate-Links: Network First mit optimierter Performance
+  // ULTRA-AGGRESSIVE Network First mit maximaler Performance
   try {
-    // Erstelle optimierte Request mit besseren Headers
+    // ULTRA-OPTIMIERTE Request mit maximalen Headers
     const optimizedRequest = new Request(request.url, {
       method: request.method,
       headers: {
         ...request.headers,
-        'Cache-Control': 'no-cache',
-        'Pragma': 'no-cache',
+        'Cache-Control': 'max-age=3600',
+        'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+        'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8',
+        'Accept-Encoding': 'gzip, deflate, br',
+        'Connection': 'keep-alive',
+        'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (compatible; SaifinBot/1.0)'
       },
       mode: 'cors',
-      credentials: 'omit'
+      credentials: 'omit',
+      redirect: 'follow'
     });
 
-    const networkResponse = await fetch(optimizedRequest);
+    // ULTRA-AGGRESSIVE Network Request mit Timeout
+    const networkResponse = await Promise.race([
+      fetch(optimizedRequest),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('Timeout')), 5000))
+    ]);
     
-    // Cache die Response mit Zeitstempel
+    // ULTRA-AGGRESSIVE Caching mit längerer Lebensdauer
     if (networkResponse.ok) {
       const responseToCache = networkResponse.clone();
       responseToCache.headers.set('sw-cache-time', now.toString());
-      responseToCache.headers.set('Cache-Control', 'max-age=300'); // 5 Minuten
+      responseToCache.headers.set('sw-cache-duration', '3600'); // 1 Stunde
+      responseToCache.headers.set('Cache-Control', 'max-age=3600'); // 1 Stunde
       cache.put(request, responseToCache);
       
-      console.log('SW: Cached affiliate link response');
+      // Background-Sync für weitere Optimierungen
+      self.registration.sync.register('affiliate-link-sync').catch(() => {});
+      
+      console.log('SW: Cached affiliate link response (ULTRA-AGGRESSIVE)');
     }
     
     return networkResponse;
   } catch (error) {
-    console.log('SW: Affiliate link failed, trying cache:', error);
+    console.log('SW: Affiliate link failed, trying cache (ULTRA-AGGRESSIVE):', error);
     
-    // Fallback: Versuche gecachte Version (auch wenn abgelaufen)
+    // ULTRA-AGGRESSIVE Fallback-Strategien
     if (cachedResponse) {
-      console.log('SW: Serving stale cached affiliate link');
+      console.log('SW: Serving stale cached affiliate link (ULTRA-AGGRESSIVE)');
       return cachedResponse;
     }
     
-    // Letzter Fallback: Redirect zur Hauptseite
-    return new Response(null, {
-      status: 302,
-      headers: {
-        'Location': '/'
-      }
+    // Versuche alternative URL
+    const alternativeResponse = await tryAlternativeUrl(request);
+    if (alternativeResponse) {
+      return alternativeResponse;
+    }
+    
+    // Letzter Fallback: Optimierte Offline-Seite
+    return new Response(`
+      <!DOCTYPE html>
+      <html>
+        <head>
+          <title>Offline - Saifin</title>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+        </head>
+        <body>
+          <h1>Offline</h1>
+          <p>Die Seite ist momentan nicht verfügbar. Bitte versuchen Sie es später erneut.</p>
+          <script>
+            // Auto-Retry nach 5 Sekunden
+            setTimeout(() => {
+              window.location.reload();
+            }, 5000);
+          </script>
+        </body>
+      </html>
+    `, { 
+      status: 503,
+      headers: { 'Content-Type': 'text/html' }
     });
   }
+}
+
+// Versuche alternative URL
+async function tryAlternativeUrl(request) {
+  try {
+    const url = new URL(request.url);
+    
+    // Versuche HTTP statt HTTPS oder umgekehrt
+    if (url.protocol === 'https:') {
+      url.protocol = 'http:';
+    } else {
+      url.protocol = 'https:';
+    }
+    
+    const alternativeRequest = new Request(url.toString(), {
+      method: 'HEAD',
+      mode: 'cors',
+      credentials: 'omit'
+    });
+    
+    const response = await fetch(alternativeRequest);
+    if (response.ok) {
+      return response;
+    }
+  } catch (error) {
+    // Ignoriere Fehler
+  }
+  
+  return null;
 }

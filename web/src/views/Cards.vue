@@ -232,27 +232,98 @@ const goToDetail = (offer) => {
   }
 }
 
-// Mobile: Filter einklappbar
+// Mobile: Filter einklappbar mit Performance-Optimierungen
 const showFilters = ref(false)
 const isDesktop = ref(false)
+const isMobile = ref(false)
 let mediaQuery
 let onChange
+
+// Mobile-spezifische Optimierungen
 onMounted(() => {
   mediaQuery = window.matchMedia('(min-width: 769px)')
   onChange = () => {
     isDesktop.value = mediaQuery.matches
+    isMobile.value = !mediaQuery.matches
+    
     if (isDesktop.value) {
       showFilters.value = false
+    }
+    
+    // Mobile-spezifische Optimierungen
+    if (isMobile.value) {
+      optimizeMobileFilters()
     }
   }
   mediaQuery.addEventListener ? mediaQuery.addEventListener('change', onChange) : mediaQuery.addListener(onChange)
   onChange()
+  
+  // Mobile Touch-Optimierungen initialisieren
+  if (isMobile.value) {
+    initializeMobileTouchOptimizations()
+  }
 })
+
 onBeforeUnmount(() => {
   if (mediaQuery && onChange) {
     mediaQuery.removeEventListener ? mediaQuery.removeEventListener('change', onChange) : mediaQuery.removeListener(onChange)
   }
 })
+
+// Mobile Filter-Optimierungen
+function optimizeMobileFilters() {
+  // Throttle Filter-Updates für bessere Performance
+  let filterTimeout
+  const throttledFilterUpdate = () => {
+    if (filterTimeout) {
+      clearTimeout(filterTimeout)
+    }
+    filterTimeout = setTimeout(() => {
+      // Filter-Update hier
+    }, 150) // 150ms Throttling
+  }
+  
+  // Optimierte Filter-Event-Listener
+  const filterElements = document.querySelectorAll('.filter-select, .checkbox input')
+  filterElements.forEach(element => {
+    element.addEventListener('change', throttledFilterUpdate, { passive: true })
+  })
+}
+
+// Mobile Touch-Optimierungen
+function initializeMobileTouchOptimizations() {
+  // Touch-Optimierungen für Apply-Buttons
+  const applyButtons = document.querySelectorAll('.apply-cta')
+  applyButtons.forEach(button => {
+    // Touch-Start für sofortiges Preloading
+    button.addEventListener('touchstart', (event) => {
+      const offer = event.target.closest('.offer-card')
+      if (offer) {
+        const offerData = offers.find(o => o.id === offer.dataset.offerId)
+        if (offerData?.applyUrl && /^https?:\/\//i.test(offerData.applyUrl)) {
+          // Sofortiges Preloading bei Touch-Start
+          preloadAffiliateLink(offerData.applyUrl, { 
+            aggressive: true, 
+            preconnect: true, 
+            prefetch: true 
+          })
+        }
+      }
+    }, { passive: true })
+    
+    // Touch-End für optimierte Navigation
+    button.addEventListener('touchend', (event) => {
+      event.preventDefault()
+      const offer = event.target.closest('.offer-card')
+      if (offer) {
+        const offerData = offers.find(o => o.id === offer.dataset.offerId)
+        if (offerData) {
+          goToApply(offerData)
+        }
+      }
+    }, { passive: false })
+  })
+}
 </script>
 
 <template>
@@ -860,25 +931,28 @@ onBeforeUnmount(() => {
   margin: 0 0 0.75rem 0;
 }
 
-/* Responsive Design */
+/* MOBILE-OPTIMIERTE RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-  /* Noch weniger Abstand oben für mobile */
+  /* Ultra-optimierte Abstände für mobile */
   .cards-page .section {
-    padding: 8px 0;
+    padding: 4px 0;
   }
   
   .content h1 {
     margin-top: 0;
     padding-top: 0;
-    margin-bottom: 0.25rem !important;
+    margin-bottom: 0.125rem !important;
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
   }
   
   .last-updated {
-    margin: 0.125rem 0 0.375rem 0;
+    margin: 0.0625rem 0 0.25rem 0;
+    font-size: 0.7rem !important;
   }
   
   .mobile-filter-toggle {
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.375rem 0;
   }
   
   .layout { grid-template-columns: 1fr; }
@@ -887,21 +961,99 @@ onBeforeUnmount(() => {
   .offer-content,
   .recommendation-content {
     flex-direction: column;
-    gap: 1rem;
+    gap: 0.75rem;
+    padding: 1rem !important;
   }
   
   .card-image-container {
     width: 100%;
-    max-width: 200px;
+    max-width: 180px;
     margin: 0 auto;
-    /* Stelle sicher, dass der Container das richtige Seitenverhältnis beibehält */
     aspect-ratio: 1.586 / 1;
     height: auto;
+    /* Mobile-optimierte Performance */
+    will-change: transform;
+    transform: translateZ(0);
   }
   
   .action-buttons {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
+  }
+  
+  /* MOBILE TOUCH-OPTIMIERUNGEN */
+  .apply-cta {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+    padding: 12px 16px !important;
+  }
+  
+  .apply-cta:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  /* OPTIMIERTE CARD-INTERAKTION */
+  .offer-card {
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .offer-card:active {
+    transform: scale(0.99) !important;
+    transition: transform 0.1s ease !important;
+  }
+  
+  /* MOBILE BILD-OPTIMIERUNGEN */
+  .card-image {
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    /* Mobile-optimierte Performance */
+    will-change: transform;
+    transform: translateZ(0);
+  }
+  
+  .card-image:not(.loaded) {
+    opacity: 0.7 !important;
+    transition: opacity 0.3s ease !important;
+  }
+  
+  .card-image.loaded {
+    opacity: 1 !important;
+  }
+  
+  /* PLACEHOLDER FÜR BESSERE UX */
+  .card-image-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    z-index: -1;
+  }
+  
+  @keyframes loading {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+  
+  .card-image.loaded + .card-image-container::before {
+    display: none;
   }
   
   .expandable-sections {
@@ -910,9 +1062,59 @@ onBeforeUnmount(() => {
   
   .recommendations-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
   }
 
-  .mobile-filter-panel { margin-bottom: 16px; }
+  .mobile-filter-panel { 
+    margin-bottom: 12px;
+    padding: 1rem !important;
+  }
+  
+  /* MOBILE FILTER-OPTIMIERUNGEN */
+  .filter-select {
+    min-height: 44px !important;
+    font-size: 16px !important;
+    padding: 12px !important;
+  }
+  
+  .checkbox {
+    min-height: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 0.5rem !important;
+  }
+  
+  .checkbox input {
+    min-width: 20px !important;
+    min-height: 20px !important;
+  }
+  
+  /* MOBILE SCROLL-OPTIMIERUNGEN */
+  .cards-page {
+    -webkit-overflow-scrolling: touch !important;
+    scroll-behavior: smooth !important;
+  }
+  
+  /* MOBILE PERFORMANCE-OPTIMIERUNGEN */
+  .offer-card,
+  .recommendation-card {
+    contain: layout style paint !important;
+    will-change: transform !important;
+  }
+  
+  /* MOBILE TYPOGRAPHY-OPTIMIERUNGEN */
+  .offer-title {
+    font-size: 1rem !important;
+    line-height: 1.3 !important;
+  }
+  
+  .feature-item {
+    font-size: 0.8rem !important;
+  }
+  
+  .annual-fee {
+    font-size: 1rem !important;
+  }
 }
 
 /* Spezifische Korrekturen für problematische Kreditkarten */

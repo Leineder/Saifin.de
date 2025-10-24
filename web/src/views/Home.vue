@@ -4,7 +4,10 @@ import { storeTrackingParams } from '../tracking'
 import { offers } from '../data/offers'
 import { brokers } from '../data/brokers'
 import { savingsOffers } from '../data/savings'
-import { batchPreloadAffiliateLinks } from '../utils/affiliate-links'
+import { batchPreloadAffiliateLinks, instantPreloadCriticalLinks } from '../utils/affiliate-links'
+import { useBackgroundPreloading } from '../utils/background-preloader'
+import { useConnectionAwarePreloading } from '../utils/connection-aware-preloading'
+import { usePredictivePreloading } from '../utils/predictive-preloading'
 
 const testimonials = [
   { name: 'Max Kowal', avatar: 'https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=200', rating: 5,
@@ -18,36 +21,83 @@ const testimonials = [
 const topOffers = computed(() => offers.slice(0, 2))
 const formatEuro = (n) => `${Number(n).toFixed(2).replace('.', ',')} €`
 
+// ULTRA-AGGRESSIVE Preloading-Hooks
+const { batchPreload, connectionAwarePreload } = useBackgroundPreloading()
+const { intelligentPreload } = useConnectionAwarePreloading()
+const { triggerPreload } = usePredictivePreloading()
+
 onMounted(() => { 
   storeTrackingParams()
   
-  // Batch-Preload der wichtigsten Affiliate-Links nach 3 Sekunden
-  setTimeout(() => {
-    // Sammle alle externen Affiliate-Links
-    const allAffiliateUrls = [
-      // Top 3 Kreditkarten
-      ...offers
-        .filter(offer => offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl))
-        .slice(0, 3)
-        .map(offer => offer.applyUrl),
-      
-      // Top 2 Broker
-      ...brokers
-        .filter(broker => broker.applyUrl && /^https?:\/\//i.test(broker.applyUrl))
-        .slice(0, 2)
-        .map(broker => broker.applyUrl),
-      
-      // Top 2 Tagesgeld
-      ...savingsOffers
-        .filter(savings => savings.applyUrl && /^https?:\/\//i.test(savings.applyUrl))
-        .slice(0, 2)
-        .map(savings => savings.applyUrl)
-    ]
+  // RADIKALES SOFORTIGES PRELOADING - KEINE VERZÖGERUNG!
+  // Sammle alle externen Affiliate-Links
+  const allAffiliateUrls = [
+    // Top 5 Kreditkarten (mehr für bessere Coverage)
+    ...offers
+      .filter(offer => offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl))
+      .slice(0, 5)
+      .map(offer => offer.applyUrl),
     
-    if (allAffiliateUrls.length > 0) {
-      batchPreloadAffiliateLinks(allAffiliateUrls, 150) // 150ms Verzögerung zwischen Preloads
-    }
-  }, 3000)
+    // Top 3 Broker (mehr für bessere Coverage)
+    ...brokers
+      .filter(broker => broker.applyUrl && /^https?:\/\//i.test(broker.applyUrl))
+      .slice(0, 3)
+      .map(broker => broker.applyUrl),
+    
+    // Top 3 Tagesgeld (mehr für bessere Coverage)
+    ...savingsOffers
+      .filter(savings => savings.applyUrl && /^https?:\/\//i.test(savings.applyUrl))
+      .slice(0, 3)
+      .map(savings => savings.applyUrl)
+  ]
+  
+  if (allAffiliateUrls.length > 0) {
+    // ULTRA-AGGRESSIVE SOFORTIGES PRELOADING - ALLE METHODEN GLEICHZEITIG!
+    
+    // 1. Standard Preloading
+    instantPreloadCriticalLinks(allAffiliateUrls)
+    
+    // 2. Background Worker Preloading
+    batchPreload(allAffiliateUrls, { priority: 'ultra' })
+    
+    // 3. Connection-Aware Preloading
+    intelligentPreload(allAffiliateUrls, { aggressive: true })
+    
+    // 4. Predictive Preloading für Top-URLs
+    allAffiliateUrls.slice(0, 3).forEach(url => {
+      triggerPreload(url)
+    })
+    
+    // ULTRA-AGGRESSIVE Zusätzliches Preloading nach 500ms
+    setTimeout(() => {
+      const additionalUrls = [
+        // Weitere Kreditkarten
+        ...offers
+          .filter(offer => offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl))
+          .slice(5, 10) // Mehr URLs
+          .map(offer => offer.applyUrl),
+        
+        // Weitere Broker
+        ...brokers
+          .filter(broker => broker.applyUrl && /^https?:\/\//i.test(broker.applyUrl))
+          .slice(3, 6) // Mehr URLs
+          .map(broker => broker.applyUrl),
+        
+        // Weitere Tagesgeld
+        ...savingsOffers
+          .filter(savings => savings.applyUrl && /^https?:\/\//i.test(savings.applyUrl))
+          .slice(3, 8) // Mehr URLs
+          .map(savings => savings.applyUrl)
+      ].filter(url => url && !allAffiliateUrls.includes(url))
+      
+      if (additionalUrls.length > 0) {
+        // ULTRA-AGGRESSIVE Multi-Method Preloading
+        batchPreloadAffiliateLinks(additionalUrls, 25, { aggressive: true, parallel: true })
+        batchPreload(additionalUrls, { priority: 'high' })
+        connectionAwarePreload(additionalUrls)
+      }
+    }, 500) // Schneller: 500ms statt 1000ms
+  }
 })
 </script>
 

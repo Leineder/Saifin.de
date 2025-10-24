@@ -31,7 +31,7 @@ onMounted(() => {
 })
 
 const goBack = () => safeNavigate(router, '/kreditkarten')
-// Erstelle optimierten Affiliate-Link-Handler
+// Erstelle optimierten Affiliate-Link-Handler mit Prediction
 const affiliateLinkHandler = computed(() => {
   if (!offer.value?.applyUrl) return null
   
@@ -39,6 +39,15 @@ const affiliateLinkHandler = computed(() => {
   if (!/^https?:\/\//i.test(url)) return null
   
   return createAffiliateLinkHandler(url, {
+    onMouseEnter: () => {
+      // Aggressives Preloading beim Hover
+      preloadAffiliateLink(url, { 
+        aggressive: true, 
+        preconnect: true, 
+        prefetch: true,
+        prerender: true // Prerender für kritische Links
+      })
+    },
     onClick: () => {
       // Starte Performance-Messung
       const measurementId = startMeasurement(url)

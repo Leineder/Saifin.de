@@ -11,6 +11,12 @@ import router from './router'
 import './style.css'
 import { initEngagementTracking } from './tracking'
 import { globalAffiliateManager } from './utils/global-affiliate-manager'
+import { affiliateLinkPredictor } from './utils/affiliate-prediction'
+import { mobileTouchOptimizer } from './utils/mobile-optimizations'
+import { mobileImageOptimizer } from './utils/image-optimization'
+import { backgroundPreloader } from './utils/background-preloader'
+import { connectionAwarePreloader } from './utils/connection-aware-preloading'
+import { predictivePreloader } from './utils/predictive-preloading'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -52,6 +58,15 @@ if (typeof window !== 'undefined') {
     initEngagementTracking()
     // Initialisiere globalen Affiliate-Manager
     globalAffiliateManager.initialize()
+    // Initialisiere Affiliate-Link-Prediction
+    console.log('Affiliate Link Predictor initialized:', affiliateLinkPredictor.getPredictionStats())
+    // Initialisiere Mobile-Optimierungen
+    console.log('Mobile Touch Optimizer initialized:', mobileTouchOptimizer.getTouchStats())
+    console.log('Mobile Image Optimizer initialized:', mobileImageOptimizer.getImageCacheStats())
+    // Initialisiere ULTRA-AGGRESSIVE Optimierungen
+    console.log('Background Preloader initialized:', backgroundPreloader.getStats())
+    console.log('Connection-Aware Preloader initialized:', connectionAwarePreloader.getConnectionStatus())
+    console.log('Predictive Preloader initialized:', predictivePreloader.getPredictionStats())
   }, 2000)
 }
 
