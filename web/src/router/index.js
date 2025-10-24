@@ -30,7 +30,7 @@ const routes = [
   { path: '/danke', name: 'thanks', component: Thanks },
   { path: '/datenschutz', name: 'privacy', component: Privacy },
   { path: '/impressum', name: 'imprint', component: Imprint },
-  { path: '/kontakt', name: 'contact', component: Contact },
+  { path: '/kontakt', name: 'contact', component: Contact }
 ]
 
 const router = createRouter({

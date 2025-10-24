@@ -109,22 +109,76 @@ const affiliateLinkHandler = computed(() => {
 const goApply = () => {
   if (!offer.value) return
   
-  // Verwende optimierten Affiliate-Link-Handler wenn verfügbar
-  if (affiliateLinkHandler.value) {
-    affiliateLinkHandler.value.onClick({ preventDefault: () => {} })
+  // Direkte Behandlung für externe Affiliate-Links
+  if (offer.value?.applyUrl && /^https?:\/\//i.test(offer.value.applyUrl)) {
+    const url = offer.value.applyUrl
+    
+    // Starte Performance-Messung
+    const measurementId = startMeasurement(url)
+    if (measurementId) {
+      collectWebVitals(measurementId)
+    }
+    
+    // Vercel Analytics: Produktanfrage tracken
+    trackCreditCardApply(offer.value.id, offer.value.title, url)
+    
+    // TikTok Event: Kreditkartenantrag initiiert (Detailseite)
+    if (window.ttq) {
+      window.ttq.track('InitiateCheckout', {
+        content_type: 'product',
+        content_name: offer.value.title,
+        content_id: offer.value.id || offer.value.slug,
+        value: offer.value.annualFee || 0,
+        currency: 'EUR'
+      })
+    }
+    
+    // Meta Pixel: CompleteRegistration bei externem Antrag
+    try {
+      if (window.fbq) {
+        window.fbq('track', 'CompleteRegistration', {
+          content_name: offer.value.title,
+          content_category: 'card',
+          content_id: offer.value.id || offer.value.slug,
+          value: offer.value.annualFee || 0,
+          currency: 'EUR',
+          status: 'external_redirect'
+        })
+      }
+    } catch (_) {}
+    
+    // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Kreditkarten-Antrag
+    try {
+      if (window.ttq && typeof window.ttq.track === 'function') {
+        window.ttq.track('Antrag gestellt', {
+          content_type: 'card',
+          content_name: offer.value.title,
+          content_id: offer.value.id || offer.value.slug,
+          value: offer.value.annualFee || 0,
+          currency: 'EUR',
+          status: 'external_redirect'
+        })
+      }
+    } catch (_) {}
+    
+    // Beende Performance-Messung nach kurzer Verzögerung
+    setTimeout(() => {
+      if (measurementId) {
+        endMeasurement(measurementId, { success: true })
+      }
+    }, 1000)
+    
+    // Öffne den Affiliate-Link direkt
+    window.open(url, '_blank', 'noopener,noreferrer')
     return
   }
   
   // Fallback für interne Links
   if (offer.value?.applyUrl) {
-    const url = offer.value.applyUrl
-    if (/^https?:\/\//i.test(url)) {
-      // Sollte nicht hier ankommen, da affiliateLinkHandler das abfängt
-      window.open(url, '_blank', 'noopener,noreferrer')
-      return
-    }
-    return safeNavigate(router, url)
+    return safeNavigate(router, offer.value.applyUrl)
   }
+  
+  // Letzter Fallback: Antrag-Seite
   safeNavigate(router, `/antrag/${offer.value.slug}`)
 }
 const formatEuro = (n) => {

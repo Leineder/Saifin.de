@@ -160,66 +160,63 @@ const goToApply = (offer) => {
   
   // Verwende optimierten Affiliate-Link-Handler für externe Links
   if (/^https?:\/\//i.test(url)) {
-    const affiliateHandler = createAffiliateLinkHandler(url, {
-      onClick: () => {
-        // Starte Performance-Messung
+    // Starte Performance-Messung
     const measurementId = startMeasurement(url)
     if (measurementId) {
       collectWebVitals(measurementId)
     }
-        
-        // Vercel Analytics: Kreditkarten-Anfrage tracken
-        trackCreditCardApply(offer.id, offer.title, url)
-        
-        // TikTok Event: Kreditkartenantrag initiiert
-        if (window.ttq) {
-          window.ttq.track('InitiateCheckout', {
-            content_type: 'product',
-            content_name: offer.title,
-            content_id: offer.id || offer.slug,
-            value: offer.annualFee || 0,
-            currency: 'EUR'
-          })
-        }
-        
-        // Meta Pixel: CompleteRegistration bei externem Antrag
-        try {
-          if (window.fbq) {
-            window.fbq('track', 'CompleteRegistration', {
-              content_name: offer.title,
-              content_category: 'card',
-              content_id: offer.id || offer.slug,
-              value: offer.annualFee || 0,
-              currency: 'EUR',
-              status: 'external_redirect'
-            })
-          }
-        } catch (_) {}
-        
-        // TikTok Pixel: Custom Event "Antrag gestellt"
-        try {
-          if (window.ttq && typeof window.ttq.track === 'function') {
-            window.ttq.track('Antrag gestellt', {
-              content_type: 'card',
-              content_name: offer.title,
-              content_id: offer.id || offer.slug,
-              value: offer.annualFee || 0,
-              currency: 'EUR',
-              status: 'external_redirect'
-            })
-          }
-        } catch (_) {}
-        
-        // Beende Performance-Messung nach kurzer Verzögerung
-        setTimeout(() => {
-          if (measurementId) {
-            endMeasurement(measurementId, { success: true })
-          }
-        }, 1000)
-      }
-    })
     
-    affiliateHandler.onClick({ preventDefault: () => {} })
+    // Vercel Analytics: Kreditkarten-Anfrage tracken
+    trackCreditCardApply(offer.id, offer.title, url)
+    
+    // TikTok Event: Kreditkartenantrag initiiert
+    if (window.ttq) {
+      window.ttq.track('InitiateCheckout', {
+        content_type: 'product',
+        content_name: offer.title,
+        content_id: offer.id || offer.slug,
+        value: offer.annualFee || 0,
+        currency: 'EUR'
+      })
+    }
+    
+    // Meta Pixel: CompleteRegistration bei externem Antrag
+    try {
+      if (window.fbq) {
+        window.fbq('track', 'CompleteRegistration', {
+          content_name: offer.title,
+          content_category: 'card',
+          content_id: offer.id || offer.slug,
+          value: offer.annualFee || 0,
+          currency: 'EUR',
+          status: 'external_redirect'
+        })
+      }
+    } catch (_) {}
+    
+    // TikTok Pixel: Custom Event "Antrag gestellt"
+    try {
+      if (window.ttq && typeof window.ttq.track === 'function') {
+        window.ttq.track('Antrag gestellt', {
+          content_type: 'card',
+          content_name: offer.title,
+          content_id: offer.id || offer.slug,
+          value: offer.annualFee || 0,
+          currency: 'EUR',
+          status: 'external_redirect'
+        })
+      }
+    } catch (_) {}
+    
+    // Beende Performance-Messung nach kurzer Verzögerung
+    setTimeout(() => {
+      if (measurementId) {
+        endMeasurement(measurementId, { success: true })
+      }
+    }, 1000)
+    
+    // Öffne den Affiliate-Link direkt
+    window.open(url, '_blank', 'noopener,noreferrer')
   } else {
     // Interne Links
     router.push(url)
