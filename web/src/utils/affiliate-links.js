@@ -1,8 +1,6 @@
 // affiliate-links.js
 // Tracking-sichere Affiliate-Link-Verwaltung
 
-import { trackingSafePreload, trackingSafeOpenAffiliateLink, trackingSafeBatchPreload } from './tracking-safe-preloading.js'
-
 /**
  * Tracking-sichere Preloading für Affiliate-Links
  * @param {string} url - Die Affiliate-URL
@@ -18,8 +16,14 @@ export function preloadAffiliateLink(url, options = {}) {
   } = options
   
   if (trackingSafe) {
-    // Verwende tracking-sichere Preloading-Funktion
-    trackingSafePreload(url, { dnsOnly, preserveTracking })
+    // Verwende tracking-sichere Preloading-Funktion (lazy import)
+    import('./tracking-safe-preloading.js').then(module => {
+      module.trackingSafePreload(url, { dnsOnly, preserveTracking })
+    }).catch(error => {
+      console.warn('Failed to load tracking-safe preloading:', error)
+      // Fallback zu Legacy-Verhalten
+      legacyPreloadAffiliateLink(url, options)
+    })
   } else {
     // Legacy-Verhalten (nicht empfohlen)
     console.warn('Using legacy preloading - may cause tracking issues')
@@ -82,8 +86,14 @@ export function openAffiliateLink(url, options = {}) {
   } = options
   
   if (trackingSafe) {
-    // Verwende tracking-sichere Link-Öffnung
-    trackingSafeOpenAffiliateLink(url, { target, noopener, noreferrer })
+    // Verwende tracking-sichere Link-Öffnung (lazy import)
+    import('./tracking-safe-preloading.js').then(module => {
+      module.trackingSafeOpenAffiliateLink(url, { target, noopener, noreferrer })
+    }).catch(error => {
+      console.warn('Failed to load tracking-safe link opening:', error)
+      // Fallback zu Legacy-Verhalten
+      legacyOpenAffiliateLink(url, options)
+    })
   } else {
     // Legacy-Verhalten
     legacyOpenAffiliateLink(url, options)
@@ -131,8 +141,14 @@ export function batchPreloadAffiliateLinks(urls, delay = 100, options = {}) {
   } = options
   
   if (trackingSafe) {
-    // Verwende tracking-sichere Batch-Preloading
-    trackingSafeBatchPreload(urls, delay, { dnsOnly, maxConcurrent })
+    // Verwende tracking-sichere Batch-Preloading (lazy import)
+    import('./tracking-safe-preloading.js').then(module => {
+      module.trackingSafeBatchPreload(urls, delay, { dnsOnly, maxConcurrent })
+    }).catch(error => {
+      console.warn('Failed to load tracking-safe batch preloading:', error)
+      // Fallback zu Legacy-Verhalten
+      legacyBatchPreloadAffiliateLinks(urls, delay, options)
+    })
   } else {
     // Legacy-Verhalten (nicht empfohlen)
     console.warn('Using legacy batch preloading - may cause tracking issues')

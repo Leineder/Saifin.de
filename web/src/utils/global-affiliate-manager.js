@@ -3,7 +3,6 @@
 
 import { batchPreloadAffiliateLinks, preloadAffiliateLink } from './affiliate-links.js'
 import { affiliatePerformanceMonitor } from './affiliate-performance.js'
-import { trackingSafeBatchPreload, trackingSafePreload } from './tracking-safe-preloading.js'
 
 /**
  * Globaler Affiliate-Link-Manager
@@ -72,7 +71,8 @@ export class GlobalAffiliateManager {
 
       if (criticalUrls.length > 0) {
         // Verwende tracking-sichere Batch-Preloading
-        trackingSafeBatchPreload(criticalUrls, 200, { 
+        batchPreloadAffiliateLinks(criticalUrls, 200, { 
+          trackingSafe: true,
           dnsOnly: true, 
           maxConcurrent: 2,
           preserveTracking: false 
@@ -116,7 +116,8 @@ export class GlobalAffiliateManager {
 
       if (secondaryUrls.length > 0) {
         // Verwende tracking-sichere Batch-Preloading
-        trackingSafeBatchPreload(secondaryUrls, 300, { 
+        batchPreloadAffiliateLinks(secondaryUrls, 300, { 
+          trackingSafe: true,
           dnsOnly: true, 
           maxConcurrent: 1,
           preserveTracking: false 
@@ -139,7 +140,8 @@ export class GlobalAffiliateManager {
 
     try {
       // Verwende tracking-sichere Preloading-Funktion
-      trackingSafePreload(url, { 
+      preloadAffiliateLink(url, { 
+        trackingSafe: true,
         dnsOnly: true, 
         preserveTracking: false 
       })
