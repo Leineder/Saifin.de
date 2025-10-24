@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { offers } from '../data/offers'
 import { trackCreditCardApply, trackFilterUsage } from '../utils/analytics'
 import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
-import { useAffiliatePerformance } from '../utils/affiliate-performance'
+import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const router = useRouter()
 
@@ -163,10 +163,10 @@ const goToApply = (offer) => {
     const affiliateHandler = createAffiliateLinkHandler(url, {
       onClick: () => {
         // Starte Performance-Messung
-        const measurementId = startMeasurement(url)
-        if (measurementId) {
-          collectWebVitals(measurementId)
-        }
+    const measurementId = startMeasurement(url)
+    if (measurementId) {
+      collectWebVitals(measurementId)
+    }
         
         // Vercel Analytics: Kreditkarten-Anfrage tracken
         trackCreditCardApply(offer.id, offer.title, url)

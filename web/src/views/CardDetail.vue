@@ -5,7 +5,7 @@ import { offers } from '../data/offers'
 import { trackCreditCardView, trackCreditCardApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
 import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
-import { useAffiliatePerformance } from '../utils/affiliate-performance'
+import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const route = useRoute()
 const router = useRouter()
@@ -49,7 +49,6 @@ const affiliateLinkHandler = computed(() => {
       })
     },
     onClick: () => {
-      // Starte Performance-Messung
       const measurementId = startMeasurement(url)
       if (measurementId) {
         collectWebVitals(measurementId)
