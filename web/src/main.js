@@ -17,6 +17,7 @@ import { mobileImageOptimizer } from './utils/image-optimization'
 import { backgroundPreloader } from './utils/background-preloader'
 import { connectionAwarePreloader } from './utils/connection-aware-preloading'
 import { predictivePreloader } from './utils/predictive-preloading'
+import { mobileFallbackManager } from './utils/mobile-fallback'
 
 const app = createApp(App)
 app.use(createPinia())
@@ -55,39 +56,51 @@ app.mount('#app')
 if (typeof window !== 'undefined') {
   // Nach kurzer Verzögerung, damit die App zuerst lädt
   setTimeout(() => {
-    initEngagementTracking()
-    // Initialisiere globalen Affiliate-Manager
-    globalAffiliateManager.initialize()
-    // Initialisiere Affiliate-Link-Prediction
-    console.log('Affiliate Link Predictor initialized:', affiliateLinkPredictor.getPredictionStats())
-    // Initialisiere Mobile-Optimierungen
-    console.log('Mobile Touch Optimizer initialized:', mobileTouchOptimizer.getTouchStats())
-    console.log('Mobile Image Optimizer initialized:', mobileImageOptimizer.getImageCacheStats())
-    // Initialisiere ULTRA-AGGRESSIVE Optimierungen
-    console.log('Background Preloader initialized:', backgroundPreloader.getStats())
-    console.log('Connection-Aware Preloader initialized:', connectionAwarePreloader.getConnectionStatus())
-    console.log('Predictive Preloader initialized:', predictivePreloader.getPredictionStats())
+    try {
+      initEngagementTracking()
+      // Initialisiere globalen Affiliate-Manager
+      globalAffiliateManager.initialize()
+      // Initialisiere Affiliate-Link-Prediction
+      console.log('Affiliate Link Predictor initialized:', affiliateLinkPredictor.getPredictionStats())
+      // Initialisiere Mobile-Optimierungen
+      console.log('Mobile Touch Optimizer initialized:', mobileTouchOptimizer.getTouchStats())
+      console.log('Mobile Image Optimizer initialized:', mobileImageOptimizer.getImageCacheStats())
+      // Initialisiere ULTRA-AGGRESSIVE Optimierungen
+      console.log('Background Preloader initialized:', backgroundPreloader.getStats())
+      console.log('Connection-Aware Preloader initialized:', connectionAwarePreloader.getConnectionStatus())
+      console.log('Predictive Preloader initialized:', predictivePreloader.getPredictionStats())
+      console.log('Mobile Fallback Manager status:', mobileFallbackManager.getFallbackStatus())
+    } catch (error) {
+      console.error('Error initializing optimizations:', error)
+    }
   }, 2000)
 }
 
 // Performance optimizations (heavily deferred and non-blocking)
 if (import.meta.env.PROD) {
   // Only load performance monitoring in production and after idle
+  const loadPerformanceMonitoring = () => {
+    Promise.all([
+      import('./vitals'),
+      import('./utils/performance')
+    ]).then(([vitals, perf]) => {
+      vitals.initWebVitals()
+      perf.initPerformanceMonitoring()
+      
+      // Further defer image optimization
+      setTimeout(() => {
+        perf.optimizeImageLoading()
+        perf.preloadCriticalResources()
+      }, 2000)
+    }).catch((error) => {
+      console.warn('Performance monitoring failed to load:', error)
+    })
+  }
+  
   if ('requestIdleCallback' in window) {
-    requestIdleCallback(() => {
-      Promise.all([
-        import('./vitals'),
-        import('./utils/performance')
-      ]).then(([vitals, perf]) => {
-        vitals.initWebVitals()
-        perf.initPerformanceMonitoring()
-        
-        // Further defer image optimization
-        setTimeout(() => {
-          perf.optimizeImageLoading()
-          perf.preloadCriticalResources()
-        }, 2000)
-      }).catch(() => {})
-    }, { timeout: 3000 })
+    requestIdleCallback(loadPerformanceMonitoring, { timeout: 3000 })
+  } else {
+    // Fallback für ältere Browser
+    setTimeout(loadPerformanceMonitoring, 3000)
   }
 }

@@ -21,6 +21,13 @@ export class BackgroundPreloader {
    */
   initializeWorker() {
     try {
+      // Prüfe Web Worker-Unterstützung
+      if (!('Worker' in window) || !('Blob' in window) || !('URL' in window)) {
+        console.warn('Web Workers not supported, falling back to direct preloading')
+        this.isEnabled = false
+        return
+      }
+      
       // Erstelle Web Worker für Background-Preloading
       const workerCode = `
         // Web Worker für Background-Preloading

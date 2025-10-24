@@ -48,7 +48,11 @@ export class MobileImageOptimizer {
    * Optimiert Lazy Loading für mobile Geräte
    */
   optimizeLazyLoading() {
-    if (!('IntersectionObserver' in window)) return
+    if (!('IntersectionObserver' in window)) {
+      console.warn('IntersectionObserver not supported, using fallback lazy loading')
+      this.fallbackLazyLoading()
+      return
+    }
     
     // Mobile-optimierte Intersection Observer
     const imageObserver = new IntersectionObserver((entries) => {
@@ -69,6 +73,28 @@ export class MobileImageOptimizer {
     document.querySelectorAll('.card-image').forEach(img => {
       imageObserver.observe(img)
     })
+  }
+
+  /**
+   * Fallback Lazy Loading für ältere Browser
+   */
+  fallbackLazyLoading() {
+    // Einfaches Scroll-basiertes Lazy Loading
+    const loadVisibleImages = () => {
+      const images = document.querySelectorAll('.card-image[data-src]')
+      images.forEach(img => {
+        const rect = img.getBoundingClientRect()
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+          this.loadImage(img)
+        }
+      })
+    }
+    
+    // Initial load
+    loadVisibleImages()
+    
+    // Load on scroll
+    window.addEventListener('scroll', loadVisibleImages, { passive: true })
   }
 
   /**
@@ -102,20 +128,25 @@ export class MobileImageOptimizer {
    */
   getOptimizedImageUrl(originalSrc) {
     if (this.isMobile) {
-      // Mobile-spezifische Optimierungen
-      const url = new URL(originalSrc, window.location.origin)
-      
-      // WebP-Format für mobile Geräte
-      if (this.supportsWebP()) {
-        url.searchParams.set('format', 'webp')
+      try {
+        // Mobile-spezifische Optimierungen
+        const url = new URL(originalSrc, window.location.origin)
+        
+        // WebP-Format für mobile Geräte
+        if (this.supportsWebP()) {
+          url.searchParams.set('format', 'webp')
+        }
+        
+        // Mobile-optimierte Größe
+        url.searchParams.set('w', '280') // Optimale Breite für mobile
+        url.searchParams.set('h', '176') // Optimale Höhe für mobile
+        url.searchParams.set('q', '85') // Qualität für mobile
+        
+        return url.toString()
+      } catch (error) {
+        console.warn('URL construction failed, using original src:', error)
+        return originalSrc
       }
-      
-      // Mobile-optimierte Größe
-      url.searchParams.set('w', '280') // Optimale Breite für mobile
-      url.searchParams.set('h', '176') // Optimale Höhe für mobile
-      url.searchParams.set('q', '85') // Qualität für mobile
-      
-      return url.toString()
     }
     
     return originalSrc
@@ -128,10 +159,15 @@ export class MobileImageOptimizer {
   supportsWebP() {
     if (typeof window === 'undefined') return false
     
-    const canvas = document.createElement('canvas')
-    canvas.width = 1
-    canvas.height = 1
-    return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0
+    try {
+      const canvas = document.createElement('canvas')
+      canvas.width = 1
+      canvas.height = 1
+      return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0
+    } catch (error) {
+      console.warn('WebP detection failed:', error)
+      return false
+    }
   }
 
   /**
@@ -165,8 +201,12 @@ export class MobileImageOptimizer {
       }
     }
     
-    // Speichere Cache-Strategien
-    localStorage.setItem('imageCacheStrategies', JSON.stringify(cacheStrategies))
+    // Speichere Cache-Strategien (mit Fallback)
+    try {
+      localStorage.setItem('imageCacheStrategies', JSON.stringify(cacheStrategies))
+    } catch (error) {
+      console.warn('localStorage not available:', error)
+    }
   }
 
   /**

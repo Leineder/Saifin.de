@@ -18,11 +18,15 @@ export function preloadAffiliateLink(url, options = {}) {
   
   // 1. DNS-Prefetch + Preconnect für sofortige Verbindung
   if (preconnect) {
-    const preconnectLink = document.createElement('link')
-    preconnectLink.rel = 'preconnect'
-    preconnectLink.href = new URL(url).origin
-    preconnectLink.crossOrigin = 'anonymous'
-    document.head.appendChild(preconnectLink)
+    try {
+      const preconnectLink = document.createElement('link')
+      preconnectLink.rel = 'preconnect'
+      preconnectLink.href = new URL(url).origin
+      preconnectLink.crossOrigin = 'anonymous'
+      document.head.appendChild(preconnectLink)
+    } catch (error) {
+      console.warn('Preconnect failed:', error)
+    }
   }
   
   // 2. Aggressives Prefetch mit höchster Priorität
@@ -65,6 +69,12 @@ export function preloadAffiliateLink(url, options = {}) {
  */
 function preloadWithIframe(url) {
   try {
+    // Prüfe iframe-Unterstützung
+    if (!document.createElement('iframe').contentWindow) {
+      console.warn('Iframe preloading not supported, skipping')
+      return
+    }
+    
     // Erstelle unsichtbares iframe für Preloading
     const iframe = document.createElement('iframe')
     iframe.style.display = 'none'

@@ -20,6 +20,13 @@ export class ConnectionAwarePreloader {
    * Initialisiert Connection-Aware Preloading
    */
   initializeConnectionAwarePreloading() {
+    // Prüfe Connection API-Unterstützung
+    if (!navigator.connection) {
+      console.warn('Connection API not supported, using fallback strategy')
+      this.isEnabled = false
+      return
+    }
+    
     this.connection = navigator.connection
     
     // Connection-Strategien definieren
