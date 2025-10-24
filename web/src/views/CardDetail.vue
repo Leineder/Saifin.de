@@ -186,6 +186,28 @@ const formatEuro = (n) => {
   if (typeof n === 'number') return `${n.toFixed(2).replace('.', ',')} €`
   return n
 }
+
+// Mobile Touch-Handler
+const handleTouchStart = (event) => {
+  // Preload beim Touch-Start
+  if (offer.value?.applyUrl && /^https?:\/\//i.test(offer.value.applyUrl)) {
+    preloadAffiliateLink(offer.value.applyUrl, { 
+      aggressive: true, 
+      preconnect: true, 
+      prefetch: true 
+    })
+  }
+}
+
+const handleTouchEnd = (event) => {
+  event.preventDefault()
+  event.stopPropagation()
+  
+  // Kleine Verzögerung für bessere UX
+  setTimeout(() => {
+    goApply()
+  }, 50)
+}
 </script>
 
 <template>
@@ -255,6 +277,8 @@ const formatEuro = (n) => {
           <button 
             class="p-button p-component w-full apply-cta" 
             @click="goApply"
+            @touchstart="handleTouchStart"
+            @touchend="handleTouchEnd"
             @mouseenter="affiliateLinkHandler?.onMouseEnter"
           >
             <span class="p-button-label">Jetzt beantragen</span>
@@ -268,6 +292,8 @@ const formatEuro = (n) => {
           <button 
             class="p-button w-full apply-cta" 
             @click="goApply"
+            @touchstart="handleTouchStart"
+            @touchend="handleTouchEnd"
             @mouseenter="affiliateLinkHandler?.onMouseEnter"
           >
             <span class="p-button-label">Jetzt beantragen</span>
@@ -407,5 +433,36 @@ const formatEuro = (n) => {
   background: transparent; /* Kein zusätzlicher Hintergrund */
   transform: none !important; /* Keine Skalierung - normale Größe */
   padding: 0 !important; /* Kein zusätzliches Padding */
+}
+
+/* Mobile Touch-Optimierungen für Apply-Buttons */
+@media (max-width: 768px) {
+  .apply-cta {
+    min-height: 48px !important;
+    min-width: 48px !important;
+    touch-action: manipulation !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-user-select: none !important;
+    user-select: none !important;
+    font-size: 16px !important;
+    line-height: 1.2 !important;
+    padding: 12px 16px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 10 !important;
+  }
+  
+  .apply-cta:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s ease !important;
+    background-color: var(--brand-accent) !important;
+    color: #062a3f !important;
+  }
+  
+  .apply-cta:hover {
+    background-color: var(--brand-accent) !important;
+    color: #062a3f !important;
+  }
 }
 </style>

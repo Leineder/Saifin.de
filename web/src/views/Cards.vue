@@ -292,34 +292,69 @@ function initializeMobileTouchOptimizations() {
   // Touch-Optimierungen für Apply-Buttons
   const applyButtons = document.querySelectorAll('.apply-cta')
   applyButtons.forEach(button => {
+    // Entferne alle bestehenden Event-Listener
+    button.removeEventListener('touchstart', handleTouchStart)
+    button.removeEventListener('touchend', handleTouchEnd)
+    button.removeEventListener('click', handleClick)
+    
     // Touch-Start für sofortiges Preloading
-    button.addEventListener('touchstart', (event) => {
-      const offer = event.target.closest('.offer-card')
-      if (offer) {
-        const offerData = offers.find(o => o.id === offer.dataset.offerId)
-        if (offerData?.applyUrl && /^https?:\/\//i.test(offerData.applyUrl)) {
-          // Sofortiges Preloading bei Touch-Start
-          preloadAffiliateLink(offerData.applyUrl, { 
-            aggressive: true, 
-            preconnect: true, 
-            prefetch: true 
-          })
-        }
-      }
-    }, { passive: true })
+    button.addEventListener('touchstart', handleTouchStart, { passive: true })
     
     // Touch-End für optimierte Navigation
-    button.addEventListener('touchend', (event) => {
-      event.preventDefault()
-      const offer = event.target.closest('.offer-card')
-      if (offer) {
-        const offerData = offers.find(o => o.id === offer.dataset.offerId)
-        if (offerData) {
-          goToApply(offerData)
-        }
-      }
-    }, { passive: false })
+    button.addEventListener('touchend', handleTouchEnd, { passive: false })
+    
+    // Fallback Click-Handler für mobile Geräte
+    button.addEventListener('click', handleClick, { passive: false })
   })
+  
+  function handleTouchStart(event) {
+    const offer = event.target.closest('.offer-card, .recommendation-card')
+    if (offer) {
+      const offerData = offers.find(o => o.id === offer.dataset.offerId)
+      if (offerData?.applyUrl && /^https?:\/\//i.test(offerData.applyUrl)) {
+        // Sofortiges Preloading bei Touch-Start
+        preloadAffiliateLink(offerData.applyUrl, { 
+          aggressive: true, 
+          preconnect: true, 
+          prefetch: true 
+        })
+      }
+    }
+  }
+  
+  function handleTouchEnd(event) {
+    event.preventDefault()
+    event.stopPropagation()
+    
+    const offer = event.target.closest('.offer-card, .recommendation-card')
+    if (offer) {
+      const offerData = offers.find(o => o.id === offer.dataset.offerId)
+      if (offerData) {
+        // Kleine Verzögerung für bessere UX
+        setTimeout(() => {
+          goToApply(offerData)
+        }, 50)
+      }
+    }
+  }
+  
+  function handleClick(event) {
+    // Verhindere doppelte Ausführung bei Touch-Geräten
+    if (event.type === 'click' && event.detail === 0) {
+      return // Wurde bereits durch Touch-End behandelt
+    }
+    
+    event.preventDefault()
+    event.stopPropagation()
+    
+    const offer = event.target.closest('.offer-card, .recommendation-card')
+    if (offer) {
+      const offerData = offers.find(o => o.id === offer.dataset.offerId)
+      if (offerData) {
+        goToApply(offerData)
+      }
+    }
+  }
 }
 </script>
 
@@ -387,6 +422,7 @@ function initializeMobileTouchOptimizations() {
             <div 
               v-for="offer in filteredOffers" 
               :key="offer.id" 
+              :data-offer-id="offer.id"
               class="offer-card surface-card border-round-xl card-accent"
               @click="goToDetail(offer)"
               style="cursor: pointer;"
@@ -497,6 +533,7 @@ function initializeMobileTouchOptimizations() {
               <div 
                 v-for="offer in topOffers" 
                 :key="offer.id" 
+                :data-offer-id="offer.id"
                 class="recommendation-card surface-card border-round-xl card-accent"
                 @click="goToDetail(offer)"
                 style="cursor: pointer;"
@@ -991,11 +1028,21 @@ function initializeMobileTouchOptimizations() {
     font-size: 16px !important;
     line-height: 1.2 !important;
     padding: 12px 16px !important;
+    cursor: pointer !important;
+    position: relative !important;
+    z-index: 10 !important;
   }
   
   .apply-cta:active {
     transform: scale(0.98) !important;
     transition: transform 0.1s ease !important;
+    background-color: var(--brand-accent) !important;
+    color: #062a3f !important;
+  }
+  
+  .apply-cta:hover {
+    background-color: var(--brand-accent) !important;
+    color: #062a3f !important;
   }
   
   /* OPTIMIERTE CARD-INTERAKTION */
