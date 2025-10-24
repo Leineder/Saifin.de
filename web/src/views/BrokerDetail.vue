@@ -5,14 +5,14 @@ import { brokers } from '../data/brokers'
 import { trackBrokerView, trackBrokerApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
 import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
-// import { useAffiliatePerformance } from '../utils/affiliate-performance' // Temporarily disabled for mobile compatibility
+import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const route = useRoute()
 const router = useRouter()
 const broker = computed(() => brokers.find(b => b.slug === route.params.slug))
 
 // Performance-Monitoring für Affiliate-Links
-// const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance(broker.value?.id || 'unknown') // Temporarily disabled
+const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance(broker.value?.id || 'unknown')
 
 // Redirect if broker not found and track analytics
 onMounted(() => {

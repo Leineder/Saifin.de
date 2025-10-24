@@ -5,7 +5,7 @@ import { savingsOffers } from '../data/savings'
 import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
 import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
-import { useAffiliatePerformance } from '../utils/affiliate-performance'
+import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const route = useRoute()
 const router = useRouter()

@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { useRouter } from 'vue-router'
 import { savingsOffers, recommendedSavings } from '../data/savings'
 import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
-import { useAffiliatePerformance } from '../utils/affiliate-performance'
+import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const router = useRouter()
 

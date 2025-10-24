@@ -120,19 +120,35 @@ export function openAffiliateLink(url, options = {}) {
     preloadAffiliateLink(url)
   }
   
-  // Öffne Link mit optimierten Attributen
-  const link = document.createElement('a')
-  link.href = url
-  link.target = target
-  
-  if (noopener) link.rel = 'noopener'
-  if (noreferrer) link.rel += ' noreferrer'
-  
-  // Füge temporär zum DOM hinzu und klicke
-  link.style.display = 'none'
-  document.body.appendChild(link)
-  link.click()
-  document.body.removeChild(link)
+  try {
+    // Mobile-kompatible Link-Öffnung
+    if (window.open) {
+      // Versuche window.open zuerst (bessere mobile Kompatibilität)
+      const newWindow = window.open(url, target, 'noopener,noreferrer')
+      if (newWindow) {
+        newWindow.focus()
+        return
+      }
+    }
+    
+    // Fallback: DOM-Link-Methode
+    const link = document.createElement('a')
+    link.href = url
+    link.target = target
+    
+    if (noopener) link.rel = 'noopener'
+    if (noreferrer) link.rel += ' noreferrer'
+    
+    // Füge temporär zum DOM hinzu und klicke
+    link.style.display = 'none'
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  } catch (error) {
+    console.warn('Failed to open affiliate link:', error)
+    // Letzter Fallback: Direkte Navigation
+    window.location.href = url
+  }
 }
 
 /**
