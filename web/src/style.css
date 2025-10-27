@@ -45,6 +45,12 @@
 a { color: var(--link-color); text-decoration: none; }
 a:hover { color: var(--link-color); opacity: .9; }
 
+/* Essential Flexbox Utilities */
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-1 { flex: 1; }
+.min-h-screen { min-height: 100vh; }
+
 /* Body-Reset */
 body {
   margin: 0;

@@ -1,31 +1,29 @@
 <template>
-  <div class="app-root min-h-screen flex flex-column">
+  <div class="app-root">
     <!-- Hauptinhalt -->
     <header class="site-header">
       <div class="container header-inner">
-        <router-link to="/" class="brand" aria-label="Startseite" @click="closeMenu">
+        <router-link to="/" class="brand" aria-label="Startseite">
           <span class="brand-mark">
             <img class="brand-logo-img" src="/images/saifin_logo_vectorized_final.svg" alt="Saifin Logo" width="80" height="80" draggable="false" loading="eager" fetchpriority="high" />
           </span>
         </router-link>
 
-        <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten" aria-expanded="isMenuOpen">
-          <i class="pi pi-bars"></i>
+        <button class="nav-toggle" @click="isMenuOpen = !isMenuOpen" aria-label="Menü umschalten">
+          ☰
         </button>
 
-        <nav :class="['site-nav', { 'is-open': isMenuOpen }]" :aria-hidden="!isMenuOpen && !isDesktop">
-          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('cards')" rel="prefetch">Kreditkarten</router-link>
-          <router-link to="/broker" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('brokers')" rel="prefetch">Broker</router-link>
-          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('savings')" rel="prefetch">Tagesgeldkonto</router-link>
-          <router-link to="/ratgeber" class="nav-link" @click="closeMenu" @mouseenter="preloadRoute('guide')" rel="prefetch">Ratgeber</router-link>
+        <nav :class="['site-nav', { 'is-open': isMenuOpen }]">
+          <router-link to="/kreditkarten" class="nav-link" @click="closeMenu">Kreditkarten</router-link>
+          <router-link to="/broker" class="nav-link" @click="closeMenu">Broker</router-link>
+          <router-link to="/tagesgeld" class="nav-link" @click="closeMenu">Tagesgeldkonto</router-link>
+          <router-link to="/ratgeber" class="nav-link" @click="closeMenu">Ratgeber</router-link>
         </nav>
       </div>
     </header>
 
-    <main class="flex-1">
-      <ErrorBoundary>
-        <router-view />
-      </ErrorBoundary>
+    <main class="main-content">
+      <router-view />
     </main>
 
     <footer class="site-footer">
@@ -41,49 +39,33 @@
         <router-link to="/kontakt" class="footer-link">Kontakt</router-link>
       </div>
     </footer>
-    
-    <!-- Speed Insights für Performance-Monitoring -->
-    <SpeedInsights />
-    
-    <!-- Vercel Analytics -->
-    <VercelAnalytics />
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from 'vue'
-import SpeedInsights from './components/SpeedInsights.vue'
-import VercelAnalytics from './components/VercelAnalytics.vue'
-import ErrorBoundary from './components/ErrorBoundary.vue'
-import { preloadRoute } from './utils/navigation'
+import { ref, onMounted } from 'vue'
 
 const isMenuOpen = ref(false)
-const isDesktop = ref(false)
 
 const closeMenu = () => { isMenuOpen.value = false }
 
-
 onMounted(() => {
-  // Bereinige alle Passwort-bezogenen localStorage-Daten (non-blocking)
-  requestAnimationFrame(() => {
-    try {
-      localStorage.removeItem('siteAuthenticated')
-      localStorage.removeItem('password')
-      localStorage.removeItem('isAuthenticated')
-    } catch (_) {}
-  })
-  
-  // Setup media query for navigation visibility
-  const mediaQuery = window.matchMedia('(min-width: 768px)')
-  const updateDesktop = () => { isDesktop.value = mediaQuery.matches }
-  mediaQuery.addEventListener('change', updateDesktop)
-  updateDesktop()
+  console.log('App mounted successfully')
 })
 </script>
 
 <style>
 /* Layout helpers */
-.app-root { background: var(--background); color: var(--text); }
+.app-root { 
+  background: var(--background); 
+  color: var(--text); 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.main-content {
+  flex: 1;
+}
 .container { max-width: 1200px; margin: 0 auto; padding: 0 16px; }
 
 /* Mobile Optimierung für Container */

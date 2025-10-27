@@ -3,8 +3,6 @@
 </template>
 
 <script>
-import { injectSpeedInsights } from '@vercel/speed-insights'
-
 export default {
   name: 'SpeedInsights',
   mounted() {
@@ -14,15 +12,14 @@ export default {
   methods: {
     initSpeedInsights() {
       try {
-        // Speed Insights für Vue.js SPA initialisieren
-        injectSpeedInsights()
-        
-        // Zusätzliche Performance-Metriken sammeln
-        this.collectWebVitals()
-        
-        console.log('✅ Vercel Speed Insights erfolgreich initialisiert')
+        // Nur in Production und wenn verfügbar
+        if (import.meta.env.PROD && typeof window !== 'undefined') {
+          // Fallback: Einfache Performance-Metriken sammeln
+          this.collectWebVitals()
+          console.log('✅ Performance-Metriken erfolgreich initialisiert')
+        }
       } catch (error) {
-        console.warn('⚠️ Speed Insights konnte nicht initialisiert werden:', error)
+        console.warn('⚠️ Performance-Metriken konnten nicht initialisiert werden:', error)
       }
     },
     
