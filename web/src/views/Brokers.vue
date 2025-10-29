@@ -220,7 +220,7 @@ onBeforeUnmount(() => {
         </aside>
 
         <!-- Content -->
-        <main class="content">
+        <main class="content" style="min-width: 0;">
            <!-- Mobile Filter Toggle -->
            <div class="mobile-filter-toggle">
              <button class="p-button apply-cta" @click="showFilters = !showFilters">
@@ -261,8 +261,9 @@ onBeforeUnmount(() => {
               <label class="checkbox"><input type="checkbox" v-model="filterSubscription" /> <span>Pauschal-/Abo-Modell</span></label>
             </div>
           </div>
-          <div class="section-eyebrow">Angebote</div>
-          <h1 class="section-title text-2xl md:text-3xl mb-3">Broker im Vergleich</h1>
+          
+          <h1 class="section-title text-2xl md:text-3xl mb-1" style="margin: 0 0 4px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; color: var(--text); padding-top: 0;">Top 10 Broker 2025</h1>
+          <p class="last-updated" style="font-size: 0.75rem; color: var(--muted-text); margin: 0.25rem 0 0.5rem 0; font-weight: 400;">zuletzt aktualisiert am 13. Oktober 2025</p>
 
           <div class="offers-section">
             <div 
@@ -270,8 +271,15 @@ onBeforeUnmount(() => {
               :key="b.id || b.slug" 
               class="offer-card surface-card border-round-xl card-accent"
               @click="goToDetail(b)"
-              style="cursor: pointer;"
+              style="cursor: pointer; position: relative;"
             >
+              <!-- Testsieger Badge -->
+              <div v-if="b.isTestsieger" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                <div class="bg-yellow-400 text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-md flex items-center justify-center" style="background-color: #facc15 !important; color: #1f2937 !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.0625rem 0.75rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important; display: flex !important; align-items: center !important; justify-content: center !important; min-height: 1rem !important; line-height: 1rem !important;">
+                  TESTSIEGER
+                </div>
+              </div>
+
               <div class="offer-content">
                 <div class="card-image-container">
                   <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
@@ -300,6 +308,7 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </div>
+          </main>
 
           <!-- Empfehlungen -->
           <div class="recommendations-section">
@@ -310,8 +319,15 @@ onBeforeUnmount(() => {
                 :key="b.slug" 
                 class="recommendation-card surface-card border-round-xl card-accent"
                 @click="goToDetail(b)"
-                style="cursor: pointer;"
+                style="cursor: pointer; position: relative;"
               >
+                <!-- Testsieger Badge -->
+                <div v-if="b.isTestsieger" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
+                  <div class="bg-yellow-400 text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-md flex items-center justify-center" style="background-color: #facc15 !important; color: #1f2937 !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.0625rem 0.75rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important; display: flex !important; align-items: center !important; justify-content: center !important; min-height: 1rem !important; line-height: 1rem !important;">
+                    TESTSIEGER
+                  </div>
+                </div>
+
                 <div class="recommendation-content">
                   <div class="card-image-container">
                     <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
@@ -424,9 +440,17 @@ onBeforeUnmount(() => {
 .filter-input { padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.375rem; background: var(--surface); color: var(--text); font-size: 0.875rem; }
 .checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text); }
 
+.last-updated {
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  margin: 0.25rem 0 0.5rem 0;
+  font-weight: 400;
+}
+
 .offers-section { margin-bottom: 3rem; }
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
 .offer-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
+
 .offer-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .card-image-container { flex-shrink: 0; width: 120px; height: 75px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid var(--border); border-radius: 1rem; overflow: hidden; }
 .card-image { width: 100%; height: 100%; object-fit: contain; background: #fff; padding: 6px; border-radius: 1rem; border: none; }

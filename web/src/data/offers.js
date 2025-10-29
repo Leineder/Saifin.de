@@ -27,6 +27,34 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
   },
   {
+    id: 'instabank-kreditkarte',
+    slug: 'instabank-kreditkarte',
+    title: 'Instabank Kreditkarte',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Niedrigster Zinssatz: 18,9 % p.a.',
+      'Kreditlimit bis 25.000 €',
+      '10%-Club Mitgliedschaft inklusive'
+    ],
+    image: '/images/creditcards/Instabank_card_horizontal_11zon.webp',
+    annualFee: 0,
+    foreignFee: '2,49 %',
+    cardType: 'Visa – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      foreignCurrency: '2,49 % Auslandseinsatz',
+      cashWithdrawal: '2 % (max. 50 € pro Abhebung)',
+      creditLimit: 'Bis 25.000 €*',
+      interest: 'Sollzins 18,9 % p.a., eff. 20,63 % p.a.',
+      notes: 'Sofort verfügbar nach Antrag; Geldüberweisung von Kreditkarte möglich; App verfügbar; Keine SCHUFA-Prüfung (Experian-Bonitätsprüfung)',
+      benefits: '10%-Club: Monatliche Rabatte; Sofortige virtuelle Karte verfügbar'
+    },
+    disclaimer: '*Bonitätsabhängig; Mindestalter 23 Jahre; Wohnsitz in Deutschland erforderlich.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
+  },
+  {
     id: 'tf-bank-mastercard-gold',
     slug: 'tf-bank-mastercard-gold',
     title: 'TF Bank Mastercard Gold',

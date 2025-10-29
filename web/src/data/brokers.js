@@ -4,6 +4,7 @@ export const brokers = [
     slug: 'captrader',
     name: 'CapTrader',
     image: '/images/brokers/captrader_cover_11zon.webp',
+    isTestsieger: true,
     highlights: [
       'Zugang zu >150 Börsen, >1,2 Mio. Wertpapieren',
       'Plattformen: Trader Workstation (TWS), Desktop, App',
@@ -21,6 +22,26 @@ export const brokers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C46922232T'
   },
   {
+    id: 'traders-place',
+    slug: 'traders-place',
+    name: 'Traders Place',
+    image: '/images/brokers/traders-place-logo.webp',
+    highlights: [
+      '0 € pro Trade für Aktien, ETFs, Fonds und Anleihen über gettex/Baader',
+      '0 € pro Trade für Derivate über Premium Partner (BNP Paribas, Société Générale, Morgan Stanley, Vontobel, UniCredit)',
+      '3.250 kostenlose Sparpläne in ETFs, Aktien und Fonds',
+      '70 € Neukunden-Bonus (nur noch kurze Zeit)'
+    ],
+    pricing: { orderCostsDE: '0 € pro Trade ab 500 € Ordervolumen; < 500 €: 0,95 € (gettex) bzw. 3 € (Derivate)' },
+    features: { 
+      productRange: 'Aktien, ETFs, Fonds, Anleihen, Derivate, Krypto (58 Währungen)',
+      etfPlans: true
+    },
+    regulation: 'Baader Bank AG (Depotführung)',
+    notes: 'Rund 40 deutsche & internationale Handelsplätze; 1,75% Zinsen p.a. (variabel); Smartphone-App verfügbar; Weltweiter Handel möglich',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C4838113108T'
+  },
+  {
     id: 'smartbroker-plus',
     slug: 'smartbroker-plus',
     name: 'SMARTBROKER+',
@@ -34,7 +55,7 @@ export const brokers = [
     pricing: { orderCostsDE: 'gettex 0 € ab 500 €, sonst 1 €; Inlandsplätze 4 € Flat; Xetra ab 4 € + Börsengebühren' },
     features: { etfPlans: true, productRange: 'Aktien, ETFs, Fonds, Anleihen, Derivate' },
     regulation: 'Baader Bank AG (Depot/Konto)',
-    notes: 'Migration alter Smartbroker-Depots (DAB/BNP) zu Baader seit Ende 2023; neues Markenauftritt „SMARTBROKER+“.',
+    notes: 'Migration alter Smartbroker-Depots (DAB/BNP) zu Baader seit Ende 2023; neues Markenauftritt „SMARTBROKER+".',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C296855636T'
   },
   {
@@ -82,6 +103,26 @@ export const brokers = [
     regulation: 'Baader Bank',
     notes: 'Nur ein Market-Maker-Handelsplatz (gettex) – Platzwahl eingeschränkt; gemischte Erfahrungen',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C372273516T'
+  },
+  {
+    id: 'tradegate-direct',
+    slug: 'tradegate-direct',
+    name: 'Tradegate Direct',
+    image: '/images/brokers/Tradegate.direct.webp',
+    highlights: [
+      'Direkter Handel über Tradegate Exchange',
+      'Verlängerte Handelszeiten (8:00-22:00 Uhr)',
+      'Hohe Liquidität und enge Spreads',
+      'Kostenlose Depotführung'
+    ],
+    pricing: { orderCostsDE: 'Handelsgebühren nach Tradegate-Tarif; Depotführung kostenlos' },
+    features: { 
+      productRange: 'Aktien, ETFs, Anleihen, Zertifikate, Optionsscheine',
+      etfPlans: false
+    },
+    regulation: 'Tradegate Exchange (Xetra)',
+    notes: 'Direkter Zugang zur Tradegate Exchange; Benutzerfreundliche Handelsplattform; Schnelle Orderausführung; Keine Mindestanlage erforderlich',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5092119264T'
   },
   {
     id: 'fonds-super-markt',
