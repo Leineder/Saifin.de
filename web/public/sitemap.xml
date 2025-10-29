@@ -46,6 +46,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.saifin.de/kreditkarten/instabank-kreditkarte</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.saifin.de/kreditkarten/tf-bank-mastercard-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -86,6 +91,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.saifin.de/broker/traders-place</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.saifin.de/broker/smartbroker-plus</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
@@ -102,6 +112,11 @@
   </url>
   <url>
     <loc>https://www.saifin.de/broker/finanzen-net-zero</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/broker/tradegate-direct</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

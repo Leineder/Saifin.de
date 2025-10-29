@@ -27,34 +27,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
   },
   {
-    id: 'instabank-kreditkarte',
-    slug: 'instabank-kreditkarte',
-    title: 'Instabank Kreditkarte',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Niedrigster Zinssatz: 18,9 % p.a.',
-      'Kreditlimit bis 25.000 €',
-      '10%-Club Mitgliedschaft inklusive'
-    ],
-    image: '/images/creditcards/Instabank_card_horizontal_11zon.webp',
-    annualFee: 0,
-    foreignFee: '2,49 %',
-    cardType: 'Visa – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay']
-    },
-    details: {
-      foreignCurrency: '2,49 % Auslandseinsatz',
-      cashWithdrawal: '2 % (max. 50 € pro Abhebung)',
-      creditLimit: 'Bis 25.000 €*',
-      interest: 'Sollzins 18,9 % p.a., eff. 20,63 % p.a.',
-      notes: 'Sofort verfügbar nach Antrag; Geldüberweisung von Kreditkarte möglich; App verfügbar; Keine SCHUFA-Prüfung (Experian-Bonitätsprüfung)',
-      benefits: '10%-Club: Monatliche Rabatte; Sofortige virtuelle Karte verfügbar'
-    },
-    disclaimer: '*Bonitätsabhängig; Mindestalter 23 Jahre; Wohnsitz in Deutschland erforderlich.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
-  },
-  {
     id: 'tf-bank-mastercard-gold',
     slug: 'tf-bank-mastercard-gold',
     title: 'TF Bank Mastercard Gold',
@@ -77,6 +49,32 @@ export const offers = [
     },
     disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
+  },
+  {
+    id: 'santander-bestcard-basic',
+    slug: 'santander-bestcard-basic',
+    title: 'Santander BestCard Basic (Visa)',
+    bullets: [
+      '0 € Jahresgebühr',
+      '4×/Monat weltweit kostenlos Bargeld',
+      '1 % Tankrabatt (bis 200 €/Monat)',
+      'Apple Pay/Google Pay/Garmin Pay'
+    ],
+    image: '/images/creditcards/Santander_BestCardBasic_2023_compressed.webp',
+    annualFee: 0,
+    foreignFee: '1,85 %',
+    cardType: 'VISA – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay']
+    },
+    details: {
+      foreignCurrency: '1,85 % Auslandseinsatz',
+      cashWithdrawal: '4×/Monat weltweit kostenlos; danach Entgelt laut Preisverzeichnis',
+      interest: 'Teilzahlung voreingestellt, eff. ca. 16,43 % p.a.',
+      notes: 'Abrechnung nur über Santander-Girokonto möglich',
+      benefits: '5 % Reiserabatt über Partner Urlaubsplus'
+    },
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
   },
   {
     id: 'netkredit24-mastercard',
@@ -128,32 +126,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328118428T'
   },
   {
-    id: 'santander-bestcard-basic',
-    slug: 'santander-bestcard-basic',
-    title: 'Santander BestCard Basic (Visa)',
-    bullets: [
-      '0 € Jahresgebühr',
-      '4×/Monat weltweit kostenlos Bargeld',
-      '1 % Tankrabatt (bis 200 €/Monat)',
-      'Apple Pay/Google Pay/Garmin Pay'
-    ],
-    image: '/images/creditcards/Santander_BestCardBasic_2023_compressed.webp',
-    annualFee: 0,
-    foreignFee: '1,85 %',
-    cardType: 'VISA – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay']
-    },
-    details: {
-      foreignCurrency: '1,85 % Auslandseinsatz',
-      cashWithdrawal: '4×/Monat weltweit kostenlos; danach Entgelt laut Preisverzeichnis',
-      interest: 'Teilzahlung voreingestellt, eff. ca. 16,43 % p.a.',
-      notes: 'Abrechnung nur über Santander-Girokonto möglich',
-      benefits: '5 % Reiserabatt über Partner Urlaubsplus'
-    },
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
-  },
-  {
     id: 'consors-finanz-mastercard',
     slug: 'consors-finanz-mastercard',
     title: 'Consors Finanz Mastercard',
@@ -201,6 +173,34 @@ export const offers = [
     },
     disclaimer: '*Konditionen abhängig vom jeweiligen Kontomodell/Preisverzeichnis.',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C10722509B'
+  },
+  {
+    id: 'instabank-kreditkarte',
+    slug: 'instabank-kreditkarte',
+    title: 'Instabank Kreditkarte',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Niedrigster Zinssatz: 18,9 % p.a.',
+      'Kreditlimit bis 25.000 €',
+      '10%-Club Mitgliedschaft inklusive'
+    ],
+    image: '/images/creditcards/Instabank_card_horizontal_11zon.webp',
+    annualFee: 0,
+    foreignFee: '2,49 %',
+    cardType: 'Visa – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      foreignCurrency: '2,49 % Auslandseinsatz',
+      cashWithdrawal: '2 % (max. 50 € pro Abhebung)',
+      creditLimit: 'Bis 25.000 €*',
+      interest: 'Sollzins 18,9 % p.a., eff. 20,63 % p.a.',
+      notes: 'Sofort verfügbar nach Antrag; Geldüberweisung von Kreditkarte möglich; App verfügbar; Keine SCHUFA-Prüfung (Experian-Bonitätsprüfung)',
+      benefits: '10%-Club: Monatliche Rabatte; Sofortige virtuelle Karte verfügbar'
+    },
+    disclaimer: '*Bonitätsabhängig; Mindestalter 23 Jahre; Wohnsitz in Deutschland erforderlich.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
   },
   {
     id: 'extra-karte-mastercard',
