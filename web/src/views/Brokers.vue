@@ -357,8 +357,6 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </div>
-
-        </main>
       </div>
       <!-- Volle Breite: Guide & FAQ außerhalb des 2-Spalten-Layouts -->
       <div class="container">
