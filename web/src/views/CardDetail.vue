@@ -215,7 +215,7 @@ const handleTouchEnd = (event) => {
     <div class="container detail-grid">
       <div class="media">
         <div class="card-image-container surface-card border-round-xl card-accent">
-          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" :class="['card-image', offer.id]" loading="lazy" decoding="async">
+          <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="600" height="378" fetchpriority="high">
         </div>
       </div>
       <div class="content">

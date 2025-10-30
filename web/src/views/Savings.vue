@@ -423,6 +423,12 @@ function goToApply(o) {
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0; }
 .guide-title { font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; color: var(--subtle-text); margin: 0 0 6px; }
 
+/* Offscreen-Content schneller rendern, ohne Layoutsprünge zu verursachen */
+.guide-section, .faq {
+  content-visibility: auto;
+  contain-intrinsic-size: 1000px;
+}
+
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
   .sidebar-card { position: static; }

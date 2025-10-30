@@ -111,7 +111,7 @@ const goApply = () => {
     <div class="container detail-grid">
       <div class="media">
         <div class="logo-frame">
-          <img :src="offer.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${offer.title} – Bild`" class="detail-logo" loading="lazy" />
+          <img :src="offer.image || '/images/saifin_logo_vectorized_final.svg'" :alt="`${offer.title} – Bild`" class="detail-logo" loading="lazy" decoding="async" width="720" height="240" />
         </div>
       </div>
       <div class="content">

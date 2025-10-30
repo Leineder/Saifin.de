@@ -532,7 +532,7 @@ onBeforeUnmount(() => {
 .recommendation-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
 .recommendation-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 
-.guide-section { margin-top: 3rem; }
+.guide-section { margin-top: 3rem; content-visibility: auto; contain-intrinsic-size: 1000px; }
 .guide-header { margin-bottom: 1rem; }
 .guide-subtitle { color: var(--muted-text); }
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
@@ -543,7 +543,7 @@ onBeforeUnmount(() => {
 .steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps-card { margin-top: 1rem; }
 
-.faq-section { margin-top: 2rem; }
+.faq-section { margin-top: 2rem; content-visibility: auto; contain-intrinsic-size: 800px; }
 .faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
 .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; }
 .faq-item summary { cursor: pointer; font-weight: 600; color: var(--text); list-style: none; }

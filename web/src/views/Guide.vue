@@ -146,7 +146,7 @@ function transformContent(article) {
 .more-cat { font-size: .7rem; text-transform: uppercase; letter-spacing: .12em; color: var(--subtle-text); }
 .more-title { font-weight: 700; color: var(--text); }
 
-.articles { margin-top: 18px; display: flex; flex-direction: column; gap: 16px; }
+.articles { margin-top: 18px; display: flex; flex-direction: column; gap: 16px; content-visibility: auto; contain-intrinsic-size: 1200px; }
 .article { overflow: hidden; }
 .article-hero { width: 100%; height: 260px; object-fit: cover; display: block; border-bottom: 1px solid var(--border); }
 .article-body { padding: 12px; }

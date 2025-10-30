@@ -356,6 +356,9 @@ onMounted(() => {
 @media (max-width: 767px) { .p-button { font-size: 1rem; } }
 .hero-cta.p-button .p-button-label { font-weight: 700; letter-spacing: .01em; }
 
+/* Sichtbarkeits-Optimierung für Offscreen-Sektionen */
+.cv-auto { content-visibility: auto; contain-intrinsic-size: 1000px; }
+
 /* Dark Mode entfernt - Website läuft permanent im Light Mode */
 .stars { 
   display: flex; 
