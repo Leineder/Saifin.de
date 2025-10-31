@@ -7,11 +7,11 @@ import { savingsOffers } from '../data/savings'
 import { batchPreloadAffiliateLinks, instantPreloadCriticalLinks } from '../utils/affiliate-links'
 
 const testimonials = [
-  { name: 'Sarah Müller', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200', rating: 5,
+  { name: 'Sarah Müller', avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop&crop=face', rating: 5,
     text: 'Super übersichtliche Darstellung aller Konditionen. Konnte direkt die beste Karte für mich finden!' },
-  { name: 'Michael Schmidt', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200', rating: 4,
+  { name: 'Michael Schmidt', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop&crop=face', rating: 4,
     text: 'Die Vergleichsfunktion ist sehr praktisch. Hat mir bei der Entscheidung für einen neuen Broker geholfen.' },
-  { name: 'Lisa Wagner', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200', rating: 5,
+  { name: 'Lisa Wagner', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop&crop=face', rating: 5,
     text: 'Endlich eine Seite, die wirklich unabhängig vergleicht. Tolle Auswahl an Tagesgeldkonten!' }
 ]
 
