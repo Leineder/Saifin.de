@@ -7,12 +7,12 @@ import { savingsOffers } from '../data/savings'
 import { batchPreloadAffiliateLinks, instantPreloadCriticalLinks } from '../utils/affiliate-links'
 
 const testimonials = [
-  { name: 'Max Kowal', avatar: 'https://images.unsplash.com/photo-1525253013412-55c1a69a5738?q=80&w=200', rating: 5,
-    text: 'Habe heute das erste Mal mit meiner neuen Kreditkarte bezahlt, richtig gut.' },
-  { name: 'Julia Huber', avatar: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=200', rating: 4,
-    text: 'War echt hilfreich für die Suche nach einem Girokonto. Hatte schnell einen guten Überblick.' },
-  { name: 'Thomas B.', avatar: 'https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=200', rating: 5,
-    text: 'Die Seite ist top! Ich habe sofort eine passende Kreditkarte gefunden.' }
+  { name: 'Sarah Müller', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200', rating: 5,
+    text: 'Super übersichtliche Darstellung aller Konditionen. Konnte direkt die beste Karte für mich finden!' },
+  { name: 'Michael Schmidt', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200', rating: 4,
+    text: 'Die Vergleichsfunktion ist sehr praktisch. Hat mir bei der Entscheidung für einen neuen Broker geholfen.' },
+  { name: 'Lisa Wagner', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=200', rating: 5,
+    text: 'Endlich eine Seite, die wirklich unabhängig vergleicht. Tolle Auswahl an Tagesgeldkonten!' }
 ]
 
 const topOffers = computed(() => offers.slice(0, 2))
