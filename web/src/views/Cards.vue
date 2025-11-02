@@ -450,7 +450,8 @@ function initializeMobileTouchOptimizations() {
                   <div class="features-list">
                     <template v-for="(feature, index) in offer.bullets" :key="index">
                       <div v-if="index < 4 || feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-item">
-                        <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
+                        <span v-if="feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-icon-red">✗</span>
+                        <i v-else class="pi pi-check"></i>
                         <span>{{ feature }}</span>
                       </div>
                     </template>
@@ -555,7 +556,8 @@ function initializeMobileTouchOptimizations() {
                     <div class="features-list">
                       <template v-for="(feature, index) in offer.bullets" :key="index">
                         <div v-if="index < 4 || feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-item">
-                          <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
+                          <span v-if="feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-icon-red">✗</span>
+                          <i v-else class="pi pi-check"></i>
                           <span>{{ feature }}</span>
                         </div>
                       </template>
@@ -837,6 +839,14 @@ function initializeMobileTouchOptimizations() {
 .feature-item i {
   color: #34d399;
   font-size: 0.75rem;
+}
+
+.feature-icon-red {
+  color: #ef4444;
+  font-size: 0.75rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .annual-fee { font-size: 1.125rem; font-weight: 700; color: var(--brand-accent); }
