@@ -182,7 +182,8 @@ export const offers = [
       '0 € Jahresgebühr',
       'Niedrigster Zinssatz: 18,9 % p.a.',
       'Kreditlimit bis 25.000 €',
-      '10%-Club Mitgliedschaft inklusive'
+      '10%-Club Mitgliedschaft inklusive',
+      'Bei Schufa Einträgen Ablehnung'
     ],
     image: '/images/creditcards/Instabank_card_horizontal_11zon.webp',
     annualFee: 0,

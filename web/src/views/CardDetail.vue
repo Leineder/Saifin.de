@@ -223,7 +223,11 @@ const handleTouchEnd = (event) => {
         <h1 class="section-title text-3xl mb-2">{{ offer.title }}</h1>
         <div class="bullets surface-card border-round-lg p-3 card-accent mb-3">
           <ul class="pl-3 m-0">
-            <li v-for="b in offer.bullets" :key="b" class="text-700">{{ b }}</li>
+            <li v-for="b in offer.bullets" :key="b" :class="[b.includes('Bei Schufa Einträgen Ablehnung') || b.includes('Ablehnung bei SCHUFA') ? 'text-red-600' : 'text-700']" :style="[b.includes('Bei Schufa Einträgen Ablehnung') || b.includes('Ablehnung bei SCHUFA') ? { listStyleType: 'none', position: 'relative', paddingLeft: '1.5rem' } : {}]">
+              <span v-if="b.includes('Bei Schufa Einträgen Ablehnung') || b.includes('Ablehnung bei SCHUFA')" :style="{ position: 'absolute', left: '0', color: '#ef4444' }">✗</span>
+              <span v-else :style="{ position: 'absolute', left: '0', color: '#34d399' }">✓</span>
+              {{ b }}
+            </li>
           </ul>
         </div>
         <div class="facts-grid mb-3">

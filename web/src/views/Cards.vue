@@ -449,8 +449,8 @@ function initializeMobileTouchOptimizations() {
                   </div>
                   <div class="features-list">
                     <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                      <i class="pi pi-check"></i>
-                      <span>{{ feature }}</span>
+                      <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
+                      <span :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]">{{ feature }}</span>
                     </div>
                   </div>
                   <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
@@ -552,8 +552,8 @@ function initializeMobileTouchOptimizations() {
                     </div>
                     <div class="features-list">
                       <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                        <i class="pi pi-check"></i>
-                        <span>{{ feature }}</span>
+                        <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
+                        <span :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]">{{ feature }}</span>
                       </div>
                     </div>
                     <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>

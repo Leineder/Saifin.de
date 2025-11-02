@@ -47,19 +47,14 @@
             
             <!-- Hauptfeatures -->
             <div class="space-y-2 mb-4">
-              <div v-for="bullet in card.bullets.slice(0, 3)" :key="bullet" class="flex items-start">
-                <div class="flex-shrink-0 w-4 h-4 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
-                  <span class="text-green-600 text-sm">✓</span>
-                </div>
-                <span class="text-gray-700 text-sm">{{ bullet }}</span>
-              </div>
-              
-              <!-- Negative Bedingung (falls vorhanden) -->
-              <div v-if="card.specialConditions && card.specialConditions.schufaCheck === 'Ablehnung bei SCHUFA-Einträgen'" class="flex items-start">
-                <div class="flex-shrink-0 w-4 h-4 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+              <div v-for="bullet in card.bullets" :key="bullet" class="flex items-start">
+                <div v-if="bullet.includes('Bei Schufa Einträgen Ablehnung') || bullet.includes('Ablehnung bei SCHUFA')" class="flex-shrink-0 w-4 h-4 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
                   <span class="text-red-600 text-sm">✗</span>
                 </div>
-                <span class="text-red-600 text-sm">Ablehnung bei SCHUFA-Einträgen</span>
+                <div v-else class="flex-shrink-0 w-4 h-4 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                  <span class="text-green-600 text-sm">✓</span>
+                </div>
+                <span :class="[bullet.includes('Bei Schufa Einträgen Ablehnung') || bullet.includes('Ablehnung bei SCHUFA') ? 'text-red-600' : 'text-gray-700', 'text-sm']">{{ bullet }}</span>
               </div>
             </div>
 
