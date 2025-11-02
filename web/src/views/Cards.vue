@@ -448,10 +448,12 @@ function initializeMobileTouchOptimizations() {
                     <h3 class="offer-title">{{ offer.title }}</h3>
                   </div>
                   <div class="features-list">
-                    <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                      <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
-                      <span :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]">{{ feature }}</span>
-                    </div>
+                    <template v-for="(feature, index) in offer.bullets" :key="index">
+                      <div v-if="index < 4 || feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-item">
+                        <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
+                        <span>{{ feature }}</span>
+                      </div>
+                    </template>
                   </div>
                   <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
                   <div class="action-buttons">
@@ -551,10 +553,12 @@ function initializeMobileTouchOptimizations() {
                       <h3 class="offer-title">{{ offer.title }}</h3>
                     </div>
                     <div class="features-list">
-                      <div v-for="(feature, index) in offer.bullets.slice(0, 4)" :key="index" class="feature-item">
-                        <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
-                        <span :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]">{{ feature }}</span>
-                      </div>
+                      <template v-for="(feature, index) in offer.bullets" :key="index">
+                        <div v-if="index < 4 || feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-item">
+                          <i :class="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? 'pi-times' : 'pi-check']" :style="[feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA') ? { color: '#ef4444' } : {}]"></i>
+                          <span>{{ feature }}</span>
+                        </div>
+                      </template>
                     </div>
                     <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
                     <div class="action-buttons">
