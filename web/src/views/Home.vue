@@ -7,11 +7,11 @@ import { savingsOffers } from '../data/savings'
 import { batchPreloadAffiliateLinks, instantPreloadCriticalLinks } from '../utils/affiliate-links'
 
 const testimonials = [
-  { name: 'Sarah Müller', avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop&crop=face', rating: 5,
+  { name: 'Gabi Schulz', avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=200&auto=format&fit=crop&crop=face', rating: 5,
     text: 'Super übersichtliche Darstellung aller Konditionen. Konnte direkt die beste Karte für mich finden!' },
-  { name: 'Michael Schmidt', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop&crop=face', rating: 4,
+  { name: 'Lars Schmidt', avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&auto=format&fit=crop&crop=face', rating: 5,
     text: 'Die Vergleichsfunktion ist sehr praktisch. Hat mir bei der Entscheidung für einen neuen Broker geholfen.' },
-  { name: 'Lisa Wagner', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop&crop=face', rating: 5,
+  { name: 'Lisa Wagner', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop&crop=face', rating: 4,
     text: 'Endlich eine Seite, die wirklich unabhängig vergleicht. Tolle Auswahl an Tagesgeldkonten!' }
 ]
 
@@ -150,20 +150,23 @@ onMounted(() => {
 
   <!-- Testimonials -->
   <section class="section cv-auto">
-    <h2 class="text-2xl md:text-3xl text-center mb-4">Das sagen unsere Nutzer</h2>
-    <div class="surface-card border-round-lg">
-      <div v-for="(t, idx) in testimonials" :key="t.name" class="testimonial">
-        <div class="p-3 md:p-4 flex align-items-start gap-3">
-          <img :src="t.avatar" :alt="`Avatar von ${t.name}`" class="border-circle" style="width:64px;height:64px;object-fit:cover" loading="lazy" decoding="async" width="64" height="64" />
-          <div class="flex-1">
-            <div class="text-900 font-bold mb-1">{{ t.name }}</div>
-            <div class="stars mb-2">
-              <span v-for="n in 5" :key="n" :class="['star', n <= t.rating ? 'star-filled' : 'star-empty']">
-                {{ n <= t.rating ? '★' : '☆' }}
-              </span>
+    <div class="container">
+      <h2 class="section-title text-2xl md:text-3xl text-center mb-2">Das sagen unsere User</h2>
+      <p class="text-center text-700 mb-4" style="max-width: 600px; margin: 0 auto 2rem;">Erfahrungen aus der Community</p>
+      <div class="testimonials-grid">
+        <div v-for="(t, idx) in testimonials" :key="t.name" class="premium-testimonial-card">
+          <div class="premium-testimonial-header">
+            <img :src="t.avatar" :alt="`Avatar von ${t.name}`" class="premium-testimonial-avatar" loading="lazy" decoding="async" width="56" height="56" />
+            <div class="premium-testimonial-info">
+              <div class="premium-testimonial-name">{{ t.name }}</div>
+              <div class="stars-premium">
+                <span v-for="n in 5" :key="n" :class="['star-premium', n <= t.rating ? 'star-filled' : 'star-empty']">
+                  {{ n <= t.rating ? '★' : '☆' }}
+                </span>
+              </div>
             </div>
-            <p class="text-900 m-0">{{ t.text }}</p>
           </div>
+          <p class="premium-testimonial-text">"{{ t.text }}"</p>
         </div>
       </div>
     </div>
@@ -173,7 +176,7 @@ onMounted(() => {
   <section id="about" class="section cv-auto">
     <div class="container">
       <div class="about-section-header">
-        <h2 class="about-main-title">Über uns</h2>
+        <h2 class="section-title text-xl md:text-2xl">Über uns</h2>
         <p class="about-subtitle">Transparenz, Unabhängigkeit und Qualität stehen bei uns im Fokus</p>
       </div>
 
@@ -203,10 +206,10 @@ onMounted(() => {
         </div>
         <div class="about-content">
           <div class="content-box about-text">
-            <h3 class="section-title text-xl md:text-2xl mb-3">Wie bewerten wir?</h3>
+            <h3 class="section-title text-xl md:text-2xl mb-3">Unsere Auswahlkriterien</h3>
             <p class="text-700">
-              Produkte landen erst nach einer sorgfältigen Prüfung in unserem Vergleich. Wir schauen
-              auf Konditionen wie Gebühren, Leistungen, Service und Transparenz. Nur Angebote, die
+              Produkte landen erst nach einer gründlichen Überprüfung in unserem Vergleich. Wir schauen
+              auf Konditionen wie Transparenz, Service, Leistungen und Gebühren. Nur Angebote, die
               unsere Mindestkriterien erfüllen, werden dargestellt.
             </p>
           </div>
@@ -359,31 +362,99 @@ onMounted(() => {
 /* Sichtbarkeits-Optimierung für Offscreen-Sektionen */
 .cv-auto { content-visibility: auto; contain-intrinsic-size: 1000px; }
 
-/* Dark Mode entfernt - Website läuft permanent im Light Mode */
-.stars { 
-  display: flex; 
-  gap: 2px; 
-  align-items: center; 
+/* Premium Testimonials - Styled to match rest of page */
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(20px, 3vw, 28px);
+  max-width: 1200px;
+  margin: 0 auto;
 }
-.star { 
-  font-size: 1.1rem; 
-  line-height: 1; 
+
+.premium-testimonial-card {
+  background: var(--surface);
+  border-radius: 16px;
+  padding: clamp(24px, 3vw, 28px);
+  box-shadow: 0 2px 12px var(--shadow-color);
+  border: 1px solid var(--border);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.premium-testimonial-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.premium-testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.premium-testimonial-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border);
+  flex-shrink: 0;
+}
+
+.premium-testimonial-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.premium-testimonial-name {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+
+.premium-testimonial-text {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--muted-text);
+  margin: 0;
+  font-style: italic;
+  flex: 1;
+}
+
+.stars-premium {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+.star-premium {
+  font-size: 0.9375rem;
+  line-height: 1;
   transition: color 0.2s ease;
 }
-.star-filled { 
-  color: #facc15; 
+
+.star-premium.star-filled {
+  color: #facc15;
   text-shadow: 0 1px 2px rgba(250, 204, 21, 0.3);
 }
-.star-empty { 
-  color: #e5e7eb; 
+
+.star-premium.star-empty {
+  color: #e5e7eb;
 }
-.testimonial + .testimonial { border-top: 1px solid var(--border); }
+
 .content-box { background: var(--surface); color: var(--text); border-radius: 12px; padding: 16px; box-shadow: 0 6px 20px var(--shadow-color); border: 1px solid var(--border) }
 .section-title { color: var(--text); font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; }
 
-.offer-card { transition: transform .15s ease, box-shadow .15s ease; }
 .offer-link { display: block; text-decoration: none; color: inherit; width: 100%; }
-.offer-link:focus .offer-card, .offer-link:hover .offer-card { transform: translateY(-2px); box-shadow: 0 12px 28px var(--shadow-color); }
+.offer-link:focus .surface-card, .offer-link:hover .surface-card { 
+  transform: translateY(-2px); 
+  box-shadow: 0 12px 28px var(--shadow-color); 
+  transition: transform .15s ease, box-shadow .15s ease;
+}
 .offer-thumb { 
   width: 112px; 
   height: 70px; 
@@ -393,9 +464,7 @@ onMounted(() => {
   border: 1px solid var(--border); 
   background: transparent; 
   overflow: hidden; 
-  /* Präzises Seitenverhältnis für Kreditkarten (85.6mm x 53.98mm ≈ 1.586:1) */
   aspect-ratio: 1.586 / 1;
-  /* Entferne weiße Ecken durch cover statt contain */
 }
 
 /* Premium Sektions-Header */
@@ -405,17 +474,18 @@ onMounted(() => {
   position: relative;
 }
 
-.about-main-title {
-  font-size: clamp(2rem, 5vw, 3rem);
-  font-weight: 800;
-  color: var(--text);
-  margin: 0 0 1rem 0;
-  font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif;
-  letter-spacing: -0.02em;
+.about-section-header .section-title {
   position: relative;
+  font-size: 1.5rem;
 }
 
-.about-main-title::after {
+@media (min-width: 768px) {
+  .about-section-header .section-title {
+    font-size: 1.8rem;
+  }
+}
+
+.about-section-header .section-title::after {
   content: '';
   position: absolute;
   bottom: -8px;
@@ -543,8 +613,17 @@ onMounted(() => {
   box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
 }
 
-/* Mobile Layout: Kompakt und elegant */
+/* Responsive Styles */
 @media (max-width: 767px) {
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .premium-testimonial-card {
+    padding: 20px;
+  }
+
   .about-block {
     flex-direction: column;
     gap: 2rem;
