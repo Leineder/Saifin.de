@@ -5,7 +5,7 @@ export const offers = [
     title: 'Consors Finanz Mastercard',
     bullets: [
       '0 € Jahresgebühr',
-      'Bargeld ab 300 € kostenlos, darunter 3,95 €',
+      'Bis zu 90 Tage zinsfrei',
       'Bis 5.000 € Kreditrahmen*'
     ],
     image: '/images/creditcards/consors-finanz-mastercard.webp',
@@ -32,8 +32,8 @@ export const offers = [
     slug: 'netkredit24-mastercard',
     title: 'Netkredit24 Mastercard',
     bullets: [
-      '0 € Jahresgebühr (beworben)',
-      'Bis zu 8 Wochen zinsfrei (beworben)',
+      '0 € Jahresgebühr',
+      'Bis zu 8 Wochen zinsfrei',
       'Kreditrahmen bis 4.000 €*'
     ],
     image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
