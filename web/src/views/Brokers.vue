@@ -263,7 +263,7 @@ onBeforeUnmount(() => {
           </div>
           
           <h1 class="section-title text-2xl md:text-3xl mb-1" style="margin: 0 0 4px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; color: var(--text); padding-top: 0;">Top 10 Broker 2025</h1>
-          <p class="last-updated" style="font-size: 0.75rem; color: var(--muted-text); margin: 0.25rem 0 0.5rem 0; font-weight: 400;">zuletzt aktualisiert am 13. Oktober 2025</p>
+          <p class="last-updated" style="font-size: 0.75rem; color: var(--muted-text); margin: 0.25rem 0 0.5rem 0; font-weight: 400;">zuletzt aktualisiert am 1. November 2025</p>
 
           <div class="offers-section">
             <div 

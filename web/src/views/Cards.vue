@@ -416,7 +416,7 @@ function initializeMobileTouchOptimizations() {
         <!-- Offers -->
         <main class="content">
           <h1 class="section-title text-2xl md:text-3xl mb-1">Top 10 Kreditkarten 2025</h1>
-          <p class="last-updated">zuletzt aktualisiert am 13. Oktober 2025</p>
+          <p class="last-updated">zuletzt aktualisiert am 1. November 2025</p>
 
           <div class="offers-section">
             <div 
@@ -427,8 +427,8 @@ function initializeMobileTouchOptimizations() {
               @click="goToDetail(offer)"
               style="cursor: pointer;"
             >
-              <!-- Testsieger Banner für Hanseatic GenialCard -->
-              <div v-if="offer.id === 'hanseatic-bank-genialcard'" class="testsieger-banner">
+              <!-- Testsieger Banner -->
+              <div v-if="offer.isTestsieger" class="testsieger-banner">
                 <i class="pi pi-trophy"></i>
                 <span>Testsieger</span>
                 <i class="pi pi-trophy trophy-small"></i>

@@ -1,5 +1,53 @@
 export const offers = [
   {
+    id: 'consors-finanz-mastercard',
+    slug: 'consors-finanz-mastercard',
+    title: 'Consors Finanz Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bargeld ab 300 € kostenlos, darunter 3,95 €',
+      'Bis 5.000 € Kreditrahmen*'
+    ],
+    image: '/images/creditcards/consors-finanz-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Mastercard – Revolving',
+    isTestsieger: true,
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      annualFeeText: '0 € p.a. (dauerhaft)',
+      foreignCurrency: '0 % (laut PV, Änderungen möglich)',
+      cashWithdrawal: '≥ 300 €: 0 €; < 300 €: 3,95 € je Abhebung',
+      limits: 'Tageslimit ca. 1.100 €*, Wochenlimit ca. 2.500 €*',
+      creditLimit: 'Bis 5.000 €',
+      interest: 'Einmalzahlung (bis 90 Tage zinsfrei) oder Teilzahlung; Sollzins ca. 17,43 %, eff. ca. 18,90 %'
+    },
+    disclaimer: '*Kreditrahmen bonitätsabhängig; PV beachten.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C395489098T'
+  },
+  {
+    id: 'netkredit24-mastercard',
+    slug: 'netkredit24-mastercard',
+    title: 'Netkredit24 Mastercard',
+    bullets: [
+      '0 € Jahresgebühr (beworben)',
+      'Bis zu 8 Wochen zinsfrei (beworben)',
+      'Kreditrahmen bis 4.000 €*'
+    ],
+    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
+    annualFee: 0,
+    foreignFee: 'variabel (je Partnerbank)',
+    cardType: 'Mastercard – Revolving (vermittelt)',
+    details: {
+      foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
+      notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
+    },
+    disclaimer: '*Abhängig vom vermittelten Institut; Angaben Werbestand.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
+  },
+  {
     id: 'hanseatic-bank-genialcard',
     slug: 'hanseatic-bank-genialcard',
     title: 'Hanseatic Bank GenialCard (Visa)',
@@ -27,6 +75,57 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
   },
   {
+    id: 'instabank-kreditkarte',
+    slug: 'instabank-kreditkarte',
+    title: 'Instabank Kreditkarte',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Niedrigster Zinssatz: 18,9 % p.a.',
+      'Kreditlimit bis 25.000 €',
+      '10%-Club Mitgliedschaft inklusive',
+      'Bei Schufa Einträgen Ablehnung'
+    ],
+    image: '/images/creditcards/Instabank_card_horizontal_11zon.webp',
+    annualFee: 0,
+    foreignFee: '2,49 %',
+    cardType: 'Visa – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      foreignCurrency: '2,49 % Auslandseinsatz',
+      cashWithdrawal: '2 % (max. 50 € pro Abhebung)',
+      creditLimit: 'Bis 25.000 €*',
+      interest: 'Sollzins 18,9 % p.a., eff. 20,63 % p.a.',
+      notes: 'Sofort verfügbar nach Antrag; Geldüberweisung von Kreditkarte möglich; App verfügbar; Keine SCHUFA-Prüfung (Experian-Bonitätsprüfung)',
+      benefits: '10%-Club: Monatliche Rabatte; Sofortige virtuelle Karte verfügbar'
+    },
+    disclaimer: '*Bonitätsabhängig; Mindestalter 23 Jahre; Wohnsitz in Deutschland erforderlich.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
+  },
+  {
+    id: '1822direkt-visa-classic-gold',
+    slug: '1822direkt-visa-classic-gold',
+    title: '1822direkt Visa Classic / Gold',
+    bullets: [
+      '1. Jahr oft kostenlos',
+      'Classic ca. 36 €/Jahr, Gold ca. 72 €/Jahr',
+      'Girokontobindung erforderlich'
+    ],
+    image: '/images/creditcards/1822 direkt Visa_11zon.webp',
+    annualFee: 36,
+    foreignFee: 'ca. 2,25 %',
+    cardType: 'VISA – Charge (Girokonto-Abrechnung)',
+    details: {
+      annualFeeText: '1. Jahr häufig kostenlos; danach Classic ~36 €/Jahr, Gold ~72 €/Jahr',
+      foreignCurrency: 'ca. 2,25 % Auslandseinsatz',
+      cashWithdrawal: 'Im Euroraum oft kostenlos (Sparkassen-Netz); außerhalb variable Gebühren (1,75–2,25 %)',
+      notes: 'Abrechnung über Girokonto (Charge), keine Revolving-Funktion; Gold mit Reiseversicherungen; Automatenkonditionen über Sparkassenverbund'
+    },
+    disclaimer: '*Konditionen abhängig vom jeweiligen Kontomodell/Preisverzeichnis.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C10722509B'
+  },
+  {
     id: 'tf-bank-mastercard-gold',
     slug: 'tf-bank-mastercard-gold',
     title: 'TF Bank Mastercard Gold',
@@ -49,52 +148,6 @@ export const offers = [
     },
     disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
-  },
-  {
-    id: 'santander-bestcard-basic',
-    slug: 'santander-bestcard-basic',
-    title: 'Santander BestCard Basic (Visa)',
-    bullets: [
-      '0 € Jahresgebühr',
-      '4×/Monat weltweit kostenlos Bargeld',
-      '1 % Tankrabatt (bis 200 €/Monat)',
-      'Apple Pay/Google Pay/Garmin Pay'
-    ],
-    image: '/images/creditcards/Santander_BestCardBasic_2023_compressed.webp',
-    annualFee: 0,
-    foreignFee: '1,85 %',
-    cardType: 'VISA – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay']
-    },
-    details: {
-      foreignCurrency: '1,85 % Auslandseinsatz',
-      cashWithdrawal: '4×/Monat weltweit kostenlos; danach Entgelt laut Preisverzeichnis',
-      interest: 'Teilzahlung voreingestellt, eff. ca. 16,43 % p.a.',
-      notes: 'Abrechnung nur über Santander-Girokonto möglich',
-      benefits: '5 % Reiserabatt über Partner Urlaubsplus'
-    },
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
-  },
-  {
-    id: 'netkredit24-mastercard',
-    slug: 'netkredit24-mastercard',
-    title: 'Netkredit24 Mastercard (Vermittelt)',
-    bullets: [
-      '0 € Jahresgebühr (beworben)',
-      'Bis zu 8 Wochen zinsfrei (beworben)',
-      'Kreditrahmen bis 4.000 €*'
-    ],
-    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
-    annualFee: 0,
-    foreignFee: 'variabel (je Partnerbank)',
-    cardType: 'Mastercard – Revolving (vermittelt)',
-    details: {
-      foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
-      notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
-    },
-    disclaimer: '*Abhängig vom vermittelten Institut; Angaben Werbestand.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
   },
   {
     id: 'hanseatic-bank-goldcard',
@@ -126,82 +179,30 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328118428T'
   },
   {
-    id: 'consors-finanz-mastercard',
-    slug: 'consors-finanz-mastercard',
-    title: 'Consors Finanz Mastercard',
+    id: 'santander-bestcard-basic',
+    slug: 'santander-bestcard-basic',
+    title: 'Santander BestCard Basic (Visa)',
     bullets: [
       '0 € Jahresgebühr',
-      'Bargeld ab 300 € kostenlos, darunter 3,95 €',
-      'Bis 5.000 € Kreditrahmen*'
+      '4×/Monat weltweit kostenlos Bargeld',
+      '1 % Tankrabatt (bis 200 €/Monat)',
+      'Apple Pay/Google Pay/Garmin Pay'
     ],
-    image: '/images/creditcards/consors-finanz-mastercard.webp',
+    image: '/images/creditcards/Santander_BestCardBasic_2023_compressed.webp',
     annualFee: 0,
-    foreignFee: '0 %',
-    cardType: 'Mastercard – Revolving',
+    foreignFee: '1,85 %',
+    cardType: 'VISA – Revolving',
     features: {
-      mobilePay: ['Apple Pay', 'Google Pay']
+      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay']
     },
     details: {
-      annualFeeText: '0 € p.a. (dauerhaft)',
-      foreignCurrency: '0 % (laut PV, Änderungen möglich)',
-      cashWithdrawal: '≥ 300 €: 0 €; < 300 €: 3,95 € je Abhebung',
-      limits: 'Tageslimit ca. 1.100 €*, Wochenlimit ca. 2.500 €*',
-      creditLimit: 'Bis 5.000 €',
-      interest: 'Einmalzahlung (bis 90 Tage zinsfrei) oder Teilzahlung; Sollzins ca. 17,43 %, eff. ca. 18,90 %'
+      foreignCurrency: '1,85 % Auslandseinsatz',
+      cashWithdrawal: '4×/Monat weltweit kostenlos; danach Entgelt laut Preisverzeichnis',
+      interest: 'Teilzahlung voreingestellt, eff. ca. 16,43 % p.a.',
+      notes: 'Abrechnung nur über Santander-Girokonto möglich',
+      benefits: '5 % Reiserabatt über Partner Urlaubsplus'
     },
-    disclaimer: '*Kreditrahmen bonitätsabhängig; PV beachten.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C395489098T'
-  },
-  {
-    id: '1822direkt-visa-classic-gold',
-    slug: '1822direkt-visa-classic-gold',
-    title: '1822direkt Visa Classic / Gold',
-    bullets: [
-      '1. Jahr oft kostenlos',
-      'Classic ca. 36 €/Jahr, Gold ca. 72 €/Jahr',
-      'Girokontobindung erforderlich'
-    ],
-    image: '/images/creditcards/1822 direkt Visa_11zon.webp',
-    annualFee: 36,
-    foreignFee: 'ca. 2,25 %',
-    cardType: 'VISA – Charge (Girokonto-Abrechnung)',
-    details: {
-      annualFeeText: '1. Jahr häufig kostenlos; danach Classic ~36 €/Jahr, Gold ~72 €/Jahr',
-      foreignCurrency: 'ca. 2,25 % Auslandseinsatz',
-      cashWithdrawal: 'Im Euroraum oft kostenlos (Sparkassen-Netz); außerhalb variable Gebühren (1,75–2,25 %)',
-      notes: 'Abrechnung über Girokonto (Charge), keine Revolving-Funktion; Gold mit Reiseversicherungen; Automatenkonditionen über Sparkassenverbund'
-    },
-    disclaimer: '*Konditionen abhängig vom jeweiligen Kontomodell/Preisverzeichnis.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C10722509B'
-  },
-  {
-    id: 'instabank-kreditkarte',
-    slug: 'instabank-kreditkarte',
-    title: 'Instabank Kreditkarte',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Niedrigster Zinssatz: 18,9 % p.a.',
-      'Kreditlimit bis 25.000 €',
-      '10%-Club Mitgliedschaft inklusive',
-      'Bei Schufa Einträgen Ablehnung'
-    ],
-    image: '/images/creditcards/Instabank_card_horizontal_11zon.webp',
-    annualFee: 0,
-    foreignFee: '2,49 %',
-    cardType: 'Visa – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay']
-    },
-    details: {
-      foreignCurrency: '2,49 % Auslandseinsatz',
-      cashWithdrawal: '2 % (max. 50 € pro Abhebung)',
-      creditLimit: 'Bis 25.000 €*',
-      interest: 'Sollzins 18,9 % p.a., eff. 20,63 % p.a.',
-      notes: 'Sofort verfügbar nach Antrag; Geldüberweisung von Kreditkarte möglich; App verfügbar; Keine SCHUFA-Prüfung (Experian-Bonitätsprüfung)',
-      benefits: '10%-Club: Monatliche Rabatte; Sofortige virtuelle Karte verfügbar'
-    },
-    disclaimer: '*Bonitätsabhängig; Mindestalter 23 Jahre; Wohnsitz in Deutschland erforderlich.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
   },
   {
     id: 'extra-karte-mastercard',
