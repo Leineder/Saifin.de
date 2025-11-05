@@ -48,33 +48,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
   },
   {
-    id: 'hanseatic-bank-genialcard',
-    slug: 'hanseatic-bank-genialcard',
-    title: 'Hanseatic Bank GenialCard (Visa)',
-    bullets: [
-      '0 € Jahresgebühr dauerhaft',
-      '0 % Auslandseinsatz',
-      'Inland 3,95 € je Abhebung, Ausland 0 €',
-      'Teilzahlung voreingestellt (3 % / min. 20 €)'
-    ],
-    image: '/images/creditcards/hanseatic-bank-genialcard_11zon.webp',
-    annualFee: 0,
-    foreignFee: '0 %',
-    cardType: 'VISA – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay']
-    },
-    details: {
-      foreignCurrency: '0 % Auslandseinsatz (ATM-Betreiber können Entgelte verlangen)',
-      cashWithdrawal: 'Inland 3,95 € je Abhebung; Ausland 0 €; Mindestabhebung 50 €*',
-      limits: 'Tageslimit Bargeld ca. 500 €*, Online-Zahlungslimit ca. 6.000 €*',
-      creditLimit: 'Typischer Startrahmen bis 4.000 €* (bonitätsabhängig)',
-      interest: 'Teilzahlung voreingestellt; Sollzins 16,05 % p.a., eff. 17,29 % p.a.'
-    },
-    disclaimer: '*Angaben erfahrungsbasiert/bonitätsabhängig; Preis-/Leistungsverzeichnis beachten.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
-  },
-  {
     id: 'instabank-kreditkarte',
     slug: 'instabank-kreditkarte',
     title: 'Instabank Kreditkarte',
@@ -148,6 +121,33 @@ export const offers = [
     },
     disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
+  },
+  {
+    id: 'hanseatic-bank-genialcard',
+    slug: 'hanseatic-bank-genialcard',
+    title: 'Hanseatic Bank GenialCard (Visa)',
+    bullets: [
+      '0 € Jahresgebühr dauerhaft',
+      '0 % Auslandseinsatz',
+      'Inland 3,95 € je Abhebung, Ausland 0 €',
+      'Teilzahlung voreingestellt (3 % / min. 20 €)'
+    ],
+    image: '/images/creditcards/hanseatic-bank-genialcard_11zon.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'VISA – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      foreignCurrency: '0 % Auslandseinsatz (ATM-Betreiber können Entgelte verlangen)',
+      cashWithdrawal: 'Inland 3,95 € je Abhebung; Ausland 0 €; Mindestabhebung 50 €*',
+      limits: 'Tageslimit Bargeld ca. 500 €*, Online-Zahlungslimit ca. 6.000 €*',
+      creditLimit: 'Typischer Startrahmen bis 4.000 €* (bonitätsabhängig)',
+      interest: 'Teilzahlung voreingestellt; Sollzins 16,05 % p.a., eff. 17,29 % p.a.'
+    },
+    disclaimer: '*Angaben erfahrungsbasiert/bonitätsabhängig; Preis-/Leistungsverzeichnis beachten.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C328121218T'
   },
   {
     id: 'hanseatic-bank-goldcard',
