@@ -48,13 +48,13 @@
             <!-- Hauptfeatures -->
             <div class="space-y-2 mb-4">
               <div v-for="bullet in card.bullets" :key="bullet" class="flex items-start">
-                <div v-if="bullet.includes('Bei Schufa Einträgen Ablehnung') || bullet.includes('Ablehnung bei SCHUFA')" class="flex-shrink-0 w-4 h-4 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
+                <div v-if="isNegativeBullet(bullet)" class="flex-shrink-0 w-4 h-4 bg-red-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
                   <span class="text-red-600 text-sm">✗</span>
                 </div>
                 <div v-else class="flex-shrink-0 w-4 h-4 bg-green-100 rounded-full flex items-center justify-center mr-3 mt-0.5">
                   <span class="text-green-600 text-sm">✓</span>
                 </div>
-                <span :class="[bullet.includes('Bei Schufa Einträgen Ablehnung') || bullet.includes('Ablehnung bei SCHUFA') ? 'text-red-600' : 'text-gray-700', 'text-sm']">{{ bullet }}</span>
+                <span :class="[isNegativeBullet(bullet) ? 'text-red-600' : 'text-gray-700', 'text-sm']">{{ bullet }}</span>
               </div>
             </div>
 
@@ -136,6 +136,12 @@ import { offers } from '../data/offers'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
+
+const isNegativeBullet = (bullet) => {
+  if (typeof bullet !== 'string') return false
+  const normalized = bullet.toLowerCase()
+  return normalized.includes('schufa') && (normalized.includes('ablehnung') || normalized.includes('abgelehnt'))
+}
 
 function goApply(slug) {
   router.push(`/antrag/${slug}`)

@@ -20,6 +20,12 @@ const schufaFree = ref(false)
 const instantDecision = ref(false)
 
 // Helpers
+const isNegativeBullet = (text) => {
+  if (typeof text !== 'string') return false
+  const normalized = text.toLowerCase()
+  return normalized.includes('schufa') && (normalized.includes('ablehnung') || normalized.includes('abgelehnt'))
+}
+
 function parsePercentToNumber(text) {
   if (!text || typeof text !== 'string') return NaN
   const m = text.replace(',', '.').match(/([0-9]+(?:\.[0-9]+)?)\s*%/)
@@ -449,8 +455,8 @@ function initializeMobileTouchOptimizations() {
                   </div>
                   <div class="features-list">
                     <template v-for="(feature, index) in offer.bullets" :key="index">
-                      <div v-if="index < 4 || feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-item">
-                        <span v-if="feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-icon-red">✗</span>
+                      <div v-if="index < 4 || isNegativeBullet(feature)" class="feature-item">
+                        <span v-if="isNegativeBullet(feature)" class="feature-icon-red">✗</span>
                         <i v-else class="pi pi-check"></i>
                         <span>{{ feature }}</span>
                       </div>
@@ -555,8 +561,8 @@ function initializeMobileTouchOptimizations() {
                     </div>
                     <div class="features-list">
                       <template v-for="(feature, index) in offer.bullets" :key="index">
-                        <div v-if="index < 4 || feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-item">
-                          <span v-if="feature.includes('Bei Schufa Einträgen Ablehnung') || feature.includes('Ablehnung bei SCHUFA')" class="feature-icon-red">✗</span>
+                        <div v-if="index < 4 || isNegativeBullet(feature)" class="feature-item">
+                          <span v-if="isNegativeBullet(feature)" class="feature-icon-red">✗</span>
                           <i v-else class="pi pi-check"></i>
                           <span>{{ feature }}</span>
                         </div>

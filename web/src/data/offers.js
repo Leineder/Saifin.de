@@ -6,7 +6,8 @@ export const offers = [
     bullets: [
       '0 € Jahresgebühr',
       'Bis zu 90 Tage zinsfrei',
-      'Bis 5.000 € Kreditrahmen*'
+      'Bis 5.000 € Kreditrahmen*',
+      'Ablehnung bei Schufa-Einträgen'
     ],
     image: '/images/creditcards/consors-finanz-mastercard.webp',
     annualFee: 0,
