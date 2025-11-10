@@ -1,5 +1,35 @@
 export const offers = [
   {
+    id: 'gebuehrenfrei-mastercard-gold',
+    slug: 'gebuehrenfrei-mastercard-gold',
+    title: 'Gebührenfrei Mastercard Gold',
+    bullets: [
+      '0 € Jahresgebühr dauerhaft',
+      'Bis zu 7 Wochen zinsfrei',
+      '0 % Auslandseinsatz & Bargeld weltweit gebührenfrei*',
+      'Ablehnung bei Schufa-Einträgen'
+    ],
+    image: '/images/creditcards/Advanzia_Gebuehrenfrei_Mastercard_Gold.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Mastercard – Revolving',
+    isTestsieger: true,
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay'],
+      insurance: 'Reiseversicherung inklusive'
+    },
+    details: {
+      annualFeeText: '0 € p.a. (dauerhaft)',
+      foreignCurrency: '0 % Auslandseinsatz; Mastercard-Referenzkurs inkl. Aufschlag',
+      cashWithdrawal: '0 € Bargeldabhebung*; Zinsen laut Preisverzeichnis ab Buchungstag',
+      interest: 'Bis zu 7 Wochen zinsfrei bei Vollzahlung; danach Sollzins gemäß Preisverzeichnis',
+      benefits: '5 % Reisegutschrift & 5 % Mietwagen-Rückvergütung über Kundenportal',
+      notes: '24/7 Kundenservice, Advanzia Mobil App, keine Mindestumsätze erforderlich'
+    },
+    disclaimer: '*Zinsen gemäß Preisverzeichnis; Fremdwährungsumrechnungsaufschlag laut Mastercard.¹',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C13814286T'
+  },
+  {
     id: 'consors-finanz-mastercard',
     slug: 'consors-finanz-mastercard',
     title: 'Consors Finanz Mastercard',
@@ -13,7 +43,6 @@ export const offers = [
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
-    isTestsieger: true,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay']
     },

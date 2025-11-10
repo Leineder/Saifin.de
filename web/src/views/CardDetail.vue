@@ -214,7 +214,7 @@ const handleTouchEnd = (event) => {
   <div v-if="offer" class="detail-page section">
     <div class="container detail-grid">
       <div class="media">
-        <div class="card-image-container surface-card border-round-xl card-accent">
+        <div :class="['card-image-container surface-card border-round-xl card-accent', offer.id]">
           <img :src="offer.image" :alt="`${offer.title} – Kartenmotiv`" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="600" height="378" fetchpriority="high">
         </div>
       </div>
@@ -328,6 +328,13 @@ const handleTouchEnd = (event) => {
   /* Stelle sicher, dass der Container die richtige Höhe hat */
   min-height: 200px;
 }
+.card-image-container.gebuehrenfrei-mastercard-gold {
+  border-radius: 16px;
+  overflow: hidden;
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
 .card-image { 
   width: 100%; 
   height: 100%; 
@@ -437,6 +444,23 @@ const handleTouchEnd = (event) => {
   background: transparent; /* Kein zusätzlicher Hintergrund */
   transform: none !important; /* Keine Skalierung - normale Größe */
   padding: 0 !important; /* Kein zusätzliches Padding */
+}
+
+.card-image-container.gebuehrenfrei-mastercard-gold {
+  padding: 12px;
+}
+
+.card-image.gebuehrenfrei-mastercard-gold {
+  object-fit: contain;
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  background: #fff;
+  overflow: hidden;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.7);
 }
 
 /* Mobile Touch-Optimierungen für Apply-Buttons */

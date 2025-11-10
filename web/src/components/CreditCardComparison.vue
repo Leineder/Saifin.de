@@ -26,11 +26,11 @@
         <div class="flex p-5">
           <!-- Kartenbild links (sehr klein, nur 10% der Breite) -->
           <div class="flex-shrink-0 card-image pr-3">
-            <div class="relative cursor-pointer" @click="goDetail(card.slug)">
+            <div class="relative cursor-pointer card-image-wrapper" :class="card.id" @click="goDetail(card.slug)">
               <img 
                 :src="card.image" 
                 :alt="card.title" 
-                class="w-full card-image-height object-cover rounded shadow-sm"
+                :class="['w-full card-image-height object-cover rounded shadow-sm', card.id]"
                 loading="lazy" decoding="async" width="200" height="120"
               />
               <!-- Karten-Typ Badge -->
@@ -175,6 +175,7 @@ function goDetail(slug) {
   object-fit: cover;
   object-position: center center;
   border-radius: 1px;
+  overflow: hidden;
   /* Entferne weiße Ecken durch cover statt contain */
 }
 
@@ -184,6 +185,22 @@ function goDetail(slug) {
 
 .card-image-height {
   height: 120px; /* 2.5x größer als h-12 (48px) = 120px */
+}
+
+.card-image-wrapper.gebuehrenfrei-mastercard-gold {
+  border-radius: 12px;
+  overflow: hidden;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-image-height.gebuehrenfrei-mastercard-gold {
+  object-fit: contain !important;
+  border-radius: 8px;
+  background: transparent;
+  box-shadow: none;
 }
 
 @media (max-width: 1024px) {
