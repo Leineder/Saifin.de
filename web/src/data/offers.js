@@ -107,28 +107,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
   },
   {
-    id: '1822direkt-visa-classic-gold',
-    slug: '1822direkt-visa-classic-gold',
-    title: '1822direkt Visa Classic / Gold',
-    bullets: [
-      '1. Jahr oft kostenlos',
-      'Classic ca. 36 €/Jahr, Gold ca. 72 €/Jahr',
-      'Girokontobindung erforderlich'
-    ],
-    image: '/images/creditcards/1822 direkt Visa_11zon.webp',
-    annualFee: 36,
-    foreignFee: 'ca. 2,25 %',
-    cardType: 'VISA – Charge (Girokonto-Abrechnung)',
-    details: {
-      annualFeeText: '1. Jahr häufig kostenlos; danach Classic ~36 €/Jahr, Gold ~72 €/Jahr',
-      foreignCurrency: 'ca. 2,25 % Auslandseinsatz',
-      cashWithdrawal: 'Im Euroraum oft kostenlos (Sparkassen-Netz); außerhalb variable Gebühren (1,75–2,25 %)',
-      notes: 'Abrechnung über Girokonto (Charge), keine Revolving-Funktion; Gold mit Reiseversicherungen; Automatenkonditionen über Sparkassenverbund'
-    },
-    disclaimer: '*Konditionen abhängig vom jeweiligen Kontomodell/Preisverzeichnis.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C10722509B'
-  },
-  {
     id: 'tf-bank-mastercard-gold',
     slug: 'tf-bank-mastercard-gold',
     title: 'TF Bank Mastercard Gold',
@@ -182,6 +160,30 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328118428T'
   },
   {
+    id: 'extra-karte-mastercard',
+    slug: 'extra-karte-mastercard',
+    title: 'Extra Karte (Novum Bank) – Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
+      'Bis 4.000 € Kreditrahmen*',
+      'Bei Schufa Einträgen Ablehnung'
+    ],
+    image: '/images/creditcards/extra-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '2,99 %',
+    cardType: 'Mastercard – Revolving',
+    details: {
+      foreignCurrency: '2,99 % Auslandseinsatz',
+      cashWithdrawal: '3 % (mind. 3 €)',
+      creditLimit: 'Kreditrahmen bis 4.000 €*',
+      interest: 'Effektivzins ca. 24,60 %',
+      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen; Bei Schufa Einträgen Ablehnung'
+    },
+    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
+  },
+  {
     id: 'santander-bestcard-basic',
     slug: 'santander-bestcard-basic',
     title: 'Santander BestCard Basic (Visa)',
@@ -208,27 +210,25 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C19318437T'
   },
   {
-    id: 'extra-karte-mastercard',
-    slug: 'extra-karte-mastercard',
-    title: 'Extra Karte (Novum Bank) – Mastercard',
+    id: '1822direkt-visa-classic-gold',
+    slug: '1822direkt-visa-classic-gold',
+    title: '1822direkt Visa Classic / Gold',
     bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
-      'Bis 4.000 € Kreditrahmen*',
-      'Bei Schufa Einträgen Ablehnung'
+      '1. Jahr oft kostenlos',
+      'Classic ca. 36 €/Jahr, Gold ca. 72 €/Jahr',
+      'Girokontobindung erforderlich'
     ],
-    image: '/images/creditcards/extra-mastercard.webp',
-    annualFee: 0,
-    foreignFee: '2,99 %',
-    cardType: 'Mastercard – Revolving',
+    image: '/images/creditcards/1822 direkt Visa_11zon.webp',
+    annualFee: 36,
+    foreignFee: 'ca. 2,25 %',
+    cardType: 'VISA – Charge (Girokonto-Abrechnung)',
     details: {
-      foreignCurrency: '2,99 % Auslandseinsatz',
-      cashWithdrawal: '3 % (mind. 3 €)',
-      creditLimit: 'Kreditrahmen bis 4.000 €*',
-      interest: 'Effektivzins ca. 24,60 %',
-      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen; Bei Schufa Einträgen Ablehnung'
+      annualFeeText: '1. Jahr häufig kostenlos; danach Classic ~36 €/Jahr, Gold ~72 €/Jahr',
+      foreignCurrency: 'ca. 2,25 % Auslandseinsatz',
+      cashWithdrawal: 'Im Euroraum oft kostenlos (Sparkassen-Netz); außerhalb variable Gebühren (1,75–2,25 %)',
+      notes: 'Abrechnung über Girokonto (Charge), keine Revolving-Funktion; Gold mit Reiseversicherungen; Automatenkonditionen über Sparkassenverbund'
     },
-    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
+    disclaimer: '*Konditionen abhängig vom jeweiligen Kontomodell/Preisverzeichnis.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C10722509B'
   }
 ]
