@@ -109,6 +109,7 @@ export function applyRouteMeta(route) {
   const name = route.name
   const canonical = buildCanonicalFromRoute(route)
   const defaultOg = '/images/landing-hero.webp'
+  const logoUrl = 'https://www.saifin.de/favicon.png'
 
   let title = 'Saifin – Finanzprodukte vergleichen'
   let description = 'Vergleiche Kreditkarten, Broker und Tagesgeld. Schnell, transparent, unabhängig.'
@@ -118,6 +119,7 @@ export function applyRouteMeta(route) {
     if (name === 'home') {
       title = 'Saifin – Kreditkarten, Broker & Tagesgeld vergleichen'
       description = 'Top-Angebote vergleichen und in Minuten entscheiden. Kostenlos und unabhängig.'
+      ogImage = logoUrl
     } else if (name === 'cards') {
       title = 'Kreditkarten Vergleich 2025 | Saifin'
       description = 'Finde die passende Kreditkarte: Gebühren, Leistungen, Versicherungen – transparent im Vergleich.'
