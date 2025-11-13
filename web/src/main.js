@@ -129,6 +129,45 @@ if (typeof window !== 'undefined') {
         console.warn('Failed to load some optimizations:', error)
       })
       
+      // Initialisiere Financeads API für Event-Tracking (lokal)
+      // HINWEIS: Die Financeads API unterstützt keine CORS-Requests vom Browser.
+      // API-Aufrufe sind deaktiviert. Das Tracking erfolgt über Affiliate-Links direkt.
+      try {
+        import('./utils/financeads-api.js').then(module => {
+          // API-Aufrufe sind deaktiviert (CORS-Probleme)
+          // Regelmäßige Updates werden nicht gestartet
+          // Das Tracking erfolgt über die Affiliate-Links direkt
+          
+          // Speichere Cleanup-Funktion für später (falls benötigt)
+          if (typeof window !== 'undefined') {
+            // Mache Test-Funktionen global verfügbar
+            window.testFinanceadsApi = async (options) => {
+              return module.testFinanceadsApi(options)
+            }
+            
+            window.quickTestFinanceadsApi = async () => {
+              return module.quickTestFinanceadsApi()
+            }
+            
+            // Zeige Test-Funktionen in der Konsole
+            console.log('💡 Financeads API Test-Funktionen verfügbar:')
+            console.log('   - window.quickTestFinanceadsApi() - API-URL anzeigen')
+            console.log('   - window.testFinanceadsApi() - Vollständiger API-Test')
+            console.log('   ⚠️ Hinweis: API-Aufrufe sind deaktiviert (CORS-Probleme)')
+            console.log('   ℹ️ Tracking erfolgt über Affiliate-Links direkt')
+          }
+          
+          console.log('✅ Financeads Event-Tracking initialisiert')
+          console.log('   User-ID:', module.FINANCEADS_API_CONFIG?.userId || '57387')
+          console.log('   ⚠️ API-Aufrufe deaktiviert (CORS-Probleme)')
+          console.log('   ℹ️ Für Statistiken-Abruf benötigen Sie einen Proxy-Server')
+        }).catch(error => {
+          console.warn('⚠️ Financeads API konnte nicht initialisiert werden:', error)
+        })
+      } catch (error) {
+        console.warn('⚠️ Financeads API Initialisierung fehlgeschlagen:', error)
+      }
+      
     } catch (error) {
       console.error('Error initializing optimizations:', error)
     }

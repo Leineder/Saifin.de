@@ -104,35 +104,65 @@ export class ConnectionAwarePreloader {
    * @returns {Object} - Preloading-Strategie
    */
   getOptimalStrategy() {
-    const connectionInfo = this.getConnectionInfo()
-    const effectiveType = connectionInfo.effectiveType
-    
-    // Fallback-Strategie
-    let strategy = this.preloadStrategies.get('3g')
-    
-    if (this.preloadStrategies.has(effectiveType)) {
-      strategy = this.preloadStrategies.get(effectiveType)
-    }
-    
-    // Anpassungen basierend auf zusätzlichen Faktoren
-    if (connectionInfo.saveData) {
-      strategy = {
-        ...strategy,
-        maxConcurrent: Math.max(1, strategy.maxConcurrent - 2),
-        delay: strategy.delay * 2,
-        priority: 'low'
+    try {
+      const connectionInfo = this.getConnectionInfo()
+      const effectiveType = connectionInfo?.effectiveType || '3g'
+      
+      // Fallback-Strategie
+      let strategy = this.preloadStrategies.get('3g')
+      
+      // Stelle sicher, dass Fallback-Strategie existiert
+      if (!strategy) {
+        strategy = {
+          maxConcurrent: 3,
+          delay: 500,
+          timeout: 10000,
+          priority: 'medium'
+        }
+      }
+      
+      if (this.preloadStrategies.has(effectiveType)) {
+        const foundStrategy = this.preloadStrategies.get(effectiveType)
+        if (foundStrategy) {
+          strategy = foundStrategy
+        }
+      }
+      
+      // Anpassungen basierend auf zusätzlichen Faktoren
+      if (connectionInfo?.saveData) {
+        strategy = {
+          ...strategy,
+          maxConcurrent: Math.max(1, (strategy.maxConcurrent || 3) - 2),
+          delay: (strategy.delay || 500) * 2,
+          priority: 'low'
+        }
+      }
+      
+      if (connectionInfo?.downlink && connectionInfo.downlink < 1) {
+        strategy = {
+          ...strategy,
+          maxConcurrent: Math.max(1, (strategy.maxConcurrent || 3) - 1),
+          delay: (strategy.delay || 500) * 1.5,
+          priority: strategy.priority || 'low'
+        }
+      }
+      
+      // Stelle sicher, dass priority immer gesetzt ist
+      if (!strategy.priority) {
+        strategy.priority = 'medium'
+      }
+      
+      return strategy
+    } catch (error) {
+      console.warn('Connection-Aware Preloader: Fehler beim Ermitteln der optimalen Strategie:', error)
+      // Fallback-Strategie
+      return {
+        maxConcurrent: 3,
+        delay: 500,
+        timeout: 10000,
+        priority: 'medium'
       }
     }
-    
-    if (connectionInfo.downlink && connectionInfo.downlink < 1) {
-      strategy = {
-        ...strategy,
-        maxConcurrent: Math.max(1, strategy.maxConcurrent - 1),
-        delay: strategy.delay * 1.5
-      }
-    }
-    
-    return strategy
   }
 
   /**
@@ -291,13 +321,36 @@ export class ConnectionAwarePreloader {
    * @returns {Object} - Preloading-Einstellungen
    */
   getOptimalSettings() {
-    const strategy = this.getOptimalStrategy()
-    const connectionInfo = this.getConnectionInfo()
-    
-    return {
-      strategy,
-      connectionInfo,
-      recommendations: this.getRecommendations(connectionInfo, strategy)
+    try {
+      const strategy = this.getOptimalStrategy()
+      const connectionInfo = this.getConnectionInfo()
+      
+      // Fallback falls strategy undefined ist
+      const safeStrategy = strategy || {
+        maxConcurrent: 3,
+        delay: 500,
+        timeout: 10000,
+        priority: 'medium'
+      }
+      
+      return {
+        strategy: safeStrategy,
+        connectionInfo: connectionInfo || { type: 'unknown', effectiveType: 'unknown' },
+        recommendations: this.getRecommendations(connectionInfo, safeStrategy)
+      }
+    } catch (error) {
+      console.warn('Connection-Aware Preloader: Fehler beim Abrufen der optimalen Einstellungen:', error)
+      // Fallback-Einstellungen
+      return {
+        strategy: {
+          maxConcurrent: 3,
+          delay: 500,
+          timeout: 10000,
+          priority: 'medium'
+        },
+        connectionInfo: { type: 'unknown', effectiveType: 'unknown' },
+        recommendations: []
+      }
     }
   }
 
@@ -310,6 +363,11 @@ export class ConnectionAwarePreloader {
   getRecommendations(connectionInfo, strategy) {
     const recommendations = []
     
+    // Prüfe ob connectionInfo existiert
+    if (!connectionInfo) {
+      return recommendations
+    }
+    
     if (connectionInfo.saveData) {
       recommendations.push('Data Saver aktiviert - Reduziertes Preloading')
     }
@@ -318,7 +376,8 @@ export class ConnectionAwarePreloader {
       recommendations.push('Langsame Verbindung - Aggressives Preloading deaktiviert')
     }
     
-    if (strategy.priority === 'ultra') {
+    // Prüfe ob strategy existiert und priority hat
+    if (strategy && strategy.priority === 'ultra') {
       recommendations.push('Sehr schnelle Verbindung - Maximales Preloading aktiviert')
     }
     

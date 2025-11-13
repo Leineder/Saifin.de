@@ -312,7 +312,17 @@
     <!-- Meta Pixel Code (HEAVILY DEFERRED - load after interaction or 6s) -->
     <script>
       (function(){
+        let pixelInitialized = false;
+        let pixelLoading = false;
+        
         function initMetaPixel(){
+          // Verhindere mehrfache Initialisierung
+          if (pixelInitialized || pixelLoading || (window.fbq && window.fbq.loaded)) {
+            return;
+          }
+          
+          pixelLoading = true;
+          
           !function(f,b,e,v,n,t,s)
           {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
           n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -321,12 +331,28 @@
           t.src=v;s=b.getElementsByTagName(e)[0];
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
-          fbq('init', '704761698638212');
-          fbq('track', 'PageView');
+          
+          // Warte bis Pixel geladen ist, bevor init aufgerufen wird
+          if (window.fbq && !window.fbq.loaded) {
+            window.fbq.queue = window.fbq.queue || [];
+          }
+          
+          // Prüfe ob Pixel bereits initialisiert wurde
+          if (!window.fbq || !window.fbq._i || !window.fbq._i['704761698638212']) {
+            if (window.fbq) {
+              window.fbq('init', '704761698638212');
+              window.fbq('track', 'PageView');
+            }
+          }
+          
+          pixelInitialized = true;
+          pixelLoading = false;
         }
         
         // Defer until user interaction or 6s idle
         const loadPixel = () => {
+          if (pixelInitialized || pixelLoading) return;
+          
           if ('requestIdleCallback' in window) {
             requestIdleCallback(initMetaPixel, { timeout: 6000 });
           } else {
@@ -334,10 +360,19 @@
           }
         };
         
+        // Verwende once: true, um sicherzustellen, dass Event-Listener nur einmal ausgelöst werden
         ['click', 'scroll', 'touchstart'].forEach(event => {
           document.addEventListener(event, loadPixel, { once: true, passive: true });
         });
-        setTimeout(loadPixel, 6000);
+        
+        // Fallback: Lade nach 6 Sekunden, aber nur einmal
+        if (!pixelInitialized && !pixelLoading) {
+          setTimeout(() => {
+            if (!pixelInitialized && !pixelLoading) {
+              loadPixel();
+            }
+          }, 6000);
+        }
       })();
     </script>
     <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=704761698638212&ev=PageView&noscript=1" /></noscript>
@@ -345,18 +380,44 @@
     <!-- TikTok Pixel Code (HEAVILY DEFERRED - load after interaction or 6s) -->
     <script>
       (function(){
+        let tiktokInitialized = false;
+        let tiktokLoading = false;
+        const TIKTOK_PIXEL_ID = 'D314FPBC77U0B8UM6A9G';
+        
         function initTikTok(){
+          // Verhindere mehrfache Initialisierung
+          if (tiktokInitialized || tiktokLoading) {
+            return;
+          }
+          
+          // Prüfe ob TikTok Pixel bereits geladen wurde
+          if (window.ttq && window.ttq._i && window.ttq._i[TIKTOK_PIXEL_ID]) {
+            tiktokInitialized = true;
+            return;
+          }
+          
+          tiktokLoading = true;
+          
           !function (w, d, t) {
             w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
             var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
             ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-            ttq.load('D314FPBC77U0B8UM6A9G');
-            ttq.page();
+            
+            // Prüfe ob Pixel bereits geladen wurde, bevor load aufgerufen wird
+            if (!ttq._i || !ttq._i[TIKTOK_PIXEL_ID]) {
+              ttq.load(TIKTOK_PIXEL_ID);
+              ttq.page();
+            }
           }(window, document, 'ttq');
+          
+          tiktokInitialized = true;
+          tiktokLoading = false;
         }
         
         // Defer until user interaction or 6s idle
         const loadTikTok = () => {
+          if (tiktokInitialized || tiktokLoading) return;
+          
           if ('requestIdleCallback' in window) {
             requestIdleCallback(initTikTok, { timeout: 6000 });
           } else {
@@ -364,18 +425,43 @@
           }
         };
         
+        // Verwende once: true, um sicherzustellen, dass Event-Listener nur einmal ausgelöst werden
         ['click', 'scroll', 'touchstart'].forEach(event => {
           document.addEventListener(event, loadTikTok, { once: true, passive: true });
         });
-        setTimeout(loadTikTok, 6000);
+        
+        // Fallback: Lade nach 6 Sekunden, aber nur einmal
+        if (!tiktokInitialized && !tiktokLoading) {
+          setTimeout(() => {
+            if (!tiktokInitialized && !tiktokLoading) {
+              loadTikTok();
+            }
+          }, 6000);
+        }
       })();
     </script>
     
-    <!-- Vercel Analytics - DIRECT INTEGRATION -->
+    <!-- Vercel Analytics - DIRECT INTEGRATION (nur in Production) -->
     <script>
-      !function(){var e=window,t=e.va||(e.va=function(){e.va.q?e.va.q.push(arguments):e.va.q=[arguments]})}();
-      window.va('beforeSend',function(e){e.url.startsWith('/_vercel')&&(e.url='/')});
-      (function(){var script=document.createElement('script');script.src='https://va.vercel-scripts.com/v1/script.js';script.defer=true;script.setAttribute('data-api','/_vercel/insights/event');document.head.appendChild(script);})();
+      // Vercel Analytics nur in Production laden (vermeidet 404-Fehler im Development)
+      (function(){
+        // Prüfe ob wir in Production sind (localhost = Development)
+        const isProduction = window.location.hostname !== 'localhost' && 
+                            window.location.hostname !== '127.0.0.1' &&
+                            !window.location.hostname.startsWith('192.168.') &&
+                            !window.location.hostname.startsWith('10.') &&
+                            window.location.protocol === 'https:';
+        
+        if (isProduction) {
+          !function(){var e=window,t=e.va||(e.va=function(){e.va.q?e.va.q.push(arguments):e.va.q=[arguments]})}();
+          window.va('beforeSend',function(e){e.url.startsWith('/_vercel')&&(e.url='/')});
+          (function(){var script=document.createElement('script');script.src='https://va.vercel-scripts.com/v1/script.js';script.defer=true;script.setAttribute('data-api','/_vercel/insights/event');document.head.appendChild(script);})();
+        } else {
+          // Development: Erstelle Mock-Funktion um Fehler zu vermeiden
+          window.va = window.va || function(){var q=window.va.q=window.va.q||[];q.push(arguments)};
+          console.debug('Vercel Analytics deaktiviert (Development-Modus)');
+        }
+      })();
     </script>
   </body>
 </html>

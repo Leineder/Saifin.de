@@ -4,6 +4,19 @@
  * Analytics Events für Produktinteraktionen
  */
 
+// Financeads API Integration (lazy import für Performance)
+let financeadsApiModule = null
+async function getFinanceadsApi() {
+  if (!financeadsApiModule) {
+    try {
+      financeadsApiModule = await import('./financeads-api.js')
+    } catch (error) {
+      console.warn('⚠️ Financeads API Modul konnte nicht geladen werden:', error)
+    }
+  }
+  return financeadsApiModule
+}
+
 // Produktkategorien
 export const PRODUCT_CATEGORIES = {
   CREDIT_CARDS: 'kreditkarten',
@@ -91,6 +104,32 @@ export function trackProductApply(productId, productName, category, applyUrl) {
           console.warn('⚠️ Vercel Analytics nicht verfügbar nach Wartezeit')
         }
       }, 1000)
+    }
+    
+    // Financeads API: Event-Tracking (lokal speichern, keine API-Aufrufe wegen CORS)
+    // HINWEIS: Die Financeads API unterstützt keine CORS-Requests vom Browser.
+    // Das Tracking erfolgt über die Affiliate-Links direkt.
+    // Events werden lokal gespeichert für spätere Analyse.
+    if (applyUrl && applyUrl.includes('financeads.net')) {
+      getFinanceadsApi().then(apiModule => {
+        if (apiModule && apiModule.trackFinanceadsEvent) {
+          // Tracke Event lokal (keine API-Aufrufe wegen CORS)
+          apiModule.trackFinanceadsEvent({
+            category,
+            productId,
+            productName,
+            applyUrl,
+            additionalData: {
+              timestamp: new Date().toISOString(),
+              userAgent: typeof navigator !== 'undefined' ? navigator.userAgent : '',
+              referrer: typeof document !== 'undefined' ? document.referrer : ''
+            }
+          })
+        }
+      }).catch(error => {
+        // Fehler werden stillschweigend ignoriert, um die Website-Performance nicht zu beeinträchtigen
+        console.debug('Financeads Event Tracking Fehler (nicht kritisch):', error)
+      })
     }
   } catch (error) {
     console.error('❌ Analytics tracking failed:', error)
