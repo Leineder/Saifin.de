@@ -29,7 +29,7 @@
 
         <section class="privacy-section">
           <h2>4. Server-Hosting und Infrastruktur</h2>
-          <p>Strato (Domain), Vercel (Hosting) – EU-basiert. Logs (inkl. IP, Timestamp) für max. 7 Tage, dann gelöscht.</p>
+          <p>Strato (Domain), Vercel (Hosting) – Hosting erfolgt primär in der EU, Vercel kann jedoch auch Server in den USA nutzen. Logs (inkl. IP, Timestamp) für max. 7 Tage, dann gelöscht.</p>
         </section>
 
         <section class="privacy-section">
@@ -42,12 +42,20 @@
 
         <section class="privacy-section">
           <h2>6. Tools / Plugins / Analyse</h2>
-          <p>Derzeit keine externen Tools ohne Einwilligung. Zukünftig nur datenschutz-konform eingebunden — z. B. Analytics oder Affiliate-Pixel — und nur nach Einwilligung.</p>
+          <p>Folgende Analyse- und Marketing-Tools werden verwendet, sofern Sie der Datenverarbeitung zugestimmt haben:</p>
+          <ul class="privacy-list">
+            <li><strong>Vercel Analytics:</strong> Erfasst anonymisierte Seitenaufrufe und Nutzungsstatistiken zur Verbesserung der Website-Performance. Anbieter: Vercel Inc., USA. Datenschutzerklärung: <a href="https://vercel.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="contact-link">vercel.com/legal/privacy-policy</a></li>
+            <li><strong>Meta Pixel (Facebook):</strong> Tracking-Code zur Messung von Conversions und zur Optimierung von Werbeanzeigen. Anbieter: Meta Platforms Ireland Limited, Irland (Daten können in die USA übermittelt werden). Datenschutzerklärung: <a href="https://www.facebook.com/privacy/explanation" target="_blank" rel="noopener noreferrer" class="contact-link">facebook.com/privacy/explanation</a></li>
+            <li><strong>TikTok Pixel:</strong> Tracking-Code zur Messung von Conversions und zur Optimierung von Werbeanzeigen. Anbieter: TikTok Technology Limited, Irland (Daten können in die USA übermittelt werden). Datenschutzerklärung: <a href="https://www.tiktok.com/legal/privacy-policy" target="_blank" rel="noopener noreferrer" class="contact-link">tiktok.com/legal/privacy-policy</a></li>
+            <li><strong>FinanceAds:</strong> Affiliate-Netzwerk zur Vermittlung von Finanzprodukten. Anbieter: FinanceAds GmbH & Co. KG, Deutschland. Datenschutzerklärung: <a href="https://www.financeads.net/datenschutz" target="_blank" rel="noopener noreferrer" class="contact-link">financeads.net/datenschutz</a></li>
+          </ul>
+          <p>Alle genannten Tools werden nur nach ausdrücklicher Einwilligung über unser Cookie-Banner aktiviert. Sie können Ihre Einwilligung jederzeit widerrufen.</p>
         </section>
 
         <section class="privacy-section">
           <h2>7. Weitergabe an Partner/Drittparteien</h2>
           <p>Datennutzung (z. B. Klick-IDs, Finanzdaten) erfolgt nur mit Zustimmung an Darlehensgeber oder zugelassene Partner. Saifin fungiert als Vermittler.</p>
+          <p>Über das Affiliate-Netzwerk FinanceAds werden Daten an die jeweiligen Finanzdienstleister (Banken, Broker etc.) weitergegeben, wenn Sie über unsere Website einen Antrag stellen. Die Datenverarbeitung erfolgt dabei durch den jeweiligen Finanzdienstleister gemäß dessen Datenschutzerklärung.</p>
         </section>
 
         <section class="privacy-section">
@@ -57,7 +65,14 @@
 
         <section class="privacy-section">
           <h2>9. Drittlandtransfer & Garantien</h2>
-          <p>Dienstleister wie GitHub (USA) werden genutzt. Hier gelten Datenschutzmechanismen wie Data Privacy Framework oder Standardvertragsklauseln (SCC).</p>
+          <p>Einige unserer Dienstleister haben ihren Sitz außerhalb der EU/des EWR, insbesondere in den USA:</p>
+          <ul class="privacy-list">
+            <li><strong>Vercel Inc.</strong> (USA) – Hosting und Analytics. Datenschutz basiert auf Standardvertragsklauseln (SCC) und dem EU-US Data Privacy Framework.</li>
+            <li><strong>Meta Platforms</strong> (USA) – Meta Pixel. Datenschutz basiert auf Standardvertragsklauseln (SCC) und dem EU-US Data Privacy Framework.</li>
+            <li><strong>TikTok Technology</strong> (USA) – TikTok Pixel. Datenschutz basiert auf Standardvertragsklauseln (SCC) und dem EU-US Data Privacy Framework.</li>
+            <li><strong>GitHub</strong> (USA) – Code-Hosting. Datenschutz basiert auf Standardvertragsklauseln (SCC) und dem EU-US Data Privacy Framework.</li>
+          </ul>
+          <p>Durch diese Mechanismen wird sichergestellt, dass Ihre Daten auch bei Drittlandtransfers ein angemessenes Datenschutzniveau erhalten.</p>
         </section>
 
         <section class="privacy-section">

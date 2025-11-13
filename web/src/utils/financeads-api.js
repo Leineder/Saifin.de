@@ -14,11 +14,12 @@
  */
 const FINANCEADS_API_CONFIG = {
   baseUrl: 'https://data.financeads.net/api/statistics.php',
+  proxyUrl: '/api/financeads', // Vercel Serverless Function Proxy
   userId: '57387', // User-ID aus dem Dashboard - identifiziert Ihren Publisher-Account
   apiKey: '4543b9ad41727264a8f8c8a4f1d97f7e',
   defaultFormat: 'csv', // Standard: CSV
   defaultCurrency: 'EUR', // Standard: EUR
-  enabled: false // API-Aufrufe sind standardmäßig deaktiviert (CORS-Probleme)
+  enabled: true // API-Aufrufe über Proxy aktiviert
 }
 
 /**
@@ -129,7 +130,7 @@ function buildFinanceadsApiUrl(options = {}) {
 }
 
 /**
- * Ruft die Financeads API auf
+ * Ruft die Financeads API über den Proxy auf
  * @param {Object} options - API-Optionen
  * @param {AbortSignal} signal - AbortSignal für Request-Abbruch
  * @returns {Promise<Response>} - API Response
@@ -137,29 +138,50 @@ function buildFinanceadsApiUrl(options = {}) {
 async function callFinanceadsApi(options = {}, signal = null) {
   // Prüfe ob API-Aufrufe aktiviert sind
   if (!FINANCEADS_API_CONFIG.enabled) {
-    console.warn('⚠️ Financeads API-Aufrufe sind deaktiviert (CORS-Probleme). Die API unterstützt keine Browser-Requests.')
-    throw new Error('Financeads API-Aufrufe sind deaktiviert. Die API unterstützt keine CORS-Requests vom Browser.')
+    console.warn('⚠️ Financeads API-Aufrufe sind deaktiviert.')
+    throw new Error('Financeads API-Aufrufe sind deaktiviert.')
   }
   
   try {
-    const url = buildFinanceadsApiUrl(options)
+    // Baue die Financeads API URL auf (für Parameter-Referenz)
+    const financeadsUrl = buildFinanceadsApiUrl(options)
+    const financeadsUrlObj = new URL(financeadsUrl)
     
-    // Versuche JSONP oder Proxy als Alternative
-    // Da die API keine CORS-Header akzeptiert, müssen wir einen Proxy verwenden
-    // Für jetzt deaktivieren wir die direkten API-Aufrufe
+    // Verwende den Proxy-Endpunkt statt direkter API-Aufruf
+    const proxyUrl = new URL(FINANCEADS_API_CONFIG.proxyUrl, window.location.origin)
     
-    // HINWEIS: Die Financeads API unterstützt keine CORS-Requests vom Browser.
-    // Um die API zu nutzen, benötigen Sie:
-    // 1. Einen Proxy-Server (z.B. Vercel Serverless Function)
-    // 2. Oder Server-Side API-Aufrufe
-    // 3. Oder die API-URL direkt im Browser öffnen (nicht programmatisch)
+    // Alle Query-Parameter an den Proxy weiterleiten (außer user und key, die im Proxy gesetzt werden)
+    financeadsUrlObj.searchParams.forEach((value, key) => {
+      if (key !== 'user' && key !== 'key') {
+        proxyUrl.searchParams.set(key, value)
+      }
+    })
     
-    throw new Error('Financeads API unterstützt keine CORS-Requests vom Browser. Bitte verwenden Sie einen Proxy-Server oder Server-Side API-Aufrufe.')
+    // Request an Proxy senden
+    const controller = signal ? new AbortController() : null
+    if (signal) {
+      signal.addEventListener('abort', () => controller.abort())
+    }
+    
+    const response = await fetch(proxyUrl.toString(), {
+      method: 'GET',
+      signal: controller?.signal || signal,
+      headers: {
+        'Accept': 'text/csv, text/xml, application/json, */*'
+      }
+    })
+    
+    if (!response.ok) {
+      const errorText = await response.text()
+      throw new Error(`Proxy Request fehlgeschlagen: ${response.status} ${response.statusText} - ${errorText}`)
+    }
+    
+    return response
   } catch (error) {
     if (error.name === 'AbortError') {
       console.warn('⚠️ Financeads API Request abgebrochen (Timeout)')
     } else {
-      console.debug('Financeads API Request nicht möglich (CORS):', error.message)
+      console.error('❌ Financeads API Request fehlgeschlagen:', error.message)
     }
     throw error
   }
@@ -524,11 +546,48 @@ export async function trackFinanceadsEvent(eventData = {}) {
  * @returns {Promise<void>}
  */
 async function updateFinanceadsStatistics(eventData = {}) {
-  // API-Aufrufe sind deaktiviert, da die Financeads API keine CORS-Requests unterstützt
-  // Das Tracking erfolgt über die Affiliate-Links direkt
-  // Für Statistiken-Abruf benötigen Sie einen Proxy-Server oder Server-Side API-Aufrufe
+  // API-Aufrufe sind jetzt über Proxy aktiviert
+  // Versuche Statistiken für heute abzurufen
+  try {
+    if (!FINANCEADS_API_CONFIG.enabled) {
+      console.debug('Financeads Statistics Update deaktiviert.')
+      return Promise.resolve()
+    }
+    
+    const today = new Date().toISOString().split('T')[0]
+    
+    // Versuche Programm-Statistiken abzurufen (benötigt keine Lead-Berechtigung)
+    const programStats = await getProgramStatistics({
+      timeFrom: today,
+      timeTo: today
+    })
+    
+    if (programStats && Array.isArray(programStats) && programStats.length > 0) {
+      console.debug('✅ Financeads Statistiken aktualisiert:', {
+        date: today,
+        programs: programStats.length
+      })
+      
+      // Speichere Statistiken lokal für spätere Verwendung
+      try {
+        if (typeof window !== 'undefined' && window.localStorage) {
+          const storageKey = `financeads:statistics_${today}`
+          localStorage.setItem(storageKey, JSON.stringify({
+            date: today,
+            programStats,
+            updatedAt: new Date().toISOString()
+          }))
+        }
+      } catch (storageError) {
+        // localStorage Fehler werden ignoriert
+        console.debug('Financeads Statistics Storage Fehler (nicht kritisch):', storageError)
+      }
+    }
+  } catch (error) {
+    // Fehler werden stillschweigend ignoriert, um die Website-Performance nicht zu beeinträchtigen
+    console.debug('Financeads Statistics Update Fehler (nicht kritisch):', error.message)
+  }
   
-  console.debug('Financeads Statistics Update deaktiviert (CORS-Probleme). Tracking erfolgt über Affiliate-Links.')
   return Promise.resolve()
 }
 
@@ -845,10 +904,11 @@ export async function quickTestFinanceadsApi() {
   console.log('🧪 Financeads API Quick Test...')
   console.log('User-ID:', FINANCEADS_API_CONFIG.userId)
   console.log('API-Key:', FINANCEADS_API_CONFIG.apiKey.substring(0, 10) + '...')
-  console.log('⚠️ WICHTIG: Die Financeads API unterstützt keine CORS-Requests vom Browser.')
-  console.log('ℹ️ Die API-Aufrufe sind deaktiviert, um CORS-Fehler zu vermeiden.')
-  console.log('ℹ️ Das Tracking erfolgt über die Affiliate-Links direkt.')
-  console.log('ℹ️ Für Statistiken-Abruf benötigen Sie einen Proxy-Server oder Server-Side API-Aufrufe.')
+  console.log('Proxy-URL:', FINANCEADS_API_CONFIG.proxyUrl)
+  console.log('Status:', FINANCEADS_API_CONFIG.enabled ? '✅ Aktiviert' : '❌ Deaktiviert')
+  console.log('')
+  console.log('ℹ️ Die API-Aufrufe erfolgen jetzt über einen Vercel Serverless Function Proxy.')
+  console.log('ℹ️ Das löst das CORS-Problem und ermöglicht direkte API-Aufrufe vom Browser.')
   
   // Zeige verschiedene API-URLs für manuelles Testen
   try {
@@ -912,19 +972,50 @@ export async function quickTestFinanceadsApi() {
     console.log('💡 Tipp: Versuchen Sie die anderen Endpunkte (2-4), wenn Leads & Sales "No Lead Permission" zurückgibt.')
     console.log('💡 Die anderen Endpunkte benötigen keine Lead-Berechtigung und sollten funktionieren.')
     console.log('💡 Oder prüfen Sie im Financeads Dashboard, ob Lead-Berechtigungen aktiviert sind.')
+    console.log('')
+    console.log('🧪 Teste jetzt die API über den Proxy...')
+    
+    // Teste die API direkt
+    try {
+      const today = new Date().toISOString().split('T')[0]
+      console.log('📊 Teste Programm-Statistiken für heute:', today)
+      
+      const testResult = await getProgramStatistics({
+        timeFrom: today,
+        timeTo: today
+      })
+      
+      if (testResult && Array.isArray(testResult)) {
+        console.log('✅ API-Test erfolgreich!')
+        console.log('📈 Gefundene Programme:', testResult.length)
+        if (testResult.length > 0) {
+          console.log('📋 Beispiel-Daten:', testResult[0])
+        }
+      } else {
+        console.log('⚠️ Keine Daten zurückgegeben (kann normal sein, wenn keine Statistiken vorhanden)')
+      }
+    } catch (error) {
+      console.error('❌ API-Test fehlgeschlagen:', error.message)
+      console.log('💡 Prüfen Sie:')
+      console.log('   1. Ist die Vercel Serverless Function deployed?')
+      console.log('   2. Gibt es Fehler in der Vercel Function Logs?')
+      console.log('   3. Sind User-ID und API-Key korrekt?')
+    }
   } catch (error) {
     console.error('❌ Fehler beim Erstellen der API-URLs:', error)
   }
   
   return {
-    success: false,
-    message: 'API-Aufrufe sind deaktiviert (CORS-Probleme). Tracking erfolgt über Affiliate-Links.',
-    note: 'Wenn "No Lead Permission" erscheint, versuchen Sie die anderen API-Endpunkte (Programm, Monatsübersicht, Tages-Statistiken)',
+    success: FINANCEADS_API_CONFIG.enabled,
+    message: FINANCEADS_API_CONFIG.enabled 
+      ? 'API-Aufrufe sind über Proxy aktiviert.' 
+      : 'API-Aufrufe sind deaktiviert.',
+    proxyUrl: FINANCEADS_API_CONFIG.proxyUrl,
     urls: {
-      leadsSales: null,
-      program: null,
-      monthly: null,
-      daily: null
+      leadsSales: leadsSalesUrl || null,
+      program: programUrl || null,
+      monthly: monthlyUrl || null,
+      daily: dailyUrl || null
     }
   }
 }

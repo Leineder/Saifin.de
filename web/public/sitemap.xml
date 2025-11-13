@@ -41,7 +41,17 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/hanseatic-bank-genialcard</loc>
+    <loc>https://www.saifin.de/kreditkarten/gebuehrenfrei-mastercard-gold</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/kreditkarten/consors-finanz-mastercard</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.saifin.de/kreditkarten/netkredit24-mastercard</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -51,12 +61,12 @@
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/tf-bank-mastercard-gold</loc>
+    <loc>https://www.saifin.de/kreditkarten/1822direkt-visa-classic-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://www.saifin.de/kreditkarten/netkredit24-mastercard</loc>
+    <loc>https://www.saifin.de/kreditkarten/tf-bank-mastercard-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -67,16 +77,6 @@
   </url>
   <url>
     <loc>https://www.saifin.de/kreditkarten/santander-bestcard-basic</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/kreditkarten/consors-finanz-mastercard</loc>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://www.saifin.de/kreditkarten/1822direkt-visa-classic-gold</loc>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
