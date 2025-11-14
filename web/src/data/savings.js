@@ -24,7 +24,7 @@ export const savingsOffers = [
     slug: 'tf-bank',
     title: 'TF Bank Tagesgeld',
     image: '/images/tagesgeldkonten/TFBank_11zon.webp',
-    interest: '2,65% p.a. für Neukunden (4 Monate), danach 1,45% p.a.',
+    interest: '2,80% p.a. für Neukunden (4 Monate), danach 1,45% p.a.',
     payout: 'monatlich',
     depositMin: '0 €',
     security: 'SE – Schwedische Einlagensicherung (Riksgälden) ~90.000 €',
@@ -32,7 +32,7 @@ export const savingsOffers = [
     euDgs: true,
     isNeukundenaktion: true,
     highlights: [
-      '2,65% p.a. Neukunden für 4 Monate',
+      '2,80% p.a. Neukunden für 4 Monate',
       'Monatliche Zinsgutschrift',
       'Kostenfrei, täglich verfügbar'
     ],
