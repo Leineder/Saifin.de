@@ -44,12 +44,15 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+import { storeTrackingParams } from './tracking'
 
 const isMenuOpen = ref(false)
 
 const closeMenu = () => { isMenuOpen.value = false }
 
 onMounted(() => {
+  // Erfasse Tracking-Parameter (UTM, ttclid, fbclid) bei jedem Seitenaufruf
+  storeTrackingParams()
   console.log('App mounted successfully')
 })
 </script>

@@ -3,7 +3,7 @@ import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { offers } from '../data/offers'
 import { trackCreditCardApply, trackFilterUsage } from '../utils/analytics'
-import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { createAffiliateLinkHandler, preloadAffiliateLink, openAffiliateLink } from '../utils/affiliate-links'
 import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const router = useRouter()
@@ -221,8 +221,8 @@ const goToApply = (offer) => {
       }
     }, 1000)
     
-    // Öffne den Affiliate-Link direkt
-    window.open(url, '_blank', 'noopener,noreferrer')
+    // Öffne den Affiliate-Link mit Click-IDs (ttclid, fbclid)
+    openAffiliateLink(url, { preload: false })
   } else {
     // Interne Links
     router.push(url)

@@ -4,7 +4,7 @@ import { onMounted, computed } from 'vue'
 import { offers } from '../data/offers'
 import { trackCreditCardView, trackCreditCardApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
-import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { createAffiliateLinkHandler, preloadAffiliateLink, openAffiliateLink } from '../utils/affiliate-links'
 import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const route = useRoute()
@@ -168,8 +168,8 @@ const goApply = () => {
       }
     }, 1000)
     
-    // Öffne den Affiliate-Link direkt
-    window.open(url, '_blank', 'noopener,noreferrer')
+    // Öffne den Affiliate-Link mit Click-IDs (ttclid, fbclid)
+    openAffiliateLink(url, { preload: false })
     return
   }
   

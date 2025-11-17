@@ -4,7 +4,7 @@ import { onMounted, computed } from 'vue'
 import { savingsOffers } from '../data/savings'
 import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
-import { createAffiliateLinkHandler, preloadAffiliateLink } from '../utils/affiliate-links'
+import { createAffiliateLinkHandler, preloadAffiliateLink, openAffiliateLink } from '../utils/affiliate-links'
 import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
 
 const route = useRoute()
@@ -99,7 +99,8 @@ const goApply = () => {
   const url = offer.value.applyUrl
   if (/^https?:\/\//i.test(url)) {
     // Sollte nicht hier ankommen, da affiliateLinkHandler das abfängt
-    window.open(url, '_blank', 'noopener,noreferrer')
+    // Öffne den Affiliate-Link mit Click-IDs (ttclid, fbclid)
+    openAffiliateLink(url, { preload: false })
   } else {
     safeNavigate(router, url)
   }

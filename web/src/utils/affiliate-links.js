@@ -1,6 +1,62 @@
 // affiliate-links.js
 // Tracking-sichere Affiliate-Link-Verwaltung
 
+import { getTrackingParams } from '../tracking'
+
+/**
+ * Fügt Click-IDs (ttclid, fbclid) an eine URL an, wenn sie vorhanden sind
+ * Für Financeads-Links werden die Click-IDs als tracking_id und tracking_type Parameter übergeben
+ * @param {string} url - Die Affiliate-URL
+ * @returns {string} - URL mit angehängten Click-IDs
+ */
+function appendClickIdsToUrl(url) {
+  if (!url || typeof url !== 'string') return url
+  
+  try {
+    const trackingParams = getTrackingParams()
+    const urlObj = new URL(url)
+    const isFinanceadsLink = urlObj.hostname.includes('financeads.net')
+    
+    if (isFinanceadsLink) {
+      // Financeads-Links: Verwende tracking_id und tracking_type Parameter
+      // Prüfe, ob bereits ein tracking_id Parameter in der URL vorhanden ist
+      if (!urlObj.searchParams.has('tracking_id')) {
+        // TikTok Click-ID hat Priorität (wird zuerst geprüft)
+        if (trackingParams.ttclid && trackingParams.ttclid.trim() !== '') {
+          urlObj.searchParams.set('tracking_id', trackingParams.ttclid)
+          urlObj.searchParams.set('tracking_type', 'tiktok')
+        }
+        // Meta/Facebook Click-ID als Fallback
+        else if (trackingParams.fbclid && trackingParams.fbclid.trim() !== '') {
+          urlObj.searchParams.set('tracking_id', trackingParams.fbclid)
+          urlObj.searchParams.set('tracking_type', 'facebook')
+        }
+      }
+    } else {
+      // Normale Affiliate-Links: Verwende ttclid und fbclid Parameter
+      // Füge ttclid hinzu, wenn vorhanden und noch nicht in der URL
+      if (trackingParams.ttclid && trackingParams.ttclid.trim() !== '') {
+        if (!urlObj.searchParams.has('ttclid')) {
+          urlObj.searchParams.set('ttclid', trackingParams.ttclid)
+        }
+      }
+      
+      // Füge fbclid hinzu, wenn vorhanden und noch nicht in der URL
+      if (trackingParams.fbclid && trackingParams.fbclid.trim() !== '') {
+        if (!urlObj.searchParams.has('fbclid')) {
+          urlObj.searchParams.set('fbclid', trackingParams.fbclid)
+        }
+      }
+    }
+    
+    return urlObj.toString()
+  } catch (error) {
+    // Falls URL-Parsing fehlschlägt, gebe ursprüngliche URL zurück
+    console.warn('Failed to append click IDs to URL:', error)
+    return url
+  }
+}
+
 /**
  * Tracking-sichere Preloading für Affiliate-Links
  * @param {string} url - Die Affiliate-URL
@@ -82,21 +138,25 @@ export function openAffiliateLink(url, options = {}) {
     noopener = true,
     noreferrer = true,
     preload = false, // Standard: kein Preload beim Öffnen
-    trackingSafe = true
+    trackingSafe = true,
+    appendClickIds = true // Standard: Click-IDs anhängen
   } = options
+  
+  // Füge Click-IDs an URL an, wenn aktiviert
+  const finalUrl = appendClickIds ? appendClickIdsToUrl(url) : url
   
   if (trackingSafe) {
     // Verwende tracking-sichere Link-Öffnung (lazy import)
     import('./tracking-safe-preloading.js').then(module => {
-      module.trackingSafeOpenAffiliateLink(url, { target, noopener, noreferrer })
+      module.trackingSafeOpenAffiliateLink(finalUrl, { target, noopener, noreferrer })
     }).catch(error => {
       console.warn('Failed to load tracking-safe link opening:', error)
       // Fallback zu Legacy-Verhalten
-      legacyOpenAffiliateLink(url, options)
+      legacyOpenAffiliateLink(finalUrl, options)
     })
   } else {
     // Legacy-Verhalten
-    legacyOpenAffiliateLink(url, options)
+    legacyOpenAffiliateLink(finalUrl, options)
   }
 }
 
@@ -243,19 +303,23 @@ function legacyOpenAffiliateLink(url, options = {}) {
     target = '_blank',
     noopener = true,
     noreferrer = true,
-    preload = true
+    preload = true,
+    appendClickIds = true
   } = options
+  
+  // Füge Click-IDs an URL an, wenn aktiviert
+  const finalUrl = appendClickIds ? appendClickIdsToUrl(url) : url
   
   // Preload wenn gewünscht
   if (preload) {
-    legacyPreloadAffiliateLink(url)
+    legacyPreloadAffiliateLink(finalUrl)
   }
   
   try {
     // Mobile-kompatible Link-Öffnung
     if (window.open) {
       // Versuche window.open zuerst (bessere mobile Kompatibilität)
-      const newWindow = window.open(url, target, 'noopener,noreferrer')
+      const newWindow = window.open(finalUrl, target, 'noopener,noreferrer')
       if (newWindow) {
         newWindow.focus()
         return
@@ -264,7 +328,7 @@ function legacyOpenAffiliateLink(url, options = {}) {
     
     // Fallback: DOM-Link-Methode
     const link = document.createElement('a')
-    link.href = url
+    link.href = finalUrl
     link.target = target
     
     if (noopener) link.rel = 'noopener'
@@ -278,7 +342,7 @@ function legacyOpenAffiliateLink(url, options = {}) {
   } catch (error) {
     console.warn('Failed to open affiliate link:', error)
     // Letzter Fallback: Direkte Navigation
-    window.location.href = url
+    window.location.href = finalUrl
   }
 }
 
