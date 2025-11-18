@@ -446,6 +446,15 @@ const handleTouchEnd = (event) => {
   padding: 0 !important; /* Kein zusätzliches Padding */
 }
 
+.card-image.barclays-visa {
+  /* Füllt den Container vollständig aus */
+  object-fit: cover; /* Füllt den gesamten Rahmen aus */
+  border-radius: 18px; /* Gleicher border-radius wie Container */
+  background: transparent; /* Kein zusätzlicher Hintergrund */
+  transform: none !important; /* Keine Skalierung - normale Größe */
+  padding: 0 !important; /* Kein zusätzliches Padding */
+}
+
 .card-image-container.gebuehrenfrei-mastercard-gold {
   padding: 12px;
 }

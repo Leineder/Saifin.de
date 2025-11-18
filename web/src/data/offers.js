@@ -131,6 +131,37 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
   },
   {
+    id: 'barclays-visa',
+    slug: 'barclays-visa',
+    title: 'Barclays Visa',
+    bullets: [
+      '25€ Startguthaben',
+      '€0 Jahresgebühr*',
+      'Über 1.000 € Sofortgeld möglich',
+      'Weltweit gebührenfrei bezahlen',
+      'Weltweit kostenlose Bargeldabhebungen',
+      'Bis zu 8 Wochen Zahlungsziel uvm.'
+    ],
+    image: '/images/creditcards/Barclays Visa.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Visa – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      annualFeeText: '€0 Jahresgebühr*',
+      foreignCurrency: 'Weltweit gebührenfrei bezahlen',
+      cashWithdrawal: 'Weltweit kostenlose Bargeldabhebungen',
+      creditLimit: 'Über 1.000 € Sofortgeld möglich*',
+      interest: 'Bis zu 8 Wochen Zahlungsziel',
+      benefits: '25€ Startguthaben',
+      notes: 'Für weitere Informationen zur Kreditkarte schau dir den Affiliate Link an.'
+    },
+    disclaimer: '*Leistungsumfang laut Versicherungsbedingungen/Preisverzeichnis.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C14313531T'
+  },
+  {
     id: 'hanseatic-bank-goldcard',
     slug: 'hanseatic-bank-goldcard',
     title: 'Hanseatic Bank GoldCard (Visa)',

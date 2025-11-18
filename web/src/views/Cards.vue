@@ -1183,7 +1183,8 @@ function initializeMobileTouchOptimizations() {
 
 /* Spezifische Korrekturen für problematische Kreditkarten */
 .card-image.tf-bank-mastercard-gold,
-.card-image.santander-bestcard-basic { 
+.card-image.santander-bestcard-basic,
+.card-image.barclays-visa { 
   /* Beide Karten auf gleiche Größe bringen */
   object-fit: cover; /* Füllt den Container vollständig aus */
   border-radius: 4px; /* Gleicher border-radius wie Container */
