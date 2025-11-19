@@ -320,14 +320,60 @@
       }
     </script>
     
-    <!-- Meta Pixel Code (HEAVILY DEFERRED - load after interaction or 6s) -->
+    <!-- Cookie Consent & Tracking Scripts (nur bei Zustimmung) -->
     <script>
       (function(){
+        // Cookie-Consent-Hilfsfunktionen
+        function getConsentStatus() {
+          try {
+            const stored = localStorage.getItem('cookie-consent');
+            if (!stored) return 'pending';
+            const parsed = JSON.parse(stored);
+            return parsed.status || 'pending';
+          } catch (_) {
+            return 'pending';
+          }
+        }
+        
+        function getCookiePreferences() {
+          try {
+            const stored = localStorage.getItem('cookie-consent');
+            if (!stored) return { analytics: false, marketing: false };
+            const parsed = JSON.parse(stored);
+            return parsed.preferences || { analytics: false, marketing: false };
+          } catch (_) {
+            return { analytics: false, marketing: false };
+          }
+        }
+        
+        function isMarketingAllowed() {
+          const status = getConsentStatus();
+          if (status === 'accepted') return true;
+          if (status === 'rejected') return false;
+          if (status === 'custom') {
+            const prefs = getCookiePreferences();
+            return prefs.marketing || false;
+          }
+          return false;
+        }
+        
+        function isAnalyticsAllowed() {
+          const status = getConsentStatus();
+          if (status === 'accepted') return true;
+          if (status === 'rejected') return false;
+          if (status === 'custom') {
+            const prefs = getCookiePreferences();
+            return prefs.analytics || false;
+          }
+          return false;
+        }
+        
+        // Meta Pixel Code (nur bei Marketing-Consent)
         let pixelInitialized = false;
         let pixelLoading = false;
         
         function initMetaPixel(){
-          // Verhindere mehrfache Initialisierung
+          if (!isMarketingAllowed()) return;
           if (pixelInitialized || pixelLoading || (window.fbq && window.fbq.loaded)) {
             return;
           }
@@ -343,12 +389,10 @@
           s.parentNode.insertBefore(t,s)}(window, document,'script',
           'https://connect.facebook.net/en_US/fbevents.js');
           
-          // Warte bis Pixel geladen ist, bevor init aufgerufen wird
           if (window.fbq && !window.fbq.loaded) {
             window.fbq.queue = window.fbq.queue || [];
           }
           
-          // Prüfe ob Pixel bereits initialisiert wurde
           if (!window.fbq || !window.fbq._i || !window.fbq._i['704761698638212']) {
             if (window.fbq) {
               window.fbq('init', '704761698638212');
@@ -360,48 +404,17 @@
           pixelLoading = false;
         }
         
-        // Defer until user interaction or 6s idle
-        const loadPixel = () => {
-          if (pixelInitialized || pixelLoading) return;
-          
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(initMetaPixel, { timeout: 6000 });
-          } else {
-            setTimeout(initMetaPixel, 6000);
-          }
-        };
-        
-        // Verwende once: true, um sicherzustellen, dass Event-Listener nur einmal ausgelöst werden
-        ['click', 'scroll', 'touchstart'].forEach(event => {
-          document.addEventListener(event, loadPixel, { once: true, passive: true });
-        });
-        
-        // Fallback: Lade nach 6 Sekunden, aber nur einmal
-        if (!pixelInitialized && !pixelLoading) {
-          setTimeout(() => {
-            if (!pixelInitialized && !pixelLoading) {
-              loadPixel();
-            }
-          }, 6000);
-        }
-      })();
-    </script>
-    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=704761698638212&ev=PageView&noscript=1" /></noscript>
-    
-    <!-- TikTok Pixel Code (HEAVILY DEFERRED - load after interaction or 6s) -->
-    <script>
-      (function(){
+        // TikTok Pixel Code (nur bei Marketing-Consent)
         let tiktokInitialized = false;
         let tiktokLoading = false;
         const TIKTOK_PIXEL_ID = 'D314FPBC77U0B8UM6A9G';
         
         function initTikTok(){
-          // Verhindere mehrfache Initialisierung
+          if (!isMarketingAllowed()) return;
           if (tiktokInitialized || tiktokLoading) {
             return;
           }
           
-          // Prüfe ob TikTok Pixel bereits geladen wurde
           if (window.ttq && window.ttq._i && window.ttq._i[TIKTOK_PIXEL_ID]) {
             tiktokInitialized = true;
             return;
@@ -414,7 +427,6 @@
             var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
             ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
             
-            // Prüfe ob Pixel bereits geladen wurde, bevor load aufgerufen wird
             if (!ttq._i || !ttq._i[TIKTOK_PIXEL_ID]) {
               ttq.load(TIKTOK_PIXEL_ID);
               ttq.page();
@@ -425,54 +437,65 @@
           tiktokLoading = false;
         }
         
-        // Defer until user interaction or 6s idle
-        const loadTikTok = () => {
-          if (tiktokInitialized || tiktokLoading) return;
-          
-          if ('requestIdleCallback' in window) {
-            requestIdleCallback(initTikTok, { timeout: 6000 });
-          } else {
-            setTimeout(initTikTok, 6000);
+        // Vercel Analytics (nur bei Analytics-Consent)
+        function initVercelAnalytics() {
+          if (!isAnalyticsAllowed()) {
+            // Mock-Funktion für Development
+            window.va = window.va || function(){var q=window.va.q=window.va.q||[];q.push(arguments)};
+            return;
           }
-        };
+          
+          const isProduction = window.location.hostname !== 'localhost' && 
+                              window.location.hostname !== '127.0.0.1' &&
+                              !window.location.hostname.startsWith('192.168.') &&
+                              !window.location.hostname.startsWith('10.') &&
+                              window.location.protocol === 'https:';
+          
+          if (isProduction) {
+            !function(){var e=window,t=e.va||(e.va=function(){e.va.q?e.va.q.push(arguments):e.va.q=[arguments]})}();
+            window.va('beforeSend',function(e){e.url.startsWith('/_vercel')&&(e.url='/')});
+            (function(){var script=document.createElement('script');script.src='https://va.vercel-scripts.com/v1/script.js';script.defer=true;script.setAttribute('data-api','/_vercel/insights/event');document.head.appendChild(script);})();
+          } else {
+            window.va = window.va || function(){var q=window.va.q=window.va.q||[];q.push(arguments)};
+            console.debug('Vercel Analytics deaktiviert (Development-Modus)');
+          }
+        }
         
-        // Verwende once: true, um sicherzustellen, dass Event-Listener nur einmal ausgelöst werden
-        ['click', 'scroll', 'touchstart'].forEach(event => {
-          document.addEventListener(event, loadTikTok, { once: true, passive: true });
+        // Lade Tracking-Skripte wenn Consent bereits gegeben wurde
+        function loadTrackingIfConsented() {
+          if (isMarketingAllowed()) {
+            if ('requestIdleCallback' in window) {
+              requestIdleCallback(() => {
+                initMetaPixel();
+                initTikTok();
+              }, { timeout: 1000 });
+            } else {
+              setTimeout(() => {
+                initMetaPixel();
+                initTikTok();
+              }, 1000);
+            }
+          }
+          
+          if (isAnalyticsAllowed()) {
+            initVercelAnalytics();
+          }
+        }
+        
+        // Prüfe sofort bei Seitenladung
+        loadTrackingIfConsented();
+        
+        // Lade bei Consent-Event (vom Cookie-Banner)
+        window.addEventListener('cookie-consent-accepted', () => {
+          loadTrackingIfConsented();
         });
         
-        // Fallback: Lade nach 6 Sekunden, aber nur einmal
-        if (!tiktokInitialized && !tiktokLoading) {
-          setTimeout(() => {
-            if (!tiktokInitialized && !tiktokLoading) {
-              loadTikTok();
-            }
-          }, 6000);
-        }
+        // Lade bei Consent-Änderung
+        window.addEventListener('cookie-consent-changed', () => {
+          loadTrackingIfConsented();
+        });
       })();
     </script>
-    
-    <!-- Vercel Analytics - DIRECT INTEGRATION (nur in Production) -->
-    <script>
-      // Vercel Analytics nur in Production laden (vermeidet 404-Fehler im Development)
-      (function(){
-        // Prüfe ob wir in Production sind (localhost = Development)
-        const isProduction = window.location.hostname !== 'localhost' && 
-                            window.location.hostname !== '127.0.0.1' &&
-                            !window.location.hostname.startsWith('192.168.') &&
-                            !window.location.hostname.startsWith('10.') &&
-                            window.location.protocol === 'https:';
-        
-        if (isProduction) {
-          !function(){var e=window,t=e.va||(e.va=function(){e.va.q?e.va.q.push(arguments):e.va.q=[arguments]})}();
-          window.va('beforeSend',function(e){e.url.startsWith('/_vercel')&&(e.url='/')});
-          (function(){var script=document.createElement('script');script.src='https://va.vercel-scripts.com/v1/script.js';script.defer=true;script.setAttribute('data-api','/_vercel/insights/event');document.head.appendChild(script);})();
-        } else {
-          // Development: Erstelle Mock-Funktion um Fehler zu vermeiden
-          window.va = window.va || function(){var q=window.va.q=window.va.q||[];q.push(arguments)};
-          console.debug('Vercel Analytics deaktiviert (Development-Modus)');
-        }
-      })();
-    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=704761698638212&ev=PageView&noscript=1" /></noscript>
   </body>
 </html>

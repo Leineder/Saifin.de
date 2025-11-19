@@ -190,6 +190,9 @@ onMounted(() => {
               klare, schnelle und zuverlässige Übersicht über Angebote zu liefern, damit du ohne
               Umwege die passende Kreditkarte findest.
             </p>
+            <p class="text-700 trust-hint">
+              <strong>✓ Saifin speichert keine persönlichen Daten.</strong> Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
+            </p>
           </div>
         </div>
         <div class="about-image">
@@ -253,6 +256,18 @@ onMounted(() => {
         <details>
           <summary>Wie aktuell sind die Angebote?</summary>
           <div class="text-700 p-2">Wir pflegen die Daten laufend und überprüfen Konditionen regelmäßig.</div>
+        </details>
+        <details>
+          <summary>Werden meine persönlichen Daten gespeichert?</summary>
+          <div class="text-700 p-2">
+            <p class="mb-2"><strong>Nein, Saifin speichert keine persönlichen Daten.</strong></p>
+            <ul class="faq-list">
+              <li>✓ Saifin speichert keine Namen, keine Adressen und keine Finanzinformationen.</li>
+              <li>✓ Alle persönlichen Daten geben Sie ausschließlich direkt beim Anbieter ein.</li>
+              <li>✓ Wir nutzen nur pseudonymisierte Tracking-Daten zur Erfolgsmessung – ohne Rückschluss auf Ihre Identität.</li>
+              <li>✓ Saifin ist eine Vergleichsplattform ohne Kundendatenbank.</li>
+            </ul>
+          </div>
         </details>
       </div>
     </div>
@@ -611,6 +626,33 @@ onMounted(() => {
 .about-text:hover {
   transform: translateY(-2px);
   box-shadow: 0 8px 32px rgba(11, 31, 58, 0.12);
+}
+
+/* Trust Hint */
+.trust-hint {
+  margin-top: 1rem;
+  margin-bottom: 0;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+.trust-hint strong {
+  color: #059669;
+}
+
+/* FAQ List Styling */
+.faq-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0.75rem 0;
+}
+
+.faq-list li {
+  margin: 0.5rem 0;
+  padding-left: 0;
+  color: var(--muted-text);
+  line-height: 1.6;
 }
 
 /* Responsive Styles */

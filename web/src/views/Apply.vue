@@ -125,7 +125,7 @@ function submit() {
   
   // Meta Pixel: CompleteRegistration Event bei Kreditkartenantrag
   try {
-    if (typeof window !== 'undefined' && window.fbq && typeof window.fbq === 'function') {
+    import('../utils/cookie-consent').then(({ safeFbq, safeTtq }) => {
       const eventData = {
         content_name: applySubjectTitle.value,
         content_category: type,
@@ -143,11 +143,9 @@ function submit() {
         eventData.value = savings.rate || 0
       }
       
-      window.fbq('track', 'CompleteRegistration', eventData)
-    }
-    
-    // TikTok Pixel: CompleteRegistration Event
-    if (typeof window !== 'undefined' && window.ttq && typeof window.ttq.track === 'function') {
+      safeFbq('track', 'CompleteRegistration', eventData)
+      
+      // TikTok Pixel: CompleteRegistration Event
       const ttqData = {
         content_type: type,
         content_name: applySubjectTitle.value,
@@ -166,11 +164,14 @@ function submit() {
       }
       
       // Standard Event
-      window.ttq.track('CompleteRegistration', ttqData)
+      safeTtq('track', 'CompleteRegistration', ttqData)
       
       // Custom Event "Antrag gestellt" für einheitliches Tracking
-      window.ttq.track('Antrag gestellt', ttqData)
-    }
+      safeTtq('track', 'Antrag gestellt', ttqData)
+    }).catch((e) => {
+      // Tracking-Fehler nicht zum Absturz führen
+      console.error('Tracking error:', e)
+    })
   } catch (e) {
     // Tracking-Fehler nicht zum Absturz führen
     console.error('Tracking error:', e)

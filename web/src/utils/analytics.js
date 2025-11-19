@@ -4,6 +4,8 @@
  * Analytics Events für Produktinteraktionen
  */
 
+import { safeVa } from './cookie-consent'
+
 // Financeads API Integration (lazy import für Performance)
 let financeadsApiModule = null
 async function getFinanceadsApi() {
@@ -42,17 +44,14 @@ export function trackProductView(productId, productName, category) {
     
     // Warten bis Analytics geladen ist
     const sendEvent = () => {
-      if (typeof window !== 'undefined' && window.va) {
-        window.va('event', EVENT_TYPES.PRODUCT_VIEW, {
-          product_id: productId,
-          product_name: productName,
-          category: category,
-          timestamp: new Date().toISOString()
-        })
-        console.log('✅ Product view tracked successfully')
-        return true
-      }
-      return false
+      safeVa('event', EVENT_TYPES.PRODUCT_VIEW, {
+        product_id: productId,
+        product_name: productName,
+        category: category,
+        timestamp: new Date().toISOString()
+      })
+      console.log('✅ Product view tracked successfully')
+      return true
     }
     
     // Sofort versuchen
@@ -82,18 +81,15 @@ export function trackProductApply(productId, productName, category, applyUrl) {
     
     // Warten bis Analytics geladen ist
     const sendEvent = () => {
-      if (typeof window !== 'undefined' && window.va) {
-        window.va('event', EVENT_TYPES.PRODUCT_APPLY, {
-          product_id: productId,
-          product_name: productName,
-          category: category,
-          apply_url: applyUrl,
-          timestamp: new Date().toISOString()
-        })
-        console.log('✅ Product apply tracked successfully')
-        return true
-      }
-      return false
+      safeVa('event', EVENT_TYPES.PRODUCT_APPLY, {
+        product_id: productId,
+        product_name: productName,
+        category: category,
+        apply_url: applyUrl,
+        timestamp: new Date().toISOString()
+      })
+      console.log('✅ Product apply tracked successfully')
+      return true
     }
     
     // Sofort versuchen
@@ -184,14 +180,12 @@ export function trackApplyButtonClick(productId, productName, category, applyUrl
 // Tracking für Filterinteraktionen
 export function trackFilterUsage(filterType, filterValue, category) {
   try {
-    if (typeof window !== 'undefined' && window.va) {
-      window.va('event', 'filter_used', {
-        filter_type: filterType,
-        filter_value: filterValue,
-        category: category,
-        timestamp: new Date().toISOString()
-      })
-    }
+    safeVa('event', 'filter_used', {
+      filter_type: filterType,
+      filter_value: filterValue,
+      category: category,
+      timestamp: new Date().toISOString()
+    })
   } catch (error) {
     console.warn('Analytics tracking failed:', error)
   }
@@ -200,14 +194,12 @@ export function trackFilterUsage(filterType, filterValue, category) {
 // Tracking für Suchanfragen
 export function trackSearch(query, resultsCount, category) {
   try {
-    if (typeof window !== 'undefined' && window.va) {
-      window.va('event', 'search_performed', {
-        search_query: query,
-        results_count: resultsCount,
-        category: category,
-        timestamp: new Date().toISOString()
-      })
-    }
+    safeVa('event', 'search_performed', {
+      search_query: query,
+      results_count: resultsCount,
+      category: category,
+      timestamp: new Date().toISOString()
+    })
   } catch (error) {
     console.warn('Analytics tracking failed:', error)
   }

@@ -6,6 +6,7 @@ import { trackSavingsView, trackSavingsApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
 import { createAffiliateLinkHandler, preloadAffiliateLink, openAffiliateLink } from '../utils/affiliate-links'
 import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
+import { safeFbq, safeTtq } from '../utils/cookie-consent'
 
 const route = useRoute()
 const router = useRouter()
@@ -51,30 +52,22 @@ const affiliateLinkHandler = computed(() => {
       trackSavingsApply(offer.value.id, offer.value.title, url)
       
       // Meta Pixel: CompleteRegistration bei externem Tagesgeld-Antrag
-      try {
-        if (window.fbq) {
-          window.fbq('track', 'CompleteRegistration', {
-            content_name: offer.value.title,
-            content_category: 'savings',
-            content_id: offer.value.id || offer.value.slug,
-            value: offer.value.rate || 0,
-            status: 'external_redirect'
-          })
-        }
-      } catch (_) {}
+      safeFbq('track', 'CompleteRegistration', {
+        content_name: offer.value.title,
+        content_category: 'savings',
+        content_id: offer.value.id || offer.value.slug,
+        value: offer.value.rate || 0,
+        status: 'external_redirect'
+      })
       
       // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Tagesgeld-Antrag
-      try {
-        if (window.ttq && typeof window.ttq.track === 'function') {
-          window.ttq.track('Antrag gestellt', {
-            content_type: 'savings',
-            content_name: offer.value.title,
-            content_id: offer.value.id || offer.value.slug,
-            value: offer.value.rate || 0,
-            status: 'external_redirect'
-          })
-        }
-      } catch (_) {}
+      safeTtq('track', 'Antrag gestellt', {
+        content_type: 'savings',
+        content_name: offer.value.title,
+        content_id: offer.value.id || offer.value.slug,
+        value: offer.value.rate || 0,
+        status: 'external_redirect'
+      })
       
       // Beende Performance-Messung nach kurzer Verzögerung
       setTimeout(() => {

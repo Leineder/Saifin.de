@@ -28,23 +28,35 @@
 
     <footer class="site-footer">
       <div class="container footer-inner">
-        <span>© {{ new Date().getFullYear() }} Saifin</span>
-        <span class="sep">·</span>
-        <router-link to="/datenschutz" class="footer-link">Datenschutz</router-link>
-        <span class="sep">·</span>
-        <router-link to="/impressum" class="footer-link">Impressum</router-link>
-        <span class="sep">·</span>
-        <router-link :to="{ path: '/', hash: '#about' }" class="footer-link">Über uns</router-link>
-        <span class="sep">·</span>
-        <router-link to="/kontakt" class="footer-link">Kontakt</router-link>
+        <div class="footer-top">
+          <span>© {{ new Date().getFullYear() }} Saifin</span>
+          <span class="sep">·</span>
+          <router-link to="/datenschutz" class="footer-link">Datenschutz</router-link>
+          <span class="sep">·</span>
+          <router-link to="/impressum" class="footer-link">Impressum</router-link>
+          <span class="sep">·</span>
+          <router-link :to="{ path: '/', hash: '#about' }" class="footer-link">Über uns</router-link>
+          <span class="sep">·</span>
+          <router-link to="/kontakt" class="footer-link">Kontakt</router-link>
+        </div>
+        <div class="footer-privacy-note">
+          <p class="footer-privacy-text">
+            <strong>Ihre Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. 
+            Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
+          </p>
+        </div>
       </div>
     </footer>
+    
+    <!-- Cookie-Banner -->
+    <CookieBanner />
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import { storeTrackingParams } from './tracking'
+import CookieBanner from './components/CookieBanner.vue'
 
 const isMenuOpen = ref(false)
 
@@ -155,22 +167,56 @@ onMounted(() => {
 .site-footer { 
   border-top: 1px solid var(--border); 
   background: var(--surface);
-  /* Fixed height to prevent CLS */
-  min-height: 60px;
   contain: layout style;
 }
 .footer-inner { 
   display: flex; 
+  flex-direction: column;
   align-items: center; 
   justify-content: center; 
-  gap: 10px; 
-  padding: 18px 16px; 
+  gap: 12px; 
+  padding: 20px 16px; 
   color: var(--muted-text); 
   font-size: 0.9rem;
-  /* Prevent layout shifts */
-  min-height: 60px;
+}
+.footer-top {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 .footer-link { color: var(--link-color); text-decoration: none; }
 .footer-link:hover { text-decoration: underline; }
 .sep { color: var(--subtle-text); }
+.footer-privacy-note {
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  max-width: 800px;
+}
+.footer-privacy-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted-text);
+  line-height: 1.5;
+}
+.footer-privacy-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
+@media (max-width: 767px) {
+  .footer-inner {
+    padding: 16px 12px;
+  }
+  .footer-top {
+    gap: 8px;
+    font-size: 0.85rem;
+  }
+  .footer-privacy-text {
+    font-size: 0.8rem;
+  }
+}
 </style>

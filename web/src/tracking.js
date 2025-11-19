@@ -58,13 +58,13 @@ export function initEngagementTracking() {
   let interactionDetected = false
   let scrollDepth = 0
 
-  function trackEngagement(trigger) {
+  async function trackEngagement(trigger) {
     if (engagementTracked || interactionDetected) return
     
     interactionDetected = true
     
     // Kurze Verzögerung um sicherzustellen, dass es echtes Engagement ist
-    setTimeout(() => {
+    setTimeout(async () => {
       if (!engagementTracked) {
         engagementTracked = true
         
@@ -75,25 +75,20 @@ export function initEngagementTracking() {
 
         // Meta Pixel: ViewContent Event für Engagement
         try {
-          if (window.fbq && typeof window.fbq === 'function') {
-            window.fbq('track', 'ViewContent', {
-              content_type: 'engagement',
-              content_name: 'User Engaged',
-              trigger: trigger,
-              scroll_depth: scrollDepth
-            })
-          }
-        } catch (_) {}
+          const { safeFbq, safeTtq } = await import('./utils/cookie-consent.js')
+          safeFbq('track', 'ViewContent', {
+            content_type: 'engagement',
+            content_name: 'User Engaged',
+            trigger: trigger,
+            scroll_depth: scrollDepth
+          })
 
-        // TikTok Pixel: Custom Event "Interaktion"
-        try {
-          if (window.ttq && typeof window.ttq.track === 'function') {
-            window.ttq.track('Interaktion', {
-              content_type: 'engagement',
-              trigger: trigger,
-              scroll_depth: scrollDepth
-            })
-          }
+          // TikTok Pixel: Custom Event "Interaktion"
+          safeTtq('track', 'Interaktion', {
+            content_type: 'engagement',
+            trigger: trigger,
+            scroll_depth: scrollDepth
+          })
         } catch (_) {}
 
         // Cleanup: Event Listener entfernen

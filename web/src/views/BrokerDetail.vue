@@ -6,6 +6,7 @@ import { trackBrokerView, trackBrokerApply } from '../utils/analytics'
 import { safeReplace, safeNavigate } from '../utils/navigation'
 import { createAffiliateLinkHandler, preloadAffiliateLink, openAffiliateLink } from '../utils/affiliate-links'
 import { useAffiliatePerformance } from '../utils/affiliate-performance-fallback'
+import { safeFbq, safeTtq } from '../utils/cookie-consent'
 
 const route = useRoute()
 const router = useRouter()
@@ -51,28 +52,20 @@ const affiliateLinkHandler = computed(() => {
       trackBrokerApply(broker.value.id, broker.value.name, url)
       
       // Meta Pixel: CompleteRegistration bei externem Broker-Antrag
-      try {
-        if (window.fbq) {
-          window.fbq('track', 'CompleteRegistration', {
-            content_name: broker.value.name,
-            content_category: 'broker',
-            content_id: broker.value.id || broker.value.slug,
-            status: 'external_redirect'
-          })
-        }
-      } catch (_) {}
+      safeFbq('track', 'CompleteRegistration', {
+        content_name: broker.value.name,
+        content_category: 'broker',
+        content_id: broker.value.id || broker.value.slug,
+        status: 'external_redirect'
+      })
       
       // TikTok Pixel: Custom Event "Antrag gestellt" bei externem Broker-Antrag
-      try {
-        if (window.ttq && typeof window.ttq.track === 'function') {
-          window.ttq.track('Antrag gestellt', {
-            content_type: 'broker',
-            content_name: broker.value.name,
-            content_id: broker.value.id || broker.value.slug,
-            status: 'external_redirect'
-          })
-        }
-      } catch (_) {}
+      safeTtq('track', 'Antrag gestellt', {
+        content_type: 'broker',
+        content_name: broker.value.name,
+        content_id: broker.value.id || broker.value.slug,
+        status: 'external_redirect'
+      })
       
       // Beende Performance-Messung nach kurzer Verzögerung
       setTimeout(() => {
