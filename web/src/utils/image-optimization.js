@@ -233,38 +233,11 @@ export class MobileImageOptimizer {
           aspect-ratio: 1.586 / 1 !important;
         }
         
-        /* Optimierte Ladezeiten */
-        .card-image:not(.loaded) {
-          opacity: 0.7 !important;
-          transition: opacity 0.3s ease !important;
-        }
-        
-        .card-image.loaded {
+        /* Volle Opacity für klare Farben */
+        .card-image {
           opacity: 1 !important;
         }
         
-        /* Placeholder für bessere UX */
-        .card-image-container::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: 0;
-          background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-          background-size: 200% 100%;
-          animation: loading 1.5s infinite;
-          z-index: -1;
-        }
-        
-        @keyframes loading {
-          0% { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-        
-        .card-image.loaded + .card-image-container::before {
-          display: none;
-        }
       }
     `
     document.head.appendChild(style)

@@ -109,10 +109,6 @@ const filteredOffers = computed(() => {
   return filtered
 })
 
-// Get top 3 offers for recommendations
-const topOffers = computed(() => {
-  return offers.slice(0, 3)
-})
 
 // Analytics: Filter-Nutzung tracken
 watch([maxAnnualFee, foreignFee, cardTypes, supportsApplePay, supportsGooglePay, hasInsurance, hasCashback, schufaFree, instantDecision], 
@@ -314,7 +310,7 @@ function initializeMobileTouchOptimizations() {
   })
   
   function handleTouchStart(event) {
-    const offer = event.target.closest('.offer-card, .recommendation-card')
+    const offer = event.target.closest('.offer-card')
     if (offer) {
       const offerData = offers.find(o => o.id === offer.dataset.offerId)
       if (offerData?.applyUrl && /^https?:\/\//i.test(offerData.applyUrl)) {
@@ -332,7 +328,7 @@ function initializeMobileTouchOptimizations() {
     event.preventDefault()
     event.stopPropagation()
     
-    const offer = event.target.closest('.offer-card, .recommendation-card')
+    const offer = event.target.closest('.offer-card')
     if (offer) {
       const offerData = offers.find(o => o.id === offer.dataset.offerId)
       if (offerData) {
@@ -353,7 +349,7 @@ function initializeMobileTouchOptimizations() {
     event.preventDefault()
     event.stopPropagation()
     
-    const offer = event.target.closest('.offer-card, .recommendation-card')
+    const offer = event.target.closest('.offer-card')
     if (offer) {
       const offerData = offers.find(o => o.id === offer.dataset.offerId)
       if (offerData) {
@@ -534,120 +530,67 @@ function initializeMobileTouchOptimizations() {
               <label class="checkbox"><input type="checkbox" v-model="instantDecision" /> <span>Sofortentscheidung</span></label>
             </div>
           </div>
-
-          <!-- Recommendations -->
-          <div class="recommendations-section">
-            <h2 class="recommendations-title section-title">Unsere Empfehlungen</h2>
-            <div class="recommendations-grid">
-              <div 
-                v-for="offer in topOffers" 
-                :key="offer.id" 
-                :data-offer-id="offer.id"
-                class="recommendation-card surface-card border-round-xl card-accent"
-                @click="goToDetail(offer)"
-                style="cursor: pointer;"
-              >
-                <div v-if="offer.bonus" class="bonus-banner">
-                  <i class="pi pi-gift"></i>
-                  {{ offer.bonus }} Bonus
-                </div>
-                <div class="recommendation-content">
-                  <div class="card-image-container">
-                    <img :src="offer.image + '?v=20241016'" :alt="offer.title" :class="['card-image', offer.id]" loading="lazy" decoding="async" width="140" height="88" @error="handleImageError" />
-                  </div>
-                  <div class="recommendation-details">
-                    <div class="offer-header">
-                      <h3 class="offer-title">{{ offer.title }}</h3>
-                    </div>
-                    <div class="features-list">
-                      <template v-for="(feature, index) in offer.bullets" :key="index">
-                        <div v-if="index < 4 || isNegativeBullet(feature)" class="feature-item">
-                          <span v-if="isNegativeBullet(feature)" class="feature-icon-red">✗</span>
-                          <i v-else class="pi pi-check"></i>
-                          <span>{{ feature }}</span>
-                        </div>
-                      </template>
-                    </div>
-                    <div class="annual-fee">{{ formatEuro(offer.annualFee) }} pro Jahr</div>
-                    <div class="action-buttons">
-                      <button 
-                      class="p-button apply-cta" 
-                      @click.stop="goToApply(offer)"
-                      @mouseenter="offer.applyUrl && /^https?:\/\//i.test(offer.applyUrl) ? preloadAffiliateLink(offer.applyUrl) : null"
-                    >
-                      <span class="p-button-label">Zum Antrag</span>
-                    </button>
-                      <button class="expand-btn" @click.stop="goToDetail(offer)">Details <i class="pi pi-chevron-right"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </main>
       </div>
       <!-- Volle Breite: Guide & FAQ außerhalb des 2-Spalten-Layouts -->
       <div class="container">
         <!-- Guide: Wie finde ich die richtige Kreditkarte? -->
-        <div class="guide-section">
-          <div class="guide-header">
+        <details class="guide-section">
+          <summary class="guide-summary">
             <div class="section-eyebrow">Ratgeber</div>
             <h2 class="section-title">Wie finde ich die richtige Kreditkarte?</h2>
+          </summary>
+          <div class="guide-content">
             <p class="guide-subtitle">Kreditkarten unterscheiden sich in Art (Charge, Credit/Revolving, Debit), Gebühren und Zusatzleistungen. Wichtig ist, dass die Karte zu deinem Nutzungsprofil passt.</p>
-          </div>
-          <div class="guide-grid">
-            <div class="surface-card border-round-lg p-3 card-accent info-card">
-              <h3 class="info-title">Kartenarten</h3>
-              <ul class="guide-list">
-                <li><strong>Charge:</strong> Sammelabrechnung, Vollausgleich monatlich.</li>
-                <li><strong>Credit/Revolving:</strong> Teilzahlung möglich, bei Restzahlung fallen Zinsen an.</li>
-                <li><strong>Debit:</strong> Sofortabbuchung vom Verrechnungskonto.</li>
-              </ul>
+            <div class="guide-grid">
+              <div class="surface-card border-round-lg p-3 card-accent info-card">
+                <h3 class="info-title">Kartenarten</h3>
+                <ul class="guide-list">
+                  <li><strong>Charge:</strong> Sammelabrechnung, Vollausgleich monatlich.</li>
+                  <li><strong>Credit/Revolving:</strong> Teilzahlung möglich, bei Restzahlung fallen Zinsen an.</li>
+                  <li><strong>Debit:</strong> Sofortabbuchung vom Verrechnungskonto.</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent info-card">
+                <h3 class="info-title">Worauf achten</h3>
+                <ul class="guide-list">
+                  <li><strong>Jahresgebühr:</strong> 0 € bis Premium – passt der Gegenwert?</li>
+                  <li><strong>Auslandseinsatz:</strong> 0 % ideal für Reisen; ATM-Gebühren beachten.</li>
+                  <li><strong>Mobile Pay:</strong> Apple Pay/Google Pay Support.</li>
+                  <li><strong>Leistungen:</strong> Versicherungen, Cashback, Reiseguthaben.</li>
+                  <li><strong>Bedingungen:</strong> SCHUFA, Sofortentscheidung, Limits.</li>
+                </ul>
+              </div>
             </div>
-            <div class="surface-card border-round-lg p-3 card-accent info-card">
-              <h3 class="info-title">Worauf achten</h3>
-              <ul class="guide-list">
-                <li><strong>Jahresgebühr:</strong> 0 € bis Premium – passt der Gegenwert?</li>
-                <li><strong>Auslandseinsatz:</strong> 0 % ideal für Reisen; ATM-Gebühren beachten.</li>
-                <li><strong>Mobile Pay:</strong> Apple Pay/Google Pay Support.</li>
-                <li><strong>Leistungen:</strong> Versicherungen, Cashback, Reiseguthaben.</li>
-                <li><strong>Bedingungen:</strong> SCHUFA, Sofortentscheidung, Limits.</li>
-              </ul>
+            <div class="surface-card border-round-lg p-3 card-accent info-card guide-steps-card">
+              <h3 class="info-title">In 4 Schritten starten</h3>
+              <ol class="steps-list">
+                <li>Nutzungsprofil definieren (Reisen, Alltag, Cashback, Versicherungen).</li>
+                <li>Filter in der Sidebar nutzen (Gebühren, Ausland, Art, Mobile Pay).</li>
+                <li>2–3 Karten vergleichen und Bedingungen prüfen.</li>
+                <li>Bei Revolving: Vollabbuchung aktivieren, um Zinsen zu vermeiden.</li>
+              </ol>
+            </div>
+            <div class="faq">
+              <details class="faq-item">
+                <summary>Charge vs. Credit vs. Debit – was ist der Unterschied?</summary>
+                <div class="text-700 p-2">Charge: Sammelabrechnung mit Vollausgleich. Credit/Revolving: Teilzahlung möglich, Zinsen bei Restschulden. Debit: Direkte Abbuchung vom Konto.</div>
+              </details>
+              <details class="faq-item">
+                <summary>Ist 0 % Auslandseinsatz wirklich gebührenfrei?</summary>
+                <div class="text-700 p-2">Die Bank erhebt keine Auslandseinsatzgebühr, Automatenbetreiber können jedoch eigene Entgelte verlangen. Hinweise im Preisverzeichnis beachten.</div>
+              </details>
+              <details class="faq-item">
+                <summary>Beeinflusst eine Kreditkarte meine SCHUFA?</summary>
+                <div class="text-700 p-2">Ja, Beantragung und Nutzung können vermerkt werden. Verantwortungsvolle Nutzung (pünktliche Zahlung) ist positiv.</div>
+              </details>
+              <details class="faq-item">
+                <summary>Wie vermeide ich Zinsen bei Revolving-Karten?</summary>
+                <div class="text-700 p-2">Automatische Vollabbuchung aktivieren und Rechnungen fristgerecht begleichen.</div>
+              </details>
             </div>
           </div>
-          <div class="surface-card border-round-lg p-3 card-accent info-card guide-steps-card">
-            <h3 class="info-title">In 4 Schritten starten</h3>
-            <ol class="steps-list">
-              <li>Nutzungsprofil definieren (Reisen, Alltag, Cashback, Versicherungen).</li>
-              <li>Filter in der Sidebar nutzen (Gebühren, Ausland, Art, Mobile Pay).</li>
-              <li>2–3 Karten vergleichen und Bedingungen prüfen.</li>
-              <li>Bei Revolving: Vollabbuchung aktivieren, um Zinsen zu vermeiden.</li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- FAQ Kreditkarten -->
-        <div class="faq-section">
-          <h2 class="section-title">Häufige Fragen zur Kreditkarte</h2>
-          <div class="faq-list">
-            <details class="faq-item">
-              <summary>Charge vs. Credit vs. Debit – was ist der Unterschied?</summary>
-              <p>Charge: Sammelabrechnung mit Vollausgleich. Credit/Revolving: Teilzahlung möglich, Zinsen bei Restschulden. Debit: Direkte Abbuchung vom Konto.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Ist 0 % Auslandseinsatz wirklich gebührenfrei?</summary>
-              <p>Die Bank erhebt keine Auslandseinsatzgebühr, Automatenbetreiber können jedoch eigene Entgelte verlangen. Hinweise im Preisverzeichnis beachten.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Beeinflusst eine Kreditkarte meine SCHUFA?</summary>
-              <p>Ja, Beantragung und Nutzung können vermerkt werden. Verantwortungsvolle Nutzung (pünktliche Zahlung) ist positiv.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Wie vermeide ich Zinsen bei Revolving-Karten?</summary>
-              <p>Automatische Vollabbuchung aktivieren und Rechnungen fristgerecht begleichen.</p>
-            </details>
-          </div>
-        </div>
+        </details>
       </div>
     </section>
   </div>
@@ -655,12 +598,6 @@ function initializeMobileTouchOptimizations() {
 
 <style scoped>
 .cards-page { background: var(--surface-muted); min-height: 100vh; }
-
-/* Reduzierte Abstände für die Section - vor allem mobil */
-.cards-page .section {
-  padding: 24px 0;
-}
-
 .layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
 .sidebar { position: relative; }
 .sidebar-card { position: sticky; top: 86px; }
@@ -883,50 +820,52 @@ function initializeMobileTouchOptimizations() {
   padding: 0.5rem;
 }
 
-/* Recommendations Section */
-.recommendations-section {
-  margin-top: 3rem;
-}
-
-.recommendations-title {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 1.5rem;
-  text-align: center;
-}
-
-.recommendations-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-  gap: 1.5rem;
-}
-
-.recommendation-card {
-  background: var(--surface);
-  border-radius: 0.75rem;
-  box-shadow: 0 1px 3px var(--shadow-color);
-  position: relative;
-  overflow: hidden;
-}
-
-.recommendation-content {
-  display: flex;
-  padding: 1.5rem;
-  gap: 1.5rem;
-}
-
-.recommendation-details {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
 
 /* Guide & FAQ */
-.guide-section { margin-top: 3rem; }
-.guide-header { margin-bottom: 1rem; }
-.guide-subtitle { color: var(--muted-text); }
+.guide-section { 
+  margin-top: 2rem; 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  padding: 1rem 1.5rem;
+}
+.guide-section summary { 
+  cursor: pointer; 
+  list-style: none; 
+  outline: none;
+}
+.guide-section summary::-webkit-details-marker { 
+  display: none; 
+}
+.guide-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.guide-summary .section-title {
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+}
+.guide-summary::after {
+  content: '▼';
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.guide-section[open] .guide-summary::after {
+  transform: rotate(180deg);
+}
+.guide-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.guide-subtitle { color: var(--muted-text); margin-bottom: 1rem; }
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
 .guide-list { margin: 0.25rem 0 0; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps { margin-top: 1rem; }
@@ -936,11 +875,29 @@ function initializeMobileTouchOptimizations() {
 .info-card { box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06); }
 .info-title { font-size: 0.875rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--subtle-text); margin: 0 0 .25rem; }
 
-.faq-section { margin-top: 2rem; }
-.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; }
-.faq-item summary { cursor: pointer; font-weight: 600; color: var(--text); list-style: none; }
-.faq-item p { margin: 0.5rem 0 0; color: var(--muted-text); }
+.faq {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.faq-item { 
+  background: var(--surface-muted); 
+  border: 1px solid var(--border); 
+  border-radius: 0.5rem; 
+  padding: 0.5rem 0.75rem; 
+}
+.faq-item summary { 
+  cursor: pointer; 
+  font-weight: 600; 
+  color: var(--text); 
+  list-style: none; 
+}
+.faq-item summary::-webkit-details-marker { 
+  display: none; 
+}
 
 /* Last Updated Text */
 .last-updated {
@@ -987,11 +944,6 @@ function initializeMobileTouchOptimizations() {
 
 /* MOBILE-OPTIMIERTE RESPONSIVE DESIGN */
 @media (max-width: 768px) {
-  /* Ultra-optimierte Abstände für mobile */
-  .cards-page .section {
-    padding: 4px 0;
-  }
-  
   .content h1 {
     margin-top: 0;
     padding-top: 0;
@@ -1012,8 +964,7 @@ function initializeMobileTouchOptimizations() {
   .layout { grid-template-columns: 1fr; }
   .sidebar-card { position: static; }
   
-  .offer-content,
-  .recommendation-content {
+  .offer-content {
     flex-direction: column;
     gap: 0.75rem;
     padding: 1rem !important;
@@ -1086,48 +1037,15 @@ function initializeMobileTouchOptimizations() {
     /* Mobile-optimierte Performance */
     will-change: transform;
     transform: translateZ(0);
-  }
-  
-  .card-image:not(.loaded) {
-    opacity: 0.7 !important;
-    transition: opacity 0.3s ease !important;
-  }
-  
-  .card-image.loaded {
+    /* Volle Opacity für klare Farben */
     opacity: 1 !important;
   }
   
-  /* PLACEHOLDER FÜR BESSERE UX */
-  .card-image-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
-    background-size: 200% 100%;
-    animation: loading 1.5s infinite;
-    z-index: -1;
-  }
-  
-  @keyframes loading {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-  }
-  
-  .card-image.loaded + .card-image-container::before {
-    display: none;
-  }
   
   .expandable-sections {
     justify-content: center;
   }
   
-  .recommendations-grid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
 
   .mobile-filter-panel { 
     margin-bottom: 12px;
@@ -1160,8 +1078,7 @@ function initializeMobileTouchOptimizations() {
   }
   
   /* MOBILE PERFORMANCE-OPTIMIERUNGEN */
-  .offer-card,
-  .recommendation-card {
+  .offer-card {
     contain: layout style paint !important;
     will-change: transform !important;
   }

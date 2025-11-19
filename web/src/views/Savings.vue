@@ -167,49 +167,9 @@ function goToApply(o) {
         </aside>
 
         <!-- Content -->
-        <main class="content">
-          <!-- Mobile Filter Toggle -->
-          <div class="mobile-filter-toggle">
-            <button class="p-button apply-cta" @click="showFilters = !showFilters">
-              <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
-              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
-            </button>
-          </div>
-
-          <!-- Mobile Filter Panel -->
-          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
-            <div class="section-eyebrow">Filter</div>
-            <h2 class="section-title text-xl mb-3">Finde dein Tagesgeld</h2>
-
-            <div class="filter-group">
-              <h3 class="filter-title">Suche</h3>
-              <input v-model="search" placeholder="Name, Zins, Einlagensicherung" class="filter-input" />
-            </div>
-
-            <div class="filter-group">
-              <label class="checkbox"><input type="checkbox" v-model="onlyRecommended" /> <span>Nur Empfehlungen</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="onlyPromo" /> <span>Neukundenaktion</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="onlyMonthlyPayout" /> <span>Monatliche Zinszahlung</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="dgsOnly" /> <span>EU-Einlagensicherung</span></label>
-            </div>
-
-            <div class="filter-group">
-              <h3 class="filter-title">Land</h3>
-              <select v-model="countryFilter" class="filter-select">
-                <option value="alle">alle</option>
-                <option value="DE">Deutschland</option>
-                <option value="ES">Spanien</option>
-                <option value="FR">Frankreich</option>
-                <option value="SE">Schweden</option>
-                <option value="CZ">Tschechien</option>
-                <option value="MT">Malta</option>
-                <option value="EU">EU/Plattform</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="section-eyebrow">Angebote</div>
-          <h1 class="section-title text-2xl md:text-3xl mb-3">Tagesgeld im Vergleich</h1>
+        <main class="content" style="min-width: 0;">
+          <h1 class="section-title text-2xl md:text-3xl mb-1">Tagesgeld im Vergleich</h1>
+          <p class="last-updated">zuletzt aktualisiert am 1. November 2025</p>
 
           <div class="offers-section">
             <div 
@@ -259,49 +219,91 @@ function goToApply(o) {
               </div>
             </div>
           </div>
+
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button class="p-button apply-cta" @click="showFilters = !showFilters">
+              <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
+              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
+            </button>
+          </div>
+
+          <!-- Mobile Filter Panel -->
+          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde dein Tagesgeld</h2>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Suche</h3>
+              <input v-model="search" placeholder="Name, Zins, Einlagensicherung" class="filter-input" />
+            </div>
+
+            <div class="filter-group">
+              <label class="checkbox"><input type="checkbox" v-model="onlyRecommended" /> <span>Nur Empfehlungen</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="onlyPromo" /> <span>Neukundenaktion</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="onlyMonthlyPayout" /> <span>Monatliche Zinszahlung</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="dgsOnly" /> <span>EU-Einlagensicherung</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Land</h3>
+              <select v-model="countryFilter" class="filter-select">
+                <option value="alle">alle</option>
+                <option value="DE">Deutschland</option>
+                <option value="ES">Spanien</option>
+                <option value="FR">Frankreich</option>
+                <option value="SE">Schweden</option>
+                <option value="CZ">Tschechien</option>
+                <option value="MT">Malta</option>
+                <option value="EU">EU/Plattform</option>
+              </select>
+            </div>
+          </div>
         </main>
       </div>
 
       <!-- Volle Breite: Guide & FAQ -->
       <div class="container">
-        <div class="guide-section">
-          <div class="guide-header">
+        <details class="guide-section">
+          <summary class="guide-summary">
             <div class="section-eyebrow">Ratgeber</div>
             <h2 class="section-title">Wissenswertes zum Tagesgeld</h2>
-          </div>
-          <div class="guide-grid">
-            <div class="surface-card border-round-lg p-3 card-accent info-card">
-              <h3 class="guide-title">Vorteile</h3>
-              <ul>
-                <li>Jederzeit verfügbar</li>
-                <li>Gesetzliche Einlagensicherung bis 100.000 €</li>
-                <li>Oft Sonderzinsen für Neukunden</li>
-              </ul>
+          </summary>
+          <div class="guide-content">
+            <div class="guide-grid">
+              <div class="surface-card border-round-lg p-3 card-accent info-card">
+                <h3 class="guide-title">Vorteile</h3>
+                <ul>
+                  <li>Jederzeit verfügbar</li>
+                  <li>Gesetzliche Einlagensicherung bis 100.000 €</li>
+                  <li>Oft Sonderzinsen für Neukunden</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent info-card">
+                <h3 class="guide-title">Worauf achten</h3>
+                <ul>
+                  <li>Zinsgarantie-Dauer</li>
+                  <li>Neukunden- vs. Bestandskundenzins</li>
+                  <li>Kombinationsangebote (z. B. mit Depot)</li>
+                </ul>
+              </div>
             </div>
-            <div class="surface-card border-round-lg p-3 card-accent info-card">
-              <h3 class="guide-title">Worauf achten</h3>
-              <ul>
-                <li>Zinsgarantie-Dauer</li>
-                <li>Neukunden- vs. Bestandskundenzins</li>
-                <li>Kombinationsangebote (z. B. mit Depot)</li>
-              </ul>
+            <div class="faq">
+              <details>
+                <summary>Was bedeutet Zinsgarantie?</summary>
+                <div class="text-700 p-2">Ein fester Zinssatz für eine definierte Zeitspanne – unabhängig von Marktschwankungen.</div>
+              </details>
+              <details>
+                <summary>Ist mein Geld sicher?</summary>
+                <div class="text-700 p-2">Guthaben sind bis 100.000 € pro Kunde und Bank gesetzlich abgesichert.</div>
+              </details>
+              <details>
+                <summary>Wie schnell komme ich an mein Geld?</summary>
+                <div class="text-700 p-2">Täglich – Überweisungen dauern i. d. R. 1 Bankarbeitstag.</div>
+              </details>
             </div>
           </div>
-          <div class="faq">
-            <details>
-              <summary>Was bedeutet Zinsgarantie?</summary>
-              <div class="text-700 p-2">Ein fester Zinssatz für eine definierte Zeitspanne – unabhängig von Marktschwankungen.</div>
-            </details>
-            <details>
-              <summary>Ist mein Geld sicher?</summary>
-              <div class="text-700 p-2">Guthaben sind bis 100.000 € pro Kunde und Bank gesetzlich abgesichert.</div>
-            </details>
-            <details>
-              <summary>Wie schnell komme ich an mein Geld?</summary>
-              <div class="text-700 p-2">Täglich – Überweisungen dauern i. d. R. 1 Bankarbeitstag.</div>
-            </details>
-          </div>
-        </div>
+        </details>
       </div>
     </section>
   </div>
@@ -319,13 +321,20 @@ function goToApply(o) {
 }
 .sidebar { position: relative; }
 .sidebar-card { position: sticky; top: 86px; }
-.content { min-width: 0; }
+.content { min-width: 0; padding-top: 0; }
 
 .filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
 .filter-title { font-size: 0.875rem; font-weight: 600; color: var(--text); margin: 0; }
 .filter-input { padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.375rem; background: var(--surface); color: var(--text); font-size: 0.875rem; }
 .filter-select { padding: 0.5rem; border: 1px solid var(--border); border-radius: 0.375rem; background: var(--surface); color: var(--text); font-size: 0.875rem; }
 .checkbox { display: flex; align-items: center; gap: 0.5rem; font-size: 0.875rem; color: var(--text); }
+
+.last-updated {
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  margin: 0.25rem 0 0.5rem 0;
+  font-weight: 400;
+}
 
 .offers-section { margin-bottom: 3rem; }
 .offer-card { margin-bottom: 1.5rem; position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
@@ -420,20 +429,86 @@ function goToApply(o) {
 .action-buttons { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 .expand-btn { display: flex; align-items: center; gap: 0.25rem; background: none; border: none; color: var(--subtle-text); font-size: 0.875rem; cursor: pointer; padding: 0.5rem; }
 
+.guide-section { 
+  margin-top: 2rem; 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  padding: 1rem 1.5rem;
+  content-visibility: auto; 
+  contain-intrinsic-size: 100px;
+}
+.guide-section summary { 
+  cursor: pointer; 
+  list-style: none; 
+  outline: none;
+}
+.guide-section summary::-webkit-details-marker { 
+  display: none; 
+}
+.guide-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.guide-summary .section-title {
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+}
+.guide-summary::after {
+  content: '▼';
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.guide-section[open] .guide-summary::after {
+  transform: rotate(180deg);
+}
+.guide-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; margin: 12px 0; }
 .guide-title { font-size: .9rem; text-transform: uppercase; letter-spacing: .1em; color: var(--subtle-text); margin: 0 0 6px; }
 
 /* Offscreen-Content schneller rendern, ohne Layoutsprünge zu verursachen */
-.guide-section, .faq {
+.faq {
   content-visibility: auto;
-  contain-intrinsic-size: 1000px;
+  contain-intrinsic-size: 500px;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
 }
 
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
   .sidebar-card { position: static; }
+  
+  .content h1 {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0.125rem !important;
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .last-updated {
+    margin: 0.0625rem 0 0.25rem 0;
+    font-size: 0.7rem !important;
+  }
+  
   .offer-content { flex-direction: column; gap: 1rem; }
   .card-image-container { width: 100%; max-width: 200px; margin: 0 auto; }
+  .card-image {
+    /* Volle Opacity für klare Farben auf mobilen Geräten */
+    opacity: 1 !important;
+  }
   .action-buttons { flex-direction: column; align-items: stretch; }
   .mobile-filter-toggle { display: flex; justify-content: center; margin: 12px 0; }
   .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }

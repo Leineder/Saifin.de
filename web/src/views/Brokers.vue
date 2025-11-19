@@ -67,7 +67,6 @@ const filteredBrokers = computed(() => {
   return list
 })
 
-const top3 = computed(() => brokers.filter(b => recommendedBrokers.includes(b.slug)))
 
 // Performance-Monitoring für Affiliate-Links
 const { startMeasurement, endMeasurement, collectWebVitals } = useAffiliatePerformance('brokers-overview')
@@ -221,49 +220,8 @@ onBeforeUnmount(() => {
 
         <!-- Content -->
         <main class="content" style="min-width: 0;">
-           <!-- Mobile Filter Toggle -->
-           <div class="mobile-filter-toggle">
-             <button class="p-button apply-cta" @click="showFilters = !showFilters">
-               <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
-               <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
-             </button>
-           </div>
-
-          <!-- Mobile Filter Panel -->
-          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
-            <div class="section-eyebrow">Filter</div>
-            <h2 class="section-title text-xl mb-3">Finde deinen Broker</h2>
-
-            <div class="filter-group">
-              <h3 class="filter-title">Suche</h3>
-              <input v-model="search" placeholder="Name oder Feature" class="filter-input" />
-            </div>
-
-            <div class="filter-group">
-              <label class="checkbox">
-                <input type="checkbox" v-model="onlyRecommended" />
-                <span>Nur Empfehlungen</span>
-              </label>
-            </div>
-
-            <div class="filter-group">
-              <h3 class="filter-title">Produkt-Features</h3>
-              <label class="checkbox"><input type="checkbox" v-model="filterEtfPlans" /> <span>ETF-Sparpläne</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="filterZeroOrder" /> <span>0 € Order (oder sehr günstig)</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="filterCrypto" /> <span>Krypto-Handel</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="filterCashInterest" /> <span>Zinsen auf Cash</span></label>
-            </div>
-
-            <div class="filter-group">
-              <h3 class="filter-title">Anbieter</h3>
-              <label class="checkbox"><input type="checkbox" v-model="filterVollbank" /> <span>Vollbank</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="filterFreeDepot" /> <span>Depot kostenlos</span></label>
-              <label class="checkbox"><input type="checkbox" v-model="filterSubscription" /> <span>Pauschal-/Abo-Modell</span></label>
-            </div>
-          </div>
-          
-          <h1 class="section-title text-2xl md:text-3xl mb-1" style="margin: 0 0 4px; font-family: 'Cinzel', ui-serif, Georgia, 'Times New Roman', serif; color: var(--text); padding-top: 0;">Top 10 Broker 2025</h1>
-          <p class="last-updated" style="font-size: 0.75rem; color: var(--muted-text); margin: 0.25rem 0 0.5rem 0; font-weight: 400;">zuletzt aktualisiert am 1. November 2025</p>
+          <h1 class="section-title text-2xl md:text-3xl mb-1">Top 10 Broker 2025</h1>
+          <p class="last-updated">zuletzt aktualisiert am 1. November 2025</p>
 
           <div class="offers-section">
             <div 
@@ -308,119 +266,109 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </div>
-          </main>
 
-          <!-- Empfehlungen -->
-          <div class="recommendations-section">
-            <h2 class="recommendations-title section-title">Unsere Empfehlungen</h2>
-            <div class="recommendations-grid">
-              <div 
-                v-for="b in top3" 
-                :key="b.slug" 
-                class="recommendation-card surface-card border-round-xl card-accent"
-                @click="goToDetail(b)"
-                style="cursor: pointer; position: relative;"
-              >
-                <!-- Testsieger Badge -->
-                <div v-if="b.isTestsieger" class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
-                  <div class="bg-yellow-400 text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-md flex items-center justify-center" style="background-color: #facc15 !important; color: #1f2937 !important; font-size: 0.75rem !important; font-weight: 700 !important; padding: 0.0625rem 0.75rem !important; border-radius: 9999px !important; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06) !important; display: flex !important; align-items: center !important; justify-content: center !important; min-height: 1rem !important; line-height: 1rem !important;">
-                    TESTSIEGER
-                  </div>
-                </div>
+          <!-- Mobile Filter Toggle -->
+          <div class="mobile-filter-toggle">
+            <button class="p-button apply-cta" @click="showFilters = !showFilters">
+              <i class="pi pi-filter" style="margin-right: 0.5rem;"></i>
+              <span class="p-button-label">{{ showFilters ? 'Filter ausblenden' : 'Filter anzeigen' }}</span>
+            </button>
+          </div>
 
-                <div class="recommendation-content">
-                  <div class="card-image-container">
-                    <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${b.name} – Logo`" class="card-image" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
-                  </div>
-                  <div class="recommendation-details">
-                    <div class="offer-header">
-                      <h3 class="offer-title">{{ b.name }}</h3>
-                    </div>
-                    <div class="features-list">
-                      <div v-for="(p, idx) in (b.recommendation?.pros || b.highlights || []).slice(0, 4)" :key="idx" class="feature-item">
-                        <i class="pi pi-check"></i>
-                        <span>{{ p }}</span>
-                      </div>
-                    </div>
-                    <div class="action-buttons">
-                      <button 
-                      class="p-button apply-cta" 
-                      @click.stop="goToApply(b)"
-                      @mouseenter="b.applyUrl && /^https?:\/\//i.test(b.applyUrl) ? preloadAffiliateLink(b.applyUrl) : null"
-                    >
-                      <span class="p-button-label">Zum Antrag</span>
-                    </button>
-                      <button class="expand-btn" @click.stop="goToDetail(b)">Details <i class="pi pi-chevron-right"></i></button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+          <!-- Mobile Filter Panel -->
+          <div v-if="!isDesktop && showFilters" class="surface-card border-round-lg p-3 card-accent mobile-filter-panel">
+            <div class="section-eyebrow">Filter</div>
+            <h2 class="section-title text-xl mb-3">Finde deinen Broker</h2>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Suche</h3>
+              <input v-model="search" placeholder="Name oder Feature" class="filter-input" />
+            </div>
+
+            <div class="filter-group">
+              <label class="checkbox">
+                <input type="checkbox" v-model="onlyRecommended" />
+                <span>Nur Empfehlungen</span>
+              </label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Produkt-Features</h3>
+              <label class="checkbox"><input type="checkbox" v-model="filterEtfPlans" /> <span>ETF-Sparpläne</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterZeroOrder" /> <span>0 € Order (oder sehr günstig)</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterCrypto" /> <span>Krypto-Handel</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterCashInterest" /> <span>Zinsen auf Cash</span></label>
+            </div>
+
+            <div class="filter-group">
+              <h3 class="filter-title">Anbieter</h3>
+              <label class="checkbox"><input type="checkbox" v-model="filterVollbank" /> <span>Vollbank</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterFreeDepot" /> <span>Depot kostenlos</span></label>
+              <label class="checkbox"><input type="checkbox" v-model="filterSubscription" /> <span>Pauschal-/Abo-Modell</span></label>
             </div>
           </div>
+          </main>
       </div>
       <!-- Volle Breite: Guide & FAQ außerhalb des 2-Spalten-Layouts -->
       <div class="container">
         <!-- Guide: Wie finde ich den richtigen Broker? -->
-        <div class="guide-section">
-          <div class="guide-header">
+        <details class="guide-section">
+          <summary class="guide-summary">
             <div class="section-eyebrow">Ratgeber</div>
             <h2 class="section-title">Wie finde ich den richtigen Broker?</h2>
+          </summary>
+          <div class="guide-content">
             <p class="guide-subtitle">Ein Broker ist dein Zugang zur Börse. Er führt deine Wertpapieraufträge aus und stellt dir Tools zur Verfügung, um zu handeln und zu sparen. Es gibt verschiedene Broker-Typen mit unterschiedlichen Stärken.</p>
-          </div>
-          <div class="guide-grid">
-            <div class="surface-card border-round-lg p-3 card-accent info-card">
-              <h3 class="info-title">Broker-Arten</h3>
-              <ul class="guide-list">
-                <li><strong>Neobroker:</strong> Sehr günstige Orders, einfache App, Fokus auf ETFs/Aktien.</li>
-                <li><strong>Vollbank-/Direktbank-Broker:</strong> Umfassendes Angebot, klassische Bankfunktionen.</li>
-                <li><strong>Spezialbroker:</strong> Breite internationale Börsenplätze, Derivate/Optionen.</li>
-              </ul>
+            <div class="guide-grid">
+              <div class="surface-card border-round-lg p-3 card-accent info-card">
+                <h3 class="info-title">Broker-Arten</h3>
+                <ul class="guide-list">
+                  <li><strong>Neobroker:</strong> Sehr günstige Orders, einfache App, Fokus auf ETFs/Aktien.</li>
+                  <li><strong>Vollbank-/Direktbank-Broker:</strong> Umfassendes Angebot, klassische Bankfunktionen.</li>
+                  <li><strong>Spezialbroker:</strong> Breite internationale Börsenplätze, Derivate/Optionen.</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent info-card">
+                <h3 class="info-title">Worauf achten</h3>
+                <ul class="guide-list">
+                  <li><strong>Kosten:</strong> Ordergebühren, Spreads/Marktkosten, Depotkosten.</li>
+                  <li><strong>Angebot:</strong> Aktien, ETFs, Sparpläne, Auslandsbörsen, Krypto.</li>
+                  <li><strong>Regulierung & Sicherheit:</strong> BaFin, Einlagensicherung, Verwahrung.</li>
+                  <li><strong>Bedienung:</strong> App/Web, Reports/Steuer, Support.</li>
+                  <li><strong>Extras:</strong> Zinsen auf Cash, Pauschal-/Abo-Modelle.</li>
+                </ul>
+              </div>
             </div>
-            <div class="surface-card border-round-lg p-3 card-accent info-card">
-              <h3 class="info-title">Worauf achten</h3>
-              <ul class="guide-list">
-                <li><strong>Kosten:</strong> Ordergebühren, Spreads/Marktkosten, Depotkosten.</li>
-                <li><strong>Angebot:</strong> Aktien, ETFs, Sparpläne, Auslandsbörsen, Krypto.</li>
-                <li><strong>Regulierung & Sicherheit:</strong> BaFin, Einlagensicherung, Verwahrung.</li>
-                <li><strong>Bedienung:</strong> App/Web, Reports/Steuer, Support.</li>
-                <li><strong>Extras:</strong> Zinsen auf Cash, Pauschal-/Abo-Modelle.</li>
-              </ul>
+            <div class="surface-card border-round-lg p-3 card-accent info-card guide-steps-card">
+              <h3 class="info-title">In 5 Schritten starten</h3>
+              <ol class="steps-list">
+                <li>Nutzungsprofil klären (Handel vs. Sparpläne, international ja/nein).</li>
+                <li>Filter in der Sidebar nutzen (z. B. ETF-Sparpläne, 0 € Order, Zinsen).</li>
+                <li>2–3 Anbieter vergleichen und Highlights prüfen.</li>
+                <li>Preis-/Leistungsverzeichnis ansehen (Fremdkosten, Börsenplätze).</li>
+                <li>Kleiner Test: z. B. Sparplan anlegen oder Demo ausprobieren.</li>
+              </ol>
+            </div>
+            <div class="faq">
+              <details class="faq-item">
+                <summary>Was ist ein Neobroker?</summary>
+                <div class="text-700 p-2">Neobroker sind digital-fokussierte Anbieter mit sehr günstigen Orders und einfacher App. Häufig mit Fokus auf ETFs/Aktien und Sparpläne.</div>
+              </details>
+              <details class="faq-item">
+                <summary>Sind 0 € Orders wirklich kostenlos?</summary>
+                <div class="text-700 p-2">Es fallen oft keine Orderprovisionen an, aber Spreads/Markt- und Börsenentgelte können anfallen. Details findest du im Preisverzeichnis.</div>
+              </details>
+              <details class="faq-item">
+                <summary>Wie sicher sind meine Einlagen und Wertpapiere?</summary>
+                <div class="text-700 p-2">Einlagen sind über gesetzliche Einlagensicherung geschützt. Wertpapiere gelten als Sondervermögen und sind getrennt vom Brokervermögen verwahrt.</div>
+              </details>
+              <details class="faq-item">
+                <summary>Kann ich mehrere Broker parallel nutzen?</summary>
+                <div class="text-700 p-2">Ja. Viele Anleger nutzen z. B. einen Neobroker für Sparpläne und einen Spezialbroker für internationale Märkte.</div>
+              </details>
             </div>
           </div>
-          <div class="surface-card border-round-lg p-3 card-accent info-card guide-steps-card">
-            <h3 class="info-title">In 5 Schritten starten</h3>
-            <ol class="steps-list">
-              <li>Nutzungsprofil klären (Handel vs. Sparpläne, international ja/nein).</li>
-              <li>Filter in der Sidebar nutzen (z. B. ETF-Sparpläne, 0 € Order, Zinsen).</li>
-              <li>2–3 Anbieter vergleichen und Highlights prüfen.</li>
-              <li>Preis-/Leistungsverzeichnis ansehen (Fremdkosten, Börsenplätze).</li>
-              <li>Kleiner Test: z. B. Sparplan anlegen oder Demo ausprobieren.</li>
-            </ol>
-          </div>
-        </div>
-
-        <!-- FAQ Broker -->
-        <div class="faq-section">
-          <h2 class="section-title">Häufige Fragen zum Broker</h2>
-          <div class="faq-list">
-            <details class="faq-item">
-              <summary>Was ist ein Neobroker?</summary>
-              <p>Neobroker sind digital-fokussierte Anbieter mit sehr günstigen Orders und einfacher App. Häufig mit Fokus auf ETFs/Aktien und Sparpläne.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Sind 0 € Orders wirklich kostenlos?</summary>
-              <p>Es fallen oft keine Orderprovisionen an, aber Spreads/Markt- und Börsenentgelte können anfallen. Details findest du im Preisverzeichnis.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Wie sicher sind meine Einlagen und Wertpapiere?</summary>
-              <p>Einlagen sind über gesetzliche Einlagensicherung geschützt. Wertpapiere gelten als Sondervermögen und sind getrennt vom Brokervermögen verwahrt.</p>
-            </details>
-            <details class="faq-item">
-              <summary>Kann ich mehrere Broker parallel nutzen?</summary>
-              <p>Ja. Viele Anleger nutzen z. B. einen Neobroker für Sparpläne und einen Spezialbroker für internationale Märkte.</p>
-            </details>
-          </div>
-        </div>
+        </details>
       </div>
     </section>
   </div>
@@ -431,7 +379,7 @@ onBeforeUnmount(() => {
 .layout { display: grid; grid-template-columns: 320px 1fr; gap: 24px; }
 .sidebar { position: relative; }
 .sidebar-card { position: sticky; top: 86px; }
-.content { min-width: 0; }
+.content { min-width: 0; padding-top: 0; }
 
 .filter-group { display: flex; flex-direction: column; gap: 0.5rem; }
 .filter-title { font-size: 0.875rem; font-weight: 600; color: var(--text); margin: 0; }
@@ -524,17 +472,53 @@ onBeforeUnmount(() => {
   padding: 0.5rem;
 }
 
-.recommendations-section { margin-top: 3rem; }
-.recommendations-title { font-size: 1.5rem; font-weight: 700; color: var(--text); margin-bottom: 1.5rem; text-align: center; }
-.recommendations-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 1.5rem; }
-.recommendation-card { background: var(--surface); border-radius: 0.75rem; box-shadow: 0 1px 3px var(--shadow-color); position: relative; overflow: hidden; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; }
-.recommendation-card:hover { transform: translateY(-2px); box-shadow: 0 8px 16px var(--shadow-color); }
-.recommendation-content { display: flex; padding: 1.5rem; gap: 1.5rem; }
-.recommendation-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 
-.guide-section { margin-top: 3rem; content-visibility: auto; contain-intrinsic-size: 1000px; }
-.guide-header { margin-bottom: 1rem; }
-.guide-subtitle { color: var(--muted-text); }
+.guide-section { 
+  margin-top: 2rem; 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  padding: 1rem 1.5rem;
+  content-visibility: auto; 
+  contain-intrinsic-size: 100px;
+}
+.guide-section summary { 
+  cursor: pointer; 
+  list-style: none; 
+  outline: none;
+}
+.guide-section summary::-webkit-details-marker { 
+  display: none; 
+}
+.guide-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.guide-summary .section-title {
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+}
+.guide-summary::after {
+  content: '▼';
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.guide-section[open] .guide-summary::after {
+  transform: rotate(180deg);
+}
+.guide-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.guide-subtitle { color: var(--muted-text); margin-bottom: 1rem; }
 .guide-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; margin-top: 1rem; }
 .info-card { box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06); }
 .info-title { font-size: 0.875rem; font-weight: 700; letter-spacing: .02em; text-transform: uppercase; color: var(--subtle-text); margin: 0 0 .25rem; }
@@ -543,19 +527,54 @@ onBeforeUnmount(() => {
 .steps-list { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem; color: var(--muted-text); }
 .guide-steps-card { margin-top: 1rem; }
 
-.faq-section { margin-top: 2rem; content-visibility: auto; contain-intrinsic-size: 800px; }
-.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
-.faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 0.5rem 0.75rem; }
-.faq-item summary { cursor: pointer; font-weight: 600; color: var(--text); list-style: none; }
-.faq-item p { margin: 0.5rem 0 0; color: var(--muted-text); }
+.faq {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.faq-item { 
+  background: var(--surface-muted); 
+  border: 1px solid var(--border); 
+  border-radius: 0.5rem; 
+  padding: 0.5rem 0.75rem; 
+}
+.faq-item summary { 
+  cursor: pointer; 
+  font-weight: 600; 
+  color: var(--text); 
+  list-style: none; 
+}
+.faq-item summary::-webkit-details-marker { 
+  display: none; 
+}
 
 @media (max-width: 768px) {
   .layout { grid-template-columns: 1fr; }
   .sidebar-card { position: static; }
-  .offer-content, .recommendation-content { flex-direction: column; gap: 1rem; }
+  
+  .content h1 {
+    margin-top: 0;
+    padding-top: 0;
+    margin-bottom: 0.125rem !important;
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+  }
+  
+  .last-updated {
+    margin: 0.0625rem 0 0.25rem 0;
+    font-size: 0.7rem !important;
+  }
+  
+  .offer-content { flex-direction: column; gap: 1rem; }
   .card-image-container { width: 100%; max-width: 200px; margin: 0 auto; }
+  .card-image {
+    /* Volle Opacity für klare Farben auf mobilen Geräten */
+    opacity: 1 !important;
+  }
   .action-buttons { flex-direction: column; align-items: stretch; }
-  .recommendations-grid { grid-template-columns: 1fr; }
   .mobile-filter-toggle { display: flex; justify-content: center; margin: 12px 0; }
   .mobile-filter-toggle .p-button { width: 100%; max-width: 300px; }
   .mobile-filter-panel { margin-bottom: 16px; }
