@@ -32,19 +32,19 @@ if (import.meta.env.PROD) {
   }).catch(() => {})
 }
 
-// Meta Pixel & TikTok Pixel: SPA-Pageviews bei jedem Routenwechsel
+// Meta Pixel & TikTok Pixel: SPA-Pageviews bei jedem Routenwechsel (nur bei Consent)
 router.afterEach(() => {
   // Defer tracking to avoid blocking navigation
-  requestAnimationFrame(() => {
+  requestAnimationFrame(async () => {
     try {
-      // Meta Pixel PageView
-      if (typeof window !== 'undefined' && window.fbq && typeof window.fbq === 'function') {
-        window.fbq('track', 'PageView')
-      }
-      // TikTok Pixel PageView
-      if (typeof window !== 'undefined' && window.ttq && typeof window.ttq.page === 'function') {
-        window.ttq.page()
-      }
+      // Prüfe Consent vor Tracking
+      const { safeFbq, safeTtq } = await import('./utils/cookie-consent.js')
+      
+      // Meta Pixel PageView (nur bei Marketing-Consent)
+      safeFbq('track', 'PageView')
+      
+      // TikTok Pixel PageView (nur bei Marketing-Consent)
+      safeTtq('page')
     } catch (_) {
       // best-effort, Fehler ignorieren
     }
