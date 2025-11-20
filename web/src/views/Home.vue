@@ -291,7 +291,7 @@ onMounted(() => {
       </div>
       <div class="cta-privacy">
         <p class="cta-privacy-text">
-          <strong>Ihre Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
+          <strong>Deine Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. Alle Daten gibst du ausschließlich direkt beim Anbieter ein.
         </p>
       </div>
     </div>

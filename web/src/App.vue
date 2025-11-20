@@ -32,8 +32,8 @@
         <div class="container privacy-banner-inner">
           <div class="privacy-banner-content">
             <p class="privacy-banner-text">
-              <strong>Ihre Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. 
-              Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
+              <strong>Deine Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. 
+              Alle Daten gibst du ausschließlich direkt beim Anbieter ein.
             </p>
           </div>
         </div>
