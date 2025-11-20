@@ -289,6 +289,11 @@ onMounted(() => {
           <span class="p-button-label">Tagesgeldkonten</span>
         </router-link>
       </div>
+      <div class="cta-privacy">
+        <p class="cta-privacy-text">
+          <strong>Ihre Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
+        </p>
+      </div>
     </div>
   </section>
 </template>
@@ -477,9 +482,23 @@ onMounted(() => {
   object-position: center center;
   border-radius: 3px; 
   border: 1px solid var(--border); 
-  background: transparent; 
+  background: transparent;
+  /* Überschreibe globale TF Bank Styles für Landing Page */
+  padding: 0 !important;
+  transform: none !important;
+  box-sizing: border-box !important; 
   overflow: hidden; 
   aspect-ratio: 1.586 / 1;
+}
+
+/* Spezifische Korrektur für TF Bank Karte auf Landing Page */
+.offer-thumb[src*="TFBank_MastercardGold"],
+.offer-thumb[alt*="TF Bank Mastercard Gold"] {
+  object-fit: cover !important;
+  padding: 0 !important;
+  transform: none !important;
+  border-radius: 3px !important;
+  background-color: transparent !important;
 }
 
 /* Premium Sektions-Header */
@@ -726,6 +745,43 @@ onMounted(() => {
 .cta-buttons .p-button:focus-visible { transform: translateY(-1px); box-shadow: 0 12px 28px var(--shadow-color) !important; }
 .cta-buttons .p-button:active { transform: translateY(0); }
 .cta-buttons .p-button .p-button-label { font-weight: 700; letter-spacing: .01em; line-height: 1; }
+
+/* Privacy im CTA-Band */
+.cta-privacy {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.cta-privacy-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.cta-privacy-text strong {
+  color: #fff;
+  font-weight: 600;
+  opacity: 1;
+}
+
+@media (max-width: 767px) {
+  .cta-privacy {
+    margin-top: 24px;
+    padding-top: 20px;
+  }
+  
+  .cta-privacy-text {
+    font-size: 0.8rem;
+    white-space: normal;
+  }
+}
 
 /* Dark Mode entfernt - Website läuft permanent im Light Mode */
 </style>

@@ -329,11 +329,11 @@ const handleTouchEnd = (event) => {
   min-height: 200px;
 }
 .card-image-container.gebuehrenfrei-mastercard-gold {
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  padding: 16px;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+  padding: 30px;
+  border: 1px solid var(--border);
+  box-shadow: none;
 }
 .card-image { 
   width: 100%; 
@@ -456,15 +456,15 @@ const handleTouchEnd = (event) => {
 }
 
 .card-image-container.gebuehrenfrei-mastercard-gold {
-  padding: 12px;
+  padding: 30px;
 }
 
 .card-image.gebuehrenfrei-mastercard-gold {
   object-fit: contain;
-  border-radius: 12px;
+  border-radius: 0;
   width: 100%;
   height: 100%;
-  max-width: none;
+  max-width: 100%;
   max-height: none;
   border: 1px solid rgba(0, 0, 0, 0.05);
   background: #fff;

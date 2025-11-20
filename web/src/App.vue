@@ -27,6 +27,18 @@
     </main>
 
     <footer class="site-footer">
+      <!-- Privacy Banner (nur auf anderen Seiten, nicht auf Startseite) -->
+      <div v-if="!isHomePage" class="privacy-banner">
+        <div class="container privacy-banner-inner">
+          <div class="privacy-banner-content">
+            <p class="privacy-banner-text">
+              <strong>Ihre Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. 
+              Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
+            </p>
+          </div>
+        </div>
+      </div>
+      
       <div class="container footer-inner">
         <div class="footer-top">
           <span>© {{ new Date().getFullYear() }} Saifin</span>
@@ -39,12 +51,6 @@
           <span class="sep">·</span>
           <router-link to="/kontakt" class="footer-link">Kontakt</router-link>
         </div>
-        <div class="footer-privacy-note">
-          <p class="footer-privacy-text">
-            <strong>Ihre Privatsphäre ist uns wichtig:</strong> Saifin speichert keine persönlichen Daten. 
-            Alle Daten geben Sie ausschließlich direkt beim Anbieter ein.
-          </p>
-        </div>
       </div>
     </footer>
     
@@ -54,13 +60,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { storeTrackingParams } from './tracking'
 import CookieBanner from './components/CookieBanner.vue'
 
 const isMenuOpen = ref(false)
+const route = useRoute()
 
 const closeMenu = () => { isMenuOpen.value = false }
+
+const isHomePage = computed(() => route.path === '/')
 
 onMounted(() => {
   // Erfasse Tracking-Parameter (UTM, ttclid, fbclid) bei jedem Seitenaufruf
@@ -169,6 +179,39 @@ onMounted(() => {
   background: var(--surface);
   contain: layout style;
 }
+
+/* Privacy Banner (nur auf anderen Seiten, weißer Hintergrund) */
+.privacy-banner {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.privacy-banner-inner {
+  padding: 16px;
+}
+
+.privacy-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.privacy-banner-text {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--muted-text);
+  line-height: 1.6;
+  text-align: center;
+}
+
+.privacy-banner-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+
 .footer-inner { 
   display: flex; 
   flex-direction: column;
@@ -189,34 +232,23 @@ onMounted(() => {
 .footer-link { color: var(--link-color); text-decoration: none; }
 .footer-link:hover { text-decoration: underline; }
 .sep { color: var(--subtle-text); }
-.footer-privacy-note {
-  margin-top: 8px;
-  padding-top: 12px;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  max-width: 800px;
-}
-.footer-privacy-text {
-  margin: 0;
-  font-size: 0.85rem;
-  color: var(--muted-text);
-  line-height: 1.5;
-}
-.footer-privacy-text strong {
-  color: var(--text);
-  font-weight: 600;
-}
 
 @media (max-width: 767px) {
+  .privacy-banner-inner {
+    padding: 14px 12px;
+  }
+  
+  .privacy-banner-text {
+    font-size: 0.8rem;
+    line-height: 1.5;
+  }
+  
   .footer-inner {
     padding: 16px 12px;
   }
   .footer-top {
     gap: 8px;
     font-size: 0.85rem;
-  }
-  .footer-privacy-text {
-    font-size: 0.8rem;
   }
 }
 </style>

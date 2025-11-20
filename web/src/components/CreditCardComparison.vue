@@ -188,17 +188,17 @@ function goDetail(slug) {
 }
 
 .card-image-wrapper.gebuehrenfrei-mastercard-gold {
-  border-radius: 12px;
+  border-radius: 1px;
   overflow: hidden;
-  padding: 4px;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }
 
 .card-image-height.gebuehrenfrei-mastercard-gold {
-  object-fit: contain !important;
-  border-radius: 8px;
+  object-fit: cover !important;
+  border-radius: 1px;
   background: transparent;
   box-shadow: none;
 }
