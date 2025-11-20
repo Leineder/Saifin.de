@@ -577,7 +577,7 @@ function initializeMobileTouchOptimizations() {
                 <div class="text-700 p-2">Charge: Sammelabrechnung mit Vollausgleich. Credit/Revolving: Teilzahlung möglich, Zinsen bei Restschulden. Debit: Direkte Abbuchung vom Konto.</div>
               </details>
               <details class="faq-item">
-                <summary>Ist 0 % Auslandseinsatz wirklich gebührenfrei?</summary>
+                <summary>Ist 0 % Kosten bei Auslandseinsatz wirklich gebührenfrei?</summary>
                 <div class="text-700 p-2">Die Bank erhebt keine Auslandseinsatzgebühr, Automatenbetreiber können jedoch eigene Entgelte verlangen. Hinweise im Preisverzeichnis beachten.</div>
               </details>
               <details class="faq-item">
@@ -1100,13 +1100,21 @@ function initializeMobileTouchOptimizations() {
 
 /* Spezifische Korrekturen für problematische Kreditkarten */
 .card-image.tf-bank-mastercard-gold,
-.card-image.santander-bestcard-basic,
-.card-image.barclays-visa { 
+.card-image.santander-bestcard-basic { 
   /* Beide Karten auf gleiche Größe bringen */
-  object-fit: cover; /* Füllt den Container vollständig aus */
+  object-fit: contain; /* Zeigt die komplette Karte ohne Abschneiden */
   border-radius: 4px; /* Gleicher border-radius wie Container */
   background: transparent; /* Kein zusätzlicher Hintergrund */
   transform: none !important; /* Keine Skalierung - normale Größe */
+  padding: 0 !important; /* Kein zusätzliches Padding */
+}
+
+.card-image.barclays-visa { 
+  /* Barclays Visa größer machen, um mit anderen Karten übereinzustimmen */
+  object-fit: contain; /* Zeigt die komplette Karte ohne Abschneiden */
+  border-radius: 4px; /* Gleicher border-radius wie Container */
+  background: transparent; /* Kein zusätzlicher Hintergrund */
+  transform: scale(1.6); /* Größere Vergrößerung um mit anderen Karten gleichzuziehen */
   padding: 0 !important; /* Kein zusätzliches Padding */
 }
 
@@ -1115,3 +1123,4 @@ function initializeMobileTouchOptimizations() {
   .mobile-filter-toggle, .mobile-filter-panel { display: none; }
 }
 </style>
+

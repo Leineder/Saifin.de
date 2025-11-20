@@ -447,11 +447,11 @@ const handleTouchEnd = (event) => {
 }
 
 .card-image.barclays-visa {
-  /* Füllt den Container vollständig aus */
-  object-fit: cover; /* Füllt den gesamten Rahmen aus */
+  /* Barclays Visa größer machen, um mit anderen Karten übereinzustimmen */
+  object-fit: contain; /* Zeigt die komplette Karte ohne Abschneiden */
   border-radius: 18px; /* Gleicher border-radius wie Container */
   background: transparent; /* Kein zusätzlicher Hintergrund */
-  transform: none !important; /* Keine Skalierung - normale Größe */
+  transform: scale(1.6); /* Größere Vergrößerung um mit anderen Karten gleichzuziehen */
   padding: 0 !important; /* Kein zusätzliches Padding */
 }
 

@@ -1,26 +1,50 @@
 export const offers = [
   {
+    id: 'tf-bank-mastercard-gold',
+    slug: 'tf-bank-mastercard-gold',
+    title: 'TF Bank Mastercard Gold',
+    bullets: [
+      '0 € Jahresgebühr',
+      '0 % Kosten bei Auslandseinsatz',
+      'Bargeld weltweit gebührenfrei',
+      'Reiseversicherungspaket inkl.'
+    ],
+    image: '/images/creditcards/TFBank_MastercardGold_11zon.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Mastercard – Revolving',
+    isTestsieger: true,
+    details: {
+      foreignCurrency: '0 % Kosten bei Auslandseinsatz',
+      cashWithdrawal: 'Weltweit gebührenfrei; Bargeld und Überweisungen verzinsen sich ab Buchungstag',
+      interest: 'Einkäufe bis 51 Tage zinsfrei bei Vollzahlung; Mindestrate 3 % / min. 30 €; Sollzins 22,35 % p.a., eff. 24,79 % p.a.',
+      creditLimit: 'Rahmen bis 10.000 €*',
+      notes: 'Keine automatische Abbuchung – Rechnung aktiv überweisen'
+    },
+    disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
+  },
+  {
     id: 'gebuehrenfrei-mastercard-gold',
     slug: 'gebuehrenfrei-mastercard-gold',
     title: 'Gebührenfrei Mastercard Gold',
     bullets: [
       '0 € Jahresgebühr dauerhaft',
       'Bis zu 7 Wochen zinsfrei',
-      '0 % Auslandseinsatz & Bargeld weltweit gebührenfrei*',
+      '0 % Kosten bei Auslandseinsatz & Bargeld weltweit gebührenfrei*',
       'Ablehnung bei Schufa-Einträgen'
     ],
     image: '/images/creditcards/Advanzia_Gebuehrenfrei_Mastercard_Gold.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
-    isTestsieger: true,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay'],
       insurance: 'Reiseversicherung inklusive'
     },
     details: {
       annualFeeText: '0 € p.a. (dauerhaft)',
-      foreignCurrency: '0 % Auslandseinsatz; Mastercard-Referenzkurs inkl. Aufschlag',
+      foreignCurrency: '0 % Kosten bei Auslandseinsatz; Mastercard-Referenzkurs inkl. Aufschlag',
       cashWithdrawal: '0 € Bargeldabhebung*; Zinsen laut Preisverzeichnis ab Buchungstag',
       interest: 'Bis zu 7 Wochen zinsfrei bei Vollzahlung; danach Sollzins gemäß Preisverzeichnis',
       benefits: '5 % Reisegutschrift & 5 % Mietwagen-Rückvergütung über Kundenportal',
@@ -107,30 +131,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
   },
   {
-    id: 'tf-bank-mastercard-gold',
-    slug: 'tf-bank-mastercard-gold',
-    title: 'TF Bank Mastercard Gold',
-    bullets: [
-      '0 € Jahresgebühr',
-      '0 % Auslandseinsatz',
-      'Bargeld weltweit gebührenfrei',
-      'Reiseversicherungspaket inkl.'
-    ],
-    image: '/images/creditcards/TFBank_MastercardGold_11zon.webp',
-    annualFee: 0,
-    foreignFee: '0 %',
-    cardType: 'Mastercard – Revolving',
-    details: {
-      foreignCurrency: '0 % Auslandseinsatz',
-      cashWithdrawal: 'Weltweit gebührenfrei; Bargeld und Überweisungen verzinsen sich ab Buchungstag',
-      interest: 'Einkäufe bis 51 Tage zinsfrei bei Vollzahlung; Mindestrate 3 % / min. 30 €; Sollzins 22,35 % p.a., eff. 24,79 % p.a.',
-      creditLimit: 'Rahmen bis 10.000 €*',
-      notes: 'Keine automatische Abbuchung – Rechnung aktiv überweisen'
-    },
-    disclaimer: '*Versicherung an Bedingungen geknüpft (z. B. ≥50 % Reisekosten mit Karte zahlen).',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
-  },
-  {
     id: 'barclays-visa',
     slug: 'barclays-visa',
     title: 'Barclays Visa',
@@ -167,7 +167,7 @@ export const offers = [
     title: 'Hanseatic Bank GoldCard (Visa)',
     bullets: [
       '4,90 € mtl. (= 58,80 € p.a.)',
-      '0 % Auslandseinsatz',
+      '0 % Kosten bei Auslandseinsatz',
       'Bargeld weltweit gebührenfrei (seitens Hanseatic)',
       'Reiseversicherungspaket inklusive'
     ],
@@ -181,7 +181,7 @@ export const offers = [
     },
     details: {
       annualFeeText: '4,90 € pro Monat (58,80 € p.a.)',
-      foreignCurrency: '0 % Auslandseinsatz',
+      foreignCurrency: '0 % Kosten bei Auslandseinsatz',
       cashWithdrawal: 'Weltweit gebührenfrei (seitens Hanseatic); Mindestabhebung 50 €*',
       creditLimit: 'Typische Obergrenze ca. 5.000 €*',
       interest: 'Teilzahlung voreingestellt (3 % / min. 20 €); Sollzins 16,05 % p.a., eff. ca. 25,49 % p.a.',
