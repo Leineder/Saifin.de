@@ -60,19 +60,22 @@ export const savingsOffers = [
   {
     id: 'raisin',
     slug: 'raisin',
-    title: 'Raisin Tagesgeld (Plattform)',
+    title: 'Raisin StartZins',
     image: '/images/tagesgeldkonten/Raisin_11zon.webp',
-    interest: 'Bis ca. 4,00% p.a. – je nach Partnerbank',
-    payout: 'variabel',
-    depositMin: 'abhängig vom Angebot',
-    security: 'EU – je Bank eigenes DGS bis 100.000 €',
-    countryCode: 'EU',
+    interest: '2,85% p.a. für 3 Monate (Neukunden)',
+    payout: 'am Ende der Laufzeit',
+    depositMin: '1 €',
+    depositMax: '50.000 €',
+    security: 'DE – Deutsche Einlagensicherung bis 100.000 €',
+    countryCode: 'DE',
     euDgs: true,
-    isNeukundenaktion: false,
+    isNeukundenaktion: true,
     highlights: [
-      'Zugang zu >140 Banken über 1 Konto',
-      'Top-Zinsen aus der EU, keine Kontoführungsgebühren',
-      'Deutscher Support, digitale Verwaltung'
+      '2,85% p.a. für 3 Monate – exklusives Neukundenangebot',
+      'Deutsche Einlagensicherung bis 100.000 €',
+      'Optional: Automatische Übertragung in Rollover-Tagesgeldprodukt (bis zu 2,02% p.a.)',
+      'Jederzeit Ein- und Auszahlungen innerhalb der 3 Monate möglich',
+      'Zugang zu über 140 Banken auf der Raisin Plattform'
     ],
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C67225978B'
   },

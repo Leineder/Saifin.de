@@ -117,6 +117,7 @@ const goApply = () => {
             <li v-if="offer.interest" class="text-700">Zins: {{ offer.interest }}</li>
             <li v-if="offer.payout" class="text-700">Zinszahlung: {{ offer.payout }}</li>
             <li v-if="offer.depositMin" class="text-700">Mindestanlage: {{ offer.depositMin }}</li>
+            <li v-if="offer.depositMax" class="text-700">Maximalanlage: {{ offer.depositMax }}</li>
             <li v-if="offer.security" class="text-700">Einlagensicherung: {{ offer.security }}</li>
             <li v-for="(h, idx) in (offer.highlights || [])" :key="idx" class="text-700">{{ h }}</li>
           </ul>

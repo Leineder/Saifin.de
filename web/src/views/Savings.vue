@@ -200,6 +200,7 @@ function goToApply(o) {
                     <div class="feature-item"><i class="pi pi-check"></i><span>{{ o.interest }}</span></div>
                     <div v-if="o.payout" class="feature-item"><i class="pi pi-check"></i><span>Zinszahlung: {{ o.payout }}</span></div>
                     <div v-if="o.depositMin" class="feature-item"><i class="pi pi-check"></i><span>Mindestanlage: {{ o.depositMin }}</span></div>
+                    <div v-if="o.depositMax" class="feature-item"><i class="pi pi-check"></i><span>Maximalanlage: {{ o.depositMax }}</span></div>
                     <div v-if="o.security" class="feature-item"><i class="pi pi-shield"></i><span>{{ o.security }}</span></div>
                     <div v-for="(h, idx) in (o.highlights || []).slice(0, 2)" :key="idx" class="feature-item">
                       <i class="pi pi-check"></i><span>{{ h }}</span>
