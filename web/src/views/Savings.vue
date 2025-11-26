@@ -263,8 +263,86 @@ function goToApply(o) {
         </main>
       </div>
 
-      <!-- Volle Breite: Guide & FAQ -->
+      <!-- Volle Breite: Ranking-Faktoren & Guide & FAQ -->
       <div class="container">
+        <!-- Ranking-Faktoren -->
+        <details class="ranking-factors-section">
+          <summary class="ranking-factors-summary">
+            <div class="section-eyebrow">Transparenz</div>
+            <h2 class="section-title">Ranking-Faktoren</h2>
+          </summary>
+          <div class="ranking-factors-content">
+            <p class="ranking-factors-intro">
+              Unser Tagesgeld-Ranking basiert auf einer objektiven Bewertung mehrerer Kriterien. Die Reihenfolge der angezeigten Tagesgeldkonten spiegelt die Gesamtbewertung wider, wobei verschiedene Faktoren unterschiedlich gewichtet werden.
+            </p>
+            <div class="ranking-factors-grid">
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">1. Sicherheit & Regulierung (Gewichtung: 35%)</h3>
+                <p class="ranking-factor-description">
+                  Die Einlagensicherung, regulatorische Aufsicht und die Stabilität des Anbieters sind die wichtigsten Faktoren für unser Ranking.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>EU-Einlagensicherung bis 100.000 €</li>
+                  <li>Regulatorische Aufsicht (BaFin, etc.)</li>
+                  <li>Reputation und Stabilität der Bank</li>
+                  <li>Zusätzliche Sicherungsfonds (z.B. BdB-Fonds)</li>
+                  <li>Deutsche vs. ausländische Einlagensicherung</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">2. Zinssatz & Zinsgarantie (Gewichtung: 30%)</h3>
+                <p class="ranking-factor-description">
+                  Der aktuelle Zinssatz wird bewertet, wobei langfristige Bestandszinsen und Stabilität wichtiger sind als kurzfristige Neukundenaktionen.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Langfristiger Bestandszins (nach Aktion)</li>
+                  <li>Zinsgarantie-Dauer und Variabilität</li>
+                  <li>Neukundenaktionen und Bonuszinsen</li>
+                  <li>Nachhaltigkeit der Zinssätze</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">3. Flexibilität & Verfügbarkeit (Gewichtung: 20%)</h3>
+                <p class="ranking-factor-description">
+                  Bewertet werden Mindest-/Maximalanlagen, Zinszahlungsfrequenz und Verfügbarkeit des Geldes.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Mindestanlage (niedrig = besser)</li>
+                  <li>Maximalanlage oder unbegrenzt</li>
+                  <li>Zinszahlungsfrequenz (monatlich bevorzugt)</li>
+                  <li>Tägliche Verfügbarkeit</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">4. Kosten (Gewichtung: 10%)</h3>
+                <p class="ranking-factor-description">
+                  Kontoführungsgebühren und eventuelle versteckte Kosten werden bewertet.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Kostenlose Kontoführung (bevorzugt)</li>
+                  <li>Keine versteckten Gebühren</li>
+                  <li>Kosten für Ein- und Auszahlungen</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">5. Service & Zugang (Gewichtung: 5%)</h3>
+                <p class="ranking-factor-description">
+                  Die Benutzerfreundlichkeit, Online-Verfügbarkeit und Servicequalität werden bewertet.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Online-Verfügbarkeit und App-Qualität</li>
+                  <li>Kundenservice und Erreichbarkeit</li>
+                  <li>Geschwindigkeit der Kontoeröffnung</li>
+                  <li>Zusätzliche Services oder Produkte</li>
+                </ul>
+              </div>
+            </div>
+            <div class="ranking-factors-note">
+              <p><strong>Hinweis:</strong> Das Ranking wird regelmäßig aktualisiert und kann sich aufgrund von Zinsänderungen, neuen Anbietern oder Produktänderungen verschieben. Ein höheres Ranking bedeutet nicht zwangsläufig, dass ein Tagesgeldkonto für jeden Nutzer das beste ist – bitte prüfe die einzelnen Konditionen auf Übereinstimmung mit deinem persönlichen Anlageprofil.</p>
+            </div>
+          </div>
+        </details>
+        
         <details class="guide-section">
           <summary class="guide-summary">
             <div class="section-eyebrow">Ratgeber</div>
@@ -429,6 +507,104 @@ function goToApply(o) {
 .feature-item i { color: #34d399; font-size: 0.75rem; }
 .action-buttons { display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
 .expand-btn { display: flex; align-items: center; gap: 0.25rem; background: none; border: none; color: var(--subtle-text); font-size: 0.875rem; cursor: pointer; padding: 0.5rem; }
+
+/* Ranking-Faktoren Sektion */
+.ranking-factors-section { 
+  margin-top: 2rem; 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  padding: 1rem 1.5rem;
+  content-visibility: auto; 
+  contain-intrinsic-size: 100px;
+}
+.ranking-factors-section summary { 
+  cursor: pointer; 
+  list-style: none; 
+  outline: none;
+}
+.ranking-factors-section summary::-webkit-details-marker { 
+  display: none; 
+}
+.ranking-factors-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.ranking-factors-summary .section-title {
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+}
+.ranking-factors-summary::after {
+  content: '▼';
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.ranking-factors-section[open] .ranking-factors-summary::after {
+  transform: rotate(180deg);
+}
+.ranking-factors-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.ranking-factors-intro {
+  color: var(--muted-text);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.ranking-factors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ranking-factor-card {
+  box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06);
+}
+.ranking-factor-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--subtle-text);
+  margin: 0 0 0.5rem;
+}
+.ranking-factor-description {
+  color: var(--muted-text);
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+.ranking-factor-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--muted-text);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.ranking-factor-list li {
+  list-style-type: disc;
+}
+.ranking-factors-note {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-text);
+  line-height: 1.6;
+}
 
 .guide-section { 
   margin-top: 2rem; 

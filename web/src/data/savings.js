@@ -62,7 +62,7 @@ export const savingsOffers = [
     slug: 'raisin',
     title: 'Raisin StartZins',
     image: '/images/tagesgeldkonten/Raisin_11zon.webp',
-    interest: '2,85% p.a. für 3 Monate (Neukunden)',
+    interest: '3,05% p.a. für 3 Monate (Neukunden, ab 25.11.2025)',
     payout: 'am Ende der Laufzeit',
     depositMin: '1 €',
     depositMax: '50.000 €',
@@ -71,7 +71,8 @@ export const savingsOffers = [
     euDgs: true,
     isNeukundenaktion: true,
     highlights: [
-      '2,85% p.a. für 3 Monate – exklusives Neukundenangebot',
+      '3,05% p.a. für 3 Monate – exklusives Neukundenangebot',
+      'Maximalanlage: 50.000 € (ab 25.11.2025)',
       'Deutsche Einlagensicherung bis 100.000 €',
       'Optional: Automatische Übertragung in Rollover-Tagesgeldprodukt (bis zu 2,02% p.a.)',
       'Jederzeit Ein- und Auszahlungen innerhalb der 3 Monate möglich',
@@ -140,23 +141,21 @@ export const savingsOffers = [
   {
     id: 'quirion',
     slug: 'quirion',
-    title: 'quirion Tagesgeld (3% Aktion)',
+    title: 'quirion Tagesgeld',
     image: '/images/tagesgeldkonten/Quirion_11zon.webp',
-    interest: '3,00% p.a. für Neukunden (3 Monate bis 28.02.2026), danach 1,00% p.a.',
+    interest: '1,00% p.a. (variabel)',
     payout: 'monatlich',
     depositMin: '0 €',
     security: 'DE – Einlagensicherung über Quirin Privatbank AG',
     countryCode: 'DE',
     euDgs: true,
-    isNeukundenaktion: true,
-    aktionszeitraum: '27.10.2025 - 23.11.2025',
-    aktionscode: 'ZINS25',
+    isNeukundenaktion: false,
     highlights: [
-      '3,00% p.a. für Neukunden (3 Monate bis 28.02.2026)',
-      '1% Quirin Privatbank AG Zinssatz + 2% Bonuszins p.a.',
+      '1,00% p.a. Zinsen',
       'Kostenlose Kontoführung, täglich verfügbar',
-      'Tochter der Quirin Privatbank - verlässlicher Partner',
-      'Aktionscode: ZINS25'
+      'Monatliche Zinsgutschrift',
+      'Deutsche Einlagensicherung über Quirin Privatbank AG',
+      'Tochter der Quirin Privatbank - verlässlicher Partner'
     ],
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C655108962T'
   },
@@ -165,7 +164,7 @@ export const savingsOffers = [
     slug: 'comdirect',
     title: 'comdirect Tagesgeld PLUS',
     image: '/images/tagesgeldkonten/Comdirect_11zon.webp',
-    interest: 'Variable Verzinsung (aktuelle Konditionen auf Website)',
+    interest: '1,75% p.a. (bis auf Widerruf, bis 1.000.000 €)',
     payout: 'vierteljährlich',
     depositMin: '0 €',
     security: 'DE – EdB gesetzlich + Einlagensicherungsfonds',
@@ -173,6 +172,8 @@ export const savingsOffers = [
     euDgs: true,
     isNeukundenaktion: false,
     highlights: [
+      '1,75% p.a. Zinsen bis auf Widerruf',
+      'Guthaben bis 1.000.000 € verzinst',
       'Kostenfreie Kontoführung, täglich verfügbar',
       'Vierteljährliche Zinsgutschrift',
       'Deutsche Bank mit vollständiger Einlagensicherung',
@@ -182,4 +183,4 @@ export const savingsOffers = [
   }
 ]
 
-export const recommendedSavings = ['quirion', 'distingo-bank', 'tf-bank']
+export const recommendedSavings = ['distingo-bank', 'tf-bank']

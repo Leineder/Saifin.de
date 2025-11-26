@@ -33,11 +33,35 @@ onMounted(() => {
 
 const goBack = () => safeNavigate(router, '/broker')
 
+// Prüfe ob Sparplan-Aktion aktiv ist
+const isSparplanAktionAktiv = computed(() => {
+  if (!broker.value?.sparbplanAktion?.aktiv) return false
+  
+  const aktion = broker.value.sparbplanAktion
+  if (!aktion.aktionszeitraum) return false
+  
+  const heute = new Date()
+  const start = new Date(aktion.aktionszeitraum.start)
+  const ende = new Date(aktion.aktionszeitraum.ende)
+  
+  // Setze Zeit auf Mitternacht für korrekten Vergleich
+  heute.setHours(0, 0, 0, 0)
+  start.setHours(0, 0, 0, 0)
+  ende.setHours(23, 59, 59, 999)
+  
+  return heute >= start && heute <= ende
+})
+
 // Erstelle optimierten Affiliate-Link-Handler
 const affiliateLinkHandler = computed(() => {
   if (!broker.value?.applyUrl) return null
   
-  const url = broker.value.applyUrl
+  // Verwende Sparplan-Aktions-URL wenn Aktion aktiv ist
+  let url = broker.value.applyUrl
+  if (isSparplanAktionAktiv.value && broker.value.sparbplanAktion?.applyUrl) {
+    url = broker.value.sparbplanAktion.applyUrl
+  }
+  
   if (!/^https?:\/\//i.test(url)) return null
   
   return createAffiliateLinkHandler(url, {
@@ -77,6 +101,12 @@ const affiliateLinkHandler = computed(() => {
   })
 })
 
+// Formatierungsfunktion für Datum
+const formatDate = (dateString) => {
+  const date = new Date(dateString)
+  return date.toLocaleDateString('de-DE', { day: '2-digit', month: '2-digit', year: 'numeric' })
+}
+
 const goApply = () => {
   if (!broker.value) return
   
@@ -112,6 +142,33 @@ const goApply = () => {
       <div class="content">
         <div class="section-eyebrow">Broker</div>
         <h1 class="section-title text-3xl mb-2">{{ broker.name }}</h1>
+
+        <!-- Sparplan-Aktion Banner -->
+        <div v-if="isSparplanAktionAktiv && broker.sparbplanAktion" class="sparbplan-aktion-banner mb-3">
+          <div class="aktion-header">
+            <i class="pi pi-gift"></i>
+            <span class="aktion-title">Neukunden-Sparplan-Aktion</span>
+          </div>
+          <div class="aktion-content">
+            <div class="praemie-highlight">
+              <span class="praemie-amount">{{ broker.sparbplanAktion.praemie }}</span>
+              <span class="praemie-label">Prämie für jeden Neukunden</span>
+            </div>
+            <div class="aktionszeitraum">
+              <i class="pi pi-calendar"></i>
+              <span>Aktionszeitraum: {{ formatDate(broker.sparbplanAktion.aktionszeitraum.start) }} – {{ formatDate(broker.sparbplanAktion.aktionszeitraum.ende) }}</span>
+            </div>
+            <details class="teilnahmebedingungen">
+              <summary>Teilnahmebedingungen</summary>
+              <ul class="bedingungen-list">
+                <li v-for="(bedingung, idx) in broker.sparbplanAktion.teilnahmebedingungen" :key="idx">{{ bedingung }}</li>
+              </ul>
+              <p class="auszahlung-hinweis">
+                Auszahlung: Nach Ablauf der Haltedauer, voraussichtlich Ende Dezember 2026
+              </p>
+            </details>
+          </div>
+        </div>
 
         <div class="surface-card border-round-lg p-3 card-accent mb-3">
           <ul class="pl-3 m-0">
@@ -155,7 +212,14 @@ const goApply = () => {
             @click="goApply"
             @mouseenter="affiliateLinkHandler?.onMouseEnter"
           >
-            <span class="p-button-label">Jetzt beantragen</span>
+            <span class="p-button-label">
+              <template v-if="isSparplanAktionAktiv && broker.sparbplanAktion">
+                Sparplan mit {{ broker.sparbplanAktion.praemie }} Prämie beantragen
+              </template>
+              <template v-else>
+                Jetzt beantragen
+              </template>
+            </span>
           </button>
         </div>
       </div>
@@ -249,6 +313,123 @@ const goApply = () => {
 .logo-frame img.detail-logo.ing { 
   transform: scale(1.15);
   padding: 10px;
+}
+
+/* Sparplan-Aktion Banner */
+.sparbplan-aktion-banner {
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #fff;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(5, 150, 105, 0.3);
+}
+
+.aktion-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.aktion-header i {
+  font-size: 1.25rem;
+}
+
+.aktion-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.praemie-highlight {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.praemie-amount {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.praemie-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+.aktionszeitraum {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  opacity: 0.95;
+}
+
+.aktionszeitraum i {
+  font-size: 1rem;
+}
+
+.teilnahmebedingungen {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.teilnahmebedingungen summary {
+  cursor: pointer;
+  padding: 0.5rem 0;
+  font-weight: 600;
+  opacity: 0.95;
+  list-style: none;
+}
+
+.teilnahmebedingungen summary::-webkit-details-marker {
+  display: none;
+}
+
+.teilnahmebedingungen summary::before {
+  content: '▶';
+  display: inline-block;
+  margin-right: 0.5rem;
+  transition: transform 0.2s;
+}
+
+.teilnahmebedingungen[open] summary::before {
+  transform: rotate(90deg);
+}
+
+.bedingungen-list {
+  margin: 0.75rem 0;
+  padding-left: 1.5rem;
+  list-style-type: disc;
+  opacity: 0.9;
+}
+
+.bedingungen-list li {
+  margin: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.auszahlung-hinweis {
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.8125rem;
+  opacity: 0.85;
+  font-style: italic;
+}
+
+@media (max-width: 767px) {
+  .sparbplan-aktion-banner {
+    padding: 1rem;
+  }
+  
+  .praemie-amount {
+    font-size: 1.5rem;
+  }
 }
 </style>
 

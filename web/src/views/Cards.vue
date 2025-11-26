@@ -532,8 +532,85 @@ function initializeMobileTouchOptimizations() {
           </div>
         </main>
       </div>
-      <!-- Volle Breite: Guide & FAQ außerhalb des 2-Spalten-Layouts -->
+      <!-- Volle Breite: Ranking-Faktoren & Guide & FAQ außerhalb des 2-Spalten-Layouts -->
       <div class="container">
+        <!-- Ranking-Faktoren -->
+        <details class="ranking-factors-section">
+          <summary class="ranking-factors-summary">
+            <div class="section-eyebrow">Transparenz</div>
+            <h2 class="section-title">Ranking-Faktoren</h2>
+          </summary>
+          <div class="ranking-factors-content">
+            <p class="ranking-factors-intro">
+              Unser Kreditkarten-Ranking basiert auf einer objektiven Bewertung mehrerer Kriterien. Die Reihenfolge der angezeigten Kreditkarten spiegelt die Gesamtbewertung wider, wobei verschiedene Faktoren unterschiedlich gewichtet werden.
+            </p>
+            <div class="ranking-factors-grid">
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">1. Kosten (Gewichtung: 35%)</h3>
+                <p class="ranking-factor-description">
+                  Bewertet werden die Jahresgebühr, Gebühren für Auslandseinsatz, Bargeldabhebungen und eventuelle Transaktionskosten.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Jahresgebühr (0 € erhält höchste Punktzahl)</li>
+                  <li>Kosten bei Auslandseinsatz (0 % ist ideal)</li>
+                  <li>Gebühren für Bargeldabhebungen</li>
+                  <li>Weitere Transaktionskosten</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">2. Zusatzleistungen (Gewichtung: 25%)</h3>
+                <p class="ranking-factor-description">
+                  Versicherungen, Cashback, Reisegutschriften und andere Mehrwertleistungen werden bewertet.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Reiseversicherungen (Auslandskranken-, Reiserücktritt, etc.)</li>
+                  <li>Cashback oder Reisegutschriften</li>
+                  <li>Zusätzliche Versicherungen (Gepäck, Mietwagen, etc.)</li>
+                  <li>Exklusive Vorteile und Partnerschaften</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">3. Nutzerfreundlichkeit (Gewichtung: 20%)</h3>
+                <p class="ranking-factor-description">
+                  Die Verfügbarkeit von Mobile Payment, App-Qualität und allgemeine Benutzerfreundlichkeit werden bewertet.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Support für Apple Pay, Google Pay, Garmin Pay</li>
+                  <li>Qualität der Banking-App</li>
+                  <li>Einfachheit der Abrechnung</li>
+                  <li>Verfügbarkeit und Qualität des Kundenservice</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">4. Flexibilität & Bedingungen (Gewichtung: 15%)</h3>
+                <p class="ranking-factor-description">
+                  Bewertet werden Zinsfreie Perioden, Kreditrahmen, Verfügbarkeit und Zugangsvoraussetzungen.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Zinsfreie Zahlungsziele (bei Charge-Karten)</li>
+                  <li>Kreditrahmen und Verfügbarkeit</li>
+                  <li>Voraussetzungen (SCHUFA-Check, Einkommen, etc.)</li>
+                  <li>Flexibilität bei Zahlungsoptionen</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">5. Kartenart & Abrechnung (Gewichtung: 5%)</h3>
+                <p class="ranking-factor-description">
+                  Die Art der Karte (Charge, Credit/Revolving, Debit) und das Abrechnungssystem werden berücksichtigt.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Kartenart (Charge, Credit/Revolving, Debit)</li>
+                  <li>Abrechnungsmodell und Zahlungsflexibilität</li>
+                  <li>Verfügbarkeit verschiedener Zahlungsoptionen</li>
+                </ul>
+              </div>
+            </div>
+            <div class="ranking-factors-note">
+              <p><strong>Hinweis:</strong> Das Ranking wird regelmäßig aktualisiert und kann sich aufgrund von Konditionsänderungen, neuen Anbietern oder Produktverbesserungen verschieben. Ein höheres Ranking bedeutet nicht zwangsläufig, dass eine Karte für jeden Nutzer die beste ist – bitte prüfe die einzelnen Konditionen auf Übereinstimmung mit deinem persönlichen Nutzungsprofil.</p>
+            </div>
+          </div>
+        </details>
+        
         <!-- Guide: Wie finde ich die richtige Kreditkarte? -->
         <details class="guide-section">
           <summary class="guide-summary">
@@ -820,6 +897,102 @@ function initializeMobileTouchOptimizations() {
   padding: 0.5rem;
 }
 
+
+/* Ranking-Faktoren Sektion */
+.ranking-factors-section { 
+  margin-top: 2rem; 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  padding: 1rem 1.5rem;
+}
+.ranking-factors-section summary { 
+  cursor: pointer; 
+  list-style: none; 
+  outline: none;
+}
+.ranking-factors-section summary::-webkit-details-marker { 
+  display: none; 
+}
+.ranking-factors-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.ranking-factors-summary .section-title {
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+}
+.ranking-factors-summary::after {
+  content: '▼';
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.ranking-factors-section[open] .ranking-factors-summary::after {
+  transform: rotate(180deg);
+}
+.ranking-factors-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.ranking-factors-intro {
+  color: var(--muted-text);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.ranking-factors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ranking-factor-card {
+  box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06);
+}
+.ranking-factor-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--subtle-text);
+  margin: 0 0 0.5rem;
+}
+.ranking-factor-description {
+  color: var(--muted-text);
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+.ranking-factor-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--muted-text);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.ranking-factor-list li {
+  list-style-type: disc;
+}
+.ranking-factors-note {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-text);
+  line-height: 1.6;
+}
 
 /* Guide & FAQ */
 .guide-section { 

@@ -149,12 +149,31 @@ export const brokers = [
     highlights: [
       'Servicegebühr 0,48 % p.a. (Digital) + ~0,17 % ETF-Kosten',
       'Erstes Jahr: 0 € Servicegebühr auf die ersten 10.000 € (Digital)',
-      'Depotführung Quirin Privatbank, BaFin-reguliert; Mindestanlage 1 €; Sparplan ab 25 €'
+      'Depotführung Quirin Privatbank, BaFin-reguliert; Mindestanlage 1 €; Sparplan ab 25 €',
+      '🎁 100 € Prämie für Neukunden bei Sparplan-Abschluss (Aktion bis 05.01.2026)'
     ],
     pricing: { orderCostsDE: '0,48 % p.a. Servicegebühr (Digital-Paket), staffelt bis 1,48 % in Premium/Privat' },
-    features: { productRange: 'ETF-Multi-Asset-Portfolios (10 Strategien, optional ESG), Rebalancing' },
+    features: { productRange: 'ETF-Multi-Asset-Portfolios (10 Strategien, optional ESG), Rebalancing', etfPlans: true },
     regulation: 'Quirin Privatbank (BaFin)',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C65520725T'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C65520725T',
+    // Sparplan-Aktion: 100€ Prämie für Neukunden
+    sparbplanAktion: {
+      aktiv: true,
+      praemie: '100 €',
+      aktionszeitraum: {
+        start: '2025-11-24',
+        ende: '2026-01-05'
+      },
+      teilnahmebedingungen: [
+        'Abschluss eines Sparplans mit einer monatlichen Rate von mindestens 50 €',
+        'Haltedauer: 12 Monate',
+        'Nur für Neukunden ohne bestehendes quirion-Depot',
+        'Auszahlung: Nach Ablauf der Haltedauer, voraussichtlich Ende Dezember 2026'
+      ],
+      kategorieId: 8534,
+      kategorieName: 'SPARZIELE100',
+      applyUrl: 'https://www.financeads.net/tc.php?t=78535C65520725T&kategorie=8534'
+    }
   },
   {
     id: 'etoro',

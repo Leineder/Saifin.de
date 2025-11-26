@@ -17,6 +17,24 @@ const filterVollbank = ref(false)
 const filterFreeDepot = ref(false)
 const filterSubscription = ref(false)
 
+// Prüfe ob Sparplan-Aktion für einen Broker aktiv ist
+const isSparplanAktionAktiv = (broker) => {
+  if (!broker?.sparbplanAktion?.aktiv) return false
+  
+  const aktion = broker.sparbplanAktion
+  if (!aktion.aktionszeitraum) return false
+  
+  const heute = new Date()
+  const start = new Date(aktion.aktionszeitraum.start)
+  const ende = new Date(aktion.aktionszeitraum.ende)
+  
+  heute.setHours(0, 0, 0, 0)
+  start.setHours(0, 0, 0, 0)
+  ende.setHours(23, 59, 59, 999)
+  
+  return heute >= start && heute <= ende
+}
+
 const filteredBrokers = computed(() => {
   let list = brokers
   if (onlyRecommended.value) {
@@ -238,6 +256,12 @@ onBeforeUnmount(() => {
                 </div>
               </div>
 
+              <!-- Sparplan-Aktion Badge -->
+              <div v-if="isSparplanAktionAktiv(b) && b.sparbplanAktion" class="sparbplan-aktion-badge">
+                <i class="pi pi-gift"></i>
+                <span>{{ b.sparbplanAktion.praemie }} Prämie</span>
+              </div>
+
               <div class="offer-content">
                 <div class="card-image-container">
                   <img :src="(b.image || '/images/saifin_logo_vectorized_final.svg') + '?v=20241016'" :alt="`${b.name} – Logo`" :class="['card-image', 'logo-' + b.slug]" loading="lazy" decoding="async" width="120" height="75" @error="handleImageError" />
@@ -309,8 +333,86 @@ onBeforeUnmount(() => {
           </div>
           </main>
       </div>
-      <!-- Volle Breite: Guide & FAQ außerhalb des 2-Spalten-Layouts -->
+      <!-- Volle Breite: Ranking-Faktoren & Guide & FAQ außerhalb des 2-Spalten-Layouts -->
       <div class="container">
+        <!-- Ranking-Faktoren -->
+        <details class="ranking-factors-section">
+          <summary class="ranking-factors-summary">
+            <div class="section-eyebrow">Transparenz</div>
+            <h2 class="section-title">Ranking-Faktoren</h2>
+          </summary>
+          <div class="ranking-factors-content">
+            <p class="ranking-factors-intro">
+              Unser Broker-Ranking basiert auf einer objektiven Bewertung mehrerer Kriterien. Die Reihenfolge der angezeigten Broker spiegelt die Gesamtbewertung wider, wobei verschiedene Faktoren unterschiedlich gewichtet werden.
+            </p>
+            <div class="ranking-factors-grid">
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">1. Kosten (Gewichtung: 30%)</h3>
+                <p class="ranking-factor-description">
+                  Bewertet werden Ordergebühren, Depotführungskosten und Mindestgebühren. Broker mit sehr günstigen oder kostenlosen Orders erhalten höhere Punktzahlen.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Ordergebühren für Aktien, ETFs und Derivate</li>
+                  <li>Depotführungsgebühren</li>
+                  <li>Mindermengenzuschläge</li>
+                  <li>Börsenentgelte und Spreads</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">2. Produktpalette (Gewichtung: 25%)</h3>
+                <p class="ranking-factor-description">
+                  Die Vielfalt und Qualität des angebotenen Produktspektrums wird bewertet, einschließlich der Verfügbarkeit von Sparplänen und internationalen Märkten.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Verfügbarkeit von ETFs, Aktien, Anleihen</li>
+                  <li>Anzahl und Konditionen von Sparplänen</li>
+                  <li>Zugang zu internationalen Börsen</li>
+                  <li>Angebot von Derivaten und Krypto</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">3. Regulierung & Sicherheit (Gewichtung: 20%)</h3>
+                <p class="ranking-factor-description">
+                  Die regulatorische Aufsicht, Einlagensicherung und Verwahrung der Wertpapiere werden bewertet.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>BaFin-Regulierung oder gleichwertige Aufsicht</li>
+                  <li>Einlagensicherung für Cash-Guthaben</li>
+                  <li>Sondervermögen für Wertpapiere</li>
+                  <li>Reputation und Stabilität des Anbieters</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">4. Benutzerfreundlichkeit & Service (Gewichtung: 15%)</h3>
+                <p class="ranking-factor-description">
+                  Bewertet werden die Qualität der Handelsplattformen, Apps, Kundenbetreuung und zusätzliche Serviceleistungen.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Qualität von App und Web-Plattform</li>
+                  <li>Verfügbarkeit von Steuerreports</li>
+                  <li>Kundensupport (Telefon, E-Mail, Chat)</li>
+                  <li>Zusätzliche Services (Research, Tools)</li>
+                </ul>
+              </div>
+              <div class="surface-card border-round-lg p-3 card-accent ranking-factor-card">
+                <h3 class="ranking-factor-title">5. Zusatzfeatures (Gewichtung: 10%)</h3>
+                <p class="ranking-factor-description">
+                  Besondere Features wie Zinsen auf Cash, kostenlose Depotführung oder exklusive Angebote werden berücksichtigt.
+                </p>
+                <ul class="ranking-factor-list">
+                  <li>Verzinsung von Cash-Guthaben</li>
+                  <li>Kostenlose Depotführung</li>
+                  <li>Neukundenboni und Aktionen</li>
+                  <li>Zusätzliche Versicherungen oder Leistungen</li>
+                </ul>
+              </div>
+            </div>
+            <div class="ranking-factors-note">
+              <p><strong>Hinweis:</strong> Das Ranking wird regelmäßig aktualisiert und kann sich aufgrund von Konditionsänderungen, neuen Anbietern oder regulatorischen Entwicklungen verschieben. Ein höheres Ranking bedeutet nicht zwangsläufig, dass ein Broker für jeden Nutzer der beste ist – bitte prüfe die einzelnen Konditionen auf Übereinstimmung mit deinem persönlichen Nutzungsprofil.</p>
+            </div>
+          </div>
+        </details>
+        
         <!-- Guide: Wie finde ich den richtigen Broker? -->
         <details class="guide-section">
           <summary class="guide-summary">
@@ -450,6 +552,29 @@ onBeforeUnmount(() => {
   transform: scale(1.15);
   padding: 5px;
 }
+
+/* Sparplan-Aktion Badge */
+.sparbplan-aktion-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: linear-gradient(135deg, #059669, #047857);
+  color: #fff;
+  padding: 0.375rem 0.75rem;
+  border-radius: 0.375rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(5, 150, 105, 0.3);
+}
+
+.sparbplan-aktion-badge i {
+  font-size: 0.875rem;
+}
+
 .offer-details { flex: 1; display: flex; flex-direction: column; gap: 1rem; }
 .offer-header { display: flex; justify-content: space-between; align-items: flex-start; }
 .offer-title { font-size: 1.125rem; font-weight: 700; color: var(--text); margin: 0; }
@@ -472,6 +597,104 @@ onBeforeUnmount(() => {
   padding: 0.5rem;
 }
 
+
+/* Ranking-Faktoren Sektion */
+.ranking-factors-section { 
+  margin-top: 2rem; 
+  background: var(--surface); 
+  border: 1px solid var(--border); 
+  border-radius: 0.75rem; 
+  padding: 1rem 1.5rem;
+  content-visibility: auto; 
+  contain-intrinsic-size: 100px;
+}
+.ranking-factors-section summary { 
+  cursor: pointer; 
+  list-style: none; 
+  outline: none;
+}
+.ranking-factors-section summary::-webkit-details-marker { 
+  display: none; 
+}
+.ranking-factors-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.ranking-factors-summary .section-title {
+  font-weight: 500 !important;
+  font-size: 1.25rem !important;
+}
+.ranking-factors-summary::after {
+  content: '▼';
+  font-size: 0.75rem;
+  color: var(--muted-text);
+  transition: transform 0.2s ease;
+  position: absolute;
+  right: 0;
+  top: 0.5rem;
+}
+.ranking-factors-section[open] .ranking-factors-summary::after {
+  transform: rotate(180deg);
+}
+.ranking-factors-content {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.ranking-factors-intro {
+  color: var(--muted-text);
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+.ranking-factors-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ranking-factor-card {
+  box-shadow: 0 10px 20px rgba(6, 42, 63, 0.06);
+}
+.ranking-factor-title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: var(--subtle-text);
+  margin: 0 0 0.5rem;
+}
+.ranking-factor-description {
+  color: var(--muted-text);
+  margin: 0.5rem 0;
+  line-height: 1.6;
+  font-size: 0.875rem;
+}
+.ranking-factor-list {
+  margin: 0.75rem 0 0;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--muted-text);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+.ranking-factor-list li {
+  list-style-type: disc;
+}
+.ranking-factors-note {
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background: var(--surface-muted);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-text);
+  line-height: 1.6;
+}
 
 .guide-section { 
   margin-top: 2rem; 
