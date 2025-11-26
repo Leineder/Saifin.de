@@ -54,54 +54,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C13814286T'
   },
   {
-    id: 'consors-finanz-mastercard',
-    slug: 'consors-finanz-mastercard',
-    title: 'Consors Finanz Mastercard',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 90 Tage zinsfrei',
-      'Bis 5.000 € Kreditrahmen*',
-      'Ablehnung bei Schufa-Einträgen'
-    ],
-    image: '/images/creditcards/consors-finanz-mastercard.webp',
-    annualFee: 0,
-    foreignFee: '0 %',
-    cardType: 'Mastercard – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay']
-    },
-    details: {
-      annualFeeText: '0 € p.a. (dauerhaft)',
-      foreignCurrency: '0 % (laut PV, Änderungen möglich)',
-      cashWithdrawal: '≥ 300 €: 0 €; < 300 €: 3,95 € je Abhebung',
-      limits: 'Tageslimit ca. 1.100 €*, Wochenlimit ca. 2.500 €*',
-      creditLimit: 'Bis 5.000 €',
-      interest: 'Einmalzahlung (bis 90 Tage zinsfrei) oder Teilzahlung; Sollzins ca. 17,43 %, eff. ca. 18,90 %'
-    },
-    disclaimer: '*Kreditrahmen bonitätsabhängig; PV beachten.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C395489098T'
-  },
-  {
-    id: 'netkredit24-mastercard',
-    slug: 'netkredit24-mastercard',
-    title: 'Netkredit24 Mastercard',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 8 Wochen zinsfrei',
-      'Kreditrahmen bis 4.000 €*'
-    ],
-    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
-    annualFee: 0,
-    foreignFee: 'variabel (je Partnerbank)',
-    cardType: 'Mastercard – Revolving (vermittelt)',
-    details: {
-      foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
-      notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
-    },
-    disclaimer: '*Abhängig vom vermittelten Institut; Angaben Werbestand.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
-  },
-  {
     id: 'instabank-kreditkarte',
     slug: 'instabank-kreditkarte',
     title: 'Instabank Kreditkarte',
@@ -129,6 +81,54 @@ export const offers = [
     },
     disclaimer: '*Bonitätsabhängig; Mindestalter 23 Jahre; Wohnsitz in Deutschland erforderlich.',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C5393126557T'
+  },
+  {
+    id: 'netkredit24-mastercard',
+    slug: 'netkredit24-mastercard',
+    title: 'Netkredit24 Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 8 Wochen zinsfrei',
+      'Kreditrahmen bis 4.000 €*'
+    ],
+    image: '/images/creditcards/NetKredit24-Kreditkarte.webp',
+    annualFee: 0,
+    foreignFee: 'variabel (je Partnerbank)',
+    cardType: 'Mastercard – Revolving (vermittelt)',
+    details: {
+      foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
+      notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
+    },
+    disclaimer: '*Abhängig vom vermittelten Institut; Angaben Werbestand.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
+  },
+  {
+    id: 'consors-finanz-mastercard',
+    slug: 'consors-finanz-mastercard',
+    title: 'Consors Finanz Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 90 Tage zinsfrei',
+      'Bis 5.000 € Kreditrahmen*',
+      'Ablehnung bei Schufa-Einträgen'
+    ],
+    image: '/images/creditcards/consors-finanz-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Mastercard – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      annualFeeText: '0 € p.a. (dauerhaft)',
+      foreignCurrency: '0 % (laut PV, Änderungen möglich)',
+      cashWithdrawal: '≥ 300 €: 0 €; < 300 €: 3,95 € je Abhebung',
+      limits: 'Tageslimit ca. 1.100 €*, Wochenlimit ca. 2.500 €*',
+      creditLimit: 'Bis 5.000 €',
+      interest: 'Einmalzahlung (bis 90 Tage zinsfrei) oder Teilzahlung; Sollzins ca. 17,43 %, eff. ca. 18,90 %'
+    },
+    disclaimer: '*Kreditrahmen bonitätsabhängig; PV beachten.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C395489098T'
   },
   {
     id: 'barclays-visa',
