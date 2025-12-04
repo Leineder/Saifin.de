@@ -52,6 +52,25 @@ const isSparplanAktionAktiv = computed(() => {
   return heute >= start && heute <= ende
 })
 
+// Prüfe ob Neukundenbonus aktiv ist
+const isNeukundenbonusAktiv = computed(() => {
+  if (!broker.value?.neukundenbonus?.aktiv) return false
+  
+  const bonus = broker.value.neukundenbonus
+  if (!bonus.aktionszeitraum) return false
+  
+  const heute = new Date()
+  const start = new Date(bonus.aktionszeitraum.start)
+  const ende = new Date(bonus.aktionszeitraum.ende)
+  
+  // Setze Zeit auf Mitternacht für korrekten Vergleich
+  heute.setHours(0, 0, 0, 0)
+  start.setHours(0, 0, 0, 0)
+  ende.setHours(23, 59, 59, 999)
+  
+  return heute >= start && heute <= ende
+})
+
 // Erstelle optimierten Affiliate-Link-Handler
 const affiliateLinkHandler = computed(() => {
   if (!broker.value?.applyUrl) return null
@@ -170,6 +189,33 @@ const goApply = () => {
           </div>
         </div>
 
+        <!-- Neukundenbonus Banner -->
+        <div v-if="isNeukundenbonusAktiv && broker.neukundenbonus" class="sparbplan-aktion-banner mb-3">
+          <div class="aktion-header">
+            <i class="pi pi-gift"></i>
+            <span class="aktion-title">Neukundenbonus</span>
+          </div>
+          <div class="aktion-content">
+            <div class="praemie-highlight">
+              <span class="praemie-amount">{{ broker.neukundenbonus.bonus }}</span>
+              <span class="praemie-label">Bonus für jeden Neukunden</span>
+            </div>
+            <div class="aktionszeitraum">
+              <i class="pi pi-calendar"></i>
+              <span>Aktionszeitraum: {{ formatDate(broker.neukundenbonus.aktionszeitraum.start) }} – {{ formatDate(broker.neukundenbonus.aktionszeitraum.ende) }}</span>
+            </div>
+            <details class="teilnahmebedingungen">
+              <summary>Teilnahmebedingungen</summary>
+              <ul class="bedingungen-list">
+                <li v-for="(bedingung, idx) in broker.neukundenbonus.teilnahmebedingungen" :key="idx">{{ bedingung }}</li>
+              </ul>
+              <p class="auszahlung-hinweis">
+                Der Bonus wird innerhalb von sechs Wochen nach Erfüllung der Bedingungen in Form von Anteilen des "Xtrackers II EUR Overnight Rate Swap UCITS ETF" direkt in das Depot eingebucht.
+              </p>
+            </details>
+          </div>
+        </div>
+
         <div class="surface-card border-round-lg p-3 card-accent mb-3">
           <ul class="pl-3 m-0">
             <li v-for="h in (broker.highlights || [])" :key="h" class="text-700">{{ h }}</li>
@@ -215,6 +261,9 @@ const goApply = () => {
             <span class="p-button-label">
               <template v-if="isSparplanAktionAktiv && broker.sparbplanAktion">
                 Sparplan mit {{ broker.sparbplanAktion.praemie }} Prämie beantragen
+              </template>
+              <template v-else-if="isNeukundenbonusAktiv && broker.neukundenbonus">
+                Depot mit {{ broker.neukundenbonus.bonus }} Bonus eröffnen
               </template>
               <template v-else>
                 Jetzt beantragen

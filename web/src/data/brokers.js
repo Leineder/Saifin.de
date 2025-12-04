@@ -30,7 +30,7 @@ export const brokers = [
       '0 € pro Trade für Aktien, ETFs, Fonds und Anleihen über gettex/Baader',
       '0 € pro Trade für Derivate über Premium Partner (BNP Paribas, Société Générale, Morgan Stanley, Vontobel, UniCredit)',
       '3.250 kostenlose Sparpläne in ETFs, Aktien und Fonds',
-      '70 € Neukunden-Bonus (nur noch kurze Zeit)'
+      '100 € Neukunden-Bonus bis Ende Dezember'
     ],
     pricing: { orderCostsDE: '0 € pro Trade ab 500 € Ordervolumen; < 500 €: 0,95 € (gettex) bzw. 3 € (Derivate)' },
     features: { 
@@ -39,7 +39,20 @@ export const brokers = [
     },
     regulation: 'Baader Bank AG (Depotführung)',
     notes: 'Rund 40 deutsche & internationale Handelsplätze; 1,75% Zinsen p.a. (variabel); Smartphone-App verfügbar; Weltweiter Handel möglich',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C4838113108T'
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C4838113108T',
+    neukundenbonus: {
+      aktiv: true,
+      bonus: '100 €',
+      aktionszeitraum: {
+        start: '2025-12-04',
+        ende: '2025-12-31'
+      },
+      teilnahmebedingungen: [
+        'Der Kunde muss innerhalb von 45 Tagen ab Depoteröffnung mindestens 3 Wertpapiertransaktionen mit einem Volumen von mindestens 100,00 EUR tätigen',
+        'Der Neukundenbonus in Höhe von 100,00 EUR wird innerhalb von sechs Wochen nach Erfüllung der Bedingungen in Form von Anteilen des "Xtrackers II EUR Overnight Rate Swap UCITS ETF" direkt in das Depot eingebucht',
+        'Das Depot muss zum Zeitpunkt der Prämienzuteilung noch aktiv sein und einen positiven Portfoliowert (Depot- zzgl. Kontosaldo) von mindestens 1.000,00 EUR ausweisen'
+      ]
+    }
   },
   {
     id: 'smartbroker-plus',

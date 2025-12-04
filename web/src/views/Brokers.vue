@@ -35,6 +35,24 @@ const isSparplanAktionAktiv = (broker) => {
   return heute >= start && heute <= ende
 }
 
+// Prüfe ob Neukundenbonus für einen Broker aktiv ist
+const isNeukundenbonusAktiv = (broker) => {
+  if (!broker?.neukundenbonus?.aktiv) return false
+  
+  const bonus = broker.neukundenbonus
+  if (!bonus.aktionszeitraum) return false
+  
+  const heute = new Date()
+  const start = new Date(bonus.aktionszeitraum.start)
+  const ende = new Date(bonus.aktionszeitraum.ende)
+  
+  heute.setHours(0, 0, 0, 0)
+  start.setHours(0, 0, 0, 0)
+  ende.setHours(23, 59, 59, 999)
+  
+  return heute >= start && heute <= ende
+}
+
 const filteredBrokers = computed(() => {
   let list = brokers
   if (onlyRecommended.value) {
@@ -260,6 +278,12 @@ onBeforeUnmount(() => {
               <div v-if="isSparplanAktionAktiv(b) && b.sparbplanAktion" class="sparbplan-aktion-badge">
                 <i class="pi pi-gift"></i>
                 <span>{{ b.sparbplanAktion.praemie }} Prämie</span>
+              </div>
+
+              <!-- Neukundenbonus Badge -->
+              <div v-if="isNeukundenbonusAktiv(b) && b.neukundenbonus" class="sparbplan-aktion-badge">
+                <i class="pi pi-gift"></i>
+                <span>{{ b.neukundenbonus.bonus }} Bonus</span>
               </div>
 
               <div class="offer-content">
