@@ -436,6 +436,12 @@ function initializeMobileTouchOptimizations() {
                 <i class="pi pi-trophy trophy-small"></i>
               </div>
               
+              <!-- Bewertung -->
+              <div v-if="offer.rating" class="rating-badge">
+                <span class="rating-star">★</span>
+                <span class="rating-value">{{ offer.rating }} / 5</span>
+              </div>
+              
               <div v-if="offer.bonus" class="bonus-banner">
                 <i class="pi pi-gift"></i>
                 {{ offer.bonus }} Bonus
@@ -733,6 +739,28 @@ function initializeMobileTouchOptimizations() {
   align-items: center;
   gap: 0.25rem;
   z-index: 10;
+}
+
+.rating-badge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  z-index: 10;
+}
+
+.rating-star {
+  color: #ffd700;
+  font-size: 0.875rem;
+  line-height: 1;
+}
+
+.rating-value {
+  color: var(--text);
+  font-size: 0.875rem;
+  font-weight: 600;
 }
 
 .testsieger-banner {

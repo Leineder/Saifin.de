@@ -14,6 +14,7 @@ export const offers = [
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
     isTestsieger: true,
+    rating: 4.6,
     details: {
       foreignCurrency: '0 % Kosten bei Auslandseinsatz',
       cashWithdrawal: 'Weltweit gebührenfrei; Bargeld und Überweisungen verzinsen sich ab Buchungstag',
@@ -38,6 +39,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: '2,49 %',
     cardType: 'Visa – Revolving',
+    rating: 4.6,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay']
     },
@@ -65,6 +67,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: 'variabel (je Partnerbank)',
     cardType: 'Mastercard – Revolving (vermittelt)',
+    rating: 4.4,
     details: {
       foreignCurrency: 'Konditionen (Auslandseinsatz, Bargeld, Zinsen) partnerabhängig',
       notes: 'Netkredit24 ist Vermittler (z. B. Extra Karte / Ferratum). Endgültige Bedingungen siehe Partnervertrag.'
@@ -86,6 +89,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: '2,99 %',
     cardType: 'Mastercard – Revolving',
+    rating: 4.4,
     details: {
       foreignCurrency: '2,99 % Auslandseinsatz',
       cashWithdrawal: '3 % (mind. 3 €)',
@@ -110,6 +114,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
+    rating: 4.0,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay'],
       insurance: 'Reiseversicherung inklusive'
@@ -141,6 +146,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Visa – Revolving',
+    rating: 4.1,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay']
     },
@@ -170,6 +176,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
+    rating: 3.9,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay']
     },
@@ -198,6 +205,7 @@ export const offers = [
     annualFee: 58.8,
     foreignFee: '0 %',
     cardType: 'VISA – Revolving',
+    rating: 3.9,
     features: {
       insurance: 'Reiserücktritt, Auslandskranken, Gepäck u.a.',
       mobilePay: ['Apple Pay', 'Google Pay']
@@ -227,6 +235,7 @@ export const offers = [
     annualFee: 0,
     foreignFee: '1,85 %',
     cardType: 'VISA – Revolving',
+    rating: 3.8,
     features: {
       mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay']
     },
@@ -252,6 +261,7 @@ export const offers = [
     annualFee: 36,
     foreignFee: 'ca. 2,25 %',
     cardType: 'VISA – Charge (Girokonto-Abrechnung)',
+    rating: 3.7,
     details: {
       annualFeeText: '1. Jahr häufig kostenlos; danach Classic ~36 €/Jahr, Gold ~72 €/Jahr',
       foreignCurrency: 'ca. 2,25 % Auslandseinsatz',

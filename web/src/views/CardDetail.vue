@@ -220,7 +220,13 @@ const handleTouchEnd = (event) => {
       </div>
       <div class="content">
         <div class="section-eyebrow">Kreditkarte</div>
-        <h1 class="section-title text-3xl mb-2">{{ offer.title }}</h1>
+        <div class="detail-header">
+          <h1 class="section-title text-3xl mb-2">{{ offer.title }}</h1>
+          <div v-if="offer.rating" class="rating-badge-detail">
+            <span class="rating-star">★</span>
+            <span class="rating-value">{{ offer.rating }} / 5</span>
+          </div>
+        </div>
         <div class="bullets surface-card border-round-lg p-3 card-accent mb-3">
           <ul class="pl-3 m-0">
             <li v-for="b in offer.bullets" :key="b" :class="[b.includes('Bei Schufa Einträgen Ablehnung') || b.includes('Ablehnung bei SCHUFA') ? 'text-red-600' : 'text-700']" :style="[b.includes('Bei Schufa Einträgen Ablehnung') || b.includes('Ablehnung bei SCHUFA') ? { listStyleType: 'none', position: 'relative', paddingLeft: '1.5rem' } : {}]">
@@ -352,7 +358,34 @@ const handleTouchEnd = (event) => {
   max-width: 100%;
   max-height: 100%;
 }
-.content { grid-column: 2 / 3; }
+.content { grid-column: 2 / 3; position: relative; }
+.detail-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+.detail-header .section-title {
+  flex: 1;
+  margin-bottom: 0;
+}
+.rating-badge-detail {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-shrink: 0;
+}
+.rating-badge-detail .rating-star {
+  color: #ffd700;
+  font-size: 1rem;
+  line-height: 1;
+}
+.rating-badge-detail .rating-value {
+  color: var(--text);
+  font-size: 1rem;
+  font-weight: 600;
+}
 .sticky-cta { grid-column: 3 / 4; position: sticky; top: 86px; align-self: start; }
 .cta-col { display: grid; grid-template-columns: 1fr; gap: 10px; }
 .facts-grid { 
@@ -422,6 +455,13 @@ const handleTouchEnd = (event) => {
   .section-title {
     font-size: 1.5rem !important;
     line-height: 1.3;
+  }
+  .detail-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rating-badge-detail {
+    margin-top: 0.5rem;
   }
   .bullets {
     padding: 0.75rem !important;
