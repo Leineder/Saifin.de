@@ -189,11 +189,47 @@ export function safeFbq(...args) {
 
 /**
  * Wrapper für TikTok Pixel (ttq)
+ * Fügt automatisch User-Agent hinzu, um Error 40002 zu vermeiden
  */
 export function safeTtq(method, ...args) {
   safeTrack(CookieCategories.MARKETING, () => {
     if (typeof window !== 'undefined' && window.ttq && typeof window.ttq[method] === 'function') {
-      window.ttq[method](...args)
+      // Für 'track' Events: User-Agent automatisch hinzufügen
+      if (method === 'track' && args.length >= 1) {
+        const eventName = args[0]
+        const eventData = args[1] || {}
+        
+        // Lazy Import für bessere Performance
+        // Verwende synchronen Fallback für sofortiges Tracking
+        try {
+          // Versuche synchronen Zugriff auf User-Agent
+          const userAgent = (typeof navigator !== 'undefined' && navigator.userAgent) 
+            ? navigator.userAgent 
+            : 'Mozilla/5.0 (compatible; SaifinBot/1.0; +https://www.saifin.de)'
+          
+          // Stelle sicher, dass context-Objekt existiert
+          if (!eventData.context) {
+            eventData.context = {}
+          }
+          
+          // User-Agent setzen (nur wenn noch nicht vorhanden oder leer)
+          if (!eventData.context.user_agent || 
+              eventData.context.user_agent === null || 
+              eventData.context.user_agent.trim() === '') {
+            eventData.context.user_agent = userAgent
+          }
+          
+          // Event mit erweiterten Daten tracken
+          window.ttq[method](eventName, eventData)
+        } catch (error) {
+          // Fallback bei Fehler: Normales Tracking
+          console.debug('TikTok Event Enrichment Fehler (nicht kritisch):', error)
+          window.ttq[method](...args)
+        }
+      } else {
+        // Für andere Methoden: Normales Tracking
+        window.ttq[method](...args)
+      }
     }
   })
 }
