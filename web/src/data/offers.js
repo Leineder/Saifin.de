@@ -25,35 +25,6 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C213344020T'
   },
   {
-    id: 'gebuehrenfrei-mastercard-gold',
-    slug: 'gebuehrenfrei-mastercard-gold',
-    title: 'Gebührenfrei Mastercard Gold',
-    bullets: [
-      '0 € Jahresgebühr dauerhaft',
-      'Bis zu 7 Wochen zinsfrei',
-      '0 % Kosten bei Auslandseinsatz & Bargeld weltweit gebührenfrei*',
-      'Ablehnung bei Schufa-Einträgen'
-    ],
-    image: '/images/creditcards/Advanzia_Gebuehrenfrei_Mastercard_Gold.webp',
-    annualFee: 0,
-    foreignFee: '0 %',
-    cardType: 'Mastercard – Revolving',
-    features: {
-      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay'],
-      insurance: 'Reiseversicherung inklusive'
-    },
-    details: {
-      annualFeeText: '0 € p.a. (dauerhaft)',
-      foreignCurrency: '0 % Kosten bei Auslandseinsatz; Mastercard-Referenzkurs inkl. Aufschlag',
-      cashWithdrawal: '0 € Bargeldabhebung*; Zinsen laut Preisverzeichnis ab Buchungstag',
-      interest: 'Bis zu 7 Wochen zinsfrei bei Vollzahlung; danach Sollzins gemäß Preisverzeichnis',
-      benefits: '5 % Reisegutschrift & 5 % Mietwagen-Rückvergütung über Kundenportal',
-      notes: '24/7 Kundenservice, Advanzia Mobil App, keine Mindestumsätze erforderlich'
-    },
-    disclaimer: '*Zinsen gemäß Preisverzeichnis; Fremdwährungsumrechnungsaufschlag laut Mastercard.¹',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C13814286T'
-  },
-  {
     id: 'instabank-kreditkarte',
     slug: 'instabank-kreditkarte',
     title: 'Instabank Kreditkarte',
@@ -103,32 +74,57 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C5160120906T'
   },
   {
-    id: 'consors-finanz-mastercard',
-    slug: 'consors-finanz-mastercard',
-    title: 'Consors Finanz Mastercard',
+    id: 'extra-karte-mastercard',
+    slug: 'extra-karte-mastercard',
+    title: 'Extra Karte (Novum Bank) – Mastercard',
     bullets: [
       '0 € Jahresgebühr',
-      'Bis zu 90 Tage zinsfrei',
-      'Bis 5.000 € Kreditrahmen*',
+      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
+      'Bis 4.000 € Kreditrahmen*',
+      'Bei Schufa Einträgen Ablehnung'
+    ],
+    image: '/images/creditcards/extra-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '2,99 %',
+    cardType: 'Mastercard – Revolving',
+    details: {
+      foreignCurrency: '2,99 % Auslandseinsatz',
+      cashWithdrawal: '3 % (mind. 3 €)',
+      creditLimit: 'Kreditrahmen bis 4.000 €*',
+      interest: 'Effektivzins ca. 24,60 %',
+      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen; Bei Schufa Einträgen Ablehnung'
+    },
+    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
+  },
+  {
+    id: 'gebuehrenfrei-mastercard-gold',
+    slug: 'gebuehrenfrei-mastercard-gold',
+    title: 'Gebührenfrei Mastercard Gold',
+    bullets: [
+      '0 € Jahresgebühr dauerhaft',
+      'Bis zu 7 Wochen zinsfrei',
+      '0 % Kosten bei Auslandseinsatz & Bargeld weltweit gebührenfrei*',
       'Ablehnung bei Schufa-Einträgen'
     ],
-    image: '/images/creditcards/consors-finanz-mastercard.webp',
+    image: '/images/creditcards/Advanzia_Gebuehrenfrei_Mastercard_Gold.webp',
     annualFee: 0,
     foreignFee: '0 %',
     cardType: 'Mastercard – Revolving',
     features: {
-      mobilePay: ['Apple Pay', 'Google Pay']
+      mobilePay: ['Apple Pay', 'Google Pay', 'Garmin Pay'],
+      insurance: 'Reiseversicherung inklusive'
     },
     details: {
       annualFeeText: '0 € p.a. (dauerhaft)',
-      foreignCurrency: '0 % (laut PV, Änderungen möglich)',
-      cashWithdrawal: '≥ 300 €: 0 €; < 300 €: 3,95 € je Abhebung',
-      limits: 'Tageslimit ca. 1.100 €*, Wochenlimit ca. 2.500 €*',
-      creditLimit: 'Bis 5.000 €',
-      interest: 'Einmalzahlung (bis 90 Tage zinsfrei) oder Teilzahlung; Sollzins ca. 17,43 %, eff. ca. 18,90 %'
+      foreignCurrency: '0 % Kosten bei Auslandseinsatz; Mastercard-Referenzkurs inkl. Aufschlag',
+      cashWithdrawal: '0 € Bargeldabhebung*; Zinsen laut Preisverzeichnis ab Buchungstag',
+      interest: 'Bis zu 7 Wochen zinsfrei bei Vollzahlung; danach Sollzins gemäß Preisverzeichnis',
+      benefits: '5 % Reisegutschrift & 5 % Mietwagen-Rückvergütung über Kundenportal',
+      notes: '24/7 Kundenservice, Advanzia Mobil App, keine Mindestumsätze erforderlich'
     },
-    disclaimer: '*Kreditrahmen bonitätsabhängig; PV beachten.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C395489098T'
+    disclaimer: '*Zinsen gemäß Preisverzeichnis; Fremdwährungsumrechnungsaufschlag laut Mastercard.¹',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C13814286T'
   },
   {
     id: 'barclays-visa',
@@ -162,6 +158,34 @@ export const offers = [
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C14313531T'
   },
   {
+    id: 'consors-finanz-mastercard',
+    slug: 'consors-finanz-mastercard',
+    title: 'Consors Finanz Mastercard',
+    bullets: [
+      '0 € Jahresgebühr',
+      'Bis zu 90 Tage zinsfrei',
+      'Bis 5.000 € Kreditrahmen*',
+      'Ablehnung bei Schufa-Einträgen'
+    ],
+    image: '/images/creditcards/consors-finanz-mastercard.webp',
+    annualFee: 0,
+    foreignFee: '0 %',
+    cardType: 'Mastercard – Revolving',
+    features: {
+      mobilePay: ['Apple Pay', 'Google Pay']
+    },
+    details: {
+      annualFeeText: '0 € p.a. (dauerhaft)',
+      foreignCurrency: '0 % (laut PV, Änderungen möglich)',
+      cashWithdrawal: '≥ 300 €: 0 €; < 300 €: 3,95 € je Abhebung',
+      limits: 'Tageslimit ca. 1.100 €*, Wochenlimit ca. 2.500 €*',
+      creditLimit: 'Bis 5.000 €',
+      interest: 'Einmalzahlung (bis 90 Tage zinsfrei) oder Teilzahlung; Sollzins ca. 17,43 %, eff. ca. 18,90 %'
+    },
+    disclaimer: '*Kreditrahmen bonitätsabhängig; PV beachten.',
+    applyUrl: 'https://www.financeads.net/tc.php?t=78535C395489098T'
+  },
+  {
     id: 'hanseatic-bank-goldcard',
     slug: 'hanseatic-bank-goldcard',
     title: 'Hanseatic Bank GoldCard (Visa)',
@@ -189,30 +213,6 @@ export const offers = [
     },
     disclaimer: '*Leistungsumfang laut Versicherungsbedingungen/Preisverzeichnis.',
     applyUrl: 'https://www.financeads.net/tc.php?t=78535C328118428T'
-  },
-  {
-    id: 'extra-karte-mastercard',
-    slug: 'extra-karte-mastercard',
-    title: 'Extra Karte (Novum Bank) – Mastercard',
-    bullets: [
-      '0 € Jahresgebühr',
-      'Bis zu 8 Wochen zinsfrei (bei Vollzahlung)',
-      'Bis 4.000 € Kreditrahmen*',
-      'Bei Schufa Einträgen Ablehnung'
-    ],
-    image: '/images/creditcards/extra-mastercard.webp',
-    annualFee: 0,
-    foreignFee: '2,99 %',
-    cardType: 'Mastercard – Revolving',
-    details: {
-      foreignCurrency: '2,99 % Auslandseinsatz',
-      cashWithdrawal: '3 % (mind. 3 €)',
-      creditLimit: 'Kreditrahmen bis 4.000 €*',
-      interest: 'Effektivzins ca. 24,60 %',
-      notes: 'Kein Girokonto erforderlich; Voraussetzungen: Einkommen, SCHUFA, keine Selbstständigen; Bei Schufa Einträgen Ablehnung'
-    },
-    disclaimer: '*Bonitätsabhängig; Bedingungen lt. Bank.',
-    applyUrl: 'https://www.financeads.net/tc.php?t=78535C411691936T'
   },
   {
     id: 'santander-bestcard-basic',
