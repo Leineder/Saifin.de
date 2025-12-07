@@ -30,7 +30,6 @@ export const offers = [
     title: 'Instabank Kreditkarte',
     bullets: [
       '0 € Jahresgebühr',
-      'Niedrigster Zinssatz: 18,9 % p.a.',
       'Kreditlimit bis 25.000 €',
       '10%-Club Mitgliedschaft inklusive',
       'Bei Schufa Einträgen Ablehnung'
