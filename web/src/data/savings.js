@@ -43,7 +43,7 @@ export const savingsOffers = [
     slug: 'distingo-bank',
     title: 'DISTINGO Bank Tagesgeld',
     image: '/images/tagesgeldkonten/Distingo_11zon.webp',
-    interest: '3,00% p.a. (3 Monate bis 100.000 €), danach 1,50% p.a.',
+    interest: '3,00% p.a. (3 Monate bis 100.000 €), danach 1,95% p.a.',
     payout: 'monatlich',
     depositMin: '0 €',
     security: 'FR – Französische Einlagensicherung (FGDR) 100.000 €',
