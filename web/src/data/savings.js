@@ -32,7 +32,6 @@ export const savingsOffers = [
     euDgs: true,
     isNeukundenaktion: true,
     highlights: [
-      '3,00% p.a. Neukunden für 4 Monate',
       'Monatliche Zinsgutschrift',
       'Kostenfrei, täglich verfügbar'
     ],
